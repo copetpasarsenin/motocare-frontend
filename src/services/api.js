@@ -1,10 +1,6 @@
 import { clearSession, getToken } from '../utils/auth'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-if (!API_BASE_URL) {
-  throw new Error("VITE_API_BASE_URL belum diatur di file .env");
-}
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '')
 
 export class ApiError extends Error {
   constructor(message, status, payload) {
@@ -16,6 +12,15 @@ export class ApiError extends Error {
 }
 
 export const getApiBaseUrl = () => API_BASE_URL
+
+function buildApiUrl(path) {
+  if (!API_BASE_URL) {
+    throw new ApiError('VITE_API_BASE_URL belum dikonfigurasi', 0, null)
+  }
+
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  return `${API_BASE_URL}${normalizedPath}`
+}
 
 function redirectToLoginOnUnauthorized() {
   clearSession()
@@ -37,7 +42,7 @@ export async function apiClient(path, options = {}) {
     headers.set('Authorization', `Bearer ${token}`)
   }
 
-  const response = await fetch(`${API_BASE_URL}${path}`, {
+  const response = await fetch(buildApiUrl(path), {
     ...options,
     headers,
   })
