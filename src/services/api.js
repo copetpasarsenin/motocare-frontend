@@ -1,6 +1,10 @@
 import { clearSession, getToken } from '../utils/auth'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!API_BASE_URL) {
+  throw new Error("VITE_API_BASE_URL belum diatur di file .env");
+}
 
 export class ApiError extends Error {
   constructor(message, status, payload) {
