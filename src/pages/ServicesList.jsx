@@ -1,4 +1,4 @@
-import { Download, FileSpreadsheet, RefreshCw, Search, Trash2 } from 'lucide-react'
+import { Download, Eye, FileSpreadsheet, Pencil, PlusCircle, RefreshCw, Search, Trash2 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import EmptyState from '../components/ui/EmptyState'
@@ -132,7 +132,7 @@ function ServicesList() {
           <p>Daftar layanan servis dengan search, filter, sorting, pagination, CSV, dan Excel export.</p>
         </div>
         <div className="button-row">
-          <Link className="ghost-button" to="/services/create">Create</Link>
+          <Link className="ghost-button" to="/services/create"><PlusCircle size={17} />Create</Link>
           <button className="ghost-button" type="button" onClick={handleExportCsv}>
             <Download size={17} />
             Export CSV
@@ -211,8 +211,8 @@ function ServicesList() {
                 <td>{service.duration_minutes} menit</td>
                 <td><StatusBadge status={service.status} /></td>
                 <td className="table-actions">
-                  <Link to={`/services/${service.id}`}>Detail</Link>
-                  <Link to={`/services/${service.id}/edit`}>Edit</Link>
+                  <Link to={`/services/${service.id}`}><Eye size={14} />Detail</Link>
+                  <Link to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
                   <button type="button" onClick={() => handleDelete(service)} disabled={deletingId === service.id}>
                     <Trash2 size={14} />
                     Delete

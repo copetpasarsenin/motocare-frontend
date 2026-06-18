@@ -130,12 +130,12 @@ function BookingCreate() {
           <FieldError message={errors.booking_date} />
         </label>
 
-        <label>
+        <label className="full-span">
           Notes
           <textarea rows="4" value={values.notes} onChange={(event) => updateValue('notes', event.target.value)} placeholder="Catatan tambahan" />
         </label>
 
-        <button className="primary-button" type="submit" disabled={loading}>
+        <button className="primary-button form-submit" type="submit" disabled={loading}>
           {loading ? 'Menyimpan...' : 'Create Booking'}
         </button>
       </form>

@@ -54,8 +54,15 @@ function Login() {
   return (
     <main className="auth-page">
       <section className="auth-panel">
+        <div className="auth-brand">
+          <span className="auth-logo">MC</span>
+          <div>
+            <strong>MotoCare</strong>
+            <span>Premium Garage Dashboard</span>
+          </div>
+        </div>
         <p className="eyebrow">MotoCare Dashboard</p>
-        <h1>Login</h1>
+        <h1>Welcome back</h1>
         <p className="muted">Masuk untuk mengelola layanan servis dan booking bengkel motor.</p>
 
         <form className="auth-form" onSubmit={handleSubmit} noValidate>

@@ -71,7 +71,7 @@ function ServiceForm({
         <FieldError message={errors.status} />
       </label>
 
-      <label>
+      <label className="full-span">
         Description
         <textarea
           rows="4"
@@ -81,7 +81,7 @@ function ServiceForm({
         />
       </label>
 
-      <button className="primary-button" type="submit" disabled={loading}>
+      <button className="primary-button form-submit" type="submit" disabled={loading}>
         {loading ? 'Menyimpan...' : submitLabel}
       </button>
     </form>

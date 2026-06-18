@@ -57,8 +57,15 @@ function Register() {
   return (
     <main className="auth-page">
       <section className="auth-panel">
+        <div className="auth-brand">
+          <span className="auth-logo">MC</span>
+          <div>
+            <strong>MotoCare</strong>
+            <span>Premium Garage Dashboard</span>
+          </div>
+        </div>
         <p className="eyebrow">MotoCare Dashboard</p>
-        <h1>Register</h1>
+        <h1>Create account</h1>
         <p className="muted">Buat akun user untuk booking layanan servis motor.</p>
 
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
