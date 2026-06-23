@@ -1,29 +1,40 @@
-# UI Polish Instructions — MotoCare Dashboard
+# UI_POLISH.md — MotoCare Dashboard
 
 ## Goal
 
-Improve the MotoCare Dashboard frontend UI so it looks modern, clean, premium, professional, and ready for presentation.
+Polish the MotoCare Dashboard frontend UI so it looks modern, clean, premium, professional, and ready for presentation.
 
-This is UI/UX polish only. The app is already connected to the deployed Railway backend and deployed on Vercel.
+This is UI/UX polish only. The app already works with:
 
-## Important Rules
+* Backend: Railway
+* Frontend: Vercel
+* Database: Supabase
+
+## Main Rules
 
 Do not break existing functionality.
 
 Do not change:
 
 * API endpoints
+* VITE_API_BASE_URL usage
 * authentication logic
 * token/localStorage behavior
 * role-based access logic
-* backend response assumptions
-* VITE_API_BASE_URL usage
 * CRUD logic
-* routing logic unless needed for UI consistency
+* backend response assumptions
+* routing logic unless only needed for layout consistency
 
-Do not hardcode API URLs.
+Do not:
 
-Do not remove required pages or features:
+* hardcode API URLs
+* commit `.env`
+* install xlsx or exceljs
+* install heavy UI libraries
+* rewrite the whole app
+* remove existing pages or features
+
+Keep these features working:
 
 * Login
 * Register
@@ -42,26 +53,23 @@ Do not remove required pages or features:
 * Sorting
 * Chart
 * Dark mode
-* Export CSV / Excel-compatible feature
+* Export CSV / Excel-compatible export
 
-Do not install heavy UI libraries.
-
-Do not commit `.env`.
-
-## Design Concept
+## Design Direction
 
 Theme: Premium Garage Dashboard / Modern Automotive Admin Panel.
 
 Style:
 
-* Clean dashboard
-* Professional automotive feel
-* Spacious layout
-* Modern cards
-* Beautiful tables
-* Clear status badges
-* Consistent spacing
-* Responsive desktop and mobile layout
+* clean dashboard
+* professional automotive feel
+* spacious layout
+* modern cards
+* polished forms
+* beautiful tables
+* clear status badges
+* consistent spacing
+* responsive desktop and mobile layout
 
 Color palette:
 
@@ -77,69 +85,116 @@ Color palette:
 * Border: #E2E8F0
 * Card: #FFFFFF
 
-## Areas to Improve
+## Polish Scope
 
 ### Login and Register
 
-* Improve background with gradient or split layout.
-* Improve auth card spacing, shadow, border radius, typography, inputs, buttons, and error messages.
-* Add MotoCare branding and tagline.
-* Make it responsive.
+Improve:
+
+* background gradient or split layout
+* auth card spacing, shadow, radius, typography
+* inputs, buttons, alerts, and validation messages
+* MotoCare branding and tagline
+* mobile responsiveness
+
+Suggested tagline:
+“Manage services, bookings, and garage operations in one dashboard.”
 
 ### Dashboard
 
-* Improve dashboard header and welcome section.
-* Improve statistic cards with icons and hover effect.
-* Improve chart containers.
-* Keep all data from API, do not hardcode.
+Improve:
+
+* header and welcome section
+* statistic cards with icons and hover states
+* chart containers
+* spacing and responsive layout
+
+Do not hardcode dashboard data. Keep API data.
 
 ### Sidebar and Topbar
 
-* Improve brand area.
-* Improve active menu state.
-* Improve icon alignment.
-* Improve logout placement.
-* Improve responsive behavior.
+Improve:
 
-### Services Table
+* brand area
+* active menu state
+* icon alignment
+* logout placement
+* responsive behavior
+* user/role display if already available
 
-* Improve table header, row hover, spacing, badges, buttons, search/filter area, sorting, pagination, loading state, and empty state.
-* Keep at least these columns: ID, Name, Category, Price, Duration, Status, Actions.
+### Services
+
+Improve:
+
+* table header
+* row hover
+* search/filter/sort layout
+* pagination
+* action buttons
+* loading state
+* empty state
+* active/inactive badges
+
+Keep at least these columns:
+ID, Name, Category, Price, Duration, Status, Actions.
 
 ### Service Detail
 
-* Make the detail page look like a clean professional information card.
-* Improve spacing, typography, and action buttons.
+Improve:
+
+* information card layout
+* spacing and typography
+* back/edit buttons
+* status display
 
 ### Create/Edit Forms
 
-* Improve card layout, labels, inputs, select, textarea, validation messages, and submit/cancel buttons.
-* Do not change payload shape.
+Improve:
+
+* card layout
+* labels
+* inputs/select/textarea
+* validation messages
+* submit/cancel buttons
+
+Do not change payload shape.
 
 ### Bookings
 
-* Improve table/list layout.
-* Improve status badges for pending, confirmed, in_progress, completed, and cancelled.
+Improve:
+
+* table/list layout
+* status badges for pending, confirmed, in_progress, completed, cancelled
+* loading and empty state
+* responsive layout
 
 ### Dark Mode
 
-* Keep dark mode working.
-* Improve readability for sidebar, cards, tables, forms, modals, badges, and buttons.
+Keep dark mode working and improve readability for:
+
+* sidebar
+* topbar
+* cards
+* tables
+* forms
+* badges
+* buttons
+* modals/confirmation UI
 
 ### Export
 
-* Keep export feature working.
-* If current export is CSV, keep CSV compatible with Excel.
-* Do not add xlsx or exceljs.
+Keep export working.
+If current export is CSV, keep it CSV and Excel-compatible.
+Do not add xlsx or exceljs.
 
-## After Changes
+## Final Checks
 
-Run:
+After changes:
 
-* npm run build
-
-Then explain:
-
-* changed files
-* UI improvements made
-* pages I should manually test
+* run npm run build
+* make sure no .env is committed
+* make sure no hardcoded localhost:8080 remains
+* make sure VITE_API_BASE_URL is still used
+* explain changed files
+* explain UI improvements
+* list pages to manually test
