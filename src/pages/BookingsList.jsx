@@ -1,4 +1,17 @@
-import { PlusCircle, RefreshCw, Search } from 'lucide-react'
+import {
+  CalendarDays,
+  Car,
+  ChevronLeft,
+  ChevronRight,
+  Clock3,
+  Mail,
+  Phone,
+  PlusCircle,
+  RefreshCw,
+  Search,
+  SlidersHorizontal,
+  User,
+} from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import EmptyState from '../components/ui/EmptyState'
@@ -40,6 +53,7 @@ function BookingsList() {
   const [loading, setLoading] = useState(false)
   const [updatingId, setUpdatingId] = useState(null)
   const [feedback, setFeedback] = useState({ type: '', message: '' })
+  const totalPages = Math.max(meta.total_pages, 1)
 
   const loadBookings = async (options = {}) => {
     setLoading(true)
@@ -72,6 +86,17 @@ function BookingsList() {
     }))
   }
 
+  const resetFilters = () => {
+    setFilters({
+      search: '',
+      status: '',
+      sort_by: 'created_at',
+      sort_order: 'desc',
+      page: 1,
+      limit: filters.limit,
+    })
+  }
+
   const handleStatusChange = async (bookingId, status) => {
     setUpdatingId(bookingId)
     setFeedback({ type: '', message: '' })
@@ -88,7 +113,7 @@ function BookingsList() {
   }
 
   return (
-    <section className="card">
+    <section className="card bookings-card">
       <div className="section-heading row-heading">
         <div>
           <h3>Bookings</h3>
@@ -100,36 +125,53 @@ function BookingsList() {
         </Link>
       </div>
 
-      <div className="toolbar booking-toolbar">
-        <label className="search-field">
-          <Search size={18} />
-          <input
-            type="search"
-            value={filters.search}
-            onChange={(event) => updateFilter('search', event.target.value)}
-            placeholder="Cari customer, phone, motor, plat..."
-          />
-        </label>
-        <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status booking">
-          <option value="">Semua status</option>
-          {bookingStatuses.map((status) => (
-            <option key={status} value={status}>{status.replaceAll('_', ' ')}</option>
-          ))}
-        </select>
+      <div className="bookings-controls">
+        <div className="filter-panel-heading">
+          <SlidersHorizontal size={18} />
+          <span>Search and filter bookings</span>
+        </div>
+        <div className="toolbar booking-toolbar">
+          <label className="search-field booking-search">
+            <Search size={18} />
+            <input
+              type="search"
+              value={filters.search}
+              onChange={(event) => updateFilter('search', event.target.value)}
+              placeholder="Cari customer, phone, motor, plat..."
+            />
+          </label>
+          <label>
+            Status
+            <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status booking">
+              <option value="">Semua status</option>
+              {bookingStatuses.map((status) => (
+                <option key={status} value={status}>{status.replaceAll('_', ' ')}</option>
+              ))}
+            </select>
+          </label>
+        </div>
       </div>
 
       {feedback.message && <div className={`feedback ${feedback.type}`}>{feedback.message}</div>}
 
       <div className="table-summary">
-        <span>{loading ? 'Memuat booking...' : `${meta.total} booking ditemukan`}</span>
-        <button className="ghost-button" type="button" onClick={() => loadBookings()} disabled={loading}>
-          <RefreshCw size={16} />
-          Refresh
-        </button>
+        <div>
+          <strong>{loading ? 'Memuat booking...' : `${meta.total} booking ditemukan`}</strong>
+          <span>Page {meta.page} of {totalPages}</span>
+        </div>
+        <div className="table-summary-actions">
+          <button className="ghost-button" type="button" onClick={resetFilters} disabled={loading}>
+            Reset Filter
+          </button>
+          <button className="ghost-button" type="button" onClick={() => loadBookings()} disabled={loading}>
+            <RefreshCw size={16} />
+            Refresh
+          </button>
+        </div>
       </div>
 
       <div className="table-scroll">
-        <table className="data-table">
+        <table className="data-table bookings-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -146,16 +188,30 @@ function BookingsList() {
           <tbody>
             {!loading && bookings.map((booking) => (
               <tr key={booking.id}>
-                <td>{booking.id}</td>
-                {isAdmin && <td>{booking.user?.email || '-'}</td>}
-                <td>{booking.customer_name}</td>
-                <td>{booking.phone}</td>
-                <td>{getVehicleInfo(booking)}</td>
-                <td>{getServiceName(booking)}</td>
-                <td>{formatDate(booking.booking_date)}</td>
-                <td><StatusBadge status={booking.status} /></td>
+                <td data-label="ID"><span className="booking-id">#{booking.id}</span></td>
                 {isAdmin && (
-                  <td>
+                  <td data-label="User">
+                    <span className="booking-cell-main"><Mail size={14} />{booking.user?.email || '-'}</span>
+                  </td>
+                )}
+                <td data-label="Customer">
+                  <span className="booking-cell-main"><User size={14} />{booking.customer_name}</span>
+                </td>
+                <td data-label="Phone">
+                  <span className="booking-cell-main"><Phone size={14} />{booking.phone}</span>
+                </td>
+                <td data-label="Vehicle">
+                  <span className="booking-cell-main"><Car size={14} />{getVehicleInfo(booking)}</span>
+                </td>
+                <td data-label="Service">
+                  <span className="booking-service-name">{getServiceName(booking)}</span>
+                </td>
+                <td data-label="Date">
+                  <span className="booking-cell-main"><CalendarDays size={14} />{formatDate(booking.booking_date)}</span>
+                </td>
+                <td data-label="Status"><StatusBadge status={booking.status} /></td>
+                {isAdmin && (
+                  <td data-label="Actions">
                     <select
                       className="inline-select"
                       value={booking.status}
@@ -167,13 +223,20 @@ function BookingsList() {
                         <option key={status} value={status}>{status.replaceAll('_', ' ')}</option>
                       ))}
                     </select>
+                    {updatingId === booking.id && <span className="status-updating"><Clock3 size={13} />Updating</span>}
                   </td>
                 )}
               </tr>
             ))}
             {loading && (
               <tr>
-                <td colSpan={isAdmin ? 9 : 7} className="table-loading">Memuat data booking...</td>
+                <td colSpan={isAdmin ? 9 : 7} className="table-loading booking-loading-cell">
+                  <div className="loading-state">
+                    <RefreshCw size={18} />
+                    <strong>Memuat data booking...</strong>
+                    <span>Menyiapkan antrean servis terbaru.</span>
+                  </div>
+                </td>
               </tr>
             )}
           </tbody>
@@ -181,16 +244,21 @@ function BookingsList() {
       </div>
 
       {!loading && bookings.length === 0 && (
-        <EmptyState title="Booking kosong" description="Tidak ada booking sesuai filter saat ini." />
+        <EmptyState title="Booking kosong" description="Tidak ada booking sesuai filter saat ini. Reset filter atau buat booking baru untuk memulai antrean servis." />
       )}
 
       <div className="pagination">
         <button className="ghost-button" type="button" disabled={filters.page <= 1 || loading} onClick={() => updateFilter('page', Math.max(1, filters.page - 1))}>
+          <ChevronLeft size={16} />
           Previous
         </button>
-        <span>Page {meta.page} / {Math.max(meta.total_pages, 1)}</span>
-        <button className="ghost-button" type="button" disabled={filters.page >= Math.max(meta.total_pages, 1) || loading} onClick={() => updateFilter('page', filters.page + 1)}>
+        <div className="pagination-current">
+          <span>Page</span>
+          <strong>{meta.page} / {totalPages}</strong>
+        </div>
+        <button className="ghost-button" type="button" disabled={filters.page >= totalPages || loading} onClick={() => updateFilter('page', filters.page + 1)}>
           Next
+          <ChevronRight size={16} />
         </button>
       </div>
     </section>
