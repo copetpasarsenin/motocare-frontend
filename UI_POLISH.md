@@ -85,6 +85,27 @@ Color palette:
 * Border: #E2E8F0
 * Card: #FFFFFF
 
+## Visual Inspiration
+
+Use the uploaded motorcycle dashboard reference only as visual inspiration, not as an exact copy.
+
+Apply this style:
+- Dark premium automotive dashboard
+- Orange accent highlights
+- Futuristic but still clean admin interface
+- Thin borders and glass/dark cards
+- Premium stat cards
+- Dashboard hero card with MotoCare branding
+- Chart area with clean dark panel
+- Professional garage/service management feel
+
+Important:
+- Keep the left sidebar dashboard layout.
+- Do not replace the sidebar with top navigation tabs.
+- Do not copy the exact logo, text, layout, motorcycle image, or Russian content from the reference.
+- Keep all existing admin features visible and usable.
+- Tables and forms must stay readable.
+
 ## Polish Scope
 
 ### Login and Register

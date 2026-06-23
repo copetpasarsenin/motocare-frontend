@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router'
 import {
   CalendarDays,
+  ChevronRight,
   Gauge,
   LogOut,
   Menu,
@@ -33,7 +34,7 @@ const pageTitles = {
   '/profile': 'Profile',
 }
 
-function Sidebar({ open, onClose, onLogout }) {
+function Sidebar({ open, onClose, onLogout, user }) {
   return (
     <aside className={`sidebar ${open ? 'open' : ''}`}>
       <div className="sidebar-brand">
@@ -47,13 +48,23 @@ function Sidebar({ open, onClose, onLogout }) {
         </button>
       </div>
 
+      <div className="sidebar-user">
+        <UserCircle size={19} />
+        <div>
+          <strong>{user?.username || 'User'}</strong>
+          <span>{user?.role || 'guest'}</span>
+        </div>
+      </div>
+
       <nav className="sidebar-nav" aria-label="Main navigation">
+        <span className="sidebar-nav-label">Workspace</span>
         {navItems.map((item) => {
           const Icon = item.icon
           return (
             <NavLink key={item.to} to={item.to} onClick={onClose} end={item.to === '/'}>
               <Icon size={18} />
               <span>{item.label}</span>
+              <ChevronRight className="nav-chevron" size={16} aria-hidden="true" />
             </NavLink>
           )
         })}
@@ -88,17 +99,19 @@ function DashboardLayout() {
 
   return (
     <div className="dashboard-layout">
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} onLogout={handleLogout} />
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} onLogout={handleLogout} user={user} />
       {sidebarOpen && <button className="backdrop" type="button" onClick={() => setSidebarOpen(false)} aria-label="Close menu" />}
 
       <div className="content-shell">
         <header className="topbar">
-          <button className="icon-button mobile-menu" type="button" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
-            <Menu size={20} />
-          </button>
-          <div>
-            <p className="topbar-kicker">MotoCare Dashboard</p>
-            <h1>{pageTitles[location.pathname] || 'MotoCare'}</h1>
+          <div className="topbar-heading">
+            <button className="icon-button mobile-menu" type="button" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
+              <Menu size={20} />
+            </button>
+            <div>
+              <p className="topbar-kicker">MotoCare Dashboard</p>
+              <h1>{pageTitles[location.pathname] || 'MotoCare'}</h1>
+            </div>
           </div>
           <div className="topbar-actions">
             <button className="theme-toggle" type="button" onClick={handleToggleTheme} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>

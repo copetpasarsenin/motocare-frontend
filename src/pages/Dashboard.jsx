@@ -1,4 +1,4 @@
-import { CalendarCheck, CircleDollarSign, ClipboardList, Timer, Wrench } from 'lucide-react'
+import { CalendarCheck, CircleDollarSign, ClipboardList, Gauge, Timer, Wrench } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import {
   Bar,
@@ -58,21 +58,43 @@ function Dashboard() {
   }, [])
 
   const summaryCards = useMemo(() => [
-    { label: 'Total Categories', value: stats.total_categories, icon: ClipboardList, tone: 'blue' },
-    { label: 'Total Services', value: stats.total_services, icon: Wrench, tone: 'orange' },
-    { label: 'Total Bookings', value: stats.total_bookings, icon: CalendarCheck, tone: 'blue' },
-    { label: 'Pending Bookings', value: stats.pending_bookings, icon: Timer, tone: 'orange' },
-    { label: 'Completed Bookings', value: stats.completed_bookings, icon: CalendarCheck, tone: 'blue' },
-    { label: 'Estimated Revenue', value: formatCurrency(stats.estimated_revenue), icon: CircleDollarSign, tone: 'orange' },
+    { label: 'Total Categories', value: stats.total_categories, icon: ClipboardList, tone: 'blue', meta: 'Service groups' },
+    { label: 'Total Services', value: stats.total_services, icon: Wrench, tone: 'orange', meta: 'Garage menu' },
+    { label: 'Total Bookings', value: stats.total_bookings, icon: CalendarCheck, tone: 'blue', meta: 'All requests' },
+    { label: 'Pending Bookings', value: stats.pending_bookings, icon: Timer, tone: 'orange', meta: 'Needs attention' },
+    { label: 'Completed Bookings', value: stats.completed_bookings, icon: Gauge, tone: 'blue', meta: 'Finished work' },
+    { label: 'Estimated Revenue', value: formatCurrency(stats.estimated_revenue), icon: CircleDollarSign, tone: 'orange', meta: 'Projected value' },
   ], [stats])
+
+  const tooltipStyle = {
+    background: 'var(--dashboard-tooltip-bg)',
+    border: '1px solid var(--dashboard-border)',
+    borderRadius: 8,
+    boxShadow: '0 18px 38px rgba(15, 23, 42, 0.16)',
+    color: 'var(--dashboard-text)',
+  }
 
   return (
     <div className="page-grid dashboard-grid">
-      <section className="hero-card">
-        <div>
-          <p className="eyebrow">Workshop Control</p>
+      <section className="hero-card dashboard-hero-card">
+        <div className="dashboard-hero-content">
+          <p className="eyebrow">MotoCare Command Center</p>
           <h2>Modern Garage Operations</h2>
-          <p className="muted">Pantau layanan, booking, status pekerjaan, dan estimasi revenue dari satu dashboard.</p>
+          <p>Pantau layanan, booking, status pekerjaan, dan estimasi revenue dari satu dashboard.</p>
+          <div className="dashboard-hero-badges" aria-label="Dashboard highlights">
+            <span>Live API data</span>
+            <span>Service workflow</span>
+            <span>Garage analytics</span>
+          </div>
+        </div>
+        <div className="dashboard-hero-panel" aria-label="Operations snapshot">
+          <span className="hero-panel-label">Today&apos;s overview</span>
+          <strong>{loading ? '...' : stats.total_bookings}</strong>
+          <span>Total bookings tracked</span>
+          <div>
+            <small>{loading ? '...' : stats.pending_bookings} pending</small>
+            <small>{loading ? '...' : formatCurrency(stats.estimated_revenue)}</small>
+          </div>
         </div>
       </section>
 
@@ -82,22 +104,26 @@ function Dashboard() {
         {summaryCards.map((item) => {
           const Icon = item.icon
           return (
-            <article className="stat-card" key={item.label}>
+            <article className={`stat-card dashboard-stat-card ${item.tone}`} key={item.label}>
               <span className={`stat-icon ${item.tone}`}>
                 <Icon size={22} />
               </span>
               <div>
                 <strong>{loading ? '...' : item.value}</strong>
                 <span>{item.label}</span>
+                <small>{item.meta}</small>
               </div>
             </article>
           )
         })}
       </section>
 
-      <section className="card chart-card">
-        <div className="section-heading">
-          <h3>Booking Count by Status</h3>
+      <section className="card chart-card dashboard-chart-card">
+        <div className="section-heading dashboard-chart-heading">
+          <div>
+            <p className="eyebrow">Booking Status</p>
+            <h3>Booking Count by Status</h3>
+          </div>
           <p>Distribusi booking berdasarkan status proses servis.</p>
         </div>
         {loading ? (
@@ -117,7 +143,12 @@ function Dashboard() {
                   <Cell key={entry.status} fill={statusColors[entry.status] || '#64748b'} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value) => [value, 'Bookings']} />
+              <Tooltip
+                formatter={(value) => [value, 'Bookings']}
+                contentStyle={tooltipStyle}
+                itemStyle={{ color: 'var(--dashboard-text)' }}
+                labelStyle={{ color: 'var(--dashboard-muted)' }}
+              />
               <Legend formatter={(value) => value.replaceAll('_', ' ')} />
             </PieChart>
           </ResponsiveContainer>
@@ -126,9 +157,12 @@ function Dashboard() {
         )}
       </section>
 
-      <section className="card chart-card">
-        <div className="section-heading">
-          <h3>Top Services</h3>
+      <section className="card chart-card dashboard-chart-card">
+        <div className="section-heading dashboard-chart-heading">
+          <div>
+            <p className="eyebrow">Service Demand</p>
+            <h3>Top Services</h3>
+          </div>
           <p>Layanan paling sering dibooking oleh customer.</p>
         </div>
         {loading ? (
@@ -136,17 +170,23 @@ function Dashboard() {
         ) : stats.top_services.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.top_services} margin={{ top: 8, right: 10, left: 0, bottom: 40 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5eaf2" />
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--dashboard-chart-grid)" />
               <XAxis
                 dataKey="service_name"
-                tick={{ fontSize: 12, fill: '#667085' }}
+                tick={{ fontSize: 12, fill: 'var(--dashboard-chart-muted)' }}
                 interval={0}
                 angle={-20}
                 textAnchor="end"
                 height={70}
               />
-              <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#667085' }} />
-              <Tooltip formatter={(value) => [value, 'Bookings']} />
+              <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: 'var(--dashboard-chart-muted)' }} />
+              <Tooltip
+                formatter={(value) => [value, 'Bookings']}
+                contentStyle={tooltipStyle}
+                cursor={{ fill: 'var(--dashboard-chart-hover)' }}
+                itemStyle={{ color: 'var(--dashboard-text)' }}
+                labelStyle={{ color: 'var(--dashboard-muted)' }}
+              />
               <Bar dataKey="total_bookings" name="Bookings" radius={[6, 6, 0, 0]} fill="#2563eb" />
             </BarChart>
           </ResponsiveContainer>

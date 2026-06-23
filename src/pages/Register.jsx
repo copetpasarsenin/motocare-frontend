@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowRight, LockKeyhole, Mail, ShieldCheck, UserRound } from 'lucide-react'
 import { Link, useNavigate } from 'react-router'
 import { apiClient } from '../services/api'
 import {
@@ -56,6 +57,19 @@ function Register() {
 
   return (
     <main className="auth-page">
+      <section className="auth-hero" aria-label="MotoCare overview">
+        <div className="auth-hero-content">
+          <span className="auth-hero-pill">Modern Automotive Admin</span>
+          <h2>MotoCare</h2>
+          <p>Manage services, bookings, and garage operations in one dashboard.</p>
+          <div className="auth-hero-stats" aria-label="MotoCare highlights">
+            <span>Cleaner workflows</span>
+            <span>Booking readiness</span>
+            <span>Garage team access</span>
+          </div>
+        </div>
+      </section>
+
       <section className="auth-panel">
         <div className="auth-brand">
           <span className="auth-logo">MC</span>
@@ -71,35 +85,50 @@ function Register() {
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           <label>
             Username
-            <input
-              value={form.username}
-              onChange={(event) => setForm((current) => ({ ...current, username: event.target.value }))}
-              autoComplete="username"
-            />
+            <span className="input-shell">
+              <UserRound size={17} aria-hidden="true" />
+              <input
+                value={form.username}
+                onChange={(event) => setForm((current) => ({ ...current, username: event.target.value }))}
+                autoComplete="username"
+              />
+            </span>
           </label>
           <label>
             Email
-            <input
-              type="email"
-              value={form.email}
-              onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-              autoComplete="email"
-            />
+            <span className="input-shell">
+              <Mail size={17} aria-hidden="true" />
+              <input
+                type="email"
+                value={form.email}
+                onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+                autoComplete="email"
+              />
+            </span>
           </label>
           <label>
             Password
-            <input
-              type="password"
-              value={form.password}
-              onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
-              autoComplete="new-password"
-            />
+            <span className="input-shell">
+              <LockKeyhole size={17} aria-hidden="true" />
+              <input
+                type="password"
+                value={form.password}
+                onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
+                autoComplete="new-password"
+              />
+            </span>
           </label>
           {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
           <button className="primary-button full" type="submit" disabled={loading}>
-            {loading ? 'Memproses...' : 'Register'}
+            <span>{loading ? 'Memproses...' : 'Register'}</span>
+            {!loading && <ArrowRight size={17} aria-hidden="true" />}
           </button>
         </form>
+
+        <div className="auth-note">
+          <ShieldCheck size={16} aria-hidden="true" />
+          <span>Account creation keeps the existing MotoCare access flow.</span>
+        </div>
 
         <p className="auth-switch">
           Sudah punya akun? <Link to="/login">Login</Link>

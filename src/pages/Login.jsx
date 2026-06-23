@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ArrowRight, LockKeyhole, Mail, ShieldCheck } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { apiClient } from '../services/api'
 import { saveSession } from '../utils/auth'
@@ -53,6 +54,19 @@ function Login() {
 
   return (
     <main className="auth-page">
+      <section className="auth-hero" aria-label="MotoCare overview">
+        <div className="auth-hero-content">
+          <span className="auth-hero-pill">Premium Garage Dashboard</span>
+          <h2>MotoCare</h2>
+          <p>Manage services, bookings, and garage operations in one dashboard.</p>
+          <div className="auth-hero-stats" aria-label="MotoCare highlights">
+            <span>Fast booking control</span>
+            <span>Service visibility</span>
+            <span>Role-aware workspace</span>
+          </div>
+        </div>
+      </section>
+
       <section className="auth-panel">
         <div className="auth-brand">
           <span className="auth-logo">MC</span>
@@ -68,27 +82,39 @@ function Login() {
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           <label>
             Email
-            <input
-              type="email"
-              value={form.email}
-              onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-              autoComplete="email"
-            />
+            <span className="input-shell">
+              <Mail size={17} aria-hidden="true" />
+              <input
+                type="email"
+                value={form.email}
+                onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
+                autoComplete="email"
+              />
+            </span>
           </label>
           <label>
             Password
-            <input
-              type="password"
-              value={form.password}
-              onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
-              autoComplete="current-password"
-            />
+            <span className="input-shell">
+              <LockKeyhole size={17} aria-hidden="true" />
+              <input
+                type="password"
+                value={form.password}
+                onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
+                autoComplete="current-password"
+              />
+            </span>
           </label>
           {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
           <button className="primary-button full" type="submit" disabled={loading}>
-            {loading ? 'Memproses...' : 'Login'}
+            <span>{loading ? 'Memproses...' : 'Login'}</span>
+            {!loading && <ArrowRight size={17} aria-hidden="true" />}
           </button>
         </form>
+
+        <div className="auth-note">
+          <ShieldCheck size={16} aria-hidden="true" />
+          <span>Secure access for MotoCare operations teams.</span>
+        </div>
 
         <p className="auth-switch">
           Belum punya akun? <Link to="/register">Register</Link>
