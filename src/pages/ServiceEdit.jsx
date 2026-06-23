@@ -80,7 +80,7 @@ function ServiceEdit() {
   }
 
   return (
-    <section className="card narrow-card">
+    <section className="card narrow-card service-form-card">
       <div className="section-heading row-heading">
         <div>
           <h3>Edit Service #{id}</h3>
@@ -99,6 +99,8 @@ function ServiceEdit() {
           errors={errors}
           loading={loading}
           submitLabel="Update Service"
+          cancelTo={`/services/${id}`}
+          cancelLabel="Back to Detail"
           onChange={updateValue}
           onSubmit={handleSubmit}
         />

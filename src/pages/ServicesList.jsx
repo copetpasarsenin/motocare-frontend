@@ -1,4 +1,17 @@
-import { Download, Eye, FileSpreadsheet, Pencil, PlusCircle, RefreshCw, Search, Trash2 } from 'lucide-react'
+import {
+  AlertTriangle,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Eye,
+  FileSpreadsheet,
+  Pencil,
+  PlusCircle,
+  RefreshCw,
+  Search,
+  SlidersHorizontal,
+  Trash2,
+} from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import EmptyState from '../components/ui/EmptyState'
@@ -25,9 +38,11 @@ function ServicesList() {
   })
   const [loading, setLoading] = useState(false)
   const [deletingId, setDeletingId] = useState(null)
+  const [pendingDelete, setPendingDelete] = useState(null)
   const [feedback, setFeedback] = useState({ type: '', message: '' })
 
   const exportFilters = useMemo(() => ({ ...filters, page: 1, limit: 100 }), [filters])
+  const totalPages = Math.max(meta.total_pages, 1)
 
   const loadServices = async () => {
     setLoading(true)
@@ -104,10 +119,19 @@ function ServicesList() {
     }
   }
 
-  const handleDelete = async (service) => {
-    const confirmed = window.confirm(`Hapus layanan "${service.name}"? Data yang dihapus tidak bisa dikembalikan.`)
-    if (!confirmed) return
+  const resetFilters = () => {
+    setFilters({
+      search: '',
+      category_id: '',
+      status: '',
+      sort_by: 'name',
+      sort_order: 'asc',
+      page: 1,
+      limit: filters.limit,
+    })
+  }
 
+  const handleDelete = async (service) => {
     setDeletingId(service.id)
     setFeedback({ type: '', message: '' })
 
@@ -121,68 +145,102 @@ function ServicesList() {
       setFeedback({ type: 'error', message: error.message || 'Gagal menghapus layanan' })
     } finally {
       setDeletingId(null)
+      setPendingDelete(null)
     }
   }
 
   return (
-    <section className="card">
+    <section className="card services-card">
       <div className="section-heading row-heading">
         <div>
           <h3>Services List</h3>
-          <p>Daftar layanan servis dengan search, filter, sorting, pagination, CSV, dan Excel export.</p>
+          <p>Kelola katalog layanan servis, harga, durasi, status, dan export data operasional.</p>
         </div>
         <div className="button-row">
-          <Link className="ghost-button" to="/services/create"><PlusCircle size={17} />Create</Link>
-          <button className="ghost-button" type="button" onClick={handleExportCsv}>
-            <Download size={17} />
-            Export CSV
-          </button>
-          <button className="primary-button" type="button" onClick={handleExportExcel}>
-            <FileSpreadsheet size={17} />
-            Export Excel
-          </button>
+          <Link className="primary-button" to="/services/create"><PlusCircle size={17} />Create Service</Link>
         </div>
       </div>
 
-      <div className="toolbar services-toolbar">
-        <label className="search-field">
-          <Search size={18} />
-          <input
-            type="search"
-            value={filters.search}
-            onChange={(event) => updateFilter('search', event.target.value)}
-            placeholder="Cari layanan..."
-          />
-        </label>
-        <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter kategori">
-          <option value="">Semua kategori</option>
-          {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
-        </select>
-        <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
-          <option value="">Semua status</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-        <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Urutkan berdasarkan">
-          <option value="name">Sort: Name</option>
-          <option value="price">Sort: Price</option>
-          <option value="duration_minutes">Sort: Duration</option>
-          <option value="status">Sort: Status</option>
-        </select>
-        <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Arah sorting">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+      <div className="services-controls">
+        <div className="services-filter-panel">
+          <div className="filter-panel-heading">
+            <SlidersHorizontal size={18} />
+            <span>Search, filter, and sorting</span>
+          </div>
+          <div className="toolbar services-toolbar">
+            <label className="search-field services-search">
+              <Search size={18} />
+              <input
+                type="search"
+                value={filters.search}
+                onChange={(event) => updateFilter('search', event.target.value)}
+                placeholder="Cari nama layanan atau deskripsi..."
+              />
+            </label>
+            <label>
+              Category
+              <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter kategori">
+                <option value="">Semua kategori</option>
+                {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
+              </select>
+            </label>
+            <label>
+              Status
+              <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
+                <option value="">Semua status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </label>
+            <label>
+              Sort by
+              <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Urutkan berdasarkan">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+                <option value="duration_minutes">Duration</option>
+                <option value="status">Status</option>
+              </select>
+            </label>
+            <label>
+              Order
+              <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Arah sorting">
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div className="services-export-panel">
+          <span>Export current view</span>
+          <div className="button-row">
+            <button className="ghost-button" type="button" onClick={handleExportCsv}>
+              <Download size={17} />
+              Export CSV
+            </button>
+            <button className="ghost-button accent-button" type="button" onClick={handleExportExcel}>
+              <FileSpreadsheet size={17} />
+              Export Excel-compatible
+            </button>
+          </div>
+        </div>
       </div>
 
       {feedback.message && <div className={`feedback ${feedback.type}`}>{feedback.message}</div>}
 
       <div className="table-summary">
-        <span>{loading ? 'Memuat layanan...' : `${meta.total} layanan ditemukan`}</span>
-        <button className="ghost-button" type="button" onClick={loadServices} disabled={loading}>
-          <RefreshCw size={16} />
-          Refresh
-        </button>
+        <div>
+          <strong>{loading ? 'Memuat layanan...' : `${meta.total} layanan ditemukan`}</strong>
+          <span>Page {meta.page} of {totalPages}</span>
+        </div>
+        <div className="table-summary-actions">
+          <button className="ghost-button" type="button" onClick={resetFilters} disabled={loading}>
+            Reset Filter
+          </button>
+          <button className="ghost-button" type="button" onClick={loadServices} disabled={loading}>
+            <RefreshCw size={16} />
+            Refresh
+          </button>
+        </div>
       </div>
 
       <div className="table-scroll">
@@ -201,21 +259,21 @@ function ServicesList() {
           <tbody>
             {!loading && services.map((service) => (
               <tr key={service.id}>
-                <td>{service.id}</td>
+                <td><span className="service-id">#{service.id}</span></td>
                 <td>
                   <strong>{service.name}</strong>
                   <small className="table-description">{service.description || 'Tanpa deskripsi'}</small>
                 </td>
                 <td>{getCategoryName(service)}</td>
-                <td>{formatCurrency(service.price)}</td>
-                <td>{service.duration_minutes} menit</td>
+                <td><strong className="money-value">{formatCurrency(service.price)}</strong></td>
+                <td><span className="duration-pill">{service.duration_minutes} menit</span></td>
                 <td><StatusBadge status={service.status} /></td>
                 <td className="table-actions">
-                  <Link to={`/services/${service.id}`}><Eye size={14} />Detail</Link>
-                  <Link to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
-                  <button type="button" onClick={() => handleDelete(service)} disabled={deletingId === service.id}>
+                  <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Detail</Link>
+                  <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
+                  <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
                     <Trash2 size={14} />
-                    Delete
+                    {deletingId === service.id ? 'Deleting...' : 'Delete'}
                   </button>
                 </td>
               </tr>
@@ -230,18 +288,48 @@ function ServicesList() {
       </div>
 
       {!loading && services.length === 0 && (
-        <EmptyState title="Layanan kosong" description="Tidak ada layanan sesuai filter saat ini." />
+        <EmptyState title="Layanan kosong" description="Tidak ada layanan sesuai filter saat ini. Reset filter untuk melihat seluruh katalog." />
       )}
 
       <div className="pagination">
         <button className="ghost-button" type="button" disabled={filters.page <= 1 || loading} onClick={() => updateFilter('page', Math.max(1, filters.page - 1))}>
+          <ChevronLeft size={16} />
           Previous
         </button>
-        <span>Page {meta.page} / {Math.max(meta.total_pages, 1)}</span>
-        <button className="ghost-button" type="button" disabled={filters.page >= Math.max(meta.total_pages, 1) || loading} onClick={() => updateFilter('page', filters.page + 1)}>
+        <div className="pagination-current">
+          <span>Page</span>
+          <strong>{meta.page} / {totalPages}</strong>
+        </div>
+        <button className="ghost-button" type="button" disabled={filters.page >= totalPages || loading} onClick={() => updateFilter('page', filters.page + 1)}>
           Next
+          <ChevronRight size={16} />
         </button>
       </div>
+
+      {pendingDelete && (
+        <div className="modal-backdrop" role="presentation">
+          <div className="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-service-title">
+            <div className="dialog-icon danger">
+              <AlertTriangle size={22} />
+            </div>
+            <div>
+              <h3 id="delete-service-title">Delete service?</h3>
+              <p>
+                Layanan <strong>{pendingDelete.name}</strong> akan dihapus dari katalog. Data yang dihapus tidak bisa dikembalikan.
+              </p>
+            </div>
+            <div className="dialog-actions">
+              <button className="ghost-button" type="button" onClick={() => setPendingDelete(null)} disabled={Boolean(deletingId)}>
+                Cancel
+              </button>
+              <button className="danger-button" type="button" onClick={() => handleDelete(pendingDelete)} disabled={Boolean(deletingId)}>
+                <Trash2 size={16} />
+                {deletingId ? 'Deleting...' : 'Delete Service'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

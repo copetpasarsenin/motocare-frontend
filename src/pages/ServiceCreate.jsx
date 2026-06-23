@@ -64,7 +64,7 @@ function ServiceCreate() {
   }
 
   return (
-    <section className="card narrow-card">
+    <section className="card narrow-card service-form-card">
       <div className="section-heading row-heading">
         <div>
           <h3>Create Service</h3>
@@ -81,6 +81,8 @@ function ServiceCreate() {
         errors={errors}
         loading={loading}
         submitLabel="Create Service"
+        cancelTo="/services"
+        cancelLabel="Back to Services"
         onChange={updateValue}
         onSubmit={handleSubmit}
       />

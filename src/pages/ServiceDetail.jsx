@@ -1,4 +1,4 @@
-import { ArrowLeft, Edit } from 'lucide-react'
+import { ArrowLeft, Clock, Edit, Gauge, Tag } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import StatusBadge from '../components/ui/StatusBadge'
@@ -29,7 +29,7 @@ function ServiceDetail() {
   }, [id])
 
   return (
-    <section className="card narrow-card">
+    <section className="card narrow-card service-detail-card">
       <div className="section-heading row-heading">
         <div>
           <h3>Service Detail</h3>
@@ -45,15 +45,42 @@ function ServiceDetail() {
       {feedback && <div className="feedback error">{feedback}</div>}
 
       {!loading && service && (
-        <dl className="detail-list">
-          <div><dt>ID</dt><dd>{service.id}</dd></div>
-          <div><dt>Name</dt><dd>{service.name}</dd></div>
-          <div><dt>Category</dt><dd>{getCategoryName(service)}</dd></div>
-          <div><dt>Price</dt><dd>{formatCurrency(service.price)}</dd></div>
-          <div><dt>Duration</dt><dd>{service.duration_minutes} menit</dd></div>
-          <div><dt>Status</dt><dd><StatusBadge status={service.status} /></dd></div>
-          <div><dt>Description</dt><dd>{service.description || '-'}</dd></div>
-        </dl>
+        <div className="service-detail-panel">
+          <div className="service-detail-hero">
+            <span className="service-id">#{service.id}</span>
+            <h2>{service.name}</h2>
+            <p>{service.description || 'Belum ada deskripsi untuk layanan ini.'}</p>
+            <StatusBadge status={service.status} />
+          </div>
+
+          <div className="service-detail-metrics">
+            <div>
+              <Tag size={18} />
+              <span>Category</span>
+              <strong>{getCategoryName(service)}</strong>
+            </div>
+            <div>
+              <Gauge size={18} />
+              <span>Price</span>
+              <strong>{formatCurrency(service.price)}</strong>
+            </div>
+            <div>
+              <Clock size={18} />
+              <span>Duration</span>
+              <strong>{service.duration_minutes} menit</strong>
+            </div>
+          </div>
+
+          <dl className="detail-list">
+            <div><dt>ID</dt><dd>{service.id}</dd></div>
+            <div><dt>Name</dt><dd>{service.name}</dd></div>
+            <div><dt>Category</dt><dd>{getCategoryName(service)}</dd></div>
+            <div><dt>Price</dt><dd>{formatCurrency(service.price)}</dd></div>
+            <div><dt>Duration</dt><dd>{service.duration_minutes} menit</dd></div>
+            <div><dt>Status</dt><dd><StatusBadge status={service.status} /></dd></div>
+            <div><dt>Description</dt><dd>{service.description || '-'}</dd></div>
+          </dl>
+        </div>
       )}
     </section>
   )

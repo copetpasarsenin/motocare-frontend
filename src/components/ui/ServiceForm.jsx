@@ -1,3 +1,6 @@
+import { ArrowLeft, CheckCircle2 } from 'lucide-react'
+import { Link } from 'react-router'
+
 function FieldError({ message }) {
   if (!message) return null
   return <span className="field-error">{message}</span>
@@ -9,13 +12,15 @@ function ServiceForm({
   errors = {},
   loading = false,
   submitLabel = 'Save',
+  cancelTo = '/services',
+  cancelLabel = 'Cancel',
   onChange,
   onSubmit,
 }) {
   return (
-    <form className="stacked-form" onSubmit={onSubmit} noValidate>
-      <label>
-        Name
+    <form className="stacked-form service-form" onSubmit={onSubmit} noValidate>
+      <label className="service-form-field">
+        <span>Name</span>
         <input
           value={values.name}
           onChange={(event) => onChange('name', event.target.value)}
@@ -24,8 +29,8 @@ function ServiceForm({
         <FieldError message={errors.name} />
       </label>
 
-      <label>
-        Category
+      <label className="service-form-field">
+        <span>Category</span>
         <select value={values.category_id} onChange={(event) => onChange('category_id', event.target.value)}>
           <option value="">Pilih kategori</option>
           {categories.map((category) => (
@@ -37,8 +42,8 @@ function ServiceForm({
         <FieldError message={errors.category_id} />
       </label>
 
-      <label>
-        Price
+      <label className="service-form-field">
+        <span>Price</span>
         <input
           type="number"
           min="0"
@@ -49,8 +54,8 @@ function ServiceForm({
         <FieldError message={errors.price} />
       </label>
 
-      <label>
-        Duration
+      <label className="service-form-field">
+        <span>Duration</span>
         <input
           type="number"
           min="0"
@@ -61,8 +66,8 @@ function ServiceForm({
         <FieldError message={errors.duration_minutes} />
       </label>
 
-      <label>
-        Status
+      <label className="service-form-field">
+        <span>Status</span>
         <select value={values.status} onChange={(event) => onChange('status', event.target.value)}>
           <option value="">Pilih status</option>
           <option value="active">Active</option>
@@ -71,8 +76,8 @@ function ServiceForm({
         <FieldError message={errors.status} />
       </label>
 
-      <label className="full-span">
-        Description
+      <label className="service-form-field full-span">
+        <span>Description</span>
         <textarea
           rows="4"
           value={values.description}
@@ -81,9 +86,16 @@ function ServiceForm({
         />
       </label>
 
-      <button className="primary-button form-submit" type="submit" disabled={loading}>
-        {loading ? 'Menyimpan...' : submitLabel}
-      </button>
+      <div className="form-actions">
+        <Link className="ghost-button" to={cancelTo}>
+          <ArrowLeft size={16} />
+          {cancelLabel}
+        </Link>
+        <button className="primary-button form-submit" type="submit" disabled={loading}>
+          <CheckCircle2 size={16} />
+          {loading ? 'Menyimpan...' : submitLabel}
+        </button>
+      </div>
     </form>
   )
 }
