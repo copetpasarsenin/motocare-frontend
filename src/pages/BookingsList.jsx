@@ -74,6 +74,7 @@ function BookingsList() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadBookings()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters])
