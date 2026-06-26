@@ -3,6 +3,7 @@ import DashboardLayout from '../components/layout/DashboardLayout'
 import BookingCreate from '../pages/BookingCreate'
 import BookingsList from '../pages/BookingsList'
 import Dashboard from '../pages/Dashboard'
+import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Profile from '../pages/Profile'
 import Register from '../pages/Register'
@@ -15,6 +16,7 @@ import ProtectedRoute from './ProtectedRoute'
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 

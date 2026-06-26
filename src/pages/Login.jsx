@@ -55,12 +55,19 @@ function Login() {
   return (
     <main className="auth-page figma-auth-page">
       <header className="auth-topbar">
-        <span className="auth-wordmark">MOTOCARE</span>
-        <span className="auth-support">SUPPORT</span>
+        <Link className="auth-wordmark" to="/home">MOTOCARE</Link>
+        <Link className="auth-support" to="/home">HOME</Link>
       </header>
 
       <section className="auth-stage">
-        <div className="auth-hero" aria-label="MotoCare precision motorcycle care" />
+        <div className="auth-hero" aria-label="MotoCare precision motorcycle care">
+          <div className="auth-hero-copy">
+            <span className="garage-tag">Precision Engineering</span>
+            <h2>Elevate Your Ride.</h2>
+            <p>Bergabunglah dengan ekosistem perawatan motor tercanggih. Pantau performa mesin Anda dengan presisi teknis.</p>
+            <div className="auth-hero-lines" aria-hidden="true"><span /><span /><span /></div>
+          </div>
+        </div>
 
         <section className="auth-panel figma-auth-panel">
           <div className="auth-kicker">
@@ -111,7 +118,7 @@ function Login() {
       <footer className="auth-footer">
         <div>
           <strong>MotoCare</strong>
-          <span>© 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+          <span>(c) 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
         </div>
         <nav aria-label="Legal links">
           <span>Privacy Policy</span>

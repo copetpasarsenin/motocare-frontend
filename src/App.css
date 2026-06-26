@@ -2806,6 +2806,7 @@ textarea {
   font-size: 26px;
   font-weight: 950;
   letter-spacing: 0;
+  text-decoration: none;
 }
 
 .auth-support,
@@ -2816,6 +2817,7 @@ textarea {
   font-weight: 900;
   letter-spacing: 4px;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .auth-stage {
@@ -2841,6 +2843,48 @@ textarea {
   background:
     linear-gradient(180deg, rgba(8, 10, 10, 0.06), rgba(8, 10, 10, 0.22)),
     linear-gradient(90deg, transparent 72%, #0f1111 100%);
+}
+
+.auth-hero-copy {
+  position: absolute;
+  inset: auto auto clamp(90px, 15vh, 190px) clamp(28px, 13vw, 260px);
+  z-index: 1;
+  width: min(520px, 72%);
+  color: #f5f7f8;
+}
+
+.auth-hero-copy h2 {
+  margin: 22px 0 18px;
+  color: #f5f7f8;
+  font-size: clamp(48px, 6vw, 82px);
+  font-style: normal;
+  font-weight: 950;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.auth-hero-copy p {
+  max-width: 430px;
+  margin: 0;
+  color: #ead8d0;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.auth-hero-lines {
+  display: flex;
+  gap: 16px;
+  margin-top: 76px;
+}
+
+.auth-hero-lines span {
+  width: 64px;
+  height: 4px;
+  background: rgba(255, 176, 142, 0.22);
+}
+
+.auth-hero-lines span:first-child {
+  background: #ffb08e;
 }
 
 .figma-auth-panel {
@@ -2890,6 +2934,12 @@ textarea {
 .figma-auth-panel .auth-form {
   gap: 24px;
   margin-top: 0;
+}
+
+.auth-password-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .auth-line-field {
@@ -3298,8 +3348,372 @@ textarea {
   font-weight: 900;
 }
 
+.public-home {
+  min-height: 100vh;
+  color: #f5f5f5;
+  background: #101211;
+}
+
+.public-home-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(1220px, calc(100% - 36px));
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(255, 106, 0, 0.32);
+  background: rgba(16, 18, 17, 0.92);
+  backdrop-filter: blur(14px);
+}
+
+.public-brand {
+  color: #ffb088;
+  font-size: 22px;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+.public-home-nav nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 34px);
+}
+
+.public-home-nav nav a {
+  color: #c9b8ad;
+  font-size: 13px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.public-home-nav nav a.active {
+  color: #ffb088;
+  border-bottom: 2px solid #ffb088;
+}
+
+.public-home-nav .nav-cta {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 4px;
+  color: #271309;
+  background: #ff6a00;
+  text-transform: uppercase;
+}
+
+.public-hero {
+  position: relative;
+  min-height: clamp(620px, 86vh, 840px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 350px);
+  align-items: center;
+  gap: clamp(28px, 7vw, 90px);
+  padding: clamp(72px, 10vw, 130px) clamp(24px, 9vw, 150px);
+  border-bottom: 1px solid rgba(255, 106, 0, 0.24);
+  background:
+    linear-gradient(90deg, rgba(8, 10, 10, 0.22), rgba(8, 10, 10, 0.8) 78%),
+    url('./assets/motocare-motorcycle-bg.jpg') center / cover;
+  overflow: hidden;
+}
+
+.public-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 28%;
+  background: linear-gradient(180deg, transparent, #101211);
+  pointer-events: none;
+}
+
+.public-hero-copy,
+.public-hero-card {
+  position: relative;
+  z-index: 1;
+}
+
+.public-hero-copy {
+  max-width: 690px;
+}
+
+.public-hero-copy h1 {
+  margin: 0;
+  color: #f5f5f5;
+  font-size: clamp(50px, 7vw, 88px);
+  font-weight: 950;
+  line-height: 0.96;
+  text-transform: uppercase;
+}
+
+.public-hero-copy h1::first-line {
+  color: #f5f5f5;
+}
+
+.public-hero-copy p {
+  max-width: 570px;
+  margin: 22px 0 0;
+  color: #ead8d0;
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.7;
+}
+
+.public-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.home-orange-button.primary-button {
+  min-height: 54px;
+  border-radius: 2px;
+  color: #241309;
+  background: #ff6a00;
+  box-shadow: 0 18px 38px rgba(255, 106, 0, 0.24);
+  text-transform: uppercase;
+}
+
+.home-orange-button.primary-button:hover {
+  background: #ff7a00;
+}
+
+.home-outline-button.ghost-button {
+  min-height: 54px;
+  border-color: rgba(255, 176, 136, 0.52);
+  color: #f5f5f5;
+  background: rgba(16, 18, 17, 0.44);
+  text-transform: uppercase;
+}
+
+.public-hero-card {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  border: 1px solid rgba(255, 106, 0, 0.35);
+  border-radius: 6px;
+  background: rgba(36, 38, 37, 0.86);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+.public-hero-card strong {
+  color: #ffb088;
+  font-size: 42px;
+  line-height: 1;
+}
+
+.public-hero-card span,
+.public-hero-card small {
+  color: #c9b8ad;
+  font-weight: 800;
+}
+
+.public-hero-card small {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.public-hero-card svg {
+  color: #ff6a00;
+}
+
+.public-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(1080px, calc(100% - 36px));
+  margin: -70px auto 0;
+  position: relative;
+  z-index: 2;
+}
+
+.public-benefits article {
+  min-height: 190px;
+  display: grid;
+  place-items: center;
+  padding: 30px;
+  border-radius: 999px 999px 0 0;
+  color: #111312;
+  background: #fff1e9;
+  text-align: center;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.public-benefits article.orange {
+  color: #fff1e9;
+  background: #ff6a00;
+}
+
+.public-service-section {
+  padding: clamp(82px, 10vw, 132px) clamp(22px, 7vw, 120px);
+  color: #101211;
+  background: #fff1e9;
+}
+
+.public-section-heading {
+  max-width: 740px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.public-section-heading h2,
+.public-final-cta h2 {
+  margin: 0;
+  color: #101211;
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 950;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.public-section-heading p:not(.eyebrow) {
+  margin: 16px 0 0;
+  color: #44342c;
+  font-weight: 800;
+  line-height: 1.65;
+}
+
+.public-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.public-service-card {
+  min-height: 250px;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid rgba(255, 106, 0, 0.44);
+  border-radius: 8px;
+  color: #f5f5f5;
+  background: #101211;
+  box-shadow: 0 18px 44px rgba(16, 18, 17, 0.12);
+}
+
+.public-service-card h3 {
+  margin: 0;
+  color: #f5f5f5;
+  font-size: 22px;
+}
+
+.public-service-card p {
+  margin: 0;
+  color: #c9b8ad;
+  line-height: 1.65;
+}
+
+.public-service-card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.public-service-card footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #c9b8ad;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.public-service-card footer strong {
+  color: #ff6a00;
+  font-size: 12px;
+}
+
+.public-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 34px clamp(22px, 8vw, 160px);
+  background: #ff6a00;
+}
+
+.public-stats div {
+  display: grid;
+  gap: 6px;
+  place-items: center;
+  min-height: 92px;
+  color: #251309;
+  text-transform: uppercase;
+}
+
+.public-stats strong {
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1;
+}
+
+.public-stats span {
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 2px;
+}
+
+.public-final-cta {
+  display: grid;
+  place-items: center;
+  gap: 28px;
+  padding: clamp(76px, 10vw, 132px) 24px;
+  background: #fff7f1;
+  text-align: center;
+}
+
+.public-final-cta h2 {
+  max-width: 760px;
+}
+
+.public-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px clamp(22px, 8vw, 150px);
+  color: #c9b8ad;
+  background: #101211;
+  border-top: 1px solid rgba(255, 106, 0, 0.26);
+}
+
+.public-footer div {
+  display: grid;
+  gap: 8px;
+}
+
+.public-footer strong {
+  color: #ffb088;
+  font-size: 22px;
+}
+
+.public-footer span {
+  color: #c9b8ad;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.public-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 28px;
+}
+
 @media (max-width: 1280px) {
   .home-dashboard .dashboard-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-service-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -3334,6 +3748,34 @@ textarea {
 
   .service-card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .public-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .public-hero-card {
+    max-width: 360px;
+  }
+
+  .public-benefits {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+    padding-top: 24px;
+  }
+
+  .public-benefits article {
+    min-height: 140px;
+    border-radius: 8px;
+  }
+
+  .public-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .public-footer nav {
+    justify-content: flex-start;
   }
 }
 
@@ -3397,6 +3839,71 @@ textarea {
   }
 
   .service-card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .auth-hero-copy {
+    inset: auto 20px 42px;
+    width: auto;
+  }
+
+  .auth-hero-copy h2 {
+    font-size: 42px;
+  }
+
+  .auth-hero-copy p {
+    font-size: 15px;
+  }
+
+  .auth-hero-lines {
+    margin-top: 30px;
+  }
+
+  .auth-password-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-home-nav {
+    position: static;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 18px 0;
+  }
+
+  .public-home-nav nav {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .public-home-nav .nav-cta {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .public-hero {
+    min-height: 620px;
+    padding: 56px 20px;
+  }
+
+  .public-hero-copy h1 {
+    font-size: 46px;
+  }
+
+  .public-hero-actions > * {
+    width: 100%;
+  }
+
+  .public-service-section {
+    padding-inline: 18px;
+  }
+
+  .public-service-grid,
+  .public-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .public-service-card footer {
     align-items: flex-start;
     flex-direction: column;
   }

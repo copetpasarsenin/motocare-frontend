@@ -10,7 +10,7 @@ import {
 } from '../utils/validation'
 
 function Register() {
-  const [form, setForm] = useState({ username: '', email: '', password: '' })
+  const [form, setForm] = useState({ username: '', email: '', password: '', confirmPassword: '' })
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -20,6 +20,7 @@ function Register() {
       username: validateUsername(form.username),
       email: validateEmail(form.email),
       password: validatePassword(form.password),
+      confirmPassword: form.confirmPassword !== form.password ? 'Konfirmasi password tidak sama' : '',
     }
 
     return firstValidationError(errors)
@@ -58,12 +59,19 @@ function Register() {
   return (
     <main className="auth-page figma-auth-page">
       <header className="auth-topbar">
-        <span className="auth-wordmark">MOTOCARE</span>
-        <span className="auth-support">SUPPORT</span>
+        <Link className="auth-wordmark" to="/home">MOTOCARE</Link>
+        <Link className="auth-support" to="/home">HOME</Link>
       </header>
 
       <section className="auth-stage">
-        <div className="auth-hero" aria-label="MotoCare precision motorcycle care" />
+        <div className="auth-hero" aria-label="MotoCare precision motorcycle care">
+          <div className="auth-hero-copy">
+            <span className="garage-tag">Precision Engineering</span>
+            <h2>Elevate Your Ride.</h2>
+            <p>Bergabunglah dengan ekosistem perawatan motor tercanggih. Pantau performa mesin Anda dengan presisi teknis.</p>
+            <div className="auth-hero-lines" aria-hidden="true"><span /><span /><span /></div>
+          </div>
+        </div>
 
         <section className="auth-panel figma-auth-panel">
           <div className="auth-kicker">
@@ -92,16 +100,28 @@ function Register() {
                 placeholder="john@motocare.id"
               />
             </label>
-            <label className="auth-line-field">
-              <span>Kata Sandi <LockKeyhole size={14} aria-hidden="true" /></span>
-              <input
-                type="password"
-                value={form.password}
-                onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
-                autoComplete="new-password"
-                placeholder="********"
-              />
-            </label>
+            <div className="auth-password-grid">
+              <label className="auth-line-field">
+                <span>Kata Sandi <LockKeyhole size={14} aria-hidden="true" /></span>
+                <input
+                  type="password"
+                  value={form.password}
+                  onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
+                  autoComplete="new-password"
+                  placeholder="********"
+                />
+              </label>
+              <label className="auth-line-field">
+                <span>Konfirmasi <LockKeyhole size={14} aria-hidden="true" /></span>
+                <input
+                  type="password"
+                  value={form.confirmPassword}
+                  onChange={(event) => setForm((current) => ({ ...current, confirmPassword: event.target.value }))}
+                  autoComplete="new-password"
+                  placeholder="********"
+                />
+              </label>
+            </div>
             {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
             <button className="primary-button full auth-submit" type="submit" disabled={loading}>
               <span>{loading ? 'Memproses...' : 'Daftar Sekarang'}</span>
@@ -123,7 +143,7 @@ function Register() {
       <footer className="auth-footer">
         <div>
           <strong>MotoCare</strong>
-          <span>© 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+          <span>(c) 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
         </div>
         <nav aria-label="Legal links">
           <span>Privacy Policy</span>
