@@ -1,4 +1,4 @@
-import { CalendarCheck, CircleDollarSign, ClipboardList, Gauge, Loader2, Timer, Wrench } from 'lucide-react'
+import { Activity, CalendarCheck, CircleDollarSign, ClipboardList, Gauge, Loader2, Timer, Wrench } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import {
   Bar,
@@ -83,22 +83,34 @@ function Dashboard() {
     color: 'var(--dashboard-text)',
   }
 
+  const bayStatus = [
+    { bay: 'B1', label: 'Active Jobs', value: stats.pending_bookings, status: 'In Progress', tone: 'active' },
+    { bay: 'B2', label: 'Completed', value: stats.completed_bookings, status: 'Ready', tone: 'ready' },
+    { bay: 'B3', label: 'Available Slots', value: Math.max(stats.total_services - stats.pending_bookings, 0), status: 'Standby', tone: 'idle' },
+  ]
+
+  const activityItems = [
+    { label: 'Booking pipeline', value: `${stats.total_bookings} total requests`, meta: `${stats.pending_bookings} pending review` },
+    { label: 'Service catalog', value: `${stats.total_services} active services`, meta: `${stats.total_categories} categories managed` },
+    { label: 'Revenue monitor', value: formatCurrency(stats.estimated_revenue), meta: 'Projected dashboard value' },
+  ]
+
   return (
     <div className="page-grid dashboard-grid home-dashboard">
       <section className="hero-card dashboard-hero-card">
         <div className="dashboard-hero-copy">
-          <span className="garage-tag">Precision Engineering</span>
+          <span className="garage-tag">Admin Console</span>
           <p className="eyebrow">MotoCare Command Center</p>
-          <h2>Elevate Your Ride.</h2>
-          <p>Pantau performa bengkel, katalog servis, booking, dan estimasi revenue dengan presisi teknis.</p>
+          <h2>Operations Dashboard</h2>
+          <p>Pantau performa bengkel, katalog servis, booking, dan estimasi revenue dalam satu workspace admin.</p>
           <div className="dashboard-hero-badges" aria-label="Dashboard highlights">
             <span>Live API Data</span>
-            <span>Service Workflow</span>
+            <span>Booking Overview</span>
             <span>Garage Analytics</span>
           </div>
         </div>
         <div className="dashboard-hero-panel" aria-label="Operations snapshot">
-          <span className="hero-panel-label">Today&apos;s Overview</span>
+          <span className="hero-panel-label">Admin Overview</span>
           <strong>{loading ? '...' : stats.total_bookings}</strong>
           <span>Total bookings tracked</span>
           <div>
@@ -197,12 +209,55 @@ function Dashboard() {
                 itemStyle={{ color: 'var(--dashboard-text)' }}
                 labelStyle={{ color: 'var(--dashboard-muted)' }}
               />
-              <Bar dataKey="total_bookings" name="Bookings" radius={[6, 6, 0, 0]} fill="#2563eb" />
+              <Bar dataKey="total_bookings" name="Bookings" radius={[2, 2, 0, 0]} fill="#ff7000" />
             </BarChart>
           </ResponsiveContainer>
         ) : (
           <div className="chart-placeholder">Belum ada data top services.</div>
         )}
+      </section>
+
+      <section className="dashboard-ops-card" aria-label="Bay status">
+        <div className="dashboard-ops-heading">
+          <div>
+            <p className="eyebrow">Workshop Bays</p>
+            <h3>Bay Status</h3>
+          </div>
+          <span>{loading ? 'Syncing' : 'Live'}</span>
+        </div>
+        <div className="dashboard-bay-list">
+          {bayStatus.map((bay) => (
+            <article className={`dashboard-bay-item ${bay.tone}`} key={bay.bay}>
+              <strong>{bay.bay}</strong>
+              <div>
+                <span>{bay.label}</span>
+                <small>{loading ? '...' : bay.value}</small>
+              </div>
+              <em>{bay.status}</em>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="dashboard-activity-card" aria-label="Recent activity">
+        <div className="dashboard-ops-heading">
+          <div>
+            <p className="eyebrow">Recent Activity</p>
+            <h3>Booking Overview</h3>
+          </div>
+          <Activity size={20} />
+        </div>
+        <div className="dashboard-activity-list">
+          {activityItems.map((item) => (
+            <article key={item.label}>
+              <div>
+                <strong>{item.label}</strong>
+                <span>{loading ? 'Loading dashboard data...' : item.meta}</span>
+              </div>
+              <em>{loading ? '...' : item.value}</em>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   )

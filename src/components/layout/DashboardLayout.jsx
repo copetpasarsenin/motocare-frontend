@@ -7,7 +7,6 @@ import {
   LogOut,
   Menu,
   Moon,
-  PlusCircle,
   Sun,
   UserCircle,
   Wrench,
@@ -19,9 +18,7 @@ import { getStoredTheme, toggleTheme } from '../../utils/theme'
 const navItems = [
   { to: '/', label: 'Dashboard', icon: Gauge },
   { to: '/services', label: 'Services', icon: Wrench },
-  { to: '/services/create', label: 'Create Service', icon: PlusCircle },
   { to: '/bookings', label: 'Bookings', icon: CalendarDays },
-  { to: '/bookings/create', label: 'Create Booking', icon: PlusCircle },
   { to: '/profile', label: 'Profile', icon: UserCircle },
 ]
 
