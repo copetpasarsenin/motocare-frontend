@@ -180,8 +180,8 @@ function ServicesList() {
       <div className="section-heading row-heading services-hero-heading">
         <div>
           <p className="eyebrow">MotoCare Services</p>
-          <h3>Pilih Layanan</h3>
-          <p>Kelola katalog layanan servis, harga, durasi, status, dan export data operasional.</p>
+          <h3>Service Management</h3>
+          <p>Kelola katalog layanan, harga, durasi, status, dan data operasional bengkel.</p>
         </div>
         <div className="button-row">
           <Link className="primary-button" to="/services/create">
@@ -194,7 +194,7 @@ function ServicesList() {
       <div className="services-controls">
         <div className="filter-panel-heading">
           <SlidersHorizontal size={18} />
-          <span>Filter &amp; search services</span>
+          <span>Search &amp; Filters</span>
         </div>
         <div className="toolbar services-toolbar">
           <label className="search-field">
@@ -255,7 +255,7 @@ function ServicesList() {
             </button>
             <button className="ghost-button accent-button" type="button" onClick={handleExportExcel}>
               <FileSpreadsheet size={17} />
-              Export Excel-compatible
+              Export Excel
             </button>
           </div>
         </div>

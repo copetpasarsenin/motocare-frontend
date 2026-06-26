@@ -8064,3 +8064,339 @@ textarea {
     justify-self: start;
   }
 }
+
+/* -- Stitch service management refinement ---------------------------------- */
+.figma-dashboard .service-catalog-page {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  color: #f5f5f5;
+  background: transparent;
+  box-shadow: none;
+}
+
+.figma-dashboard .service-catalog-page .services-hero-heading {
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255, 112, 0, 0.13), transparent 30%),
+    #151617;
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3 {
+  color: #f5f5f5;
+  font-size: clamp(34px, 4vw, 56px);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3::before {
+  width: 4px;
+  height: 34px;
+  margin-right: 12px;
+  background: #ff7000;
+}
+
+.figma-dashboard .service-catalog-page .section-heading p:not(.eyebrow) {
+  max-width: 640px;
+  color: #9ca3af;
+}
+
+.figma-dashboard .service-catalog-page .primary-button {
+  min-height: 44px;
+  border-radius: 2px;
+  color: #fff;
+  background: #ff7000;
+  box-shadow: none;
+}
+
+.figma-dashboard .service-catalog-page .services-controls {
+  gap: 12px;
+  margin: 0 0 14px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background: #151617;
+}
+
+.figma-dashboard .service-catalog-page .filter-panel-heading {
+  min-height: 22px;
+  color: #ffb06b;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar {
+  grid-template-columns: minmax(240px, 1.2fr) repeat(5, minmax(112px, 0.7fr));
+  gap: 10px;
+  padding: 0;
+  background: transparent !important;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar label:not(.search-field) {
+  gap: 6px;
+  color: #9ca3af;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar select,
+.figma-dashboard .service-catalog-page .services-toolbar input {
+  min-height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  color: #f5f5f5;
+  background: #101112;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar select:focus,
+.figma-dashboard .service-catalog-page .services-toolbar input:focus {
+  border-color: rgba(255, 112, 0, 0.68);
+  box-shadow: 0 0 0 3px rgba(255, 112, 0, 0.1);
+  outline: none;
+}
+
+.figma-dashboard .service-catalog-page .search-field {
+  min-height: 40px;
+  border-radius: 2px;
+  background: #101112;
+}
+
+.figma-dashboard .service-catalog-page .services-export-panel {
+  padding: 0;
+  background: transparent;
+}
+
+.figma-dashboard .service-catalog-page .services-export-panel .button-row {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.figma-dashboard .service-catalog-page .services-export-panel .accent-button,
+.figma-dashboard .service-catalog-page .table-summary .ghost-button,
+.figma-dashboard .service-catalog-page .pagination .ghost-button {
+  min-height: 38px;
+  border-radius: 2px;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #d7d7d7;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: none;
+}
+
+.figma-dashboard .service-catalog-page .services-export-panel .accent-button:hover,
+.figma-dashboard .service-catalog-page .table-summary .ghost-button:hover:not(:disabled),
+.figma-dashboard .service-catalog-page .pagination .ghost-button:hover:not(:disabled) {
+  border-color: rgba(255, 112, 0, 0.48);
+  color: #fff;
+  background: rgba(255, 112, 0, 0.1);
+}
+
+.figma-dashboard .service-catalog-page .table-summary {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background: #151617;
+}
+
+.figma-dashboard .service-catalog-page .table-summary strong {
+  color: #f5f5f5;
+}
+
+.figma-dashboard .service-catalog-page .table-summary span {
+  color: #9ca3af;
+}
+
+.figma-dashboard .service-catalog-page .service-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card {
+  min-height: 0;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  color: #f5f5f5;
+  background: #151617;
+  box-shadow: none;
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card.featured {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: #151617;
+  transform: none;
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card:hover {
+  border-color: rgba(255, 112, 0, 0.4);
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+
+.figma-dashboard .service-catalog-page .service-card-topline {
+  margin-bottom: 18px;
+}
+
+.figma-dashboard .service-catalog-page .service-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 2px;
+  color: #ff7000;
+  background: rgba(255, 112, 0, 0.12);
+}
+
+.figma-dashboard .service-catalog-page .service-code {
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.figma-dashboard .service-catalog-page .service-card-body h4 {
+  color: #fff;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .service-card-body p {
+  min-height: 44px;
+  color: #9ca3af;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+  padding: 14px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta span {
+  min-height: 38px;
+  justify-content: flex-start;
+  border: 0;
+  border-radius: 0;
+  color: #d7d7d7;
+  background: transparent;
+  font-size: 12px;
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta span::before {
+  display: block;
+  color: #7d8590;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta span:first-child::before {
+  content: 'Category';
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta span:last-child::before {
+  content: 'Duration';
+}
+
+.figma-dashboard .service-catalog-page .service-card-footer {
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.figma-dashboard .service-catalog-page .service-card-footer strong {
+  color: #f5f5f5;
+  font-size: 18px;
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions.table-actions {
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 0;
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button {
+  min-height: 34px;
+  border-radius: 2px;
+  color: #d7d7d7;
+  background: transparent;
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.detail,
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.edit {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.detail:hover,
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.edit:hover {
+  border-color: rgba(255, 112, 0, 0.5);
+  color: #ffb06b;
+  background: rgba(255, 112, 0, 0.08);
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.delete {
+  border-color: rgba(239, 68, 68, 0.28);
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.delete:hover:not(:disabled) {
+  border-color: rgba(239, 68, 68, 0.62);
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.figma-dashboard .service-catalog-page .pagination-current {
+  border-radius: 2px;
+  border-color: rgba(255, 255, 255, 0.09);
+  background: #151617;
+}
+
+.figma-dashboard .service-catalog-page .confirmation-dialog {
+  border-radius: 2px;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+  background: #151617;
+}
+
+@media (max-width: 1180px) {
+  .figma-dashboard .service-catalog-page .services-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figma-dashboard .service-catalog-page .service-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .service-catalog-page .services-hero-heading,
+  .figma-dashboard .service-catalog-page .services-export-panel .button-row,
+  .figma-dashboard .service-catalog-page .service-card-footer,
+  .figma-dashboard .service-catalog-page .service-card-actions.table-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .figma-dashboard .service-catalog-page .services-toolbar,
+  .figma-dashboard .service-catalog-page .service-card-grid,
+  .figma-dashboard .service-catalog-page .service-card-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-dashboard .service-catalog-page .service-card-actions .action-button {
+    width: 100%;
+  }
+}
