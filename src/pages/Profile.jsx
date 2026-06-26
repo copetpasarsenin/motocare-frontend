@@ -1,22 +1,99 @@
+import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
 import { getApiBaseUrl } from '../services/api'
 import { getStoredUser } from '../utils/auth'
 
 function Profile() {
   const user = getStoredUser()
+  const initials = (user?.username || 'U').slice(0, 2).toUpperCase()
+  const roleBadgeClass =
+    user?.role === 'admin' ? 'profile-role-badge admin' : 'profile-role-badge'
 
   return (
-    <section className="card narrow-card">
-      <div className="section-heading">
-        <h3>Profile</h3>
-        <p>Informasi sesi login yang tersimpan di localStorage.</p>
-      </div>
-      <dl className="profile-list">
-        <div><dt>Username</dt><dd>{user?.username || '-'}</dd></div>
-        <div><dt>Email</dt><dd>{user?.email || '-'}</dd></div>
-        <div><dt>Role</dt><dd>{user?.role || '-'}</dd></div>
-        <div><dt>API Base URL</dt><dd>{getApiBaseUrl()}</dd></div>
-      </dl>
-    </section>
+    <div className="profile-page">
+      {/* Hero header */}
+      <section className="profile-hero">
+        <div className="profile-avatar">{initials}</div>
+        <div className="profile-hero-info">
+          <h2>{user?.username || 'User'}</h2>
+          <p>{user?.email || '-'}</p>
+          {user?.role && <span className={roleBadgeClass}>{user.role}</span>}
+        </div>
+      </section>
+
+      {/* Account information */}
+      <section className="profile-section">
+        <div className="profile-section-header">
+          <User size={18} />
+          <h3>Account Information</h3>
+        </div>
+        <dl className="profile-list">
+          <div>
+            <dt>
+              <UserCircle size={15} />
+              Username
+            </dt>
+            <dd>{user?.username || '-'}</dd>
+          </div>
+          <div>
+            <dt>
+              <Mail size={15} />
+              Email
+            </dt>
+            <dd>{user?.email || '-'}</dd>
+          </div>
+          <div>
+            <dt>
+              <Shield size={15} />
+              Role
+            </dt>
+            <dd>
+              <span className={roleBadgeClass}>{user?.role || '-'}</span>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      {/* Security */}
+      <section className="profile-section">
+        <div className="profile-section-header">
+          <KeyRound size={18} />
+          <h3>Security</h3>
+        </div>
+        <dl className="profile-list">
+          <div>
+            <dt>
+              <KeyRound size={15} />
+              Authentication
+            </dt>
+            <dd>Bearer Token (JWT)</dd>
+          </div>
+          <div>
+            <dt>
+              <Shield size={15} />
+              Session Storage
+            </dt>
+            <dd>localStorage</dd>
+          </div>
+        </dl>
+      </section>
+
+      {/* Connection settings */}
+      <section className="profile-section">
+        <div className="profile-section-header">
+          <Globe size={18} />
+          <h3>Connection</h3>
+        </div>
+        <dl className="profile-list">
+          <div>
+            <dt>
+              <Globe size={15} />
+              API Base URL
+            </dt>
+            <dd className="profile-mono">{getApiBaseUrl() || '-'}</dd>
+          </div>
+        </dl>
+      </section>
+    </div>
   )
 }
 

@@ -5430,3 +5430,192 @@ textarea {
     background: #0d0f0f;
   }
 }
+
+/* == Profile Page ========================================================= */
+.profile-page {
+  display: grid;
+  gap: 24px;
+  max-width: 720px;
+}
+
+/* -- Hero card ------------------------------------------------------------ */
+.profile-hero {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 32px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.profile-avatar {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.22);
+}
+
+.profile-hero-info h2 {
+  margin: 0;
+  font-size: clamp(22px, 3vw, 28px);
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.profile-hero-info p {
+  margin: 4px 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* -- Role badge ----------------------------------------------------------- */
+.profile-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  background: var(--surface-soft);
+}
+
+.profile-role-badge.admin {
+  color: #ff7000;
+  border-color: rgba(255, 112, 0, 0.3);
+  background: rgba(255, 112, 0, 0.08);
+}
+
+/* -- Section cards -------------------------------------------------------- */
+.profile-section {
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+}
+
+.profile-section-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* -- Profile list overrides for icons ------------------------------------- */
+.profile-page .profile-list dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-page .profile-list dt svg {
+  flex-shrink: 0;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.profile-mono {
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+/* -- Figma dashboard dark overrides for profile page ---------------------- */
+.figma-dashboard .profile-hero {
+  border-color: rgba(255, 112, 0, 0.14);
+  background:
+    radial-gradient(circle at 88% 16%, rgba(255, 112, 0, 0.18), transparent 40%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 62%, #1c1610 100%);
+}
+
+.figma-dashboard .profile-avatar {
+  background: linear-gradient(135deg, #ff7000, #e65100);
+  box-shadow: 0 8px 28px rgba(255, 112, 0, 0.28);
+}
+
+.figma-dashboard .profile-hero-info h2 {
+  color: #fff;
+}
+
+.figma-dashboard .profile-hero-info p {
+  color: #a89080;
+}
+
+.figma-dashboard .profile-role-badge {
+  color: #8a7568;
+  border-color: rgba(255, 112, 0, 0.16);
+  background: #1a1c1c;
+}
+
+.figma-dashboard .profile-role-badge.admin {
+  color: #ffb08e;
+  border-color: rgba(255, 112, 0, 0.3);
+  background: rgba(255, 112, 0, 0.1);
+}
+
+.figma-dashboard .profile-section {
+  border-color: rgba(255, 112, 0, 0.14);
+  background: #141616;
+}
+
+.figma-dashboard .profile-section-header {
+  border-color: rgba(255, 112, 0, 0.12);
+  color: #ff7000;
+}
+
+.figma-dashboard .profile-section-header h3 {
+  color: #f3f0ed;
+}
+
+.figma-dashboard .profile-page .profile-list dt svg {
+  color: #ff7000;
+  opacity: 0.6;
+}
+
+.figma-dashboard .profile-mono {
+  color: #ffb08e;
+}
+
+/* -- Responsive ----------------------------------------------------------- */
+@media (max-width: 600px) {
+  .profile-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 20px;
+  }
+
+  .profile-hero-info h2 {
+    font-size: 22px;
+  }
+
+  .profile-section {
+    padding: 20px 18px;
+  }
+
+  .profile-page .profile-list div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
