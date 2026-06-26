@@ -3711,14 +3711,16 @@ textarea {
 .booking-create-page,
 .figma-service-detail {
   min-height: calc(100vh - 146px);
-  padding: clamp(20px, 3vw, 34px);
-  border: 1px solid rgba(255, 106, 0, 0.22);
-  border-radius: 8px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 36px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
   color: #f5f5f5;
   background:
-    radial-gradient(circle at 12% 8%, rgba(255, 106, 0, 0.12), transparent 26%),
-    #101211;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+    radial-gradient(circle at 8% 0%, rgba(255, 106, 0, 0.14), transparent 24%),
+    linear-gradient(180deg, #151515 0%, #0f1011 100%);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
 }
 
 .booking-page-heading,
@@ -3727,14 +3729,15 @@ textarea {
   align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
 .booking-page-heading h3 {
   margin: 0;
   color: #f5f5f5;
-  font-size: clamp(38px, 5vw, 58px);
+  font-size: clamp(36px, 5vw, 64px);
   font-weight: 950;
+  letter-spacing: -1.5px;
 }
 
 .booking-page-heading h3::before {
@@ -3748,22 +3751,22 @@ textarea {
 }
 
 .booking-page-heading p:not(.eyebrow) {
-  max-width: 720px;
+  max-width: 660px;
   margin: 8px 0 0;
-  color: #c9b8ad;
+  color: #9ca3af;
   line-height: 1.65;
 }
 
 .booking-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
   align-items: start;
-  gap: 28px;
+  gap: 32px;
 }
 
 .booking-main-column {
   display: grid;
-  gap: 24px;
+  gap: 22px;
 }
 
 .booking-panel,
@@ -3771,18 +3774,18 @@ textarea {
 .booking-info-card,
 .figma-description-card,
 .figma-benefit-grid article {
-  border: 1px solid rgba(255, 106, 0, 0.28);
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
   color: #f5f5f5;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 52%),
-    #242625;
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 58%),
+    #1b1b1e;
 }
 
 .booking-panel,
 .booking-confirm-panel,
 .booking-info-card {
-  padding: clamp(20px, 3vw, 30px);
+  padding: clamp(20px, 3vw, 32px);
 }
 
 .booking-panel-heading {
@@ -3795,7 +3798,7 @@ textarea {
 .booking-panel-heading svg,
 .booking-info-card > svg {
   flex: 0 0 auto;
-  color: #ffb088;
+  color: #ff6a00;
 }
 
 .booking-panel-heading h4,
@@ -3804,7 +3807,7 @@ textarea {
 .figma-description-card h4 {
   margin: 0;
   color: #f5f5f5;
-  font-size: clamp(25px, 3vw, 34px);
+  font-size: clamp(24px, 3vw, 32px);
   font-weight: 950;
 }
 
@@ -3813,27 +3816,27 @@ textarea {
 .figma-description-card p,
 .figma-benefit-grid p {
   margin: 6px 0 0;
-  color: #c9b8ad;
+  color: #9ca3af;
   line-height: 1.65;
 }
 
 .booking-service-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 12px;
 }
 
 .booking-service-option {
   position: relative;
-  min-height: 174px;
+  min-height: 166px;
   display: grid;
-  grid-template-columns: 58px 1fr;
-  gap: 18px;
-  padding: 22px;
-  border: 1px solid rgba(255, 106, 0, 0.24);
-  border-radius: 8px;
+  grid-template-columns: 52px 1fr;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
   color: #f5f5f5;
-  background: #1c1f1e;
+  background: #202023;
   cursor: pointer;
   text-align: left;
   transition:
@@ -3845,8 +3848,21 @@ textarea {
 .booking-service-option:hover,
 .booking-service-option.selected {
   border-color: #ff6a00;
-  box-shadow: 0 16px 36px rgba(255, 106, 0, 0.12);
+  background: #242124;
+  box-shadow: 0 16px 34px rgba(255, 106, 0, 0.1);
   transform: translateY(-1px);
+}
+
+.booking-service-option.selected::after {
+  content: 'Dipilih';
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  color: #ff6a00;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
 }
 
 .booking-service-option span:not(.service-icon-box) {
@@ -3857,11 +3873,12 @@ textarea {
 
 .booking-service-option strong {
   color: #f5f5f5;
-  font-size: 22px;
+  padding-right: 36px;
+  font-size: 20px;
 }
 
 .booking-service-option small {
-  color: #c9b8ad;
+  color: #a1a1aa;
   line-height: 1.55;
 }
 
@@ -3869,7 +3886,7 @@ textarea {
   color: #ff6a00;
   font-style: normal;
   font-weight: 950;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -3877,7 +3894,7 @@ textarea {
   position: absolute;
   top: 18px;
   right: 18px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.25);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
   font-size: 12px;
   font-style: normal;
@@ -3887,7 +3904,7 @@ textarea {
 .booking-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 18px 16px;
 }
 
 .figma-field {
@@ -3897,20 +3914,21 @@ textarea {
 
 .figma-field span,
 .booking-confirm-group > span {
-  color: #c9b8ad;
+  color: #a1a1aa;
   font-size: 12px;
   font-weight: 950;
-  letter-spacing: 3px;
+  letter-spacing: 2.4px;
   text-transform: uppercase;
 }
 
 .figma-field input,
 .figma-field textarea,
 .booking-date-input {
-  border: 1px solid rgba(255, 106, 0, 0.18);
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   color: #f5f5f5;
-  background: #111312;
+  background: #121214;
 }
 
 .figma-field input:focus,
@@ -3918,6 +3936,7 @@ textarea {
 .booking-date-input:focus {
   border-color: #ff6a00;
   box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12);
+  outline: none;
 }
 
 .figma-field input::placeholder,
@@ -3929,6 +3948,7 @@ textarea {
   display: flex;
   align-items: flex-start;
   gap: 14px;
+  background: #18181b;
 }
 
 .booking-info-card strong {
@@ -3937,21 +3957,24 @@ textarea {
 
 .booking-confirm-panel {
   position: sticky;
-  top: 104px;
+  top: 96px;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #1a1a1d;
 }
 
 .booking-confirm-panel h4 {
   max-width: 330px;
-  margin-bottom: 28px;
-  color: #ff6a00;
-  font-size: clamp(38px, 4vw, 54px);
+  margin-bottom: 30px;
+  color: #f5f5f5;
+  font-size: clamp(34px, 4vw, 50px);
   line-height: 1.08;
+  letter-spacing: -1px;
 }
 
 .booking-confirm-group {
   display: grid;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: 13px;
+  margin-bottom: 30px;
 }
 
 .booking-date-grid {
@@ -3963,12 +3986,18 @@ textarea {
 .booking-date-grid button,
 .booking-time-grid button {
   min-height: 70px;
-  border: 1px solid rgba(255, 106, 0, 0.24);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
   color: #f5f5f5;
-  background: #202323;
+  background: #202023;
   cursor: pointer;
   font-weight: 900;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+}
+
+.booking-date-grid button:hover,
+.booking-time-grid button:hover {
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
 .booking-date-grid button {
@@ -3981,12 +4010,12 @@ textarea {
 .booking-time-grid button.selected {
   border-color: #ff6a00;
   color: #ff6a00;
-  background: rgba(255, 106, 0, 0.08);
+  background: rgba(255, 106, 0, 0.07);
 }
 
 .booking-date-grid small,
 .booking-date-grid em {
-  color: #c9b8ad;
+  color: #a1a1aa;
   font-size: 11px;
   font-style: normal;
   text-transform: uppercase;
@@ -3997,7 +4026,9 @@ textarea {
 }
 
 .booking-date-input {
-  min-height: 42px;
+  min-height: 44px;
+  padding: 0 12px;
+  color-scheme: dark;
 }
 
 .booking-time-grid {
@@ -4022,10 +4053,17 @@ textarea {
   align-items: center;
   gap: 12px;
   padding: 0 16px;
-  border: 1px solid rgba(255, 106, 0, 0.24);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
   color: #f5f5f5;
-  background: #202323;
+  background: rgba(255, 255, 255, 0.035);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.booking-addon-list label:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.055);
 }
 
 .booking-addon-list input {
@@ -4049,7 +4087,7 @@ textarea {
   gap: 12px;
   margin-top: 34px;
   padding-top: 24px;
-  border-top: 1px solid rgba(255, 106, 0, 0.24);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .booking-summary div {
@@ -4057,7 +4095,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  color: #c9b8ad;
+  color: #a1a1aa;
 }
 
 .booking-summary strong {
@@ -4067,31 +4105,35 @@ textarea {
 .booking-summary .total {
   margin-top: 12px;
   color: #f5f5f5;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 950;
 }
 
 .booking-summary .total strong {
   color: #ff6a00;
-  font-size: 30px;
+  font-size: clamp(28px, 4vw, 34px);
 }
 
 .booking-confirm-button.primary-button {
   width: 100%;
-  min-height: 66px;
+  min-height: 62px;
   margin-top: 26px;
-  border-radius: 4px;
-  color: #241309;
-  background: #ff6a00;
+  border-radius: 2px;
+  color: #fff;
+  background: linear-gradient(90deg, #d95a00, #ff6a00);
   box-shadow: 0 18px 38px rgba(255, 106, 0, 0.24);
   font-size: 17px;
   text-transform: uppercase;
 }
 
+.booking-confirm-button.primary-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff6a00, #ff9b45);
+}
+
 .booking-payload-note {
   display: block;
   margin-top: 14px;
-  color: #92796e;
+  color: #7d7d86;
   line-height: 1.55;
   text-align: center;
 }

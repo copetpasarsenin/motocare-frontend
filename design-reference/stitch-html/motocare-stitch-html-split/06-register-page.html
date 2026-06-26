@@ -1,0 +1,154 @@
+<!-- MotoCare - Register Page (Revised) -->
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MotoCare - Registrasi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-fonts">
+    @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #111315;
+      color: #e2e8f0;
+    }
+    h1, h2, h3, .font-archivo {
+      font-family: 'Archivo Narrow', sans-serif;
+    }
+  </style>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            motocare: {
+              orange: '#ff6b00',
+              dark: '#111315',
+              darker: '#0a0b0d',
+              input: '#1a1d21',
+              border: '#2d333b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased text-gray-300 bg-motocare-dark">
+<!-- BEGIN: Header -->
+<header class="w-full flex items-center justify-between px-8 py-6 border-b border-motocare-border bg-motocare-darker absolute top-0 z-10" data-purpose="main-header">
+<div class="flex items-center">
+<span class="text-motocare-orange font-bold text-2xl tracking-wider">MOTOCARE</span>
+</div>
+<nav class="hidden md:flex space-x-6">
+<a class="text-sm tracking-widest hover:text-motocare-orange uppercase transition-colors" href="#">Support</a>
+</nav>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Main Content -->
+<main class="flex-grow flex flex-col md:flex-row pt-[85px]" data-purpose="main-content">
+<!-- Left Side: Hero Image & Text -->
+<section class="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen flex items-center px-8 md:px-20 py-20 bg-black overflow-hidden" data-purpose="hero-section">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Motorcycle Close-up" class="w-full h-full object-cover opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmC_aDxvqo1jw0rAjvSQTDpyqZ0VG_LZcYNsJHC1Q4CekC99952U0amJE2Hji6KxCTwPa013wwAK0qpNbEmcb2lzwxE_-23RSJxFqTTKjVgaq6cIXCnztYShIcIMbkXpRwejTiFCz_34lg-DrO9YeoDTihPvXbhJVypQ-T7U2T5OkQekz7Lvcw0asLFJ4yC1DQGPNSlPR_BRxspoqtJqGc9ZmeomSFzmbKVegByysFnKSIg0wN3linD66DHm3sdb7AwIPP0Vm4Nkfx">
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-motocare-dark via-transparent to-transparent"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 max-w-lg">
+<div class="inline-block bg-motocare-orange text-black font-archivo text-lg uppercase px-3 py-1 mb-6 skew-x-[-15deg]">
+<span class="inline-block skew-x-[15deg] font-bold tracking-widest text-sm">PRECISION ENGINEERING</span>
+</div>
+<h1 class="font-archivo text-6xl md:text-[5.5rem] font-bold leading-[0.9] text-white mb-6 uppercase">
+          ELEVATE<br>
+<span class="text-gray-100">YOUR RIDE.</span>
+</h1>
+<p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-md font-sans">
+          Bergabunglah dengan ekosistem perawatan motor tercanggih. Pantau performa mesin Anda dengan presisi teknis.
+        </p>
+<!-- Progress Indicators -->
+<div class="flex space-x-3">
+<div class="w-12 h-1 bg-motocare-orange"></div>
+<div class="w-12 h-1 bg-gray-600"></div>
+<div class="w-12 h-1 bg-gray-600"></div>
+</div>
+</div>
+</section>
+<!-- Right Side: Registration Form -->
+<section class="w-full md:w-1/2 flex items-center justify-center px-8 py-20 bg-motocare-dark" data-purpose="registration-form-section">
+<div class="w-full max-w-md">
+<!-- Form Header -->
+<div class="mb-10">
+<div class="flex items-center space-x-3 mb-2">
+<div class="w-8 h-[2px] bg-motocare-orange"></div>
+<span class="uppercase tracking-widest text-xs text-motocare-orange font-semibold">NEW ACCOUNT</span>
+</div>
+<h2 class="font-archivo text-5xl md:text-6xl text-white italic uppercase tracking-wide font-bold">BUAT AKUN BARU</h2>
+</div>
+<!-- The Form -->
+<form action="#" class="space-y-6" method="POST">
+<!-- Full Name -->
+<div>
+<label class="block text-xs font-semibold tracking-widest uppercase text-gray-400 mb-2 flex justify-between" for="fullName">
+              NAMA LENGKAP
+              <svg class="h-4 w-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+</svg>
+</label>
+<input class="w-full bg-motocare-input border border-motocare-border focus:border-motocare-orange text-white px-4 py-3 outline-none transition-colors rounded-sm" id="fullName" name="fullName" placeholder="John Doe" required="" type="text">
+</div>
+<!-- Email -->
+<div>
+<label class="block text-xs font-semibold tracking-widest uppercase text-gray-400 mb-2 flex justify-between" for="email">
+              EMAIL
+              <svg class="h-4 w-4 text-gray-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+</svg>
+</label>
+<input class="w-full bg-motocare-input border border-motocare-border focus:border-motocare-orange text-white px-4 py-3 outline-none transition-colors rounded-sm" id="email" name="email" placeholder="john@motocare.id" required="" type="email">
+</div>
+<!-- Password Row -->
+<div class="flex flex-col md:flex-row md:space-x-4 space-y-6 md:space-y-0">
+<!-- Password -->
+<div class="w-full md:w-1/2">
+<label class="block text-xs font-semibold tracking-widest uppercase text-gray-400 mb-2" for="password">KATA SANDI</label>
+<input class="w-full bg-motocare-input border border-motocare-border focus:border-motocare-orange text-white px-4 py-3 outline-none transition-colors rounded-sm" id="password" name="password" placeholder="••••••••" required="" type="password">
+</div>
+<!-- Confirm Password -->
+<div class="w-full md:w-1/2">
+<label class="block text-xs font-semibold tracking-widest uppercase text-gray-400 mb-2" for="confirmPassword">KONFIRMASI</label>
+<input class="w-full bg-motocare-input border border-motocare-border focus:border-motocare-orange text-white px-4 py-3 outline-none transition-colors rounded-sm" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required="" type="password">
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-motocare-orange hover:bg-orange-500 text-black font-bold uppercase tracking-widest py-4 px-6 flex justify-center items-center transition-colors mt-8" type="submit">
+            DAFTAR SEKARANG
+            <svg class="h-5 w-5 ml-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 1L4 14h7v9l11-13h-7z"></path>
+</svg>
+</button>
+</form>
+<!-- Login Link -->
+<div class="mt-8 text-center text-sm text-gray-400">
+          Sudah punya akun? <a class="text-motocare-orange hover:text-orange-400 transition-colors ml-1" href="#">Masuk</a>
+</div>
+</div>
+</section>
+</main>
+<!-- END: Main Content -->
+<!-- BEGIN: Footer -->
+<footer class="w-full border-t border-motocare-border bg-motocare-darker py-8 px-8 flex flex-col md:flex-row justify-between items-center" data-purpose="main-footer">
+<div class="mb-4 md:mb-0">
+<span class="text-motocare-orange font-bold text-xl tracking-wider block mb-1">MotoCare</span>
+<p class="text-xs text-gray-600 uppercase tracking-wider">© 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="flex flex-wrap gap-6 text-xs text-gray-400 uppercase tracking-widest justify-center md:justify-end">
+<a class="hover:text-motocare-orange transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-motocare-orange transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-motocare-orange transition-colors" href="#">Service Status</a>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

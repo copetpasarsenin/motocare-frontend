@@ -145,7 +145,7 @@ function BookingCreate() {
             <div className="booking-panel-heading">
               <Wrench size={22} />
               <div>
-                <h4>Service Selection</h4>
+                <h4>Pilih Layanan</h4>
                 <p>Pilih salah satu layanan aktif dari katalog MotoCare.</p>
               </div>
             </div>

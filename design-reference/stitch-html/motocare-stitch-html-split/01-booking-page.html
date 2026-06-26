@@ -1,0 +1,366 @@
+<!-- MotoCare - Booking Page (Revised) -->
+<!DOCTYPE html><html lang="id"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>MotoCare - Booking Service</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            motocare: {
+              bg: '#1e1e21',
+              surface: '#252528',
+              surfaceLight: '#313135',
+              primary: '#f97316',
+              primaryDark: '#c2410c',
+              text: '#f3f4f6',
+              textMuted: '#9ca3af',
+              border: '#3f3f46'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-utilities">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      background-color: #1e1e21;
+      color: #f3f4f6;
+    }
+
+    /* Custom Checkbox / Radio styling to match design */
+    .custom-radio {
+      appearance: none;
+      background-color: transparent;
+      margin: 0;
+      font: inherit;
+      color: currentColor;
+      width: 1.5em;
+      height: 1.5em;
+      border: 1px solid #6b7280;
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+    }
+    .custom-radio::before {
+      content: "";
+      width: 0.8em;
+      height: 0.8em;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em #f97316;
+    }
+    .custom-radio:checked::before {
+      transform: scale(1);
+    }
+    .custom-radio:checked {
+      border-color: #f97316;
+    }
+
+    .custom-checkbox {
+      appearance: none;
+      background-color: transparent;
+      margin: 0;
+      font: inherit;
+      color: currentColor;
+      width: 1.25em;
+      height: 1.25em;
+      border: 1px solid #6b7280;
+      border-radius: 0.25rem;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+    }
+    .custom-checkbox::before {
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em transparent;
+      background-color: transparent;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+    .custom-checkbox:checked::before {
+      transform: scale(1);
+      background-color: #f97316;
+    }
+    .custom-checkbox:checked {
+      border-color: #f97316;
+    }
+
+    .glass-effect {
+      background: #252528;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-sans">
+<!-- BEGIN: MainHeader -->
+<header class="bg-[#18181b] border-b border-motocare-border/50 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<!-- Logo -->
+<div class="flex-shrink-0 flex items-center">
+<a class="text-[#ffb78e] font-bold text-xl tracking-wider uppercase" href="#">MOTOCARE</a>
+</div>
+<!-- Navigation -->
+<nav class="hidden md:flex space-x-8 items-center">
+<a class="text-motocare-text hover:text-white px-3 py-2 text-sm font-medium border-b-2 border-[#ffb78e]" href="#">Home</a>
+<a class="text-motocare-textMuted hover:text-white px-3 py-2 text-sm font-medium transition-colors" href="#">Services</a>
+<a class="bg-motocare-primary hover:bg-motocare-primaryDark text-[#1e1e21] px-4 py-1.5 rounded text-sm font-bold uppercase transition-colors" href="#">BOOKING SERVICE</a>
+</nav>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 lg:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Left Column: Services & Customer Data -->
+<div class="lg:col-span-7 space-y-10">
+<!-- Section: Pilih Layanan -->
+<section data-purpose="service-selection">
+<div class="flex items-center space-x-3 mb-6">
+<div class="w-2 h-8 bg-motocare-primary"></div>
+<h1 class="text-3xl font-bold text-white tracking-tight">Pilih Layanan</h1>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Service Card 1 -->
+<label class="relative rounded-lg border border-motocare-border bg-motocare-surface p-6 flex flex-col cursor-pointer hover:border-motocare-primary transition-colors border-motocare-primary">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded bg-motocare-surfaceLight flex items-center justify-center text-motocare-primary">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex items-center space-x-3">
+<span class="text-xs text-motocare-border font-mono">ID: SR-001</span>
+<input checked="" class="custom-radio" name="main_service" type="radio" value="servis_rutin">
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 mt-4">Servis Rutin</h3>
+<p class="text-sm text-motocare-textMuted mb-6 flex-grow">Pengecekan standar berkala untuk menjaga performa optimal kendaraan Anda.</p>
+<p class="text-motocare-primary font-mono text-sm tracking-widest font-semibold uppercase">EST. RP 150.000</p>
+</label>
+<!-- Service Card 2 -->
+<label class="relative rounded-lg border border-motocare-border bg-motocare-surface p-6 flex flex-col cursor-pointer hover:border-motocare-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded bg-motocare-surfaceLight flex items-center justify-center text-motocare-primary">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex items-center space-x-3">
+<span class="text-xs text-motocare-border font-mono">ID: GO-042</span>
+<input class="custom-radio" name="main_service" type="radio" value="ganti_oli">
+</div>
+</div>
+<h3 class="text-xl font-bold text-white mb-2 mt-4">Ganti Oli Premium</h3>
+<p class="text-sm text-motocare-textMuted mb-6 flex-grow">Penggantian oli sintetik premium termasuk filter aliran tinggi baru.</p>
+<p class="text-motocare-primary font-mono text-sm tracking-widest font-semibold uppercase">EST. RP 1.200.000</p>
+</label>
+<!-- Service Card 3 (Full width span) -->
+<label class="md:col-span-2 relative rounded-lg border border-motocare-border bg-motocare-surface p-6 flex flex-col md:flex-row md:items-center cursor-pointer hover:border-motocare-primary/50 transition-colors">
+<div class="flex-shrink-0 w-16 h-16 rounded bg-motocare-surfaceLight flex items-center justify-center text-motocare-primary mb-4 md:mb-0 md:mr-6">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start w-full mb-2">
+<h3 class="text-2xl font-bold text-white">Tune Up Mesin</h3>
+<div class="flex items-center space-x-3">
+<span class="text-xs text-motocare-border font-mono">ID: TU-99X</span>
+<input class="custom-radio" name="main_service" type="radio" value="tune_up">
+</div>
+</div>
+<p class="text-sm text-motocare-textMuted mb-4 md:mb-2 max-w-lg">Pemindaian OBD-II lengkap, pembersihan ruang bakar, dan kalibrasi ECU.</p>
+<p class="text-motocare-primary font-mono text-sm tracking-widest font-semibold uppercase">EST. RP 890.000</p>
+</div>
+</label>
+</div>
+</section>
+<!-- Section: Data Pelanggan -->
+<section class="rounded-xl border border-motocare-border bg-motocare-surface p-8 relative overflow-hidden" data-purpose="customer-data">
+<h2 class="text-2xl font-bold text-white tracking-tight mb-8">DATA PELANGGAN</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<!-- Nama Lengkap -->
+<div>
+<label class="block text-xs font-mono text-motocare-textMuted uppercase tracking-wider mb-2" for="nama">NAMA LENGKAP</label>
+<input class="w-full bg-[#1e1e21] border-none rounded text-white p-4 focus:ring-1 focus:ring-motocare-primary" id="nama" placeholder="Masukkan nama sesuai STNK" type="text">
+</div>
+<!-- Nomor HP -->
+<div>
+<label class="block text-xs font-mono text-motocare-textMuted uppercase tracking-wider mb-2" for="nohp">NOMOR HP</label>
+<input class="w-full bg-[#1e1e21] border-none rounded text-white p-4 focus:ring-1 focus:ring-motocare-primary" id="nohp" placeholder="+62 8xx-xxxx-xxxx" type="tel">
+</div>
+</div>
+<!-- Catatan -->
+<div>
+<label class="block text-xs font-mono text-motocare-textMuted uppercase tracking-wider mb-2" for="catatan">CATATAN LAYANAN LAINNYA</label>
+<input class="w-full bg-[#1e1e21] border-none rounded text-white p-4 focus:ring-1 focus:ring-motocare-primary" id="catatan" placeholder="Masukkan layanan lainnya" type="text">
+</div>
+</section>
+<!-- Section: Info -->
+<section class="rounded-xl border border-motocare-border bg-motocare-surface p-8 relative overflow-hidden" data-purpose="info-banner">
+<div class="absolute bottom-0 right-4 opacity-[0.03] pointer-events-none">
+<svg class="w-64 h-64" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"></path>
+<path clip-rule="evenodd" d="M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z" fill-rule="evenodd"></path>
+<path d="M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z"></path>
+</svg>
+</div>
+<div class="flex items-center space-x-2 mb-2 text-motocare-primary">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<h2 class="text-xl font-bold text-white tracking-tight">Informasi Hari Ini</h2>
+</div>
+<p class="text-motocare-textMuted text-sm mb-6">Senin, 24 Mei 2024</p>
+<div class="bg-[#1e1e21] rounded p-4 flex flex-wrap gap-4 text-sm items-center relative z-10 border border-motocare-border/50">
+<div class="flex items-center space-x-2">
+<span class="text-motocare-textMuted">Bengkel Buka:</span>
+<span class="font-semibold text-white">08:00 - 20:00</span>
+</div>
+<div class="w-px h-4 bg-motocare-border hidden sm:block"></div>
+<div class="flex items-center space-x-2">
+<span class="text-motocare-textMuted">Kapasitas Tersedia:</span>
+<span class="font-bold text-motocare-primary bg-[#2a1d17] px-2 py-0.5 rounded">4 Slot</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Schedule & Checkout -->
+<div class="lg:col-span-5">
+<div class="sticky top-24 rounded-xl border border-motocare-border bg-motocare-surface p-8 glass-effect shadow-2xl">
+<h2 class="text-4xl font-bold text-motocare-primary leading-tight mb-8">Jadwal &amp;<br>Konfirmasi</h2>
+<!-- Date Picker -->
+<div class="mb-8">
+<h4 class="text-xs font-mono text-motocare-textMuted uppercase tracking-wider mb-4">PILIH TANGGAL</h4>
+<div class="grid grid-cols-4 gap-3">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="date" type="radio">
+<div class="rounded border border-motocare-border bg-motocare-surfaceLight peer-checked:border-motocare-primary hover:border-motocare-border text-center py-3 flex flex-col transition-colors">
+<span class="text-[10px] text-motocare-textMuted uppercase mb-1">Okt</span>
+<span class="text-2xl font-bold text-white mb-1">24</span>
+<span class="text-[10px] text-motocare-textMuted uppercase">Kam</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="date" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary hover:border-motocare-textMuted text-center py-3 flex flex-col transition-colors">
+<span class="text-[10px] text-motocare-textMuted uppercase mb-1">Okt</span>
+<span class="text-2xl font-bold text-white mb-1">25</span>
+<span class="text-[10px] text-motocare-textMuted uppercase">Jum</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="date" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary hover:border-motocare-textMuted text-center py-3 flex flex-col transition-colors">
+<span class="text-[10px] text-motocare-textMuted uppercase mb-1">Okt</span>
+<span class="text-2xl font-bold text-white mb-1">26</span>
+<span class="text-[10px] text-motocare-textMuted uppercase">Sab</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="date" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary hover:border-motocare-textMuted text-center py-3 flex flex-col transition-colors">
+<span class="text-[10px] text-motocare-textMuted uppercase mb-1">Okt</span>
+<span class="text-2xl font-bold text-white mb-1">28</span>
+<span class="text-[10px] text-motocare-textMuted uppercase">Sen</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Time Picker -->
+<div class="mb-10">
+<h4 class="text-xs font-mono text-motocare-textMuted uppercase tracking-wider mb-4">PILIH WAKTU</h4>
+<div class="grid grid-cols-3 gap-3">
+<label class="cursor-pointer">
+<input class="peer sr-only" name="time" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary peer-checked:text-motocare-primary hover:border-motocare-textMuted text-center py-3 text-sm transition-colors text-motocare-textMuted">
+                09:00 WIB
+              </div>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="time" type="radio">
+<div class="rounded border border-motocare-primary bg-[#1e1e21] text-motocare-primary text-center py-3 text-sm font-semibold transition-colors">
+                10:30 WIB
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="time" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary peer-checked:text-motocare-primary hover:border-motocare-textMuted text-center py-3 text-sm transition-colors text-motocare-textMuted">
+                13:00 WIB
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="time" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary peer-checked:text-motocare-primary hover:border-motocare-textMuted text-center py-3 text-sm transition-colors text-motocare-textMuted">
+                14:30 WIB
+              </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="time" type="radio">
+<div class="rounded border border-motocare-border bg-[#1e1e21] peer-checked:border-motocare-primary peer-checked:text-motocare-primary hover:border-motocare-textMuted text-center py-3 text-sm transition-colors text-motocare-textMuted">
+                16:00 WIB
+              </div>
+</label>
+</div>
+</div>
+<!-- Additional Services -->
+<div class="mb-8">
+<h4 class="text-xs font-mono text-motocare-textMuted uppercase tracking-wider mb-4">LAYANAN TAMBAHAN</h4>
+<div class="space-y-3">
+<label class="flex items-center justify-between rounded border border-motocare-border bg-motocare-surfaceLight/50 p-4 cursor-pointer hover:border-motocare-textMuted transition-colors">
+<div class="flex items-center space-x-3">
+<input class="custom-checkbox" type="checkbox">
+<span class="text-white text-sm">Cuci Salju</span>
+</div>
+<span class="text-white text-sm font-semibold">+Rp 50.000</span>
+</label>
+<label class="flex items-center justify-between rounded border border-motocare-border bg-motocare-surfaceLight/50 p-4 cursor-pointer hover:border-motocare-textMuted transition-colors">
+<div class="flex items-center space-x-3">
+<input class="custom-checkbox" type="checkbox">
+<span class="text-white text-sm">Isi Nitrogen</span>
+</div>
+<span class="text-white text-sm font-semibold">+Rp 20.000</span>
+</label>
+</div>
+</div>
+<hr class="border-motocare-border mb-6">
+<!-- Summary -->
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm">
+<span class="text-motocare-textMuted">Servis Rutin</span>
+<span class="text-motocare-textMuted">Rp 150.000</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-motocare-textMuted">Pajak &amp; Biaya (11%)</span>
+<span class="text-motocare-textMuted">Rp 16.500</span>
+</div>
+</div>
+<div class="flex justify-between items-end mb-8 mt-6">
+<span class="text-2xl font-bold text-white">Total</span>
+<span class="text-3xl font-bold text-motocare-primary">Rp 166.500</span>
+</div>
+<button class="w-full bg-gradient-to-r from-[#d95a00] to-motocare-primary hover:from-motocare-primary hover:to-orange-400 text-white font-bold py-4 px-6 rounded flex items-center justify-center transition-all shadow-lg shadow-[#d95a00]/20">
+<span>Konfirmasi Pemesanan</span>
+<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<p class="text-center text-[10px] text-motocare-textMuted mt-4">
+          Dengan mengonfirmasi, Anda menyetujui Syarat Layanan kami.
+        </p>
+</div>
+</div>
+</main>
+<!-- END: MainContent -->
+</body></html>
