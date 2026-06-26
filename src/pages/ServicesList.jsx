@@ -23,6 +23,30 @@ import { downloadServicesExcel } from '../utils/excel'
 
 const CSV_FILENAME = 'motocare_services.csv'
 const EXCEL_FILENAME = 'motocare_services.xlsx'
+const SKELETON_COUNT = 6
+
+function SkeletonCard() {
+  return (
+    <article className="service-catalog-card skeleton-card" aria-hidden="true">
+      <div className="service-card-topline">
+        <span className="skeleton-box skeleton-icon" />
+        <span className="skeleton-box skeleton-text-sm" />
+      </div>
+      <div className="service-card-body">
+        <span className="skeleton-box skeleton-text-lg" />
+        <span className="skeleton-box skeleton-text-md" />
+      </div>
+      <div className="service-card-meta">
+        <span className="skeleton-box skeleton-tag" />
+        <span className="skeleton-box skeleton-tag" />
+      </div>
+      <div className="service-card-footer">
+        <span className="skeleton-box skeleton-text-sm" />
+        <span className="skeleton-box skeleton-tag" />
+      </div>
+    </article>
+  )
+}
 
 function ServicesList() {
   const [services, setServices] = useState([])
@@ -160,63 +184,72 @@ function ServicesList() {
           <p>Kelola katalog layanan servis, harga, durasi, status, dan export data operasional.</p>
         </div>
         <div className="button-row">
-          <Link className="primary-button" to="/services/create"><PlusCircle size={17} />Create Service</Link>
+          <Link className="primary-button" to="/services/create">
+            <PlusCircle size={17} />
+            Add Service
+          </Link>
         </div>
       </div>
 
       <div className="services-controls">
-        <div className="services-filter-panel">
-          <div className="filter-panel-heading">
-            <SlidersHorizontal size={18} />
-            <span>Search, filter, and sorting</span>
-          </div>
-          <div className="toolbar services-toolbar">
-            <label className="search-field services-search">
-              <Search size={18} />
-              <input
-                type="search"
-                value={filters.search}
-                onChange={(event) => updateFilter('search', event.target.value)}
-                placeholder="Cari nama layanan atau deskripsi..."
-              />
-            </label>
-            <label>
-              Category
-              <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter kategori">
-                <option value="">Semua kategori</option>
-                {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
-              </select>
-            </label>
-            <label>
-              Status
-              <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
-                <option value="">Semua status</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-              </select>
-            </label>
-            <label>
-              Sort by
-              <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Urutkan berdasarkan">
-                <option value="name">Name</option>
-                <option value="price">Price</option>
-                <option value="duration_minutes">Duration</option>
-                <option value="status">Status</option>
-              </select>
-            </label>
-            <label>
-              Order
-              <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Arah sorting">
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
-              </select>
-            </label>
-          </div>
+        <div className="filter-panel-heading">
+          <SlidersHorizontal size={18} />
+          <span>Filter &amp; search services</span>
+        </div>
+        <div className="toolbar services-toolbar">
+          <label className="search-field">
+            <Search size={18} />
+            <input
+              type="search"
+              value={filters.search}
+              onChange={(event) => updateFilter('search', event.target.value)}
+              placeholder="Cari nama layanan..."
+            />
+          </label>
+          <label>
+            Category
+            <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter category">
+              <option value="">All categories</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Status
+            <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
+              <option value="">All status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </label>
+          <label>
+            Sort by
+            <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Sort field">
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+              <option value="duration_minutes">Duration</option>
+            </select>
+          </label>
+          <label>
+            Order
+            <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Sort order">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </label>
+          <label>
+            Per page
+            <select value={filters.limit} onChange={(event) => updateFilter('limit', Number(event.target.value))} aria-label="Items per page">
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+            </select>
+          </label>
         </div>
         <div className="services-export-panel">
-          <span>Export current view</span>
           <div className="button-row">
-            <button className="ghost-button" type="button" onClick={handleExportCsv}>
+            <button className="ghost-button accent-button" type="button" onClick={handleExportCsv}>
               <Download size={17} />
               Export CSV
             </button>
@@ -247,7 +280,11 @@ function ServicesList() {
       </div>
 
       {loading ? (
-        <div className="service-grid-loading">Memuat data layanan...</div>
+        <div className="service-card-grid" aria-label="Loading services">
+          {Array.from({ length: SKELETON_COUNT }, (_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
       ) : (
         <div className="service-card-grid" aria-label="Service catalog">
           {services.map((service, index) => (
@@ -282,7 +319,13 @@ function ServicesList() {
       )}
 
       {!loading && services.length === 0 && (
-        <EmptyState title="Layanan kosong" description="Tidak ada layanan sesuai filter saat ini. Reset filter untuk melihat seluruh katalog." />
+        <EmptyState
+          icon={Wrench}
+          title="Layanan kosong"
+          description="Tidak ada layanan sesuai filter saat ini. Reset filter atau tambah layanan baru."
+          actionLabel="Tambah Layanan"
+          actionTo="/services/create"
+        />
       )}
 
       <div className="pagination">
@@ -301,16 +344,17 @@ function ServicesList() {
       </div>
 
       {pendingDelete && (
-        <div className="modal-backdrop" role="presentation">
+        <div className="modal-backdrop" role="presentation" onClick={(e) => { if (e.target === e.currentTarget && !deletingId) setPendingDelete(null) }}>
           <div className="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-service-title">
             <div className="dialog-icon danger">
-              <AlertTriangle size={22} />
+              <AlertTriangle size={24} />
             </div>
             <div>
-              <h3 id="delete-service-title">Delete service?</h3>
+              <h3 id="delete-service-title">Delete Service?</h3>
               <p>
-                Layanan <strong>{pendingDelete.name}</strong> akan dihapus dari katalog. Data yang dihapus tidak bisa dikembalikan.
+                Layanan <strong>{pendingDelete.name}</strong> akan dihapus permanen dari katalog.
               </p>
+              <p className="dialog-warning">This action cannot be undone.</p>
             </div>
             <div className="dialog-actions">
               <button className="ghost-button" type="button" onClick={() => setPendingDelete(null)} disabled={Boolean(deletingId)}>

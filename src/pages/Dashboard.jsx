@@ -1,4 +1,4 @@
-import { CalendarCheck, CircleDollarSign, ClipboardList, Gauge, Timer, Wrench } from 'lucide-react'
+import { CalendarCheck, CircleDollarSign, ClipboardList, Gauge, Loader2, Timer, Wrench } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import {
   Bar,
@@ -33,6 +33,15 @@ const emptyStats = {
   estimated_revenue: 0,
   bookings_by_status: [],
   top_services: [],
+}
+
+function ChartLoading({ label }) {
+  return (
+    <div className="chart-placeholder chart-loading">
+      <Loader2 size={28} className="spin" />
+      <span>{label}</span>
+    </div>
+  )
 }
 
 function Dashboard() {
@@ -105,7 +114,7 @@ function Dashboard() {
         {summaryCards.map((item) => {
           const Icon = item.icon
           return (
-            <article className={`stat-card dashboard-stat-card ${item.tone}`} key={item.label}>
+            <article className={`stat-card dashboard-stat-card ${item.tone} ${loading ? 'skeleton-pulse' : ''}`} key={item.label}>
               <span className={`stat-icon ${item.tone}`}>
                 <Icon size={22} />
               </span>
@@ -128,7 +137,7 @@ function Dashboard() {
           <p>Distribusi booking berdasarkan status proses servis.</p>
         </div>
         {loading ? (
-          <div className="chart-placeholder">Memuat chart status booking...</div>
+          <ChartLoading label="Memuat chart status booking..." />
         ) : stats.bookings_by_status.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -167,7 +176,7 @@ function Dashboard() {
           <p>Layanan paling sering dibooking oleh customer.</p>
         </div>
         {loading ? (
-          <div className="chart-placeholder">Memuat chart top services...</div>
+          <ChartLoading label="Memuat chart top services..." />
         ) : stats.top_services.length > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={stats.top_services} margin={{ top: 8, right: 10, left: 0, bottom: 40 }}>

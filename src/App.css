@@ -5619,3 +5619,323 @@ textarea {
     gap: 4px;
   }
 }
+
+
+/* =========================================================================
+   Stage 4B — Delete Confirmation, Empty States, Loading States
+   ========================================================================= */
+
+/* -- Enhanced Empty State ------------------------------------------------- */
+.empty-state {
+  display: grid;
+  gap: 10px;
+  place-items: center;
+  min-height: 180px;
+  padding: 32px 20px;
+  border: 1px dashed #b9c3d2;
+  border-radius: 10px;
+  color: var(--muted);
+  text-align: center;
+  background: var(--surface-soft);
+  margin-top: 14px;
+}
+
+.empty-state-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--accent);
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  margin-bottom: 4px;
+}
+
+.empty-state strong {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.empty-state > span {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 380px;
+  line-height: 1.55;
+}
+
+.empty-state-action {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* -- Figma dashboard empty state override --------------------------------- */
+.figma-dashboard .empty-state {
+  border-color: rgba(255, 112, 0, 0.18);
+  background: rgba(255, 112, 0, 0.04);
+}
+
+.figma-dashboard .empty-state-icon {
+  color: #ff7000;
+  background: rgba(255, 112, 0, 0.10);
+  border-color: rgba(255, 112, 0, 0.24);
+}
+
+.figma-dashboard .empty-state strong {
+  color: #f3f0ed;
+}
+
+.figma-dashboard .empty-state > span {
+  color: #8a7568;
+}
+
+/* -- Enhanced Delete Confirmation Modal ----------------------------------- */
+.confirmation-dialog {
+  width: min(440px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid rgba(254, 202, 202, 0.72);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 28px 70px rgba(2, 6, 23, 0.28);
+  animation: dialog-enter 0.2s ease;
+}
+
+@keyframes dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.dialog-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+
+.dialog-icon.danger {
+  color: var(--danger);
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.confirmation-dialog h3 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.confirmation-dialog p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.confirmation-dialog p strong {
+  color: var(--text);
+}
+
+.dialog-warning {
+  margin-top: 6px !important;
+  color: var(--danger) !important;
+  font-size: 13px !important;
+  font-weight: 700;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+/* -- Figma dashboard modal overrides -------------------------------------- */
+.figma-dashboard .modal-backdrop {
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(6px);
+}
+
+.figma-dashboard .confirmation-dialog {
+  border: 1px solid rgba(248, 113, 113, 0.18);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(248, 113, 113, 0.06), transparent 60%),
+    #181a1a;
+  color: #e5e0db;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.56);
+}
+
+.figma-dashboard .confirmation-dialog h3 {
+  color: #fff;
+}
+
+.figma-dashboard .confirmation-dialog p {
+  color: #a89080;
+}
+
+.figma-dashboard .confirmation-dialog p strong {
+  color: #ffb08e;
+}
+
+.figma-dashboard .dialog-warning {
+  color: #f87171 !important;
+}
+
+.figma-dashboard .dialog-icon.danger {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.24);
+}
+
+.figma-dashboard .dialog-actions {
+  border-color: rgba(255, 112, 0, 0.10);
+}
+
+.figma-dashboard .danger-button {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  border-color: #dc2626;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.28);
+}
+
+.figma-dashboard .danger-button:hover {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.38);
+}
+
+/* -- Skeleton Loading ----------------------------------------------------- */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-box {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease infinite;
+}
+
+.skeleton-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.skeleton-text-sm {
+  width: 60px;
+  height: 14px;
+}
+
+.skeleton-text-md {
+  width: 100%;
+  height: 14px;
+}
+
+.skeleton-text-lg {
+  width: 80%;
+  height: 18px;
+}
+
+.skeleton-tag {
+  width: 72px;
+  height: 24px;
+  border-radius: 999px;
+}
+
+/* Skeleton service card */
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton-card .service-card-body {
+  display: grid;
+  gap: 10px;
+}
+
+/* Skeleton table row */
+.skeleton-row td {
+  padding: 14px 12px !important;
+}
+
+/* Skeleton stat card pulse */
+.skeleton-pulse {
+  animation: skeleton-shimmer 1.8s ease infinite;
+  background-size: 200% 100%;
+}
+
+/* -- Figma dashboard skeleton overrides ----------------------------------- */
+.figma-dashboard .skeleton-box {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 112, 0, 0.04) 25%,
+    rgba(255, 112, 0, 0.10) 50%,
+    rgba(255, 112, 0, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease infinite;
+}
+
+.figma-dashboard .skeleton-card {
+  border-color: rgba(255, 112, 0, 0.08);
+  background: #181a1a;
+}
+
+.figma-dashboard .skeleton-row td {
+  border-color: rgba(255, 112, 0, 0.06);
+}
+
+/* -- Chart loading spinner ------------------------------------------------ */
+.chart-loading {
+  display: grid;
+  place-items: center;
+  gap: 12px;
+}
+
+.chart-loading .spin,
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+.figma-dashboard .chart-loading {
+  color: #8a7568;
+}
+
+.figma-dashboard .chart-loading .spin {
+  color: #ff7000;
+}
+
+/* -- Loading state enhanced ----------------------------------------------- */
+.figma-dashboard .loading-state {
+  color: #8a7568;
+}
+
+.figma-dashboard .loading-state svg {
+  color: #ff7000;
+}
+
+.figma-dashboard .loading-state strong {
+  color: #f3f0ed;
+}

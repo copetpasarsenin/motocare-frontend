@@ -19,6 +19,8 @@ import StatusBadge from '../components/ui/StatusBadge'
 import { bookingStatuses, getBookings, updateBookingStatus } from '../services/bookings'
 import { getStoredUser } from '../utils/auth'
 
+const SKELETON_ROWS = 5
+
 function formatDate(value) {
   if (!value) return '-'
 
@@ -37,9 +39,20 @@ function getVehicleInfo(booking) {
   return `${booking.vehicle_name || '-'} / ${booking.vehicle_plate || '-'}`
 }
 
+function SkeletonRow({ cols }) {
+  return (
+    <tr className="skeleton-row" aria-hidden="true">
+      {Array.from({ length: cols }, (_, index) => (
+        <td key={index}><span className="skeleton-box skeleton-text-md" /></td>
+      ))}
+    </tr>
+  )
+}
+
 function BookingsList() {
   const user = getStoredUser()
   const isAdmin = user?.role === 'admin'
+  const colCount = isAdmin ? 9 : 7
   const [bookings, setBookings] = useState([])
   const [meta, setMeta] = useState({ page: 1, limit: 10, total: 0, total_pages: 0 })
   const [filters, setFilters] = useState({
@@ -187,6 +200,9 @@ function BookingsList() {
             </tr>
           </thead>
           <tbody>
+            {loading && Array.from({ length: SKELETON_ROWS }, (_, index) => (
+              <SkeletonRow key={index} cols={colCount} />
+            ))}
             {!loading && bookings.map((booking) => (
               <tr key={booking.id}>
                 <td data-label="ID"><span className="booking-id">#{booking.id}</span></td>
@@ -229,23 +245,18 @@ function BookingsList() {
                 )}
               </tr>
             ))}
-            {loading && (
-              <tr>
-                <td colSpan={isAdmin ? 9 : 7} className="table-loading booking-loading-cell">
-                  <div className="loading-state">
-                    <RefreshCw size={18} />
-                    <strong>Memuat data booking...</strong>
-                    <span>Menyiapkan antrean servis terbaru.</span>
-                  </div>
-                </td>
-              </tr>
-            )}
           </tbody>
         </table>
       </div>
 
       {!loading && bookings.length === 0 && (
-        <EmptyState title="Booking kosong" description="Tidak ada booking sesuai filter saat ini. Reset filter atau buat booking baru untuk memulai antrean servis." />
+        <EmptyState
+          icon={CalendarDays}
+          title="Booking kosong"
+          description="Tidak ada booking sesuai filter saat ini. Reset filter atau buat booking baru."
+          actionLabel="Buat Booking"
+          actionTo="/bookings/create"
+        />
       )}
 
       <div className="pagination">
