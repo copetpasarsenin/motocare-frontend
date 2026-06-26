@@ -46,7 +46,7 @@ function ServiceDetail() {
               <h3>{service.name}</h3>
               <p>{service.description || 'Layanan servis motor premium dengan teknisi berpengalaman dan standar pengerjaan MotoCare.'}</p>
               <div className="figma-service-cta-row">
-                <Link className="primary-button home-orange-button" to="/bookings/create">
+                <Link className="primary-button home-orange-button" to={`/bookings/create?service_id=${service.id}`}>
                   Booking Service Sekarang
                   <ArrowRight size={18} />
                 </Link>

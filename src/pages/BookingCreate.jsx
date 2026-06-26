@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowRight, CheckSquare, Info, User, Wrench } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import { createBooking } from '../services/bookings'
 import { getServices } from '../services/services'
 import { formatCurrency } from '../utils/csv'
@@ -63,6 +63,8 @@ function BookingCreate() {
   const [selectedTime, setSelectedTime] = useState(timeOptions[1])
   const [selectedAddOns, setSelectedAddOns] = useState([])
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const preselectedServiceId = searchParams.get('service_id') || ''
   const dateOptions = useMemo(() => buildDateOptions(), [])
   const selectedService = useMemo(
     () => services.find((service) => String(service.id) === String(values.service_id)),
@@ -88,6 +90,15 @@ function BookingCreate() {
 
     loadServices()
   }, [])
+
+  useEffect(() => {
+    if (preselectedServiceId && services.length > 0 && !values.service_id) {
+      const match = services.find((s) => String(s.id) === preselectedServiceId)
+      if (match) {
+        updateValue('service_id', String(match.id))
+      }
+    }
+  }, [services, preselectedServiceId])
 
   const updateValue = (key, value) => {
     setValues((current) => ({ ...current, [key]: value }))

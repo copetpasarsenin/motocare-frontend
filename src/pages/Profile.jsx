@@ -1,4 +1,4 @@
-﻿import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
+import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
 import { getApiBaseUrl } from '../services/api'
 import { getStoredUser } from '../utils/auth'
 

@@ -310,7 +310,7 @@ function ServicesList() {
               </div>
               <div className="service-card-actions table-actions">
                 <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Lihat Detail</Link>
-                <Link className="action-button book" to="/bookings/create">Booking</Link>
+                <Link className="action-button book" to={`/bookings/create?service_id=${service.id}`}>Booking</Link>
                 <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
                 <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
                   <Trash2 size={14} />
