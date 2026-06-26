@@ -5966,3 +5966,400 @@ textarea {
 .figma-dashboard .placeholder-box .spin {
   color: #ff7000;
 }
+
+/* =========================================================================
+   Home Page Layout Polish
+   ========================================================================= */
+.public-home {
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(255, 106, 0, 0.10), transparent 26%),
+    #101211;
+}
+
+.public-home-nav {
+  width: 100%;
+  min-height: 76px;
+  padding: 0 max(24px, calc((100vw - 1180px) / 2));
+  border-bottom: 1px solid rgba(255, 106, 0, 0.20);
+  background: rgba(16, 18, 17, 0.94);
+}
+
+.public-brand {
+  letter-spacing: 0.06em;
+}
+
+.public-home-nav nav {
+  gap: clamp(14px, 2.3vw, 30px);
+}
+
+.public-home-nav nav a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.public-home-nav .nav-cta {
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 6px;
+  color: #211006;
+  box-shadow: 0 10px 24px rgba(255, 106, 0, 0.20);
+}
+
+.public-hero {
+  min-height: clamp(560px, 74vh, 760px);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  gap: clamp(28px, 5vw, 72px);
+  padding: clamp(70px, 8vw, 112px) max(24px, calc((100vw - 1180px) / 2));
+  background:
+    linear-gradient(90deg, rgba(8, 10, 10, 0.88) 0%, rgba(8, 10, 10, 0.70) 42%, rgba(8, 10, 10, 0.42) 100%),
+    linear-gradient(180deg, rgba(16, 18, 17, 0.08), rgba(16, 18, 17, 0.86)),
+    url('./assets/motocare-motorcycle-bg.jpg') right center / cover no-repeat;
+}
+
+.public-hero-copy {
+  max-width: 720px;
+}
+
+.public-hero-copy h1 {
+  max-width: 760px;
+  font-size: clamp(48px, 5.8vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.public-hero-copy p {
+  max-width: 620px;
+  margin-top: 20px;
+  font-size: clamp(16px, 1.35vw, 20px);
+}
+
+.public-hero-actions {
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.home-orange-button.primary-button,
+.home-outline-button.ghost-button {
+  min-height: 50px;
+  padding-inline: 22px;
+  border-radius: 6px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.public-hero-card {
+  align-self: end;
+  margin-bottom: clamp(10px, 4vh, 42px);
+  padding: 24px 22px;
+  border-radius: 12px;
+  background: rgba(24, 26, 26, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.public-benefits {
+  width: min(1100px, calc(100% - 48px));
+  gap: 16px;
+  margin: -42px auto 0;
+}
+
+.public-benefits article {
+  min-height: 132px;
+  padding: 24px 28px;
+  border: 1px solid rgba(255, 106, 0, 0.22);
+  border-radius: 14px;
+  color: #f5f5f5;
+  background:
+    linear-gradient(145deg, rgba(255, 106, 0, 0.15), transparent 56%),
+    #1a1c1c;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.public-benefits article.orange {
+  color: #221006;
+  background: linear-gradient(135deg, #ff7a00, #ff5a00);
+}
+
+.public-benefits article p {
+  max-width: 290px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.public-service-section {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(76px, 9vw, 118px) 0 clamp(56px, 7vw, 86px);
+}
+
+.public-section-heading {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.public-section-heading h2 {
+  margin: 4px 0 10px;
+  color: #fff;
+  font-size: clamp(36px, 4.2vw, 58px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.public-section-heading p {
+  margin: 0;
+  color: #bca99f;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.public-service-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.public-service-card {
+  min-height: 300px;
+  padding: 28px;
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(255, 106, 0, 0.10), transparent 52%),
+    #1a1c1c;
+}
+
+.public-service-card h3 {
+  margin-top: 18px;
+  font-size: 22px;
+}
+
+.public-service-card p {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.public-service-card footer {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.public-stats {
+  width: min(1180px, calc(100% - 48px));
+  min-height: 132px;
+  margin: 0 auto clamp(56px, 7vw, 84px);
+  padding: 24px 28px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ff7a00, #ee5f00);
+  box-shadow: 0 22px 46px rgba(255, 106, 0, 0.20);
+}
+
+.public-stats div {
+  min-height: 84px;
+  border-right: 1px solid rgba(36, 18, 8, 0.18);
+}
+
+.public-stats div:last-child {
+  border-right: 0;
+}
+
+.public-stats strong {
+  font-size: clamp(30px, 3.4vw, 46px);
+}
+
+.public-stats span {
+  margin-top: 4px;
+  font-size: 13px;
+  letter-spacing: 0.10em;
+}
+
+.public-final-cta {
+  width: min(1180px, calc(100% - 48px));
+  min-height: 260px;
+  margin: 0 auto clamp(54px, 7vw, 82px);
+  padding: clamp(40px, 6vw, 64px) 28px;
+  border-radius: 22px;
+}
+
+.public-final-cta h2 {
+  max-width: 780px;
+  margin: 0 auto 24px;
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1.04;
+  text-align: center;
+}
+
+.public-final-cta .primary-button {
+  width: fit-content;
+  min-width: 240px;
+}
+
+.public-footer {
+  min-height: 96px;
+  padding: 26px max(24px, calc((100vw - 1180px) / 2));
+}
+
+.public-footer div {
+  gap: 4px;
+}
+
+.public-footer nav {
+  gap: 18px;
+}
+
+@media (max-width: 1024px) {
+  .public-home-nav {
+    padding-inline: 24px;
+  }
+
+  .public-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding: 72px 24px 92px;
+    background-position: 64% center;
+  }
+
+  .public-hero-card {
+    align-self: start;
+    max-width: 420px;
+    margin-bottom: 0;
+  }
+
+  .public-benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: -34px;
+  }
+
+  .public-benefits article {
+    min-height: 132px;
+    padding: 22px;
+  }
+
+  .public-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-stats {
+    min-height: 118px;
+  }
+}
+
+@media (max-width: 720px) {
+  .public-home-nav {
+    position: sticky;
+    top: 0;
+    min-height: 0;
+    align-items: stretch;
+    padding: 16px 18px;
+  }
+
+  .public-home-nav nav {
+    gap: 10px;
+  }
+
+  .public-home-nav nav a {
+    min-height: 34px;
+    font-size: 12px;
+  }
+
+  .public-home-nav .nav-cta {
+    min-height: 38px;
+    flex: 1 1 100%;
+  }
+
+  .public-hero {
+    min-height: auto;
+    padding: 56px 18px 76px;
+    background-position: 68% center;
+  }
+
+  .public-hero-copy h1 {
+    font-size: clamp(38px, 12vw, 50px);
+    line-height: 1.04;
+  }
+
+  .public-hero-copy p {
+    font-size: 15px;
+  }
+
+  .public-hero-actions {
+    align-items: stretch;
+  }
+
+  .public-hero-card {
+    width: 100%;
+  }
+
+  .public-benefits {
+    width: calc(100% - 36px);
+    grid-template-columns: 1fr;
+    margin-top: -22px;
+  }
+
+  .public-benefits article {
+    min-height: 112px;
+  }
+
+  .public-benefits article p {
+    max-width: none;
+  }
+
+  .public-service-section,
+  .public-stats,
+  .public-final-cta {
+    width: calc(100% - 36px);
+  }
+
+  .public-service-section {
+    padding-top: 58px;
+  }
+
+  .public-service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-service-card {
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .public-stats {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 16px;
+  }
+
+  .public-stats div {
+    min-height: 92px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(36, 18, 8, 0.18);
+  }
+
+  .public-stats div:last-child {
+    border-bottom: 0;
+  }
+
+  .public-final-cta {
+    min-height: 220px;
+    padding-inline: 20px;
+  }
+
+  .public-final-cta .primary-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .public-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px 18px;
+  }
+
+  .public-footer nav {
+    justify-content: flex-start;
+  }
+}
