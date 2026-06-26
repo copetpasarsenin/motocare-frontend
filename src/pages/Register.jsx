@@ -56,84 +56,81 @@ function Register() {
   }
 
   return (
-    <main className="auth-page">
-      <section className="auth-hero" aria-label="MotoCare overview">
-        <div className="auth-hero-content">
-          <span className="auth-hero-pill">Modern Automotive Admin</span>
-          <h2>MotoCare</h2>
-          <p>Manage services, bookings, and garage operations in one dashboard.</p>
-          <div className="auth-hero-stats" aria-label="MotoCare highlights">
-            <span>Cleaner workflows</span>
-            <span>Booking readiness</span>
-            <span>Garage team access</span>
-          </div>
-        </div>
-      </section>
+    <main className="auth-page figma-auth-page">
+      <header className="auth-topbar">
+        <span className="auth-wordmark">MOTOCARE</span>
+        <span className="auth-support">SUPPORT</span>
+      </header>
 
-      <section className="auth-panel">
-        <div className="auth-brand">
-          <span className="auth-logo">MC</span>
-          <div>
-            <strong>MotoCare</strong>
-            <span>Premium Garage Dashboard</span>
-          </div>
-        </div>
-        <p className="eyebrow">MotoCare Dashboard</p>
-        <h1>Create account</h1>
-        <p className="muted">Buat akun user untuk booking layanan servis motor.</p>
+      <section className="auth-stage">
+        <div className="auth-hero" aria-label="MotoCare precision motorcycle care" />
 
-        <form className="auth-form" onSubmit={handleSubmit} noValidate>
-          <label>
-            Username
-            <span className="input-shell">
-              <UserRound size={17} aria-hidden="true" />
+        <section className="auth-panel figma-auth-panel">
+          <div className="auth-kicker">
+            <span />
+            <strong>New Account</strong>
+          </div>
+          <h1>Buat Akun Baru</h1>
+
+          <form className="auth-form register-auth-form" onSubmit={handleSubmit} noValidate>
+            <label className="auth-line-field">
+              <span>Nama Lengkap <UserRound size={14} aria-hidden="true" /></span>
               <input
                 value={form.username}
                 onChange={(event) => setForm((current) => ({ ...current, username: event.target.value }))}
                 autoComplete="username"
+                placeholder="John Doe"
               />
-            </span>
-          </label>
-          <label>
-            Email
-            <span className="input-shell">
-              <Mail size={17} aria-hidden="true" />
+            </label>
+            <label className="auth-line-field">
+              <span>Email <Mail size={14} aria-hidden="true" /></span>
               <input
                 type="email"
                 value={form.email}
                 onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
                 autoComplete="email"
+                placeholder="john@motocare.id"
               />
-            </span>
-          </label>
-          <label>
-            Password
-            <span className="input-shell">
-              <LockKeyhole size={17} aria-hidden="true" />
+            </label>
+            <label className="auth-line-field">
+              <span>Kata Sandi <LockKeyhole size={14} aria-hidden="true" /></span>
               <input
                 type="password"
                 value={form.password}
                 onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
                 autoComplete="new-password"
+                placeholder="********"
               />
-            </span>
-          </label>
-          {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
-          <button className="primary-button full" type="submit" disabled={loading}>
-            <span>{loading ? 'Memproses...' : 'Register'}</span>
-            {!loading && <ArrowRight size={17} aria-hidden="true" />}
-          </button>
-        </form>
+            </label>
+            {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
+            <button className="primary-button full auth-submit" type="submit" disabled={loading}>
+              <span>{loading ? 'Memproses...' : 'Daftar Sekarang'}</span>
+              {!loading && <ArrowRight size={18} aria-hidden="true" />}
+            </button>
+          </form>
 
-        <div className="auth-note">
-          <ShieldCheck size={16} aria-hidden="true" />
-          <span>Account creation keeps the existing MotoCare access flow.</span>
-        </div>
+          <div className="auth-note">
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>Account creation keeps the existing MotoCare access flow.</span>
+          </div>
 
-        <p className="auth-switch">
-          Sudah punya akun? <Link to="/login">Login</Link>
-        </p>
+          <p className="auth-switch">
+            Sudah punya akun? <Link to="/login">Masuk</Link>
+          </p>
+        </section>
       </section>
+
+      <footer className="auth-footer">
+        <div>
+          <strong>MotoCare</strong>
+          <span>© 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+        </div>
+        <nav aria-label="Legal links">
+          <span>Privacy Policy</span>
+          <span>Terms of Service</span>
+          <span>Service Status</span>
+        </nav>
+      </footer>
     </main>
   )
 }

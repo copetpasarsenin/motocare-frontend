@@ -11,6 +11,7 @@ import {
   Search,
   SlidersHorizontal,
   Trash2,
+  Wrench,
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
@@ -151,10 +152,11 @@ function ServicesList() {
   }
 
   return (
-    <section className="card services-card">
-      <div className="section-heading row-heading">
+    <section className="card services-card service-catalog-page">
+      <div className="section-heading row-heading services-hero-heading">
         <div>
-          <h3>Services List</h3>
+          <p className="eyebrow">MotoCare Services</p>
+          <h3>Pilih Layanan</h3>
           <p>Kelola katalog layanan servis, harga, durasi, status, dan export data operasional.</p>
         </div>
         <div className="button-row">
@@ -244,49 +246,40 @@ function ServicesList() {
         </div>
       </div>
 
-      <div className="table-scroll">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Duration</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!loading && services.map((service) => (
-              <tr key={service.id}>
-                <td><span className="service-id">#{service.id}</span></td>
-                <td>
-                  <strong>{service.name}</strong>
-                  <small className="table-description">{service.description || 'Tanpa deskripsi'}</small>
-                </td>
-                <td>{getCategoryName(service)}</td>
-                <td><strong className="money-value">{formatCurrency(service.price)}</strong></td>
-                <td><span className="duration-pill">{service.duration_minutes} menit</span></td>
-                <td><StatusBadge status={service.status} /></td>
-                <td className="table-actions">
-                  <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Detail</Link>
-                  <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
-                  <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
-                    <Trash2 size={14} />
-                    {deletingId === service.id ? 'Deleting...' : 'Delete'}
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {loading && (
-              <tr>
-                <td colSpan="7" className="table-loading">Memuat data layanan...</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      {loading ? (
+        <div className="service-grid-loading">Memuat data layanan...</div>
+      ) : (
+        <div className="service-card-grid" aria-label="Service catalog">
+          {services.map((service, index) => (
+            <article className={`service-catalog-card ${index === 0 ? 'featured' : ''}`} key={service.id}>
+              <div className="service-card-topline">
+                <span className="service-icon-box"><Wrench size={22} aria-hidden="true" /></span>
+                <span className="service-code">ID: #{service.id}</span>
+              </div>
+              <div className="service-card-body">
+                <h4>{service.name}</h4>
+                <p>{service.description || 'Tanpa deskripsi'}</p>
+              </div>
+              <div className="service-card-meta">
+                <span>{getCategoryName(service)}</span>
+                <span>{service.duration_minutes} menit</span>
+              </div>
+              <div className="service-card-footer">
+                <strong>{formatCurrency(service.price)}</strong>
+                <StatusBadge status={service.status} />
+              </div>
+              <div className="service-card-actions table-actions">
+                <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Detail</Link>
+                <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
+                <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
+                  <Trash2 size={14} />
+                  {deletingId === service.id ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
 
       {!loading && services.length === 0 && (
         <EmptyState title="Layanan kosong" description="Tidak ada layanan sesuai filter saat ini. Reset filter untuk melihat seluruh katalog." />

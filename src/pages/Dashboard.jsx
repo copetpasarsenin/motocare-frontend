@@ -75,24 +75,25 @@ function Dashboard() {
   }
 
   return (
-    <div className="page-grid dashboard-grid">
+    <div className="page-grid dashboard-grid home-dashboard">
       <section className="hero-card dashboard-hero-card">
-        <div className="dashboard-hero-content">
+        <div className="dashboard-hero-copy">
+          <span className="garage-tag">Precision Engineering</span>
           <p className="eyebrow">MotoCare Command Center</p>
-          <h2>Modern Garage Operations</h2>
-          <p>Pantau layanan, booking, status pekerjaan, dan estimasi revenue dari satu dashboard.</p>
+          <h2>Elevate Your Ride.</h2>
+          <p>Pantau performa bengkel, katalog servis, booking, dan estimasi revenue dengan presisi teknis.</p>
           <div className="dashboard-hero-badges" aria-label="Dashboard highlights">
-            <span>Live API data</span>
-            <span>Service workflow</span>
-            <span>Garage analytics</span>
+            <span>Live API Data</span>
+            <span>Service Workflow</span>
+            <span>Garage Analytics</span>
           </div>
         </div>
         <div className="dashboard-hero-panel" aria-label="Operations snapshot">
-          <span className="hero-panel-label">Today&apos;s overview</span>
+          <span className="hero-panel-label">Today&apos;s Overview</span>
           <strong>{loading ? '...' : stats.total_bookings}</strong>
           <span>Total bookings tracked</span>
           <div>
-            <small>{loading ? '...' : stats.pending_bookings} pending</small>
+            <small>{loading ? '...' : stats.pending_bookings} pending jobs</small>
             <small>{loading ? '...' : formatCurrency(stats.estimated_revenue)}</small>
           </div>
         </div>

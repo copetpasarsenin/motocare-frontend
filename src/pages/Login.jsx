@@ -53,73 +53,72 @@ function Login() {
   }
 
   return (
-    <main className="auth-page">
-      <section className="auth-hero" aria-label="MotoCare overview">
-        <div className="auth-hero-content">
-          <span className="auth-hero-pill">Premium Garage Dashboard</span>
-          <h2>MotoCare</h2>
-          <p>Manage services, bookings, and garage operations in one dashboard.</p>
-          <div className="auth-hero-stats" aria-label="MotoCare highlights">
-            <span>Fast booking control</span>
-            <span>Service visibility</span>
-            <span>Role-aware workspace</span>
-          </div>
-        </div>
-      </section>
+    <main className="auth-page figma-auth-page">
+      <header className="auth-topbar">
+        <span className="auth-wordmark">MOTOCARE</span>
+        <span className="auth-support">SUPPORT</span>
+      </header>
 
-      <section className="auth-panel">
-        <div className="auth-brand">
-          <span className="auth-logo">MC</span>
-          <div>
-            <strong>MotoCare</strong>
-            <span>Premium Garage Dashboard</span>
-          </div>
-        </div>
-        <p className="eyebrow">MotoCare Dashboard</p>
-        <h1>Welcome back</h1>
-        <p className="muted">Masuk untuk mengelola layanan servis dan booking bengkel motor.</p>
+      <section className="auth-stage">
+        <div className="auth-hero" aria-label="MotoCare precision motorcycle care" />
 
-        <form className="auth-form" onSubmit={handleSubmit} noValidate>
-          <label>
-            Email
-            <span className="input-shell">
-              <Mail size={17} aria-hidden="true" />
+        <section className="auth-panel figma-auth-panel">
+          <div className="auth-kicker">
+            <span />
+            <strong>Sign In</strong>
+          </div>
+          <h1>Masuk Akun</h1>
+
+          <form className="auth-form" onSubmit={handleSubmit} noValidate>
+            <label className="auth-line-field">
+              <span>Email <Mail size={14} aria-hidden="true" /></span>
               <input
                 type="email"
                 value={form.email}
                 onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
                 autoComplete="email"
+                placeholder="john@motocare.id"
               />
-            </span>
-          </label>
-          <label>
-            Password
-            <span className="input-shell">
-              <LockKeyhole size={17} aria-hidden="true" />
+            </label>
+            <label className="auth-line-field">
+              <span>Kata Sandi <LockKeyhole size={14} aria-hidden="true" /></span>
               <input
                 type="password"
                 value={form.password}
                 onChange={(event) => setForm((current) => ({ ...current, password: event.target.value }))}
                 autoComplete="current-password"
+                placeholder="********"
               />
-            </span>
-          </label>
-          {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
-          <button className="primary-button full" type="submit" disabled={loading}>
-            <span>{loading ? 'Memproses...' : 'Login'}</span>
-            {!loading && <ArrowRight size={17} aria-hidden="true" />}
-          </button>
-        </form>
+            </label>
+            {feedback.message && <div className={`form-alert ${feedback.type}`}>{feedback.message}</div>}
+            <button className="primary-button full auth-submit" type="submit" disabled={loading}>
+              <span>{loading ? 'Memproses...' : 'Masuk Sekarang'}</span>
+              {!loading && <ArrowRight size={18} aria-hidden="true" />}
+            </button>
+          </form>
 
-        <div className="auth-note">
-          <ShieldCheck size={16} aria-hidden="true" />
-          <span>Secure access for MotoCare operations teams.</span>
-        </div>
+          <div className="auth-note">
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>Secure access for MotoCare operations teams.</span>
+          </div>
 
-        <p className="auth-switch">
-          Belum punya akun? <Link to="/register">Register</Link>
-        </p>
+          <p className="auth-switch">
+            Belum punya akun? <Link to="/register">Daftar</Link>
+          </p>
+        </section>
       </section>
+
+      <footer className="auth-footer">
+        <div>
+          <strong>MotoCare</strong>
+          <span>© 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+        </div>
+        <nav aria-label="Legal links">
+          <span>Privacy Policy</span>
+          <span>Terms of Service</span>
+          <span>Service Status</span>
+        </nav>
+      </footer>
     </main>
   )
 }

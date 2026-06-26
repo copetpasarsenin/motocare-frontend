@@ -2773,3 +2773,631 @@ textarea {
   background: #111827 !important;
   border-color: var(--line) !important;
 }
+
+/* MotoCare Figma step: home, services, login, and register surfaces. */
+.figma-auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px minmax(0, 1fr) 148px;
+  gap: 0;
+  padding: 0;
+  color: #f3f4f6;
+  background: #0d0f0f;
+}
+
+.auth-topbar,
+.auth-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(22px, 10vw, 196px);
+  border-color: rgba(255, 112, 0, 0.22);
+  background: #111313;
+}
+
+.auth-topbar {
+  border-bottom: 1px solid rgba(255, 112, 0, 0.18);
+}
+
+.auth-wordmark,
+.auth-footer strong {
+  color: #ffb08e;
+  font-size: 26px;
+  font-weight: 950;
+  letter-spacing: 0;
+}
+
+.auth-support,
+.auth-footer span,
+.auth-footer nav span {
+  color: #d5b4a8;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.auth-stage {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(420px, 0.85fr);
+  background: #0f1111;
+}
+
+.figma-auth-page .auth-hero {
+  min-height: 0;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 10, 10, 0.12), rgba(8, 10, 10, 0.48)),
+    url('./assets/motocare-motorcycle-bg.jpg') center / cover;
+  box-shadow: none;
+}
+
+.figma-auth-page .auth-hero::after {
+  height: 100%;
+  background:
+    linear-gradient(180deg, rgba(8, 10, 10, 0.06), rgba(8, 10, 10, 0.22)),
+    linear-gradient(90deg, transparent 72%, #0f1111 100%);
+}
+
+.figma-auth-panel {
+  width: 100%;
+  max-width: none;
+  align-self: center;
+  justify-self: stretch;
+  padding: clamp(42px, 7vw, 86px) clamp(28px, 8vw, 118px);
+  border: 0;
+  border-radius: 0;
+  color: #f3f4f6;
+  background: #0f1111;
+  box-shadow: none;
+}
+
+.auth-kicker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  color: #ffb08e;
+}
+
+.auth-kicker span {
+  width: 48px;
+  height: 2px;
+  background: #ff6b00;
+}
+
+.auth-kicker strong {
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.figma-auth-panel h1 {
+  margin: 0 0 30px;
+  color: #f5f7f8;
+  font-size: clamp(36px, 5vw, 52px);
+  font-style: italic;
+  font-weight: 950;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+.figma-auth-panel .auth-form {
+  gap: 24px;
+  margin-top: 0;
+}
+
+.auth-line-field {
+  display: grid;
+  gap: 8px;
+  color: #d5b4a8;
+}
+
+.auth-line-field > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  color: #d5b4a8;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.auth-line-field svg {
+  color: #ffb08e;
+}
+
+.auth-line-field input {
+  min-height: 54px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 112, 0, 0.42);
+  border-radius: 0;
+  padding: 10px 0;
+  color: #f5f7f8;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-line-field input:hover,
+.auth-line-field input:focus {
+  border-color: #ff6b00;
+  box-shadow: none;
+}
+
+.auth-line-field input::placeholder {
+  color: rgba(255, 255, 255, 0.16);
+}
+
+.figma-auth-panel .form-alert {
+  margin: 0;
+  border-radius: 0;
+}
+
+.auth-submit.primary-button {
+  min-height: 76px;
+  margin-top: 18px;
+  border-radius: 2px;
+  color: #241309;
+  background: #ff6b00;
+  box-shadow: 0 18px 38px rgba(255, 107, 0, 0.24);
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 950;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.auth-submit.primary-button:hover {
+  background: #ff7d1a;
+}
+
+.figma-auth-panel .auth-note {
+  margin-top: 18px;
+  border-color: rgba(255, 112, 0, 0.18);
+  border-radius: 2px;
+  color: #d5b4a8;
+  background: rgba(255, 112, 0, 0.06);
+}
+
+.figma-auth-panel .auth-note svg {
+  color: #ffb08e;
+}
+
+.figma-auth-panel .auth-switch {
+  margin-top: 18px;
+  color: #e8d4cc;
+  text-align: center;
+}
+
+.figma-auth-panel .auth-switch a {
+  color: #ffb08e;
+}
+
+.auth-footer {
+  border-top: 1px solid rgba(255, 112, 0, 0.18);
+}
+
+.auth-footer div {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-footer strong {
+  font-size: 27px;
+  text-transform: none;
+}
+
+.auth-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: clamp(20px, 3vw, 42px);
+}
+
+.home-dashboard {
+  gap: 22px;
+}
+
+.home-dashboard .dashboard-hero-card {
+  min-height: clamp(360px, 48vw, 620px);
+  align-items: center;
+  padding: clamp(30px, 6vw, 74px);
+  border-color: rgba(255, 112, 0, 0.3);
+  background:
+    linear-gradient(90deg, rgba(9, 11, 11, 0.26), rgba(9, 11, 11, 0.62)),
+    url('./assets/motocare-motorcycle-bg.jpg') center / cover;
+}
+
+.home-dashboard .dashboard-hero-card::before {
+  display: none;
+}
+
+.home-dashboard .dashboard-hero-card::after {
+  inset: auto auto clamp(42px, 6vw, 74px) clamp(30px, 6vw, 74px);
+  width: 170px;
+  height: 4px;
+  background: linear-gradient(90deg, #ffb08e 0 32%, rgba(255, 176, 142, 0.28) 32% 64%, rgba(255, 176, 142, 0.18) 64%);
+  box-shadow: none;
+}
+
+.dashboard-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  display: grid;
+  align-content: center;
+}
+
+.garage-tag {
+  width: fit-content;
+  margin-bottom: 18px;
+  padding: 5px 14px;
+  color: #1f130b;
+  background: #ff6b00;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 950;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transform: skewX(-10deg);
+}
+
+.dashboard-hero-copy .eyebrow {
+  color: #ffb08e;
+}
+
+.dashboard-hero-copy h2 {
+  margin: 0;
+  color: #f5f7f8;
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 950;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.dashboard-hero-copy p:not(.eyebrow) {
+  max-width: 520px;
+  margin: 22px 0 0;
+  color: #e7d6cf;
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.75;
+}
+
+.home-dashboard .dashboard-hero-badges span,
+.home-dashboard .dashboard-hero-panel {
+  border-color: rgba(255, 112, 0, 0.24);
+  background: rgba(15, 17, 17, 0.72);
+}
+
+.home-dashboard .dashboard-stats-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-dashboard .dashboard-stat-card,
+.service-catalog-page,
+.service-catalog-card,
+.service-grid-loading {
+  border-color: rgba(255, 112, 0, 0.24);
+  color: #f5f7f8;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent 48%),
+    #202323;
+}
+
+.service-catalog-page {
+  padding: clamp(20px, 3vw, 32px);
+  box-shadow: 0 18px 44px rgba(2, 6, 23, 0.14);
+}
+
+.service-catalog-page .services-hero-heading {
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 112, 0, 0.24);
+}
+
+.service-catalog-page .section-heading h3 {
+  color: #f5f7f8;
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 950;
+}
+
+.service-catalog-page .section-heading h3::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 44px;
+  margin-right: 16px;
+  background: #ff6b00;
+  vertical-align: -8px;
+}
+
+.service-catalog-page .section-heading p,
+.service-catalog-page .table-summary,
+.service-catalog-page .table-description {
+  color: #cdb4aa;
+}
+
+.service-catalog-page .services-filter-panel,
+.service-catalog-page .services-export-panel {
+  border-color: rgba(255, 112, 0, 0.24);
+  background: #202323;
+}
+
+.service-catalog-page .services-toolbar label:not(.search-field),
+.service-catalog-page .services-export-panel span {
+  color: #d5b4a8;
+  letter-spacing: 2px;
+}
+
+.service-catalog-page input,
+.service-catalog-page select,
+.service-catalog-page .search-field {
+  border-color: rgba(255, 112, 0, 0.26);
+  color: #f5f7f8;
+  background: #101313;
+}
+
+.service-catalog-page input::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.service-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.service-catalog-card {
+  position: relative;
+  min-height: 280px;
+  display: grid;
+  align-content: start;
+  gap: 20px;
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid rgba(255, 112, 0, 0.24);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.service-catalog-card.featured {
+  border-color: #ff6b00;
+}
+
+.service-catalog-card::after {
+  content: '';
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #c79b8d;
+  border-radius: 999px;
+  opacity: 0.9;
+}
+
+.service-card-topline,
+.service-card-footer,
+.service-card-meta,
+.service-card-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.service-card-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-right: 44px;
+}
+
+.service-icon-box {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  color: #ffb08e;
+  background: rgba(255, 176, 142, 0.1);
+}
+
+.service-code {
+  color: rgba(255, 255, 255, 0.18);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 1px;
+}
+
+.service-card-body h4 {
+  margin: 0 0 12px;
+  color: #f5f7f8;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.service-card-body p {
+  min-height: 54px;
+  margin: 0;
+  color: #cdb4aa;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.service-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.service-card-meta span {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 112, 0, 0.22);
+  border-radius: 999px;
+  color: #d5b4a8;
+  background: rgba(255, 112, 0, 0.06);
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.service-card-footer strong {
+  color: #ff6b00;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 17px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.service-card-actions.table-actions {
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.service-card-actions.table-actions .action-button,
+.service-card-actions.table-actions button.action-button {
+  min-height: 38px;
+  border-color: rgba(255, 112, 0, 0.24);
+  color: #f5f7f8;
+  background: #101313;
+}
+
+.service-card-actions.table-actions .action-button.edit {
+  color: #ffb08e;
+  background: rgba(255, 112, 0, 0.1);
+}
+
+.service-card-actions.table-actions button.action-button.delete {
+  color: #fca5a5;
+}
+
+.service-grid-loading {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(255, 112, 0, 0.28);
+  border-radius: 8px;
+  color: #d5b4a8;
+  font-weight: 900;
+}
+
+@media (max-width: 1280px) {
+  .home-dashboard .dashboard-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .figma-auth-page {
+    grid-template-rows: 72px auto auto;
+  }
+
+  .auth-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-auth-page .auth-hero {
+    min-height: 420px;
+  }
+
+  .figma-auth-panel {
+    padding-block: 46px;
+  }
+
+  .auth-footer {
+    gap: 22px;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-block: 28px;
+  }
+
+  .auth-footer nav {
+    justify-content: flex-start;
+  }
+
+  .service-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .auth-topbar,
+  .auth-footer {
+    padding-inline: 20px;
+  }
+
+  .auth-wordmark,
+  .auth-footer strong {
+    font-size: 22px;
+  }
+
+  .auth-support {
+    letter-spacing: 2px;
+  }
+
+  .figma-auth-page .auth-hero {
+    min-height: 320px;
+  }
+
+  .figma-auth-panel {
+    padding: 34px 20px 44px;
+  }
+
+  .figma-auth-panel h1 {
+    font-size: 34px;
+  }
+
+  .auth-submit.primary-button {
+    min-height: 60px;
+    font-size: 18px;
+  }
+
+  .home-dashboard .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-dashboard .dashboard-hero-card {
+    min-height: 460px;
+    padding: 24px;
+  }
+
+  .dashboard-hero-copy h2 {
+    font-size: 46px;
+  }
+
+  .service-catalog-page {
+    padding: 18px;
+  }
+
+  .service-catalog-page .section-heading h3::before {
+    height: 34px;
+    margin-right: 10px;
+  }
+
+  .service-catalog-card {
+    min-height: 0;
+    padding: 22px;
+  }
+
+  .service-card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
