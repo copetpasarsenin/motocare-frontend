@@ -98,7 +98,7 @@ function DashboardLayout() {
   }
 
   return (
-    <div className="dashboard-layout">
+    <div className="dashboard-layout figma-dashboard">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} onLogout={handleLogout} user={user} />
       {sidebarOpen && <button className="backdrop" type="button" onClick={() => setSidebarOpen(false)} aria-label="Close menu" />}
 
