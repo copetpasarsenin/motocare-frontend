@@ -9095,3 +9095,531 @@ textarea {
     font-size: 24px;
   }
 }
+
+/* =========================================================================
+   Public Services + Service Detail MotoCare Polish
+   Scoped to service catalog/detail only; approved Home/Login/Register untouched.
+   ========================================================================= */
+
+.figma-dashboard .service-catalog-page,
+.service-catalog-page,
+.figma-service-detail {
+  --public-mc-bg: #080a0a;
+  --public-mc-surface: #101313;
+  --public-mc-surface-2: #151817;
+  --public-mc-line: rgba(255, 112, 0, 0.24);
+  --public-mc-line-soft: rgba(255, 255, 255, 0.09);
+  --public-mc-orange: #ff6b00;
+  --public-mc-orange-soft: #ffb08e;
+  --public-mc-text: #f7f2ee;
+  --public-mc-muted: #bfa79d;
+}
+
+.figma-dashboard .service-catalog-page,
+.service-catalog-page {
+  position: relative;
+  padding: clamp(22px, 4vw, 44px);
+  border: 1px solid var(--public-mc-line);
+  border-radius: 0;
+  color: var(--public-mc-text);
+  background: radial-gradient(circle at 80% 0%, rgba(255, 107, 0, 0.16), transparent 34%), linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 18%), var(--public-mc-bg);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.figma-dashboard .service-catalog-page::before,
+.service-catalog-page::before,
+.figma-service-detail::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 220px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 107, 0, 0.13), transparent 54%);
+  opacity: 0.72;
+}
+
+.figma-dashboard .service-catalog-page > *,
+.service-catalog-page > *,
+.figma-service-detail > * {
+  position: relative;
+  z-index: 1;
+}
+
+.figma-dashboard .service-catalog-page .services-hero-heading,
+.service-catalog-page .services-hero-heading {
+  align-items: end;
+  gap: 22px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--public-mc-line);
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3,
+.service-catalog-page .section-heading h3,
+.figma-service-hero-copy h3 {
+  max-width: 820px;
+  color: var(--public-mc-text);
+  font-size: clamp(40px, 6vw, 74px);
+  font-weight: 950;
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3::before,
+.service-catalog-page .section-heading h3::before {
+  display: none;
+}
+
+.figma-dashboard .service-catalog-page .section-heading p:not(.eyebrow),
+.service-catalog-page .section-heading p:not(.eyebrow),
+.figma-service-hero-copy p:not(.eyebrow) {
+  max-width: 650px;
+  color: var(--public-mc-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.figma-dashboard .service-catalog-page .eyebrow,
+.service-catalog-page .eyebrow,
+.figma-service-detail .eyebrow {
+  color: var(--public-mc-orange);
+  font-weight: 950;
+  letter-spacing: 0.16em;
+}
+
+.figma-dashboard .service-catalog-page .primary-button,
+.service-catalog-page .primary-button,
+.figma-service-detail .primary-button {
+  border-color: var(--public-mc-orange);
+  border-radius: 0;
+  color: #140b05;
+  background: var(--public-mc-orange);
+  box-shadow: none;
+  text-transform: uppercase;
+  font-weight: 950;
+  letter-spacing: 0.03em;
+}
+
+.figma-dashboard .service-catalog-page .ghost-button,
+.service-catalog-page .ghost-button,
+.figma-service-detail .ghost-button {
+  border-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  color: var(--public-mc-text);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: none;
+}
+
+.figma-dashboard .service-catalog-page .services-controls,
+.service-catalog-page .services-controls {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid var(--public-mc-line-soft);
+  background: rgba(16, 19, 19, 0.88);
+}
+
+.figma-dashboard .service-catalog-page .filter-panel-heading,
+.service-catalog-page .filter-panel-heading {
+  color: var(--public-mc-orange-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar,
+.service-catalog-page .services-toolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.35fr) repeat(5, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar label:not(.search-field),
+.service-catalog-page .services-toolbar label:not(.search-field) {
+  color: var(--public-mc-muted);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page input,
+.figma-dashboard .service-catalog-page select,
+.figma-dashboard .service-catalog-page .search-field,
+.service-catalog-page input,
+.service-catalog-page select,
+.service-catalog-page .search-field {
+  border: 1px solid var(--public-mc-line-soft);
+  border-radius: 0;
+  color: var(--public-mc-text);
+  background: #0b0d0d;
+}
+
+.figma-dashboard .service-catalog-page input:focus,
+.figma-dashboard .service-catalog-page select:focus,
+.service-catalog-page input:focus,
+.service-catalog-page select:focus {
+  border-color: rgba(255, 107, 0, 0.62);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12);
+}
+
+.figma-dashboard .service-catalog-page .services-export-panel,
+.service-catalog-page .services-export-panel {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.figma-dashboard .service-catalog-page .table-summary,
+.service-catalog-page .table-summary {
+  margin: 16px 0 20px;
+  padding: 14px 16px;
+  border: 1px solid var(--public-mc-line-soft);
+  border-radius: 0;
+  color: var(--public-mc-muted);
+  background: rgba(21, 24, 23, 0.9);
+}
+
+.figma-dashboard .service-catalog-page .table-summary strong,
+.service-catalog-page .table-summary strong {
+  color: var(--public-mc-text);
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .service-card-grid,
+.service-catalog-page .service-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card,
+.service-catalog-page .service-catalog-card {
+  min-height: 300px;
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid var(--public-mc-line-soft);
+  border-radius: 12px;
+  color: var(--public-mc-text);
+  background: linear-gradient(145deg, rgba(255, 107, 0, 0.055), transparent 48%), var(--public-mc-surface);
+  box-shadow: none;
+  transform: none;
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card:hover,
+.service-catalog-page .service-catalog-card:hover {
+  border-color: rgba(255, 107, 0, 0.48);
+  transform: translateY(-2px);
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card.featured,
+.service-catalog-page .service-catalog-card.featured {
+  border-color: var(--public-mc-line);
+  background: linear-gradient(145deg, rgba(255, 107, 0, 0.09), transparent 48%), var(--public-mc-surface);
+}
+
+.figma-dashboard .service-catalog-page .service-catalog-card::after,
+.service-catalog-page .service-catalog-card::after {
+  display: none;
+}
+
+.figma-dashboard .service-catalog-page .service-icon-box,
+.service-catalog-page .service-icon-box,
+.figma-service-detail .service-icon-box {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  border-radius: 10px;
+  color: var(--public-mc-orange);
+  background: rgba(255, 107, 0, 0.12);
+}
+
+.figma-dashboard .service-catalog-page .service-card-body h4,
+.service-catalog-page .service-card-body h4 {
+  color: var(--public-mc-text);
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 950;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .service-card-body p,
+.service-catalog-page .service-card-body p {
+  min-height: 58px;
+  color: var(--public-mc-muted);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta,
+.service-catalog-page .service-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta span,
+.service-catalog-page .service-card-meta span {
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 107, 0, 0.18);
+  border-radius: 999px;
+  color: #e4d4cc;
+  background: rgba(255, 107, 0, 0.07);
+  font-size: 11px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .service-catalog-page .service-card-meta span::before,
+.service-catalog-page .service-card-meta span::before {
+  display: none;
+}
+
+.figma-dashboard .service-catalog-page .service-card-footer strong,
+.service-catalog-page .service-card-footer strong {
+  color: var(--public-mc-orange);
+  font-size: 17px;
+  letter-spacing: 0.02em;
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions.table-actions,
+.service-catalog-page .service-card-actions.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start;
+  margin-top: auto;
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button,
+.service-catalog-page .service-card-actions .action-button {
+  min-height: 36px;
+  border-radius: 0;
+  border-color: rgba(255, 255, 255, 0.13);
+  color: var(--public-mc-text);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.detail,
+.service-catalog-page .service-card-actions .action-button.detail,
+.figma-dashboard .service-catalog-page .service-card-actions .action-button.book,
+.service-catalog-page .service-card-actions .action-button.book {
+  border-color: var(--public-mc-orange);
+  color: #120a05;
+  background: var(--public-mc-orange);
+  font-weight: 950;
+}
+
+.figma-service-detail {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 44px);
+  border: 1px solid rgba(255, 112, 0, 0.18);
+  color: var(--public-mc-text);
+  background: radial-gradient(circle at 88% 8%, rgba(255, 107, 0, 0.18), transparent 34%), linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 18%), var(--public-mc-bg);
+  overflow: hidden;
+}
+
+.service-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.figma-service-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: clamp(22px, 5vw, 54px);
+  align-items: end;
+  min-height: 390px;
+  padding: clamp(26px, 6vw, 64px);
+  border: 1px solid var(--public-mc-line);
+  background: linear-gradient(90deg, rgba(8, 10, 10, 0.95), rgba(8, 10, 10, 0.78)), url('./assets/motocare-motorcycle-bg.jpg') center / cover;
+}
+
+.figma-service-hero-copy {
+  max-width: 780px;
+}
+
+.figma-service-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.figma-service-score {
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+  border: 1px solid rgba(255, 107, 0, 0.28);
+  background: rgba(21, 24, 23, 0.88);
+}
+
+.figma-service-score strong {
+  color: var(--public-mc-orange-soft);
+  font-size: clamp(48px, 7vw, 74px);
+  line-height: 0.9;
+}
+
+.figma-service-score span,
+.figma-service-score small {
+  color: var(--public-mc-muted);
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.figma-detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.figma-detail-metrics article,
+.figma-description-card,
+.figma-benefit-grid article {
+  border: 1px solid var(--public-mc-line-soft);
+  color: var(--public-mc-text);
+  background: var(--public-mc-surface);
+}
+
+.figma-detail-metrics article {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.figma-detail-metrics svg,
+.figma-benefit-grid svg {
+  color: var(--public-mc-orange);
+}
+
+.figma-detail-metrics span {
+  color: var(--public-mc-muted);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.figma-detail-metrics strong {
+  color: var(--public-mc-text);
+  font-size: 18px;
+}
+
+.figma-detail-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 18px;
+}
+
+.figma-description-card {
+  padding: 26px;
+}
+
+.figma-description-card h4 {
+  margin: 0 0 12px;
+  color: var(--public-mc-text);
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.figma-description-card p:not(.eyebrow),
+.figma-benefit-grid p {
+  color: var(--public-mc-muted);
+  line-height: 1.7;
+}
+
+.figma-benefit-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.figma-benefit-grid article {
+  padding: 22px;
+}
+
+.figma-benefit-grid h5 {
+  margin: 10px 0 8px;
+  color: var(--public-mc-text);
+  font-size: 17px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.service-grid-loading {
+  border-color: var(--public-mc-line-soft);
+  color: var(--public-mc-muted);
+  background: var(--public-mc-surface);
+}
+
+@media (max-width: 1180px) {
+  .figma-dashboard .service-catalog-page .services-toolbar,
+  .service-catalog-page .services-toolbar,
+  .figma-dashboard .service-catalog-page .service-card-grid,
+  .service-catalog-page .service-card-grid,
+  .figma-detail-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figma-service-hero,
+  .figma-detail-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .service-catalog-page,
+  .service-catalog-page,
+  .figma-service-detail {
+    padding: 18px;
+  }
+
+  .figma-dashboard .service-catalog-page .services-hero-heading,
+  .service-catalog-page .services-hero-heading,
+  .figma-dashboard .service-catalog-page .table-summary,
+  .service-catalog-page .table-summary,
+  .service-detail-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .figma-dashboard .service-catalog-page .button-row,
+  .service-catalog-page .button-row,
+  .figma-dashboard .service-catalog-page .table-summary-actions,
+  .service-catalog-page .table-summary-actions {
+    width: 100%;
+  }
+
+  .figma-dashboard .service-catalog-page .services-toolbar,
+  .service-catalog-page .services-toolbar,
+  .figma-dashboard .service-catalog-page .service-card-grid,
+  .service-catalog-page .service-card-grid,
+  .figma-detail-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-service-hero {
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .figma-dashboard .service-catalog-page .section-heading h3,
+  .service-catalog-page .section-heading h3,
+  .figma-service-hero-copy h3 {
+    font-size: clamp(34px, 12vw, 52px);
+  }
+}

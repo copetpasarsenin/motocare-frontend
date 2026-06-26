@@ -179,11 +179,14 @@ function ServicesList() {
     <section className="card services-card service-catalog-page">
       <div className="section-heading row-heading services-hero-heading">
         <div>
-          <p className="eyebrow">MotoCare Services</p>
-          <h3>Service Management</h3>
-          <p>Kelola katalog layanan, harga, durasi, status, dan data operasional bengkel.</p>
+          <p className="eyebrow">Official MotoCare Services</p>
+          <h3>Layanan MotoCare</h3>
+          <p>Pilih layanan bengkel premium dengan teknisi berpengalaman, estimasi durasi jelas, dan harga transparan.</p>
         </div>
         <div className="button-row">
+          <Link className="ghost-button home-outline-button" to="/bookings/create">
+            Booking Service
+          </Link>
           <Link className="primary-button" to="/services/create">
             <PlusCircle size={17} />
             Add Service
@@ -194,7 +197,7 @@ function ServicesList() {
       <div className="services-controls">
         <div className="filter-panel-heading">
           <SlidersHorizontal size={18} />
-          <span>Search &amp; Filters</span>
+          <span>Temukan Layanan</span>
         </div>
         <div className="toolbar services-toolbar">
           <label className="search-field">
@@ -209,7 +212,7 @@ function ServicesList() {
           <label>
             Category
             <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter category">
-              <option value="">All categories</option>
+              <option value="">Semua kategori</option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>{category.name}</option>
               ))}
@@ -218,7 +221,7 @@ function ServicesList() {
           <label>
             Status
             <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
-              <option value="">All status</option>
+              <option value="">Semua status</option>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
@@ -226,16 +229,16 @@ function ServicesList() {
           <label>
             Sort by
             <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Sort field">
-              <option value="name">Name</option>
+              <option value="name">Nama</option>
               <option value="price">Price</option>
-              <option value="duration_minutes">Duration</option>
+              <option value="duration_minutes">Durasi</option>
             </select>
           </label>
           <label>
             Order
             <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Sort order">
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
+              <option value="asc">Naik</option>
+              <option value="desc">Turun</option>
             </select>
           </label>
           <label>
@@ -306,7 +309,8 @@ function ServicesList() {
                 <StatusBadge status={service.status} />
               </div>
               <div className="service-card-actions table-actions">
-                <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Detail</Link>
+                <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Lihat Detail</Link>
+                <Link className="action-button book" to="/bookings/create">Booking</Link>
                 <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
                 <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
                   <Trash2 size={14} />
