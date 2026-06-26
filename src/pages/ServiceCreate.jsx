@@ -64,9 +64,10 @@ function ServiceCreate() {
   }
 
   return (
-    <section className="card narrow-card service-form-card">
+    <section className="card narrow-card service-form-card admin-service-form-page">
       <div className="section-heading row-heading">
         <div>
+          <p className="admin-page-eyebrow">Service Catalog</p>
           <h3>Create Service</h3>
           <p>Tambahkan layanan servis baru untuk katalog MotoCare.</p>
         </div>

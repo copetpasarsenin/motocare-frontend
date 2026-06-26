@@ -19,7 +19,7 @@ function ServiceForm({
 }) {
   return (
     <form className="stacked-form service-form" onSubmit={onSubmit} noValidate>
-      <label className="service-form-field">
+      <label className="service-form-field full-span">
         <span>Name</span>
         <input
           value={values.name}
@@ -29,7 +29,7 @@ function ServiceForm({
         <FieldError message={errors.name} />
       </label>
 
-      <label className="service-form-field">
+      <label className="service-form-field split-field">
         <span>Category</span>
         <select value={values.category_id} onChange={(event) => onChange('category_id', event.target.value)}>
           <option value="">Pilih kategori</option>
@@ -42,7 +42,17 @@ function ServiceForm({
         <FieldError message={errors.category_id} />
       </label>
 
-      <label className="service-form-field">
+      <label className="service-form-field split-field">
+        <span>Status</span>
+        <select value={values.status} onChange={(event) => onChange('status', event.target.value)}>
+          <option value="">Pilih status</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <FieldError message={errors.status} />
+      </label>
+
+      <label className="service-form-field split-field">
         <span>Price</span>
         <input
           type="number"
@@ -54,7 +64,7 @@ function ServiceForm({
         <FieldError message={errors.price} />
       </label>
 
-      <label className="service-form-field">
+      <label className="service-form-field split-field">
         <span>Duration</span>
         <input
           type="number"
@@ -64,16 +74,6 @@ function ServiceForm({
           placeholder="30"
         />
         <FieldError message={errors.duration_minutes} />
-      </label>
-
-      <label className="service-form-field">
-        <span>Status</span>
-        <select value={values.status} onChange={(event) => onChange('status', event.target.value)}>
-          <option value="">Pilih status</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-        <FieldError message={errors.status} />
       </label>
 
       <label className="service-form-field full-span">

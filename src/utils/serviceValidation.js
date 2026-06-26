@@ -9,12 +9,18 @@ export function validateServiceForm(values) {
     errors.category_id = 'Kategori wajib dipilih'
   }
 
-  if (Number(values.price) < 0) {
+  const price = Number(values.price)
+  if (values.price === '' || isNaN(price)) {
+    errors.price = 'Harga harus berupa angka yang valid'
+  } else if (price < 0) {
     errors.price = 'Harga tidak boleh negatif'
   }
 
-  if (Number(values.duration_minutes) < 0) {
-    errors.duration_minutes = 'Durasi tidak boleh negatif'
+  const duration = Number(values.duration_minutes)
+  if (values.duration_minutes === '' || isNaN(duration)) {
+    errors.duration_minutes = 'Durasi harus berupa angka yang valid'
+  } else if (duration <= 0) {
+    errors.duration_minutes = 'Durasi harus lebih dari 0 menit'
   }
 
   if (!values.status) {

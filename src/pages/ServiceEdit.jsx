@@ -80,9 +80,10 @@ function ServiceEdit() {
   }
 
   return (
-    <section className="card narrow-card service-form-card">
+    <section className="card narrow-card service-form-card admin-service-form-page">
       <div className="section-heading row-heading">
         <div>
+          <p className="admin-page-eyebrow">Service Catalog</p>
           <h3>Edit Service #{id}</h3>
           <p>Ubah informasi layanan servis yang sudah tersimpan.</p>
         </div>
