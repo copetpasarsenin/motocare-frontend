@@ -8927,3 +8927,171 @@ textarea {
     white-space: normal;
   }
 }
+
+
+/* =========================================================================
+   Profile Page – Admin Design System Polish
+   ========================================================================= */
+
+/* -- Page heading (matches Services / Bookings heading pattern) ----------- */
+.figma-dashboard .profile-page-heading {
+  margin-bottom: var(--mc-space-5);
+}
+
+.figma-dashboard .profile-page-heading h3 {
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.05;
+  font-weight: 950;
+  letter-spacing: -0.025em;
+  color: var(--mc-text);
+}
+
+.figma-dashboard .profile-page-heading p:not(.eyebrow) {
+  color: var(--mc-muted);
+  line-height: 1.65;
+}
+
+.figma-dashboard .profile-page-heading .eyebrow {
+  color: var(--mc-orange);
+}
+
+/* -- Profile page grid ---------------------------------------------------- */
+.figma-dashboard .profile-page {
+  max-width: 860px;
+  gap: var(--mc-space-5);
+}
+
+/* -- Hero card ------------------------------------------------------------ */
+.figma-dashboard .profile-hero {
+  gap: var(--mc-space-5);
+  padding: var(--mc-space-6) var(--mc-space-5);
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius-lg);
+  background:
+    radial-gradient(circle at 88% 16%, rgba(255, 112, 0, 0.14), transparent 44%),
+    linear-gradient(135deg, var(--mc-surface-2) 0%, var(--mc-surface) 62%, #1c1610 100%);
+  box-shadow: var(--mc-shadow-soft);
+}
+
+.figma-dashboard .profile-avatar {
+  width: 76px;
+  height: 76px;
+  font-size: 28px;
+  background: linear-gradient(135deg, var(--mc-orange), #e65100);
+  box-shadow: 0 10px 32px rgba(255, 112, 0, 0.28);
+}
+
+.figma-dashboard .profile-hero-info h2 {
+  color: var(--mc-text);
+  font-weight: 950;
+  letter-spacing: -0.02em;
+}
+
+.figma-dashboard .profile-hero-info p {
+  color: var(--mc-muted);
+}
+
+.figma-dashboard .profile-role-badge {
+  color: var(--mc-muted);
+  border-color: var(--mc-border);
+  border-radius: var(--mc-radius-sm);
+  background: var(--mc-surface-2);
+}
+
+.figma-dashboard .profile-role-badge.admin {
+  color: var(--mc-orange-soft);
+  border-color: var(--mc-border-strong);
+  background: rgba(255, 112, 0, 0.1);
+}
+
+/* -- Section cards -------------------------------------------------------- */
+.figma-dashboard .profile-section {
+  padding: var(--mc-space-5);
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius-lg);
+  background:
+    linear-gradient(145deg, rgba(255, 112, 0, 0.035), transparent 48%),
+    var(--mc-surface);
+  box-shadow: var(--mc-shadow-soft);
+}
+
+.figma-dashboard .profile-section-header {
+  border-color: var(--mc-border);
+  color: var(--mc-orange);
+  margin-bottom: var(--mc-space-4);
+  padding-bottom: var(--mc-space-3);
+}
+
+.figma-dashboard .profile-section-header h3 {
+  color: var(--mc-text);
+  font-weight: 950;
+  letter-spacing: -0.02em;
+}
+
+/* -- Profile list items --------------------------------------------------- */
+.figma-dashboard .profile-page .profile-list {
+  gap: var(--mc-space-2);
+}
+
+.figma-dashboard .profile-page .profile-list div {
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius);
+  padding: var(--mc-space-3) var(--mc-space-4);
+  background: var(--mc-surface-2);
+  transition: border-color 0.18s ease;
+}
+
+.figma-dashboard .profile-page .profile-list div:hover {
+  border-color: var(--mc-border-strong);
+}
+
+.figma-dashboard .profile-page .profile-list div:first-child {
+  border-color: var(--mc-border-strong);
+  background: rgba(255, 112, 0, 0.06);
+}
+
+.figma-dashboard .profile-page .profile-list dt {
+  color: var(--mc-text-soft);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.figma-dashboard .profile-page .profile-list dt svg {
+  color: var(--mc-orange);
+  opacity: 0.65;
+}
+
+.figma-dashboard .profile-page .profile-list dd {
+  color: var(--mc-text);
+  font-size: 14px;
+}
+
+.figma-dashboard .profile-mono {
+  color: var(--mc-orange-soft);
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+/* -- Responsive ----------------------------------------------------------- */
+@media (max-width: 600px) {
+  .figma-dashboard .profile-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--mc-space-5) var(--mc-space-4);
+  }
+
+  .figma-dashboard .profile-section {
+    padding: var(--mc-space-4) var(--mc-space-3);
+  }
+
+  .figma-dashboard .profile-page .profile-list div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .figma-dashboard .profile-page-heading h3 {
+    font-size: 24px;
+  }
+}

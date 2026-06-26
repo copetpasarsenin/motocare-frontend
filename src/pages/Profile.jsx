@@ -1,4 +1,4 @@
-import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
+﻿import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
 import { getApiBaseUrl } from '../services/api'
 import { getStoredUser } from '../utils/auth'
 
@@ -10,7 +10,14 @@ function Profile() {
 
   return (
     <div className="profile-page">
-      {/* Hero header */}
+      <div className="section-heading profile-page-heading">
+        <div>
+          <p className="eyebrow">MotoCare Account</p>
+          <h3>Profile</h3>
+          <p>View your account details, role, and connection settings.</p>
+        </div>
+      </div>
+
       <section className="profile-hero">
         <div className="profile-avatar">{initials}</div>
         <div className="profile-hero-info">
@@ -20,7 +27,6 @@ function Profile() {
         </div>
       </section>
 
-      {/* Account information */}
       <section className="profile-section">
         <div className="profile-section-header">
           <User size={18} />
@@ -53,7 +59,6 @@ function Profile() {
         </dl>
       </section>
 
-      {/* Security */}
       <section className="profile-section">
         <div className="profile-section-header">
           <KeyRound size={18} />
@@ -77,7 +82,6 @@ function Profile() {
         </dl>
       </section>
 
-      {/* Connection settings */}
       <section className="profile-section">
         <div className="profile-section-header">
           <Globe size={18} />
