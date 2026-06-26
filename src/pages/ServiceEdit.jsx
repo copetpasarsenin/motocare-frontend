@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
 import ServiceForm from '../components/ui/ServiceForm'
@@ -91,7 +91,7 @@ function ServiceEdit() {
 
       {feedback.message && <div className={`feedback ${feedback.type}`}>{feedback.message}</div>}
       {pageLoading ? (
-        <div className="placeholder-box">Memuat form layanan...</div>
+        <div className="placeholder-box"><Loader2 size={24} className="spin" /><span>Memuat form layanan...</span></div>
       ) : (
         <ServiceForm
           values={values}

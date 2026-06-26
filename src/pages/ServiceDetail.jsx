@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Edit, Gauge, ShieldCheck, Tag, Wrench } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Edit, Gauge, Loader2, ShieldCheck, Tag, Wrench } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import StatusBadge from '../components/ui/StatusBadge'
@@ -35,7 +35,7 @@ function ServiceDetail() {
         {service && <Link className="ghost-button home-outline-button" to={`/services/${service.id}/edit`}><Edit size={16} />Edit</Link>}
       </div>
 
-      {loading && <div className="service-grid-loading">Memuat detail layanan...</div>}
+      {loading && <div className="service-grid-loading"><Loader2 size={24} className="spin" /><span>Memuat detail layanan...</span></div>}
       {feedback && <div className="feedback error">{feedback}</div>}
 
       {!loading && service && (

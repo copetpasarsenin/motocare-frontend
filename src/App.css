@@ -5939,3 +5939,30 @@ textarea {
 .figma-dashboard .loading-state strong {
   color: #f3f0ed;
 }
+
+/* -- Service-grid-loading and placeholder-box spinner support ------------- */
+.service-grid-loading {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  min-height: 220px;
+}
+
+.service-grid-loading .spin {
+  color: var(--accent);
+}
+
+.placeholder-box {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.placeholder-box .spin {
+  color: var(--accent);
+}
+
+.figma-dashboard .service-grid-loading .spin,
+.figma-dashboard .placeholder-box .spin {
+  color: #ff7000;
+}
