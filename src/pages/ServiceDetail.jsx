@@ -1,4 +1,4 @@
-import { ArrowLeft, Clock, Edit, Gauge, Tag } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Edit, Gauge, ShieldCheck, Tag, Wrench } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import StatusBadge from '../components/ui/StatusBadge'
@@ -29,58 +29,86 @@ function ServiceDetail() {
   }, [id])
 
   return (
-    <section className="card narrow-card service-detail-card">
-      <div className="section-heading row-heading">
-        <div>
-          <h3>Service Detail</h3>
-          <p>Detail lengkap layanan servis motor.</p>
-        </div>
-        <div className="button-row">
-          <Link className="ghost-button" to="/services"><ArrowLeft size={16} />Back</Link>
-          {service && <Link className="primary-button" to={`/services/${service.id}/edit`}><Edit size={16} />Edit</Link>}
-        </div>
+    <section className="figma-service-detail">
+      <div className="service-detail-actions">
+        <Link className="ghost-button home-outline-button" to="/services"><ArrowLeft size={16} />Back to Services</Link>
+        {service && <Link className="ghost-button home-outline-button" to={`/services/${service.id}/edit`}><Edit size={16} />Edit</Link>}
       </div>
 
-      {loading && <div className="placeholder-box">Memuat detail layanan...</div>}
+      {loading && <div className="service-grid-loading">Memuat detail layanan...</div>}
       {feedback && <div className="feedback error">{feedback}</div>}
 
       {!loading && service && (
-        <div className="service-detail-panel">
-          <div className="service-detail-hero">
-            <span className="service-id">#{service.id}</span>
-            <h2>{service.name}</h2>
-            <p>{service.description || 'Belum ada deskripsi untuk layanan ini.'}</p>
-            <StatusBadge status={service.status} />
-          </div>
+        <>
+          <section className="figma-service-hero">
+            <div className="figma-service-hero-copy">
+              <p className="eyebrow">MotoCare Service Detail</p>
+              <h3>{service.name}</h3>
+              <p>{service.description || 'Layanan servis motor premium dengan teknisi berpengalaman dan standar pengerjaan MotoCare.'}</p>
+              <div className="figma-service-cta-row">
+                <Link className="primary-button home-orange-button" to="/bookings/create">
+                  Booking Service Sekarang
+                  <ArrowRight size={18} />
+                </Link>
+                <StatusBadge status={service.status} />
+              </div>
+            </div>
+            <aside className="figma-service-score">
+              <strong>{service.duration_minutes}</strong>
+              <span>Menit estimasi</span>
+              <small><CheckCircle2 size={14} /> Pemeriksaan sesuai standar</small>
+              <small><CheckCircle2 size={14} /> Teknisi MotoCare</small>
+            </aside>
+          </section>
 
-          <div className="service-detail-metrics">
-            <div>
-              <Tag size={18} />
+          <section className="figma-detail-metrics">
+            <article>
+              <Tag size={22} />
               <span>Category</span>
               <strong>{getCategoryName(service)}</strong>
-            </div>
-            <div>
-              <Gauge size={18} />
+            </article>
+            <article>
+              <Gauge size={22} />
               <span>Price</span>
               <strong>{formatCurrency(service.price)}</strong>
-            </div>
-            <div>
-              <Clock size={18} />
+            </article>
+            <article>
+              <Clock size={22} />
               <span>Duration</span>
               <strong>{service.duration_minutes} menit</strong>
-            </div>
-          </div>
+            </article>
+            <article>
+              <Wrench size={22} />
+              <span>Service ID</span>
+              <strong>#{service.id}</strong>
+            </article>
+          </section>
 
-          <dl className="detail-list">
-            <div><dt>ID</dt><dd>{service.id}</dd></div>
-            <div><dt>Name</dt><dd>{service.name}</dd></div>
-            <div><dt>Category</dt><dd>{getCategoryName(service)}</dd></div>
-            <div><dt>Price</dt><dd>{formatCurrency(service.price)}</dd></div>
-            <div><dt>Duration</dt><dd>{service.duration_minutes} menit</dd></div>
-            <div><dt>Status</dt><dd><StatusBadge status={service.status} /></dd></div>
-            <div><dt>Description</dt><dd>{service.description || '-'}</dd></div>
-          </dl>
-        </div>
+          <section className="figma-detail-content">
+            <div className="figma-description-card">
+              <p className="eyebrow">Description</p>
+              <h4>Detail Pengerjaan</h4>
+              <p>{service.description || 'Belum ada deskripsi untuk layanan ini.'}</p>
+            </div>
+            <div className="figma-benefit-grid">
+              <article>
+                <ShieldCheck size={22} />
+                <h5>Official Standard</h5>
+                <p>Pengerjaan mengikuti standar teknisi MotoCare untuk menjaga performa motor.</p>
+              </article>
+              <article>
+                <Gauge size={22} />
+                <h5>Performance Focus</h5>
+                <p>Dirancang untuk membantu kendaraan tetap responsif, aman, dan siap digunakan.</p>
+              </article>
+              <article>
+                <Clock size={22} />
+                <h5>Clear Timing</h5>
+                <p>Estimasi durasi ditampilkan sejak awal agar jadwal booking lebih mudah diatur.</p>
+              </article>
+            </div>
+          </section>
+        </>
       )}
     </section>
   )
