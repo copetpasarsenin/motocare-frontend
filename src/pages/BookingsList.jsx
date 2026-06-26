@@ -67,15 +67,19 @@ function BookingsList() {
   const [updatingId, setUpdatingId] = useState(null)
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const totalPages = Math.max(meta.total_pages, 1)
+  const visibleStatusCounts = bookings.reduce((counts, booking) => {
+    counts[booking.status] = (counts[booking.status] || 0) + 1
+    return counts
+  }, {})
 
-  const loadBookings = async (options = {}) => {
+  const loadBookings = async (nextFilters = filters, options = {}) => {
     setLoading(true)
     if (!options.keepFeedback) {
       setFeedback({ type: '', message: '' })
     }
 
     try {
-      const payload = await getBookings(filters)
+      const payload = await getBookings(nextFilters)
       setBookings(payload.data)
       setMeta(payload.meta)
     } catch (error) {
@@ -88,7 +92,7 @@ function BookingsList() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadBookings()
+    loadBookings(filters)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters])
 
@@ -127,9 +131,10 @@ function BookingsList() {
   }
 
   return (
-    <section className="card bookings-card">
+    <section className="card bookings-card booking-management-page">
       <div className="section-heading row-heading">
         <div>
+          <span className="admin-page-eyebrow">Booking Management</span>
           <h3>Bookings</h3>
           <p>{isAdmin ? 'Admin melihat semua booking dan dapat mengubah status.' : 'User melihat booking miliknya sendiri.'}</p>
         </div>
@@ -137,6 +142,25 @@ function BookingsList() {
           <PlusCircle size={17} />
           Create Booking
         </Link>
+      </div>
+
+      <div className="booking-metrics-grid" aria-label="Booking summary">
+        <div className="booking-metric-card">
+          <span>Total Bookings</span>
+          <strong>{meta.total}</strong>
+        </div>
+        <div className="booking-metric-card">
+          <span>Visible Pending</span>
+          <strong>{visibleStatusCounts.pending || 0}</strong>
+        </div>
+        <div className="booking-metric-card">
+          <span>Visible In Progress</span>
+          <strong>{visibleStatusCounts.in_progress || 0}</strong>
+        </div>
+        <div className="booking-metric-card">
+          <span>Visible Completed</span>
+          <strong>{visibleStatusCounts.completed || 0}</strong>
+        </div>
       </div>
 
       <div className="bookings-controls">
@@ -163,6 +187,21 @@ function BookingsList() {
               ))}
             </select>
           </label>
+          <label>
+            Sort by
+            <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Sort bookings by">
+              <option value="created_at">Created date</option>
+              <option value="booking_date">Booking date</option>
+              <option value="status">Status</option>
+            </select>
+          </label>
+          <label>
+            Order
+            <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Sort booking order">
+              <option value="desc">Newest first</option>
+              <option value="asc">Oldest first</option>
+            </select>
+          </label>
         </div>
       </div>
 
@@ -177,7 +216,7 @@ function BookingsList() {
           <button className="ghost-button" type="button" onClick={resetFilters} disabled={loading}>
             Reset Filter
           </button>
-          <button className="ghost-button" type="button" onClick={() => loadBookings()} disabled={loading}>
+          <button className="ghost-button" type="button" onClick={() => loadBookings(filters)} disabled={loading}>
             <RefreshCw size={16} />
             Refresh
           </button>

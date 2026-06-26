@@ -8400,3 +8400,328 @@ textarea {
     width: 100%;
   }
 }
+
+/* -- Stitch booking management refinement --------------------------------- */
+.figma-dashboard .booking-management-page.bookings-card {
+  display: grid;
+  gap: 18px;
+  padding: clamp(18px, 2.4vw, 28px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(255, 112, 0, 0.11), transparent 32%),
+    #111213;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.figma-dashboard .booking-management-page .section-heading.row-heading {
+  align-items: flex-end;
+  gap: 18px;
+  margin-bottom: 2px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.figma-dashboard .booking-management-page .admin-page-eyebrow {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: #ffb06b;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .booking-management-page .section-heading h3 {
+  color: #f5f5f5;
+  font-size: clamp(32px, 3.7vw, 48px);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .booking-management-page .section-heading h3::before {
+  width: 5px;
+  height: 34px;
+  margin-right: 12px;
+  border-radius: 0;
+  background: #ff7000;
+}
+
+.figma-dashboard .booking-management-page .section-heading p {
+  max-width: 640px;
+  color: #9ca3af;
+}
+
+.figma-dashboard .booking-management-page .primary-button {
+  min-height: 42px;
+  border-radius: 2px;
+  color: #0c0d0d;
+  background: #ff7000;
+  box-shadow: none;
+}
+
+.figma-dashboard .booking-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.figma-dashboard .booking-metric-card {
+  display: grid;
+  gap: 8px;
+  min-height: 96px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background: #151617;
+}
+
+.figma-dashboard .booking-metric-card span {
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .booking-metric-card strong {
+  color: #f5f5f5;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.figma-dashboard .booking-management-page .bookings-controls {
+  margin: 0;
+  padding: 14px;
+  border-color: rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background: #151617 !important;
+}
+
+.figma-dashboard .booking-management-page .filter-panel-heading {
+  color: #d7d7d7;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .booking-management-page .booking-toolbar {
+  grid-template-columns: minmax(300px, 1fr) repeat(3, minmax(150px, 210px));
+  padding: 0;
+  border: 0;
+  background: transparent !important;
+}
+
+.figma-dashboard .booking-management-page .search-field,
+.figma-dashboard .booking-management-page select,
+.figma-dashboard .booking-management-page .inline-select {
+  border-radius: 2px;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+  background-color: #0f1011;
+}
+
+.figma-dashboard .booking-management-page .search-field input::placeholder {
+  color: #6f7782;
+}
+
+.figma-dashboard .booking-management-page .table-summary {
+  margin: 0;
+  padding: 12px 14px;
+  border-color: rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background: #151617;
+}
+
+.figma-dashboard .booking-management-page .table-summary strong {
+  color: #f5f5f5;
+}
+
+.figma-dashboard .booking-management-page .table-summary span {
+  color: #9ca3af;
+}
+
+.figma-dashboard .booking-management-page .ghost-button {
+  min-height: 38px;
+  border-radius: 2px;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #d7d7d7;
+  background: transparent;
+}
+
+.figma-dashboard .booking-management-page .ghost-button:hover:not(:disabled) {
+  border-color: rgba(255, 112, 0, 0.5);
+  color: #fff;
+  background: rgba(255, 112, 0, 0.1);
+}
+
+.figma-dashboard .booking-management-page .table-scroll {
+  border-color: rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  background: #111213;
+  box-shadow: none;
+}
+
+.figma-dashboard .booking-management-page .bookings-table {
+  min-width: 1040px;
+  table-layout: auto;
+}
+
+.figma-dashboard .booking-management-page .bookings-table th {
+  padding: 14px 16px;
+  color: #9ca3af;
+  background: #18191a;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .booking-management-page .bookings-table td {
+  padding: 15px 16px;
+  color: #d7d7d7;
+  border-bottom-color: rgba(255, 255, 255, 0.07);
+  white-space: nowrap;
+}
+
+.figma-dashboard .booking-management-page .bookings-table th:nth-child(2),
+.figma-dashboard .booking-management-page .bookings-table td:nth-child(2),
+.figma-dashboard .booking-management-page .bookings-table th:nth-child(6),
+.figma-dashboard .booking-management-page .bookings-table td:nth-child(6) {
+  min-width: 190px;
+}
+
+.figma-dashboard .booking-management-page .bookings-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.figma-dashboard .booking-management-page .booking-id {
+  color: #f5f5f5;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+}
+
+.figma-dashboard .booking-management-page .booking-cell-main,
+.figma-dashboard .booking-management-page .booking-service-name {
+  max-width: 260px;
+  color: #f5f5f5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.figma-dashboard .booking-management-page .booking-cell-main svg {
+  color: #ff7000;
+}
+
+.figma-dashboard .booking-management-page .status-badge {
+  min-width: 0;
+  padding: 5px 9px;
+  border-radius: 2px;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.figma-dashboard .booking-management-page .status-badge.pending {
+  color: #ffb06b;
+  border-color: rgba(255, 112, 0, 0.55);
+  background: rgba(255, 112, 0, 0.08);
+}
+
+.figma-dashboard .booking-management-page .status-badge.in_progress {
+  color: #f5f5f5;
+  border-color: rgba(255, 112, 0, 0.34);
+  background: rgba(255, 112, 0, 0.2);
+}
+
+.figma-dashboard .booking-management-page .status-badge.confirmed,
+.figma-dashboard .booking-management-page .status-badge.completed {
+  color: #d7d7d7;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #202223;
+}
+
+.figma-dashboard .booking-management-page .status-badge.cancelled {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.09);
+}
+
+.figma-dashboard .booking-management-page .inline-select {
+  min-width: 156px;
+  min-height: 36px;
+  padding-inline: 10px;
+}
+
+.figma-dashboard .booking-management-page .status-updating {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  color: #ffb06b;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.figma-dashboard .booking-management-page .pagination {
+  margin-top: 0;
+}
+
+.figma-dashboard .booking-management-page .pagination-current {
+  border-radius: 2px;
+  border-color: rgba(255, 255, 255, 0.09);
+  background: #151617;
+}
+
+@media (max-width: 1180px) {
+  .figma-dashboard .booking-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figma-dashboard .booking-management-page .booking-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .booking-management-page.bookings-card {
+    padding: 16px;
+  }
+
+  .figma-dashboard .booking-management-page .section-heading.row-heading,
+  .figma-dashboard .booking-management-page .table-summary,
+  .figma-dashboard .booking-management-page .pagination {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .figma-dashboard .booking-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-dashboard .booking-management-page .table-summary-actions,
+  .figma-dashboard .booking-management-page .table-summary-actions > *,
+  .figma-dashboard .booking-management-page .pagination > * {
+    width: 100%;
+  }
+
+  .figma-dashboard .booking-management-page .bookings-table {
+    min-width: 0;
+  }
+
+  .figma-dashboard .booking-management-page .bookings-table tbody tr {
+    border-color: rgba(255, 255, 255, 0.09);
+    background: #151617;
+  }
+
+  .figma-dashboard .booking-management-page .bookings-table td {
+    white-space: normal;
+  }
+}
