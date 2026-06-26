@@ -6363,3 +6363,834 @@ textarea {
     justify-content: flex-start;
   }
 }
+
+/* =========================================================================
+   Unified MotoCare UI System
+   Shared polish layer for presentation-ready consistency
+   ========================================================================= */
+:root {
+  --mc-bg: #0d0f0f;
+  --mc-bg-soft: #111313;
+  --mc-surface: #151717;
+  --mc-surface-2: #1a1c1c;
+  --mc-surface-3: #202323;
+  --mc-text: #f4f0ec;
+  --mc-text-soft: #c9beb5;
+  --mc-muted: #907d70;
+  --mc-border: rgba(255, 112, 0, 0.14);
+  --mc-border-strong: rgba(255, 112, 0, 0.26);
+  --mc-orange: #ff7000;
+  --mc-orange-soft: #ffb08e;
+  --mc-red: #dc2626;
+  --mc-red-soft: #f87171;
+  --mc-radius-sm: 8px;
+  --mc-radius: 14px;
+  --mc-radius-lg: 20px;
+  --mc-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+  --mc-shadow-soft: 0 10px 26px rgba(0, 0, 0, 0.20);
+  --mc-glow: 0 0 0 1px rgba(255, 112, 0, 0.08), 0 18px 48px rgba(255, 112, 0, 0.08);
+  --mc-page-max: 1180px;
+  --mc-space-1: 6px;
+  --mc-space-2: 10px;
+  --mc-space-3: 14px;
+  --mc-space-4: 18px;
+  --mc-space-5: 24px;
+  --mc-space-6: 32px;
+  --mc-space-7: 42px;
+}
+
+/* -- App shell ------------------------------------------------------------ */
+.figma-dashboard.dashboard-layout {
+  grid-template-columns: 264px minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 88% 0%, rgba(255, 112, 0, 0.10), transparent 30%),
+    linear-gradient(180deg, #0b0d0d, #101211 42%, #0d0f0f);
+}
+
+.figma-dashboard .sidebar {
+  padding: 22px 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 112, 0, 0.09), transparent 260px),
+    #0f1111;
+  border-right: 1px solid var(--mc-border);
+}
+
+.figma-dashboard .sidebar-brand {
+  padding: 0 4px 18px;
+  border-color: var(--mc-border);
+}
+
+.figma-dashboard .brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff7000, #d65c00);
+  box-shadow: 0 12px 28px rgba(255, 112, 0, 0.24);
+}
+
+.figma-dashboard .sidebar-brand strong {
+  color: var(--mc-text);
+  letter-spacing: 0.04em;
+}
+
+.figma-dashboard .sidebar-brand span,
+.figma-dashboard .sidebar-nav-label {
+  color: var(--mc-muted);
+}
+
+.figma-dashboard .sidebar-user {
+  padding: 12px;
+  border-color: var(--mc-border);
+  border-radius: var(--mc-radius);
+  background: rgba(255, 112, 0, 0.055);
+}
+
+.figma-dashboard .sidebar-nav {
+  gap: 7px;
+  margin-top: 20px;
+}
+
+.figma-dashboard .sidebar-nav a {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--mc-text-soft);
+  font-weight: 800;
+}
+
+.figma-dashboard .sidebar-nav a:hover,
+.figma-dashboard .sidebar-nav a.active {
+  border-color: var(--mc-border-strong);
+  color: #fff;
+  background: rgba(255, 112, 0, 0.10);
+  box-shadow: none;
+}
+
+.figma-dashboard .sidebar-nav a.active {
+  box-shadow: inset 3px 0 0 var(--mc-orange), var(--mc-shadow-soft);
+}
+
+.figma-dashboard .content-shell {
+  min-width: 0;
+}
+
+.figma-dashboard .topbar {
+  min-height: 76px;
+  padding: 14px clamp(18px, 3vw, 32px);
+  border-color: var(--mc-border);
+  background: rgba(13, 15, 15, 0.88);
+  backdrop-filter: blur(16px);
+}
+
+.figma-dashboard .topbar h1 {
+  color: var(--mc-text);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 950;
+  letter-spacing: -0.02em;
+}
+
+.figma-dashboard .topbar-kicker {
+  color: var(--mc-orange);
+  letter-spacing: 0.10em;
+}
+
+.figma-dashboard .user-chip {
+  border-color: var(--mc-border);
+  border-radius: 12px;
+  background: var(--mc-surface);
+}
+
+.figma-dashboard .page-content {
+  width: min(100%, calc(var(--mc-page-max) + clamp(32px, 5vw, 64px)));
+  margin: 0 auto;
+  padding: clamp(22px, 3.2vw, 36px);
+}
+
+/* -- Common cards and headings ------------------------------------------- */
+.figma-dashboard .card,
+.figma-dashboard .hero-card,
+.figma-dashboard .stat-card,
+.figma-dashboard .chart-card,
+.figma-dashboard .narrow-card,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section,
+.figma-dashboard .service-catalog-card,
+.figma-dashboard .booking-confirm-panel,
+.figma-dashboard .booking-form-panel,
+.figma-dashboard .booking-info-card,
+.figma-dashboard .figma-service-hero,
+.figma-dashboard .figma-description-card,
+.figma-dashboard .figma-benefit-grid article {
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius-lg);
+  background:
+    linear-gradient(145deg, rgba(255, 112, 0, 0.045), transparent 48%),
+    var(--mc-surface);
+  box-shadow: var(--mc-shadow-soft);
+}
+
+.figma-dashboard .card,
+.figma-dashboard .narrow-card,
+.figma-dashboard .bookings-card,
+.figma-dashboard .services-card {
+  padding: clamp(20px, 2.4vw, 28px);
+}
+
+.figma-dashboard .section-heading,
+.figma-dashboard .row-heading,
+.figma-dashboard .booking-page-heading,
+.figma-dashboard .service-detail-actions {
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.figma-dashboard .section-heading h3,
+.figma-dashboard .booking-page-heading h3,
+.figma-dashboard .profile-section-header h3,
+.figma-dashboard .figma-service-hero-copy h3 {
+  color: var(--mc-text);
+  font-weight: 950;
+  letter-spacing: -0.025em;
+}
+
+.figma-dashboard .section-heading h3,
+.figma-dashboard .booking-page-heading h3 {
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.05;
+}
+
+.figma-dashboard .section-heading p,
+.figma-dashboard .booking-page-heading p,
+.figma-dashboard .figma-service-hero-copy p:not(.eyebrow) {
+  color: var(--mc-muted);
+  line-height: 1.65;
+}
+
+.figma-dashboard .eyebrow {
+  color: var(--mc-orange);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+/* -- Buttons -------------------------------------------------------------- */
+.figma-dashboard .primary-button,
+.figma-dashboard .ghost-button,
+.figma-dashboard .danger-button,
+.figma-dashboard .action-button,
+.figma-dashboard .icon-button,
+.figma-dashboard .theme-toggle,
+.figma-dashboard .sidebar-footer button {
+  border-radius: 12px;
+  font-weight: 900;
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.figma-dashboard .primary-button {
+  min-height: 44px;
+  background: linear-gradient(135deg, #ff7a00, #d85c00);
+  border-color: rgba(255, 112, 0, 0.75);
+  box-shadow: 0 12px 28px rgba(255, 112, 0, 0.20);
+}
+
+.figma-dashboard .primary-button:hover,
+.figma-dashboard .ghost-button:hover,
+.figma-dashboard .action-button:hover,
+.figma-dashboard .theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.figma-dashboard .ghost-button,
+.figma-dashboard .theme-toggle,
+.figma-dashboard .icon-button {
+  min-height: 42px;
+  border-color: var(--mc-border-strong);
+  color: var(--mc-orange-soft);
+  background: rgba(255, 112, 0, 0.055);
+}
+
+.figma-dashboard .danger-button,
+.figma-dashboard .table-actions button.action-button.delete {
+  color: #fff;
+  border-color: rgba(220, 38, 38, 0.52);
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+}
+
+.figma-dashboard .table-actions button.action-button.delete:hover {
+  border-color: rgba(248, 113, 113, 0.55);
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+/* -- Inputs, filters, forms ---------------------------------------------- */
+.figma-dashboard input,
+.figma-dashboard select,
+.figma-dashboard textarea,
+.figma-dashboard .input-shell,
+.figma-dashboard .inline-select {
+  min-height: 44px;
+  border: 1px solid var(--mc-border);
+  border-radius: 12px;
+  color: var(--mc-text);
+  background: #101212;
+}
+
+.figma-dashboard input::placeholder,
+.figma-dashboard textarea::placeholder {
+  color: #66584f;
+}
+
+.figma-dashboard input:hover,
+.figma-dashboard select:hover,
+.figma-dashboard textarea:hover,
+.figma-dashboard .input-shell:hover {
+  border-color: var(--mc-border-strong);
+}
+
+.figma-dashboard input:focus,
+.figma-dashboard select:focus,
+.figma-dashboard textarea:focus,
+.figma-dashboard .input-shell:focus-within,
+.figma-dashboard .inline-select:focus {
+  border-color: var(--mc-orange);
+  box-shadow: 0 0 0 3px rgba(255, 112, 0, 0.14);
+}
+
+.figma-dashboard .toolbar,
+.figma-dashboard .services-controls,
+.figma-dashboard .bookings-controls,
+.figma-dashboard .services-export-panel,
+.figma-dashboard .booking-toolbar {
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius-lg);
+  background:
+    linear-gradient(145deg, rgba(255, 112, 0, 0.04), transparent 50%),
+    #121414;
+}
+
+.figma-dashboard .services-controls,
+.figma-dashboard .bookings-controls {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  margin: 18px 0;
+}
+
+.figma-dashboard .toolbar,
+.figma-dashboard .booking-toolbar {
+  gap: 14px;
+  padding: 14px;
+}
+
+.figma-dashboard .toolbar label,
+.figma-dashboard .booking-toolbar label,
+.figma-dashboard .services-toolbar label:not(.search-field),
+.figma-dashboard .service-form-field,
+.figma-dashboard .figma-field {
+  color: var(--mc-muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.figma-dashboard .search-field {
+  border-color: var(--mc-border);
+  border-radius: 12px;
+  background: #101212;
+}
+
+.figma-dashboard .filter-panel-heading {
+  color: var(--mc-orange-soft);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.figma-dashboard .filter-panel-heading svg {
+  color: var(--mc-orange);
+}
+
+/* -- Tables and summaries ------------------------------------------------- */
+.figma-dashboard .table-summary {
+  margin: 18px 0 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius);
+  background: #121414;
+}
+
+.figma-dashboard .table-summary strong {
+  color: var(--mc-text);
+}
+
+.figma-dashboard .table-summary span {
+  color: var(--mc-muted);
+}
+
+.figma-dashboard .table-scroll {
+  border: 1px solid var(--mc-border);
+  border-radius: var(--mc-radius-lg);
+  background: #111313;
+  overflow: auto;
+  box-shadow: var(--mc-shadow-soft);
+}
+
+.figma-dashboard .data-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 860px;
+}
+
+.figma-dashboard .data-table th {
+  padding: 15px 16px;
+  color: var(--mc-orange-soft);
+  background: #171919;
+  border-bottom: 1px solid var(--mc-border);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+}
+
+.figma-dashboard .data-table td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 112, 0, 0.07);
+  color: var(--mc-text-soft);
+  vertical-align: middle;
+}
+
+.figma-dashboard .data-table tbody tr {
+  background: transparent;
+}
+
+.figma-dashboard .data-table tbody tr:hover {
+  background: rgba(255, 112, 0, 0.055);
+}
+
+.figma-dashboard .table-actions {
+  gap: 8px;
+}
+
+.figma-dashboard .table-actions .action-button,
+.figma-dashboard .table-actions button.action-button {
+  min-height: 36px;
+  padding: 0 11px;
+  border-radius: 10px;
+}
+
+.figma-dashboard .pagination {
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.figma-dashboard .pagination-current {
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 1px solid var(--mc-border);
+  border-radius: 12px;
+  color: var(--mc-text);
+  background: #121414;
+}
+
+/* -- Dashboard ------------------------------------------------------------ */
+.figma-dashboard .dashboard-grid {
+  gap: 22px;
+}
+
+.figma-dashboard .dashboard-hero-card {
+  min-height: 320px;
+  padding: clamp(24px, 3.2vw, 36px);
+  border-radius: 24px;
+  background:
+    linear-gradient(100deg, rgba(13, 15, 15, 0.88), rgba(13, 15, 15, 0.62)),
+    radial-gradient(circle at 92% 10%, rgba(255, 112, 0, 0.24), transparent 34%),
+    #151717;
+}
+
+.figma-dashboard .dashboard-hero-copy h2 {
+  max-width: 720px;
+  font-size: clamp(44px, 5vw, 72px);
+  line-height: 0.98;
+}
+
+.figma-dashboard .dashboard-hero-copy p {
+  max-width: 640px;
+  color: var(--mc-text-soft);
+}
+
+.figma-dashboard .dashboard-hero-panel {
+  border-radius: 18px;
+  border-color: var(--mc-border-strong);
+  background: rgba(18, 20, 20, 0.84);
+}
+
+.figma-dashboard .dashboard-stats-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.figma-dashboard .dashboard-stat-card {
+  min-height: 132px;
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.figma-dashboard .dashboard-stat-card strong {
+  font-size: clamp(24px, 2.4vw, 34px);
+}
+
+.figma-dashboard .chart-card {
+  min-height: 420px;
+  padding: 22px;
+}
+
+/* -- Services ------------------------------------------------------------- */
+.figma-dashboard .service-catalog-page .services-hero-heading {
+  padding-bottom: 14px;
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3 {
+  font-size: clamp(30px, 3.3vw, 44px);
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3::before {
+  height: 32px;
+  margin-right: 10px;
+}
+
+.figma-dashboard .services-toolbar {
+  grid-template-columns: minmax(260px, 1.5fr) repeat(5, minmax(120px, 1fr));
+}
+
+.figma-dashboard .services-export-panel {
+  padding: 12px;
+}
+
+.figma-dashboard .service-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.figma-dashboard .service-catalog-card {
+  min-height: 250px;
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.figma-dashboard .service-catalog-card.featured {
+  transform: none;
+}
+
+.figma-dashboard .service-card-body h4 {
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.figma-dashboard .service-card-body p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.figma-dashboard .service-card-meta {
+  gap: 8px;
+}
+
+/* -- Bookings ------------------------------------------------------------- */
+.figma-dashboard .bookings-card {
+  background:
+    linear-gradient(145deg, rgba(255, 112, 0, 0.035), transparent 46%),
+    var(--mc-surface);
+}
+
+.figma-dashboard .bookings-controls,
+.figma-dashboard .booking-toolbar,
+.figma-dashboard .bookings-controls .toolbar {
+  background:
+    linear-gradient(145deg, rgba(255, 112, 0, 0.04), transparent 48%),
+    #121414 !important;
+}
+
+.figma-dashboard .booking-toolbar {
+  grid-template-columns: minmax(260px, 1fr) minmax(180px, 240px);
+}
+
+.figma-dashboard .bookings-table td {
+  white-space: nowrap;
+}
+
+.figma-dashboard .booking-cell-main {
+  gap: 8px;
+}
+
+.figma-dashboard .inline-select {
+  width: 100%;
+  min-width: 150px;
+}
+
+/* -- Forms / create edit pages ------------------------------------------- */
+.figma-dashboard .narrow-card {
+  max-width: 900px;
+}
+
+.figma-dashboard .service-form {
+  gap: 16px;
+}
+
+.figma-dashboard .service-form input,
+.figma-dashboard .service-form select,
+.figma-dashboard .service-form textarea,
+.figma-dashboard .figma-field input,
+.figma-dashboard .figma-field select,
+.figma-dashboard .figma-field textarea {
+  background: #101212;
+}
+
+.figma-dashboard .form-actions {
+  margin-top: 6px;
+  padding-top: 18px;
+  border-color: var(--mc-border);
+}
+
+/* -- Create booking ------------------------------------------------------- */
+.figma-dashboard .booking-create-page,
+.figma-dashboard .figma-service-detail {
+  max-width: var(--mc-page-max);
+  margin: 0 auto;
+}
+
+.figma-dashboard .booking-layout {
+  gap: 22px;
+}
+
+.figma-dashboard .booking-form-panel,
+.figma-dashboard .booking-confirm-panel {
+  padding: clamp(20px, 2.5vw, 28px);
+}
+
+.figma-dashboard .booking-service-options {
+  gap: 12px;
+}
+
+.figma-dashboard .booking-service-option {
+  border-radius: 16px;
+  border-color: var(--mc-border);
+  background: #121414;
+}
+
+.figma-dashboard .booking-service-option.selected,
+.figma-dashboard .booking-service-option:hover {
+  border-color: var(--mc-border-strong);
+  background: rgba(255, 112, 0, 0.08);
+}
+
+.figma-dashboard .booking-date-grid,
+.figma-dashboard .booking-time-grid {
+  gap: 10px;
+}
+
+.figma-dashboard .booking-date-grid button,
+.figma-dashboard .booking-time-grid button,
+.figma-dashboard .booking-addon-list label {
+  border-radius: 14px;
+  border-color: var(--mc-border);
+  background: #101212;
+}
+
+/* -- Profile -------------------------------------------------------------- */
+.figma-dashboard .profile-page {
+  max-width: 860px;
+}
+
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section {
+  padding: 24px;
+}
+
+.figma-dashboard .profile-list div {
+  border-radius: 14px;
+}
+
+/* -- Auth pages ----------------------------------------------------------- */
+.figma-auth-page {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 112, 0, 0.12), transparent 30%),
+    #0d0f0f;
+}
+
+.auth-stage {
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+  grid-template-columns: minmax(0, 1.05fr) minmax(380px, 460px);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.figma-auth-page .auth-hero {
+  min-height: clamp(480px, 68vh, 640px);
+  border-radius: 24px;
+  background:
+    linear-gradient(90deg, rgba(8, 10, 10, 0.86), rgba(8, 10, 10, 0.46)),
+    url('./assets/hero.png') center / cover no-repeat;
+}
+
+.auth-hero-copy {
+  inset: auto clamp(24px, 4vw, 44px) clamp(34px, 6vw, 56px);
+  max-width: 620px;
+}
+
+.auth-hero-copy h2 {
+  max-width: 620px;
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+}
+
+.auth-hero-copy p {
+  max-width: 560px;
+  font-size: clamp(15px, 1.3vw, 18px);
+}
+
+.figma-auth-panel {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: var(--mc-shadow);
+}
+
+.figma-auth-panel h1 {
+  font-size: clamp(34px, 4vw, 48px);
+  line-height: 1.02;
+}
+
+.figma-auth-panel .auth-form {
+  gap: 18px;
+}
+
+.figma-auth-panel .auth-line-field {
+  border-radius: 16px;
+}
+
+/* -- Shared state components --------------------------------------------- */
+.figma-dashboard .empty-state,
+.figma-dashboard .placeholder-box,
+.figma-dashboard .service-grid-loading,
+.figma-dashboard .chart-placeholder {
+  border: 1px dashed var(--mc-border-strong);
+  border-radius: var(--mc-radius-lg);
+  background: rgba(255, 112, 0, 0.035);
+}
+
+.figma-dashboard .status-badge {
+  border-radius: 999px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+}
+
+/* -- Responsive system ---------------------------------------------------- */
+@media (max-width: 1180px) {
+  .figma-dashboard .dashboard-stats-grid,
+  .figma-dashboard .service-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .figma-dashboard .services-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .figma-dashboard.dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-dashboard .page-content {
+    width: 100%;
+    padding: 22px;
+  }
+
+  .figma-dashboard .topbar {
+    min-height: 72px;
+  }
+
+  .auth-stage {
+    width: min(760px, calc(100% - 40px));
+    grid-template-columns: 1fr;
+    padding: 28px 0 46px;
+  }
+
+  .figma-auth-page .auth-hero {
+    min-height: 420px;
+  }
+
+  .auth-hero-copy h2 {
+    font-size: clamp(42px, 9vw, 64px);
+  }
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .page-content {
+    padding: 18px;
+  }
+
+  .figma-dashboard .topbar,
+  .figma-dashboard .topbar-actions,
+  .figma-dashboard .section-heading.row-heading,
+  .figma-dashboard .table-summary,
+  .figma-dashboard .booking-page-heading,
+  .figma-dashboard .service-detail-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .figma-dashboard .topbar-actions > *,
+  .figma-dashboard .button-row > *,
+  .figma-dashboard .table-summary-actions > *,
+  .figma-dashboard .pagination > *,
+  .figma-dashboard .form-actions > * {
+    width: 100%;
+  }
+
+  .figma-dashboard .dashboard-hero-card {
+    min-height: 420px;
+    padding: 22px;
+  }
+
+  .figma-dashboard .dashboard-hero-copy h2 {
+    font-size: 44px;
+  }
+
+  .figma-dashboard .dashboard-stats-grid,
+  .figma-dashboard .service-card-grid,
+  .figma-dashboard .services-toolbar,
+  .figma-dashboard .booking-toolbar,
+  .figma-dashboard .stats-grid,
+  .figma-dashboard .booking-layout,
+  .figma-dashboard .stacked-form {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-dashboard .service-catalog-card {
+    min-height: 0;
+  }
+
+  .figma-dashboard .pagination {
+    flex-direction: column;
+  }
+
+  .auth-stage {
+    width: calc(100% - 32px);
+    padding: 22px 0 34px;
+  }
+
+  .figma-auth-page .auth-hero {
+    min-height: 360px;
+  }
+
+  .auth-hero-copy {
+    inset: auto 22px 32px;
+  }
+
+  .auth-hero-copy h2 {
+    font-size: clamp(36px, 12vw, 48px);
+  }
+
+  .figma-auth-panel {
+    padding: 30px 20px 36px;
+  }
+}
