@@ -1,29 +1,9 @@
-import { ArrowRight, CheckCircle2, Clock3, Gauge, ShieldCheck, Wrench } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { ArrowRight, CheckCircle2, Clock3, Moon, Sun, Wrench } from 'lucide-react'
 import { Link } from 'react-router'
-
-const featuredServices = [
-  {
-    title: 'Servis Rutin',
-    description: 'Pemeriksaan berkala untuk menjaga performa motor tetap stabil setiap hari.',
-    duration: '45 Menit',
-    price: 'Mulai Rp 65.000',
-    icon: Wrench,
-  },
-  {
-    title: 'Ganti Oli & Filter',
-    description: 'Perawatan fluida mesin dengan oli berkualitas untuk umur mesin lebih panjang.',
-    duration: '30 Menit',
-    price: 'Mulai Rp 85.000',
-    icon: Gauge,
-  },
-  {
-    title: 'Diagnostik Motor',
-    description: 'Pengecekan kelistrikan dan kondisi mesin memakai standar teknisi MotoCare.',
-    duration: '60 Menit',
-    price: 'Mulai Rp 120.000',
-    icon: ShieldCheck,
-  },
-]
+import { getServices } from '../services/services'
+import { formatCurrency, getCategoryName } from '../utils/csv'
+import { getStoredTheme, toggleTheme } from '../utils/theme'
 
 const benefits = [
   'Teknisi berpengalaman untuk motor harian dan premium.',
@@ -32,14 +12,58 @@ const benefits = [
 ]
 
 function Home() {
+  const [theme, setTheme] = useState(getStoredTheme)
+  const [services, setServices] = useState([])
+  const [servicesLoading, setServicesLoading] = useState(true)
+  const [servicesError, setServicesError] = useState('')
+
+  const isDark = theme === 'dark'
+
+  function handleToggleTheme() {
+    setTheme(toggleTheme(theme))
+  }
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadServices() {
+      try {
+        setServicesLoading(true)
+        setServicesError('')
+        const result = await getServices({ page: 1, limit: 100, status: 'active' })
+        if (isMounted) {
+          setServices(result.data)
+        }
+      } catch (error) {
+        console.error(error)
+        if (isMounted) {
+          setServicesError('Gagal memuat layanan. Silakan coba lagi nanti.')
+        }
+      } finally {
+        if (isMounted) {
+          setServicesLoading(false)
+        }
+      }
+    }
+
+    loadServices()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <main className="public-home">
       <header className="public-home-nav">
         <Link className="public-brand" to="/home">MOTOCARE</Link>
         <nav aria-label="MotoCare public navigation">
           <Link className="active" to="/home">Home</Link>
-          <Link to="/services">Services</Link>
           <Link className="nav-cta" to="/login">Booking Service</Link>
+          <button className="public-theme-toggle" type="button" onClick={handleToggleTheme} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            <span>{isDark ? 'Light' : 'Dark'}</span>
+          </button>
         </nav>
       </header>
 
@@ -79,24 +103,30 @@ function Home() {
         <div className="public-section-heading">
           <p className="eyebrow">Official Partner</p>
           <h2>Our Service</h2>
-          <p>Pilih layanan populer MotoCare atau masuk ke dashboard untuk melihat katalog lengkap dari API.</p>
+          <p>Pilih layanan aktif MotoCare langsung dari katalog terbaru.</p>
         </div>
-        <div className="public-service-grid">
-          {featuredServices.map((service) => {
-            const Icon = service.icon
-            return (
-              <article className="public-service-card" key={service.title}>
-                <span className="service-icon-box"><Icon size={20} /></span>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+        {servicesLoading && <p className="public-service-state">Memuat layanan MotoCare...</p>}
+        {!servicesLoading && servicesError && <p className="public-service-state error">{servicesError}</p>}
+        {!servicesLoading && !servicesError && services.length === 0 && (
+          <p className="public-service-state">Belum ada layanan tersedia.</p>
+        )}
+        {!servicesLoading && !servicesError && services.length > 0 && (
+          <div className="public-service-grid">
+            {services.map((service) => (
+              <article className="public-service-card" key={service.id}>
+                <span className="service-icon-box"><Wrench size={20} /></span>
+                <div className="public-service-meta">{getCategoryName(service)}</div>
+                <h3>{service.name}</h3>
+                <p>{service.description || 'Layanan perawatan motor profesional dari teknisi MotoCare.'}</p>
                 <footer>
-                  <span><Clock3 size={14} />{service.duration}</span>
-                  <strong>{service.price}</strong>
+                  <span><Clock3 size={14} />{service.duration_minutes || 0} menit</span>
+                  <strong>{formatCurrency(service.price)}</strong>
                 </footer>
+                <Link className="public-service-cta" to="/login">Booking Service</Link>
               </article>
-            )
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="public-stats" aria-label="MotoCare statistics">

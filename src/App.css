@@ -10969,3 +10969,227 @@ html body .auth-page.figma-auth-page .auth-stage .auth-hero .auth-hero-lines spa
     min-width: 120px !important;
   }
 }
+
+.public-theme-toggle {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 106, 0, 0.34);
+  border-radius: 999px;
+  color: #f8f2ed;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.public-theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 106, 0, 0.74);
+  background: rgba(255, 106, 0, 0.14);
+}
+
+.public-service-meta {
+  width: fit-content;
+  margin-top: 18px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 106, 0, 0.24);
+  border-radius: 999px;
+  color: #ffb06a;
+  background: rgba(255, 106, 0, 0.10);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.public-service-card .public-service-meta + h3 {
+  margin-top: 14px;
+}
+
+.public-service-cta {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0 18px;
+  border-radius: 8px;
+  color: #231105;
+  background: linear-gradient(135deg, #ff8a1f, #ff6500);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 14px 28px rgba(255, 106, 0, 0.22);
+}
+
+.public-service-state {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 26px;
+  border: 1px solid rgba(255, 106, 0, 0.22);
+  border-radius: 16px;
+  color: #f5d6c0;
+  background: rgba(26, 28, 28, 0.82);
+  text-align: center;
+}
+
+.public-service-state.error {
+  border-color: rgba(239, 68, 68, 0.32);
+  color: #fecaca;
+}
+
+:root[data-theme='light'] .public-home {
+  color: #20140e;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(255, 122, 0, 0.16), transparent 28%),
+    linear-gradient(180deg, #fff7ef 0%, #fffaf4 46%, #f7efe5 100%);
+}
+
+:root[data-theme='light'] .public-home-nav {
+  border-bottom-color: rgba(180, 91, 18, 0.18);
+  background: rgba(255, 250, 244, 0.94);
+  box-shadow: 0 14px 34px rgba(91, 51, 19, 0.08);
+}
+
+:root[data-theme='light'] .public-brand {
+  color: #c95000;
+}
+
+:root[data-theme='light'] .public-home-nav nav a {
+  color: #4f3828;
+}
+
+:root[data-theme='light'] .public-home-nav nav a.active {
+  color: #e75d00;
+}
+
+:root[data-theme='light'] .public-home-nav .nav-cta {
+  color: #261105;
+  background: linear-gradient(135deg, #ff8a1f, #ff6400);
+}
+
+:root[data-theme='light'] .public-theme-toggle {
+  border-color: rgba(207, 80, 0, 0.26);
+  color: #5a321b;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+:root[data-theme='light'] .public-theme-toggle:hover {
+  border-color: rgba(207, 80, 0, 0.58);
+  background: rgba(255, 122, 0, 0.12);
+}
+
+:root[data-theme='light'] .public-hero {
+  background:
+    linear-gradient(90deg, rgba(255, 247, 239, 0.94) 0%, rgba(255, 247, 239, 0.78) 46%, rgba(255, 247, 239, 0.46) 100%),
+    linear-gradient(180deg, rgba(255, 250, 244, 0.08), rgba(255, 250, 244, 0.88)),
+    url('./assets/motocare-motorcycle-bg.jpg') right center / cover no-repeat;
+}
+
+:root[data-theme='light'] .public-hero::after {
+  background: linear-gradient(180deg, transparent, rgba(255, 250, 244, 0.84));
+}
+
+:root[data-theme='light'] .public-hero-copy h1 {
+  color: #21140d;
+}
+
+:root[data-theme='light'] .public-hero-copy p {
+  color: #684c39;
+}
+
+:root[data-theme='light'] .public-hero-card {
+  border: 1px solid rgba(207, 80, 0, 0.18);
+  color: #2b1a10;
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 24px 54px rgba(117, 67, 26, 0.14);
+}
+
+:root[data-theme='light'] .public-benefits article {
+  border-color: rgba(207, 80, 0, 0.18);
+  color: #3c281a;
+  background:
+    linear-gradient(145deg, rgba(255, 122, 0, 0.14), transparent 58%),
+    #fffaf5;
+  box-shadow: 0 18px 42px rgba(114, 64, 24, 0.10);
+}
+
+:root[data-theme='light'] .public-benefits article.orange {
+  color: #241006;
+  background: linear-gradient(135deg, #ff962f, #ff6a00);
+}
+
+:root[data-theme='light'] .public-service-section {
+  color: #2b1a10;
+}
+
+:root[data-theme='light'] .public-section-heading h2,
+:root[data-theme='light'] .public-final-cta h2 {
+  color: #20140e;
+}
+
+:root[data-theme='light'] .public-section-heading p {
+  color: #6f513d;
+}
+
+:root[data-theme='light'] .public-service-card {
+  border: 1px solid rgba(207, 80, 0, 0.14);
+  color: #2d1c12;
+  background:
+    linear-gradient(145deg, rgba(255, 122, 0, 0.11), transparent 54%),
+    #fffdf9;
+  box-shadow: 0 20px 44px rgba(114, 64, 24, 0.10);
+}
+
+:root[data-theme='light'] .public-service-card p {
+  color: #674c39;
+}
+
+:root[data-theme='light'] .public-service-meta {
+  color: #a64300;
+  background: rgba(255, 122, 0, 0.10);
+}
+
+:root[data-theme='light'] .public-service-state {
+  color: #5d412e;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+:root[data-theme='light'] .public-service-state.error {
+  color: #9f1239;
+}
+
+:root[data-theme='light'] .public-stats {
+  background: linear-gradient(135deg, #ff962f, #ff6500);
+  box-shadow: 0 22px 46px rgba(255, 106, 0, 0.18);
+}
+
+:root[data-theme='light'] .public-final-cta {
+  border: 1px solid rgba(207, 80, 0, 0.16);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 122, 0, 0.18), transparent 44%),
+    #fffaf5;
+  box-shadow: 0 22px 54px rgba(114, 64, 24, 0.10);
+}
+
+:root[data-theme='light'] .public-footer {
+  border-top: 1px solid rgba(207, 80, 0, 0.14);
+  color: #6b4e3a;
+  background: #fff8f0;
+}
+
+@media (max-width: 720px) {
+  .public-theme-toggle {
+    min-height: 38px;
+    flex: 1 1 auto;
+  }
+}
