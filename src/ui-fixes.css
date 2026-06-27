@@ -1177,3 +1177,199 @@ textarea:focus,
 .booking-summary strong {
   color: var(--accent) !important;
 }
+
+/* Cream light-mode fix: remove black gutters and dark dashboard panels. */
+:root {
+  --bg: #fff7ed;
+  --surface-soft: #fffbf5;
+}
+
+:root[data-theme='light'],
+:root:not([data-theme='dark']) {
+  --bg: #fff7ed;
+  --surface: #fffdf8;
+  --surface-soft: #fff3e4;
+  --surface-raised: #ffffff;
+  --line: #eadfd2;
+  --text: #1c1917;
+  --muted: #756a61;
+  --shadow-soft: 0 18px 42px rgba(67, 44, 28, 0.08);
+  --shadow-hover: 0 26px 64px rgba(67, 44, 28, 0.14);
+}
+
+:root[data-theme='light'] body,
+:root:not([data-theme='dark']) body,
+:root[data-theme='light'] #root,
+:root:not([data-theme='dark']) #root,
+:root[data-theme='light'] .dashboard-layout,
+:root:not([data-theme='dark']) .dashboard-layout,
+:root[data-theme='light'] .content-shell,
+:root:not([data-theme='dark']) .content-shell,
+:root[data-theme='light'] .page-content,
+:root:not([data-theme='dark']) .page-content {
+  background: #fff7ed !important;
+}
+
+:root[data-theme='light'] .page-content,
+:root:not([data-theme='dark']) .page-content {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(245, 158, 11, 0.12), transparent 30%),
+    #fff7ed !important;
+}
+
+:root[data-theme='light'] .booking-create-page,
+:root:not([data-theme='dark']) .booking-create-page,
+:root[data-theme='light'] .booking-management-page,
+:root:not([data-theme='dark']) .booking-management-page,
+:root[data-theme='light'] .service-catalog-page,
+:root:not([data-theme='dark']) .service-catalog-page,
+:root[data-theme='light'] .profile-page,
+:root:not([data-theme='dark']) .profile-page,
+:root[data-theme='light'] .home-dashboard,
+:root:not([data-theme='dark']) .home-dashboard {
+  background: #fff7ed !important;
+}
+
+:root[data-theme='light'] .card,
+:root:not([data-theme='dark']) .card,
+:root[data-theme='light'] .services-card,
+:root:not([data-theme='dark']) .services-card,
+:root[data-theme='light'] .bookings-card,
+:root:not([data-theme='dark']) .bookings-card {
+  background: #fff7ed !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme='light'] .dashboard-grid,
+:root:not([data-theme='dark']) .dashboard-grid {
+  --dashboard-panel: #fffdf8;
+  --dashboard-panel-strong: #fff3e4;
+  --dashboard-border: #eadfd2;
+  --dashboard-text: #1c1917;
+  --dashboard-muted: #756a61;
+  --dashboard-chart-grid: rgba(120, 113, 108, 0.24);
+  --dashboard-chart-muted: #78716c;
+  --dashboard-chart-hover: rgba(234, 88, 12, 0.08);
+  --dashboard-tooltip-bg: #fffdf8;
+  background: #fff7ed !important;
+}
+
+:root[data-theme='light'] .hero-card.dashboard-hero-card,
+:root:not([data-theme='dark']) .hero-card.dashboard-hero-card {
+  color: var(--text) !important;
+  border-color: #eadfd2 !important;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(245, 158, 11, 0.22), transparent 32%),
+    linear-gradient(135deg, #fffdf8 0%, #fff3e4 58%, #ffedd5 100%) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-card::before,
+:root:not([data-theme='dark']) .dashboard-hero-card::before {
+  background:
+    linear-gradient(rgba(120, 113, 108, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 113, 108, 0.08) 1px, transparent 1px) !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-card .garage-tag,
+:root:not([data-theme='dark']) .dashboard-hero-card .garage-tag,
+:root[data-theme='light'] .dashboard-hero-card .eyebrow,
+:root:not([data-theme='dark']) .dashboard-hero-card .eyebrow {
+  color: var(--accent) !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-card h2,
+:root:not([data-theme='dark']) .dashboard-hero-card h2,
+:root[data-theme='light'] .dashboard-hero-card p,
+:root:not([data-theme='dark']) .dashboard-hero-card p,
+:root[data-theme='light'] .dashboard-hero-content h2,
+:root:not([data-theme='dark']) .dashboard-hero-content h2,
+:root[data-theme='light'] .dashboard-hero-content p,
+:root:not([data-theme='dark']) .dashboard-hero-content p {
+  color: var(--text) !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-panel,
+:root:not([data-theme='dark']) .dashboard-hero-panel,
+:root[data-theme='light'] .dashboard-stat-card,
+:root:not([data-theme='dark']) .dashboard-stat-card,
+:root[data-theme='light'] .chart-card,
+:root:not([data-theme='dark']) .chart-card,
+:root[data-theme='light'] .dashboard-chart-card,
+:root:not([data-theme='dark']) .dashboard-chart-card,
+:root[data-theme='light'] .dashboard-bay-item,
+:root:not([data-theme='dark']) .dashboard-bay-item,
+:root[data-theme='light'] .dashboard-activity-list article,
+:root:not([data-theme='dark']) .dashboard-activity-list article {
+  color: var(--text) !important;
+  border-color: #eadfd2 !important;
+  background: #fffdf8 !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-panel strong,
+:root:not([data-theme='dark']) .dashboard-hero-panel strong,
+:root[data-theme='light'] .dashboard-stat-card strong,
+:root:not([data-theme='dark']) .dashboard-stat-card strong,
+:root[data-theme='light'] .dashboard-chart-heading h3,
+:root:not([data-theme='dark']) .dashboard-chart-heading h3,
+:root[data-theme='light'] .dashboard-bay-item strong,
+:root:not([data-theme='dark']) .dashboard-bay-item strong {
+  color: var(--text) !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-panel span,
+:root:not([data-theme='dark']) .dashboard-hero-panel span,
+:root[data-theme='light'] .dashboard-stat-card span,
+:root:not([data-theme='dark']) .dashboard-stat-card span,
+:root[data-theme='light'] .dashboard-stat-card small,
+:root:not([data-theme='dark']) .dashboard-stat-card small,
+:root[data-theme='light'] .dashboard-chart-heading p,
+:root:not([data-theme='dark']) .dashboard-chart-heading p {
+  color: var(--muted) !important;
+  background: #fff3e4 !important;
+  border-color: #eadfd2 !important;
+}
+
+:root[data-theme='light'] .dashboard-hero-badges button,
+:root:not([data-theme='dark']) .dashboard-hero-badges button,
+:root[data-theme='light'] .dashboard-hero-badges span,
+:root:not([data-theme='dark']) .dashboard-hero-badges span,
+:root[data-theme='light'] .dashboard-hero-panel small,
+:root:not([data-theme='dark']) .dashboard-hero-panel small {
+  color: var(--primary) !important;
+  border-color: rgba(234, 88, 12, 0.32) !important;
+  background: #ffedd5 !important;
+}
+
+:root[data-theme='light'] .stat-icon.blue,
+:root:not([data-theme='dark']) .stat-icon.blue,
+:root[data-theme='light'] .dashboard-stat-card .stat-icon.blue,
+:root:not([data-theme='dark']) .dashboard-stat-card .stat-icon.blue {
+  color: var(--primary) !important;
+  border-color: rgba(234, 88, 12, 0.24) !important;
+  background: #ffedd5 !important;
+}
+
+:root[data-theme='light'] .dashboard-stat-card::after,
+:root:not([data-theme='dark']) .dashboard-stat-card::after {
+  background: rgba(245, 158, 11, 0.12) !important;
+}
+
+:root[data-theme='light'] .service-catalog-page::before,
+:root:not([data-theme='dark']) .service-catalog-page::before,
+:root[data-theme='light'] .booking-management-page::before,
+:root:not([data-theme='dark']) .booking-management-page::before,
+:root[data-theme='light'] .profile-page::before,
+:root:not([data-theme='dark']) .profile-page::before {
+  background: #fff7ed !important;
+}
+
+:root[data-theme='light'] .services-hero-heading,
+:root:not([data-theme='dark']) .services-hero-heading,
+:root[data-theme='light'] .profile-page-heading,
+:root:not([data-theme='dark']) .profile-page-heading,
+:root[data-theme='light'] .row-heading,
+:root:not([data-theme='dark']) .row-heading {
+  background: #fff7ed !important;
+}
