@@ -2365,3 +2365,182 @@ html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card span {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Sidebar menu pages should use the Operations Dashboard frame language. */
+.figma-dashboard .service-catalog-page,
+.figma-dashboard .booking-management-page,
+.figma-dashboard .profile-page {
+  display: grid !important;
+  gap: 20px !important;
+  padding: clamp(22px, 3vw, 34px) !important;
+  border-radius: var(--motocare-frame-radius, 16px) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page,
+html[data-theme='dark'] body .figma-dashboard .profile-page {
+  border: 1px solid rgba(249, 115, 22, 0.18) !important;
+  background: #050707 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page,
+html[data-theme='light'] body .figma-dashboard .booking-management-page,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page,
+html[data-theme='light'] body .figma-dashboard .profile-page,
+html:not([data-theme='dark']) body .figma-dashboard .profile-page {
+  border: 1px solid var(--motocare-frame-border-light, #eadfd2) !important;
+  background: #f7f3ed !important;
+}
+
+.figma-dashboard .service-catalog-page > .section-heading,
+.figma-dashboard .booking-management-page > .section-heading,
+.figma-dashboard .profile-page > .section-heading {
+  min-height: 228px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: clamp(18px, 4vw, 42px) !important;
+  padding: clamp(26px, 4vw, 42px) !important;
+  border-radius: var(--motocare-frame-radius, 16px) !important;
+  overflow: hidden !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page > .section-heading,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading,
+html[data-theme='dark'] body .figma-dashboard .profile-page > .section-heading {
+  color: #f8fafc !important;
+  border: 1px solid var(--motocare-frame-border-dark, rgba(249, 115, 22, 0.26)) !important;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(249, 115, 22, 0.22), transparent 30%),
+    radial-gradient(circle at 18% 82%, rgba(37, 99, 235, 0.18), transparent 30%),
+    linear-gradient(135deg, #111827 0%, #0f172a 58%, #17110c 100%) !important;
+  box-shadow: var(--motocare-frame-shadow-dark, 0 18px 48px rgba(0, 0, 0, 0.32)) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page > .section-heading,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page > .section-heading,
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading,
+html[data-theme='light'] body .figma-dashboard .profile-page > .section-heading,
+html:not([data-theme='dark']) body .figma-dashboard .profile-page > .section-heading {
+  color: #1c1917 !important;
+  border: 1px solid var(--motocare-frame-border-light, #eadfd2) !important;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(245, 158, 11, 0.18), transparent 32%),
+    linear-gradient(135deg, #fffdf8 0%, #fff7ed 58%, #ffedd5 100%) !important;
+  box-shadow: var(--motocare-frame-shadow-light, 0 18px 45px rgba(42, 32, 28, 0.08)) !important;
+}
+
+.figma-dashboard .service-catalog-page > .section-heading h3,
+.figma-dashboard .booking-management-page > .section-heading h3,
+.figma-dashboard .profile-page > .section-heading h3 {
+  max-width: 760px !important;
+  margin: 0 !important;
+  font-size: clamp(42px, 6vw, 76px) !important;
+  font-weight: 900 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.figma-dashboard .service-catalog-page > .section-heading p:not(.eyebrow),
+.figma-dashboard .booking-management-page > .section-heading p:not(.eyebrow),
+.figma-dashboard .profile-page > .section-heading p:not(.eyebrow) {
+  max-width: 620px !important;
+  margin-top: 22px !important;
+  font-size: clamp(16px, 1.5vw, 20px) !important;
+  line-height: 1.65 !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page > .section-heading h3,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading h3,
+html[data-theme='dark'] body .figma-dashboard .profile-page > .section-heading h3 {
+  color: #f8fafc !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page > .section-heading p:not(.eyebrow),
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading p:not(.eyebrow),
+html[data-theme='dark'] body .figma-dashboard .profile-page > .section-heading p:not(.eyebrow) {
+  color: #cbd5e1 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page > .section-heading h3,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page > .section-heading h3,
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading h3,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading h3,
+html[data-theme='light'] body .figma-dashboard .profile-page > .section-heading h3,
+html:not([data-theme='dark']) body .figma-dashboard .profile-page > .section-heading h3 {
+  color: #1c1917 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page > .section-heading p:not(.eyebrow),
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page > .section-heading p:not(.eyebrow),
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading p:not(.eyebrow),
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading p:not(.eyebrow),
+html[data-theme='light'] body .figma-dashboard .profile-page > .section-heading p:not(.eyebrow),
+html:not([data-theme='dark']) body .figma-dashboard .profile-page > .section-heading p:not(.eyebrow) {
+  color: #6b625b !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .services-controls,
+html[data-theme='dark'] body .figma-dashboard .services-filter-panel,
+html[data-theme='dark'] body .figma-dashboard .services-export-panel,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-card,
+html[data-theme='dark'] body .figma-dashboard .profile-hero,
+html[data-theme='dark'] body .figma-dashboard .profile-section,
+html[data-theme='dark'] body .figma-dashboard .profile-list div,
+html[data-theme='dark'] body .figma-dashboard .profile-password-form input,
+html[data-theme='dark'] body .figma-dashboard .profile-password-form textarea,
+html[data-theme='dark'] body .figma-dashboard .profile-password-form select {
+  border-color: var(--motocare-frame-border-dark, rgba(249, 115, 22, 0.26)) !important;
+  border-radius: var(--motocare-frame-radius, 16px) !important;
+  color: #f8fafc !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.055), transparent 48%),
+    var(--motocare-frame-dark, #111827) !important;
+  box-shadow: var(--motocare-frame-shadow-dark, 0 18px 48px rgba(0, 0, 0, 0.32)) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .services-controls,
+html:not([data-theme='dark']) body .figma-dashboard .services-controls,
+html[data-theme='light'] body .figma-dashboard .services-filter-panel,
+html:not([data-theme='dark']) body .figma-dashboard .services-filter-panel,
+html[data-theme='light'] body .figma-dashboard .services-export-panel,
+html:not([data-theme='dark']) body .figma-dashboard .services-export-panel,
+html[data-theme='light'] body .figma-dashboard .service-catalog-card,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-card,
+html[data-theme='light'] body .figma-dashboard .profile-hero,
+html:not([data-theme='dark']) body .figma-dashboard .profile-hero,
+html[data-theme='light'] body .figma-dashboard .profile-section,
+html:not([data-theme='dark']) body .figma-dashboard .profile-section,
+html[data-theme='light'] body .figma-dashboard .profile-list div,
+html:not([data-theme='dark']) body .figma-dashboard .profile-list div {
+  border-color: var(--motocare-frame-border-light, #eadfd2) !important;
+  border-radius: var(--motocare-frame-radius, 16px) !important;
+  color: #1c1917 !important;
+  background: var(--motocare-frame-light, #fffdf8) !important;
+  box-shadow: var(--motocare-frame-shadow-light, 0 18px 45px rgba(42, 32, 28, 0.08)) !important;
+}
+
+.figma-dashboard .service-catalog-card,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section,
+.figma-dashboard .booking-metric-card,
+.figma-dashboard .dashboard-stat-card {
+  min-height: 148px !important;
+}
+
+.figma-dashboard .profile-list div {
+  min-height: 56px !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .service-catalog-page > .section-heading,
+  .figma-dashboard .booking-management-page > .section-heading,
+  .figma-dashboard .profile-page > .section-heading {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+}
