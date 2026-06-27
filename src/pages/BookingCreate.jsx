@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, CheckSquare, Info, User, Wrench } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { createBooking } from '../services/bookings'
 import { getServices } from '../services/services'
@@ -78,32 +78,34 @@ function BookingCreate() {
   const estimatedTax = Math.round(servicePrice * 0.11)
   const estimatedTotal = servicePrice + addOnTotal + estimatedTax
 
+  const updateValue = useCallback((key, value) => {
+    setValues((current) => ({ ...current, [key]: value }))
+    setErrors((current) => ({ ...current, [key]: '' }))
+  }, [])
+
   useEffect(() => {
     const loadServices = async () => {
       try {
         const payload = await getServices({ page: 1, limit: 100, status: 'active', sort_by: 'name', sort_order: 'asc' })
-        setServices(payload.data)
+        const loadedServices = payload.data
+        setServices(loadedServices)
+
+        if (preselectedServiceId) {
+          const match = loadedServices.find((service) => String(service.id) === preselectedServiceId)
+          if (match) {
+            setValues((current) => (
+              current.service_id ? current : { ...current, service_id: String(match.id) }
+            ))
+          }
+        }
       } catch (error) {
         setFeedback({ type: 'error', message: error.message || 'Gagal mengambil daftar layanan' })
       }
     }
 
     loadServices()
-  }, [])
+  }, [preselectedServiceId])
 
-  useEffect(() => {
-    if (preselectedServiceId && services.length > 0 && !values.service_id) {
-      const match = services.find((s) => String(s.id) === preselectedServiceId)
-      if (match) {
-        updateValue('service_id', String(match.id))
-      }
-    }
-  }, [services, preselectedServiceId])
-
-  const updateValue = (key, value) => {
-    setValues((current) => ({ ...current, [key]: value }))
-    setErrors((current) => ({ ...current, [key]: '' }))
-  }
 
   const toggleAddOn = (addOnId) => {
     setSelectedAddOns((current) => (
