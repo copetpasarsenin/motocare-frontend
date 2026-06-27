@@ -326,3 +326,215 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Theme polish: admin and user surfaces use the same readable palette. */
+.dashboard-layout,
+.content-shell,
+.card,
+.booking-management-page,
+.booking-create-page,
+.service-catalog-page,
+.profile-page {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.card,
+.hero-card,
+.booking-panel,
+.booking-confirm-panel,
+.booking-info-card,
+.profile-section,
+.profile-hero,
+.service-catalog-card,
+.services-filter-panel,
+.services-export-panel,
+.table-summary,
+.pagination,
+.booking-detail-dialog {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--surface);
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+}
+
+:root[data-theme='dark'] .card,
+:root[data-theme='dark'] .hero-card,
+:root[data-theme='dark'] .booking-panel,
+:root[data-theme='dark'] .booking-confirm-panel,
+:root[data-theme='dark'] .booking-info-card,
+:root[data-theme='dark'] .profile-section,
+:root[data-theme='dark'] .profile-hero,
+:root[data-theme='dark'] .service-catalog-card,
+:root[data-theme='dark'] .services-filter-panel,
+:root[data-theme='dark'] .services-export-panel,
+:root[data-theme='dark'] .table-summary,
+:root[data-theme='dark'] .pagination,
+:root[data-theme='dark'] .booking-detail-dialog {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.topbar,
+.sidebar,
+.sidebar-footer,
+.sidebar-user {
+  border-color: var(--line);
+}
+
+.sidebar {
+  color: #e5eefc;
+  background: linear-gradient(180deg, var(--sidebar), var(--sidebar-soft));
+}
+
+.sidebar-nav a,
+.sidebar-footer a,
+.sidebar-footer button {
+  color: #cbd5e1;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active,
+.sidebar-footer a:hover,
+.sidebar-footer a.active,
+.sidebar-footer button:hover {
+  color: #ffffff;
+  background: rgba(96, 165, 250, 0.14);
+}
+
+.topbar,
+.data-table th,
+.table-summary,
+.pagination-current,
+.booking-detail-grid div,
+.booking-detail-status-row {
+  color: var(--text);
+  background: var(--surface-soft);
+}
+
+.data-table,
+.data-table td,
+.data-table th {
+  border-color: var(--line);
+}
+
+.data-table tbody tr,
+.booking-service-option,
+.booking-date-grid button,
+.booking-time-grid button {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.data-table tbody tr:hover,
+.booking-service-option:hover,
+.booking-date-grid button:hover,
+.booking-time-grid button:hover {
+  background: var(--surface-soft);
+}
+
+.booking-service-option.selected,
+.booking-date-grid button.selected,
+.booking-time-grid button.selected {
+  color: var(--primary-dark);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+:root[data-theme='dark'] .booking-service-option.selected,
+:root[data-theme='dark'] .booking-date-grid button.selected,
+:root[data-theme='dark'] .booking-time-grid button.selected {
+  color: #dbeafe;
+}
+
+input,
+select,
+textarea,
+.input-shell,
+.search-field,
+.inline-select {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--surface-raised, var(--surface));
+}
+
+input::placeholder,
+textarea::placeholder,
+.search-field svg,
+.section-heading p,
+.booking-page-heading p,
+.booking-panel-heading p,
+.profile-list dt,
+.booking-detail-grid dt,
+.booking-time-note,
+.booking-payload-note {
+  color: var(--muted);
+}
+
+.primary-button,
+.accent-button,
+.booking-confirm-button {
+  color: #ffffff;
+  border-color: var(--primary-dark);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+.ghost-button,
+.icon-button,
+.action-button {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.ghost-button:hover,
+.icon-button:hover,
+.action-button:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.feedback.success,
+.form-alert.success {
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 35%, transparent);
+  background: var(--success-soft);
+}
+
+.feedback.error,
+.form-alert.error {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 35%, transparent);
+  background: var(--danger-soft);
+}
+
+.status-badge.pending,
+.status-badge.in_progress {
+  color: var(--warning);
+  background: var(--warning-soft);
+}
+
+.status-badge.confirmed {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.status-badge.completed {
+  color: var(--success);
+  background: var(--success-soft);
+}
+
+.status-badge.cancelled,
+.status-badge.rejected {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.service-card-meta,
+.public-service-meta,
+.profile-role-badge,
+.booking-id {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
