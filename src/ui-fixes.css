@@ -538,3 +538,354 @@ textarea::placeholder,
   color: var(--accent);
   background: var(--accent-soft);
 }
+
+/* Warm automotive UI refresh for booking, service, and profile pages only. */
+.booking-create-page,
+.booking-management-page,
+.service-catalog-page,
+.profile-page {
+  --auto-radius: 16px;
+  --auto-radius-sm: 12px;
+  --auto-transition: 180ms ease-out;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 8% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 28%),
+    var(--bg);
+}
+
+.booking-create-page *,
+.booking-management-page *,
+.service-catalog-page *,
+.profile-page * {
+  transition:
+    background-color var(--auto-transition),
+    border-color var(--auto-transition),
+    color var(--auto-transition),
+    box-shadow var(--auto-transition),
+    transform var(--auto-transition),
+    opacity var(--auto-transition);
+}
+
+.booking-create-page .booking-page-heading,
+.booking-management-page .section-heading,
+.service-catalog-page .section-heading,
+.profile-page .section-heading {
+  animation: motocareFadeUp 240ms ease-out both;
+}
+
+.booking-panel,
+.booking-confirm-panel,
+.booking-info-card,
+.bookings-card,
+.services-card,
+.service-catalog-card,
+.profile-hero,
+.profile-section,
+.booking-detail-dialog,
+.services-filter-panel,
+.services-export-panel,
+.table-summary,
+.pagination {
+  border: 1px solid var(--line) !important;
+  border-radius: var(--auto-radius) !important;
+  color: var(--text) !important;
+  background: color-mix(in srgb, var(--surface) 96%, var(--accent) 4%) !important;
+  box-shadow: var(--shadow-soft) !important;
+  animation: motocareFadeUp 260ms ease-out both;
+}
+
+:root[data-theme='dark'] .booking-panel,
+:root[data-theme='dark'] .booking-confirm-panel,
+:root[data-theme='dark'] .booking-info-card,
+:root[data-theme='dark'] .bookings-card,
+:root[data-theme='dark'] .services-card,
+:root[data-theme='dark'] .service-catalog-card,
+:root[data-theme='dark'] .profile-hero,
+:root[data-theme='dark'] .profile-section,
+:root[data-theme='dark'] .booking-detail-dialog,
+:root[data-theme='dark'] .services-filter-panel,
+:root[data-theme='dark'] .services-export-panel,
+:root[data-theme='dark'] .table-summary,
+:root[data-theme='dark'] .pagination {
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent) 8%) !important;
+}
+
+.service-catalog-card:hover,
+.booking-panel:hover,
+.booking-confirm-panel:hover,
+.profile-section:hover,
+.data-table tbody tr:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover) !important;
+}
+
+.booking-panel-heading h4,
+.booking-confirm-panel h4,
+.profile-section-header h3,
+.service-catalog-card h3,
+.section-heading h3,
+.booking-page-heading h3,
+.profile-hero-info h2 {
+  color: var(--text) !important;
+  letter-spacing: -0.02em;
+}
+
+.booking-panel-heading p,
+.booking-page-heading p,
+.section-heading p,
+.service-catalog-card p,
+.profile-hero-info p,
+.profile-list dt,
+.booking-detail-grid dt,
+.booking-time-note,
+.booking-payload-note,
+.booking-edit-grid small {
+  color: var(--muted) !important;
+}
+
+.booking-info-card,
+.booking-detail-status-row,
+.booking-summary .total,
+.profile-role-badge,
+.service-card-meta,
+.booking-id {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line)) !important;
+  background: var(--accent-soft) !important;
+}
+
+.booking-info-card svg,
+.booking-info-card strong,
+.booking-summary .total strong,
+.booking-detail-header span,
+.service-card-meta,
+.profile-role-badge,
+.booking-id,
+.eyebrow,
+.admin-page-eyebrow,
+.topbar-kicker {
+  color: var(--accent) !important;
+}
+
+.booking-summary,
+.booking-detail-grid div,
+.booking-detail-status-row,
+.data-table th,
+.table-summary,
+.pagination-current {
+  border-color: var(--line) !important;
+  background: var(--surface-soft) !important;
+}
+
+.data-table,
+.data-table td,
+.data-table th {
+  border-color: var(--line) !important;
+}
+
+.data-table tbody tr,
+.booking-service-option,
+.booking-date-grid button,
+.booking-time-grid button,
+.service-card-footer,
+.profile-list div {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+  background: var(--surface) !important;
+}
+
+.booking-service-option:hover,
+.booking-date-grid button:hover,
+.booking-time-grid button:hover,
+.service-catalog-card:hover {
+  border-color: color-mix(in srgb, var(--primary) 54%, var(--line)) !important;
+  background: color-mix(in srgb, var(--surface) 88%, var(--primary) 12%) !important;
+}
+
+.booking-service-option.selected,
+.booking-date-grid button.selected,
+.booking-time-grid button.selected {
+  color: var(--primary-dark) !important;
+  border-color: var(--primary) !important;
+  background: var(--primary-soft) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 16%, transparent) !important;
+}
+
+:root[data-theme='dark'] .booking-service-option.selected,
+:root[data-theme='dark'] .booking-date-grid button.selected,
+:root[data-theme='dark'] .booking-time-grid button.selected {
+  color: #fed7aa !important;
+}
+
+input,
+select,
+textarea,
+.input-shell,
+.search-field,
+.inline-select,
+.booking-date-input,
+.profile-password-form input,
+.booking-edit-grid input,
+.booking-edit-grid select,
+.booking-edit-grid textarea {
+  color: var(--text) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--auto-radius-sm) !important;
+  background: var(--surface-raised) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 36%, transparent);
+}
+
+input:hover,
+select:hover,
+textarea:hover,
+.input-shell:hover,
+.search-field:hover {
+  border-color: color-mix(in srgb, var(--primary) 52%, var(--line)) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.input-shell:focus-within,
+.search-field:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 18%, transparent) !important;
+}
+
+.primary-button,
+.accent-button,
+.booking-confirm-button,
+.form-submit,
+.auth-submit {
+  color: #fff7ed !important;
+  border-color: var(--primary-dark) !important;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--primary) 28%, transparent) !important;
+}
+
+.ghost-button,
+.icon-button,
+.action-button,
+.public-service-cta {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+  background: var(--surface) !important;
+}
+
+.primary-button:hover,
+.accent-button:hover,
+.booking-confirm-button:hover,
+.form-submit:hover,
+.auth-submit:hover,
+.ghost-button:hover,
+.icon-button:hover,
+.action-button:hover,
+.public-service-cta:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.ghost-button:hover,
+.icon-button:hover,
+.action-button:hover,
+.public-service-cta:hover {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  background: var(--primary-soft) !important;
+}
+
+.table-actions .action-button.danger,
+.action-button.danger {
+  color: var(--danger) !important;
+  border-color: color-mix(in srgb, var(--danger) 38%, var(--line)) !important;
+  background: var(--danger-soft) !important;
+}
+
+.status-badge {
+  border: 1px solid currentColor;
+  border-radius: 999px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.02em;
+}
+
+.status-badge.pending,
+.status-badge.in_progress {
+  color: var(--warning) !important;
+  background: var(--warning-soft) !important;
+}
+
+.status-badge.confirmed {
+  color: var(--primary) !important;
+  background: var(--primary-soft) !important;
+}
+
+.status-badge.completed {
+  color: var(--success) !important;
+  background: var(--success-soft) !important;
+}
+
+.status-badge.cancelled,
+.status-badge.rejected {
+  color: var(--danger) !important;
+  background: var(--danger-soft) !important;
+}
+
+.feedback,
+.form-alert,
+.public-service-state {
+  animation: motocareFadeUp 220ms ease-out both;
+}
+
+.feedback.success,
+.form-alert.success {
+  color: var(--success) !important;
+  border-color: color-mix(in srgb, var(--success) 42%, var(--line)) !important;
+  background: var(--success-soft) !important;
+}
+
+.feedback.error,
+.form-alert.error,
+.public-service-state.error {
+  color: var(--danger) !important;
+  border-color: color-mix(in srgb, var(--danger) 42%, var(--line)) !important;
+  background: var(--danger-soft) !important;
+}
+
+.service-icon-box,
+.profile-avatar {
+  color: #fff7ed !important;
+  background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--primary) 24%, transparent) !important;
+}
+
+.profile-password-form,
+.booking-edit-grid,
+.booking-form-grid {
+  gap: 16px !important;
+}
+
+.profile-password-form label,
+.booking-edit-grid label,
+.figma-field,
+.services-toolbar label {
+  color: var(--text) !important;
+}
+
+@keyframes motocareFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-create-page *,
+  .booking-management-page *,
+  .service-catalog-page *,
+  .profile-page * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
