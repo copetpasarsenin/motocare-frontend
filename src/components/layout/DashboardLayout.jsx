@@ -3,6 +3,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from 'react-router'
 import {
   CalendarDays,
   ChevronRight,
+  Home,
   Gauge,
   LogOut,
   Menu,
@@ -71,6 +72,10 @@ function Sidebar({ open, onClose, onLogout, user }) {
       </nav>
 
       <div className="sidebar-footer">
+        <NavLink to="/home" onClick={onClose}>
+          <Home size={18} />
+          <span>Home</span>
+        </NavLink>
         <button type="button" onClick={onLogout}>
           <LogOut size={18} />
           <span>Logout</span>

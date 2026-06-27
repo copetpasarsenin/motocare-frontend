@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, CheckSquare, Square, Info, User, Wrench } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Info, User, Wrench } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { createBooking } from '../services/bookings'
@@ -28,10 +28,6 @@ function FieldError({ message }) {
 
 const timeOptions = ['09:00 WIB', '10:30 WIB', '13:00 WIB', '14:30 WIB', '16:00 WIB']
 
-const addOns = [
-  { id: 'wash', name: 'Cuci Salju', price: 50000 },
-  { id: 'nitrogen', name: 'Isi Nitrogen', price: 20000 },
-]
 
 function toDateInputValue(date) {
   const year = date.getFullYear()
@@ -62,7 +58,6 @@ function BookingCreate() {
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const [loading, setLoading] = useState(false)
   const [selectedTime, setSelectedTime] = useState(timeOptions[1])
-  const [selectedAddOns, setSelectedAddOns] = useState([])
   const navigate = useNavigate()
   const isAdmin = getUserRole() === 'admin'
 
@@ -78,13 +73,9 @@ function BookingCreate() {
     () => services.find((service) => String(service.id) === String(values.service_id)),
     [services, values.service_id],
   )
-  const addOnTotal = selectedAddOns.reduce((total, addOnId) => {
-    const addOn = addOns.find((item) => item.id === addOnId)
-    return total + (addOn?.price || 0)
-  }, 0)
   const servicePrice = Number(selectedService?.price || 0)
   const estimatedTax = Math.round(servicePrice * 0.11)
-  const estimatedTotal = servicePrice + addOnTotal + estimatedTax
+  const estimatedTotal = servicePrice + estimatedTax
 
   const updateValue = useCallback((key, value) => {
     setValues((current) => ({ ...current, [key]: value }))
@@ -95,7 +86,7 @@ function BookingCreate() {
     const loadServices = async () => {
       try {
         const payload = await getServices({ page: 1, limit: 100, status: 'active', sort_by: 'name', sort_order: 'asc' })
-        const loadedServices = payload.data
+        const loadedServices = Array.from(new Map(payload.data.map((service) => [String(service.id || service.name).toLowerCase(), service])).values())
         setServices(loadedServices)
 
         if (preselectedServiceId) {
@@ -114,14 +105,6 @@ function BookingCreate() {
     loadServices()
   }, [preselectedServiceId])
 
-
-  const toggleAddOn = (addOnId) => {
-    setSelectedAddOns((current) => (
-      current.includes(addOnId)
-        ? current.filter((item) => item !== addOnId)
-        : [...current, addOnId]
-    ))
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -272,23 +255,8 @@ function BookingCreate() {
             </div>
           </div>
 
-          <div className="booking-confirm-group">
-            <span>Layanan Tambahan</span>
-            <div className="booking-addon-list">
-              {addOns.map((addOn) => (
-                <label key={addOn.id}>
-                  <input type="checkbox" checked={selectedAddOns.includes(addOn.id)} onChange={() => toggleAddOn(addOn.id)} />
-                  {selectedAddOns.includes(addOn.id) ? <CheckSquare size={18} /> : <Square size={18} />}
-                  <strong>{addOn.name}</strong>
-                  <em>+{formatCurrency(addOn.price)}</em>
-                </label>
-              ))}
-            </div>
-          </div>
-
           <div className="booking-summary">
             <div><span>{selectedService?.name || 'Pilih layanan'}</span><strong>{formatCurrency(servicePrice)}</strong></div>
-            <div><span>Layanan tambahan</span><strong>{formatCurrency(addOnTotal)}</strong></div>
             <div><span>Pajak & biaya (11%)</span><strong>{formatCurrency(estimatedTax)}</strong></div>
             <div className="total"><span>Total</span><strong>{formatCurrency(estimatedTotal)}</strong></div>
           </div>
@@ -297,7 +265,7 @@ function BookingCreate() {
             {loading ? 'Menyimpan...' : 'Konfirmasi Pemesanan'}
             {!loading && <ArrowRight size={18} />}
           </button>
-          <small className="booking-payload-note">Waktu dan tambahan ditampilkan sebagai preferensi UI; payload backend tetap mengikuti format booking saat ini.</small>
+          <small className="booking-payload-note">Waktu ditampilkan sebagai preferensi UI; payload backend tetap mengikuti format booking saat ini.</small>
         </aside>
       </form>
     </section>
