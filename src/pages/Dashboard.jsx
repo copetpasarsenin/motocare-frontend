@@ -44,6 +44,19 @@ function ChartLoading({ label }) {
   )
 }
 
+function PiePercentLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent }) {
+  const RADIAN = Math.PI / 180
+  const radius = innerRadius + (outerRadius - innerRadius) * 1.45
+  const posX = cx + radius * Math.cos(-midAngle * RADIAN)
+  const posY = cy + radius * Math.sin(-midAngle * RADIAN)
+  if (percent < 0.03) return null
+  return (
+    <text x={posX} y={posY} fill="var(--dashboard-text, #f8fafc)" fontSize={12} fontWeight={700} textAnchor={posX > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${(percent * 100).toFixed(1)}%`}
+    </text>
+  )
+}
+
 function Dashboard() {
   const [stats, setStats] = useState(emptyStats)
   const [loading, setLoading] = useState(true)
@@ -151,27 +164,36 @@ function Dashboard() {
         {loading ? (
           <ChartLoading label="Memuat chart status booking..." />
         ) : stats.bookings_by_status.length > 0 ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={340}>
             <PieChart>
               <Pie
                 data={stats.bookings_by_status}
                 dataKey="total"
                 nameKey="status"
-                innerRadius={64}
-                outerRadius={104}
+                innerRadius={60}
+                outerRadius={100}
                 paddingAngle={3}
+                label={PiePercentLabel}
+                labelLine={false}
               >
                 {stats.bookings_by_status.map((entry) => (
                   <Cell key={entry.status} fill={statusColors[entry.status] || '#64748b'} />
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value) => [value, 'Bookings']}
+                formatter={(value, name, props) => {
+                  const pct = (props.percent * 100).toFixed(1)
+                  return [`${value} (${pct}%)`, 'Bookings']
+                }}
                 contentStyle={tooltipStyle}
                 itemStyle={{ color: 'var(--dashboard-text)' }}
                 labelStyle={{ color: 'var(--dashboard-muted)' }}
               />
-              <Legend formatter={(value) => value.replaceAll('_', ' ')} />
+              <Legend
+                formatter={(value) => value.replaceAll('_', ' ')}
+                iconType="circle"
+                wrapperStyle={{ paddingTop: 12 }}
+              />
             </PieChart>
           </ResponsiveContainer>
         ) : (
@@ -209,7 +231,7 @@ function Dashboard() {
                 itemStyle={{ color: 'var(--dashboard-text)' }}
                 labelStyle={{ color: 'var(--dashboard-muted)' }}
               />
-              <Bar dataKey="total_bookings" name="Bookings" radius={[2, 2, 0, 0]} fill="#ff7000" />
+              <Bar dataKey="total_bookings" name="Bookings" radius={[6, 6, 0, 0]} fill="#ff7000" barSize={36} />
             </BarChart>
           </ResponsiveContainer>
         ) : (

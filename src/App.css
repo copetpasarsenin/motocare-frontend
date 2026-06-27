@@ -4579,7 +4579,7 @@ textarea {
 
 
 /* ---------------------------------------------------------------------------
-   Stage 3  MotoCare Figma: Admin Dashboard dark / orange automotive style
+   Stage 3 Â– MotoCare Figma: Admin Dashboard dark / orange automotive style
    Scoped under .figma-dashboard so existing public pages are unaffected.
    --------------------------------------------------------------------------- */
 
@@ -5664,7 +5664,7 @@ textarea {
 
 
 /* =========================================================================
-   Stage 4B — Delete Confirmation, Empty States, Loading States
+   Stage 4B â€” Delete Confirmation, Empty States, Loading States
    ========================================================================= */
 
 /* -- Enhanced Empty State ------------------------------------------------- */
@@ -7238,7 +7238,7 @@ textarea {
 }
 
 /* =========================================================================
-   Auth Pages — Figma Reference Restore
+   Auth Pages â€” Figma Reference Restore
    Scope: Login/Register only
    ========================================================================= */
 .figma-auth-page.auth-page {
@@ -8930,7 +8930,7 @@ textarea {
 
 
 /* =========================================================================
-   Profile Page – Admin Design System Polish
+   Profile Page â€“ Admin Design System Polish
    ========================================================================= */
 
 /* -- Page heading (matches Services / Bookings heading pattern) ----------- */
@@ -9623,3 +9623,629 @@ textarea {
     font-size: clamp(34px, 12vw, 52px);
   }
 }
+
+/* =========================================================================
+   FINAL POLISH OVERRIDES — consolidated cascade fixes
+   Added to resolve duplicated rule conflicts and visual polish
+   ========================================================================= */
+
+/* ---- 1. AUTH HERO TEXT OVERLAP FIX ----------------------------------------
+   Multiple competing .auth-hero-copy definitions caused ghost/doubled text.
+   These high-specificity overrides ensure a single clean rendering.
+   -------------------------------------------------------------------------- */
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-copy {
+  position: absolute;
+  inset: auto auto clamp(88px, 13vh, 170px) clamp(42px, 13vw, 256px);
+  z-index: 2;
+  width: min(520px, calc(100% - 72px));
+  max-width: 520px;
+  color: #f5f7f8;
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-copy .garage-tag {
+  display: inline-flex;
+  min-height: 22px;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 0;
+  color: #15100d;
+  background: #ff7000;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-copy h2 {
+  max-width: 440px;
+  margin: 28px 0 24px;
+  color: #f5f7f8;
+  font-size: clamp(54px, 5.4vw, 76px);
+  font-style: normal;
+  font-weight: 950;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  text-shadow: none;
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-copy p {
+  max-width: 430px;
+  margin: 0;
+  color: #ead8d0;
+  font-size: 18px;
+  line-height: 1.58;
+  text-shadow: none;
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-lines {
+  display: flex;
+  gap: 16px;
+  margin-top: clamp(48px, 8vh, 76px);
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-lines span {
+  width: 64px;
+  height: 4px;
+  background: rgba(255, 176, 142, 0.24);
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-lines span:first-child {
+  background: #ffb08e;
+}
+
+.figma-auth-page.auth-page .auth-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  height: auto;
+  background:
+    radial-gradient(circle at 32% 78%, rgba(255, 112, 0, 0.10), transparent 30%),
+    linear-gradient(90deg, transparent 76%, #0f1111 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 1180px) {
+  .figma-auth-page.auth-page .auth-hero .auth-hero-copy {
+    inset-inline-start: clamp(38px, 7vw, 88px);
+  }
+}
+
+@media (max-width: 900px) {
+  .figma-auth-page.auth-page .auth-hero .auth-hero-copy {
+    inset: auto 28px 44px;
+    width: min(520px, calc(100% - 56px));
+  }
+
+  .figma-auth-page.auth-page .auth-hero .auth-hero-copy h2 {
+    font-size: clamp(42px, 9vw, 64px);
+  }
+}
+
+@media (max-width: 560px) {
+  .figma-auth-page.auth-page .auth-hero .auth-hero-copy {
+    inset: auto 20px 34px;
+    width: calc(100% - 40px);
+  }
+
+  .figma-auth-page.auth-page .auth-hero .auth-hero-copy h2 {
+    max-width: 340px;
+    font-size: 42px;
+  }
+
+  .figma-auth-page.auth-page .auth-hero .auth-hero-copy p {
+    font-size: 15px;
+  }
+
+  .figma-auth-page.auth-page .auth-hero .auth-hero-lines {
+    margin-top: 34px;
+  }
+}
+
+/* ---- 2. SERVICES PAGE LAYOUT POLISH --------------------------------------
+   Cleaner filter bar, better card spacing, consistent grid
+   -------------------------------------------------------------------------- */
+
+.figma-dashboard .service-catalog-page .services-toolbar,
+.service-catalog-page .services-toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: end;
+}
+
+.figma-dashboard .service-catalog-page .services-toolbar .input-shell,
+.service-catalog-page .services-toolbar .input-shell,
+.figma-dashboard .service-catalog-page .services-toolbar select,
+.service-catalog-page .services-toolbar select {
+  min-height: 46px;
+  border-radius: 8px;
+}
+
+.figma-dashboard .service-catalog-page .service-card-grid,
+.service-catalog-page .service-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.figma-dashboard .service-catalog-card,
+.service-catalog-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.figma-dashboard .service-catalog-card .service-card-body,
+.service-catalog-card .service-card-body {
+  flex: 1;
+  padding: 16px 20px;
+}
+
+.figma-dashboard .service-catalog-card .service-card-body h4,
+.service-catalog-card .service-card-body h4 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.figma-dashboard .service-catalog-card .service-card-body p,
+.service-catalog-card .service-card-body p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.figma-dashboard .service-catalog-card .service-card-meta,
+.service-catalog-card .service-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 20px;
+}
+
+.figma-dashboard .service-catalog-card .service-card-meta span,
+.service-catalog-card .service-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.figma-dashboard .service-catalog-card .service-card-footer,
+.service-catalog-card .service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  gap: 12px;
+}
+
+.figma-dashboard .service-catalog-card .service-card-footer strong,
+.service-catalog-card .service-card-footer strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.figma-dashboard .service-catalog-card .service-card-actions,
+.service-catalog-card .service-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 20px 16px;
+}
+
+.figma-dashboard .service-catalog-card .service-card-actions .action-button,
+.service-catalog-card .service-card-actions .action-button {
+  min-height: 36px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.figma-dashboard .service-catalog-page .table-summary,
+.service-catalog-page .table-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.figma-dashboard .service-catalog-page .pagination,
+.service-catalog-page .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 16px 0;
+}
+
+@media (max-width: 1180px) {
+  .figma-dashboard .service-catalog-page .services-toolbar,
+  .service-catalog-page .services-toolbar,
+  .figma-dashboard .service-catalog-page .service-card-grid,
+  .service-catalog-page .service-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .service-catalog-page .services-toolbar,
+  .service-catalog-page .services-toolbar,
+  .figma-dashboard .service-catalog-page .service-card-grid,
+  .service-catalog-page .service-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-dashboard .service-catalog-card,
+  .service-catalog-card {
+    min-height: 0;
+  }
+}
+
+/* ---- 3. DASHBOARD STAT CARDS & CHART POLISH ------------------------------
+   More premium stat cards, consistent icon containers, better chart spacing
+   -------------------------------------------------------------------------- */
+
+.figma-dashboard .dashboard-stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 20px;
+  border-radius: 14px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.figma-dashboard .dashboard-stat-card .stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  transition: transform 0.22s ease;
+}
+
+.figma-dashboard .dashboard-stat-card .stat-icon.orange {
+  color: #ff7000;
+  background: rgba(255, 112, 0, 0.12);
+  border: 1px solid rgba(255, 112, 0, 0.18);
+}
+
+.figma-dashboard .dashboard-stat-card .stat-icon.blue {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.18);
+}
+
+.figma-dashboard .dashboard-stat-card div strong {
+  display: block;
+  font-size: 26px;
+  font-weight: 950;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.figma-dashboard .dashboard-stat-card div span {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.figma-dashboard .dashboard-stat-card div small {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  margin-top: 4px;
+  opacity: 0.65;
+}
+
+.figma-dashboard .dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.figma-dashboard .dashboard-chart-card {
+  padding: 28px;
+  border-radius: 14px;
+}
+
+.figma-dashboard .dashboard-chart-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.figma-dashboard .dashboard-chart-heading h3 {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.figma-dashboard .dashboard-chart-heading p {
+  font-size: 13.5px;
+  max-width: 340px;
+}
+
+.figma-dashboard .dashboard-ops-card,
+.figma-dashboard .dashboard-activity-card {
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.figma-dashboard .dashboard-bay-item {
+  border-radius: 10px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+}
+
+@media (max-width: 1180px) {
+  .figma-dashboard .dashboard-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .figma-dashboard .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 4. MICRO-ANIMATIONS -------------------------------------------------
+   Subtle CSS-only interactions: hover lifts, fades, transitions
+   -------------------------------------------------------------------------- */
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.figma-dashboard .dashboard-stat-card,
+.figma-dashboard .dashboard-chart-card,
+.figma-dashboard .dashboard-ops-card,
+.figma-dashboard .dashboard-activity-card {
+  animation: fadeSlideUp 0.4s ease both;
+}
+
+.figma-dashboard .dashboard-stat-card:nth-child(1) { animation-delay: 0.04s; }
+.figma-dashboard .dashboard-stat-card:nth-child(2) { animation-delay: 0.08s; }
+.figma-dashboard .dashboard-stat-card:nth-child(3) { animation-delay: 0.12s; }
+.figma-dashboard .dashboard-stat-card:nth-child(4) { animation-delay: 0.16s; }
+.figma-dashboard .dashboard-stat-card:nth-child(5) { animation-delay: 0.20s; }
+.figma-dashboard .dashboard-stat-card:nth-child(6) { animation-delay: 0.24s; }
+
+.figma-dashboard .dashboard-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.figma-dashboard .dashboard-stat-card:hover .stat-icon {
+  transform: scale(1.08);
+}
+
+.figma-dashboard .dashboard-bay-item:hover {
+  transform: translateY(-2px);
+}
+
+.figma-dashboard .service-catalog-card:hover,
+.service-catalog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
+}
+
+.figma-dashboard .service-card-actions .action-button:hover,
+.service-card-actions .action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.primary-button,
+.ghost-button,
+.danger-button {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.2);
+}
+
+.ghost-button:hover {
+  transform: translateY(-1px);
+}
+
+.danger-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.18);
+}
+
+.sidebar-nav a {
+  transition: background 0.18s ease, padding-left 0.18s ease, color 0.18s ease;
+}
+
+.sidebar-nav a:hover {
+  padding-left: 4px;
+}
+
+.sidebar-nav a svg {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav a:hover svg:first-child {
+  transform: scale(1.12);
+}
+
+.sidebar-nav a:hover .nav-chevron {
+  transform: translateX(3px);
+}
+
+.figma-auth-page.auth-page .auth-hero .auth-hero-copy {
+  animation: fadeSlideUp 0.6s ease both;
+  animation-delay: 0.15s;
+}
+
+.figma-auth-panel {
+  animation: fadeSlideUp 0.5s ease both;
+  animation-delay: 0.08s;
+}
+
+.auth-form label,
+.auth-line-field {
+  animation: fadeSlideUp 0.35s ease both;
+}
+
+.auth-form label:nth-child(1),
+.auth-line-field:nth-child(1) { animation-delay: 0.12s; }
+.auth-form label:nth-child(2),
+.auth-line-field:nth-child(2) { animation-delay: 0.18s; }
+.auth-form label:nth-child(3),
+.auth-line-field:nth-child(3) { animation-delay: 0.24s; }
+
+.auth-submit.primary-button {
+  animation: fadeSlideUp 0.35s ease both;
+  animation-delay: 0.3s;
+}
+
+.user-chip,
+.theme-toggle {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.06);
+}
+
+.figma-dashboard .dashboard-activity-card article,
+.figma-dashboard .dashboard-activity-list article {
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.figma-dashboard .dashboard-activity-card article:hover,
+.figma-dashboard .dashboard-activity-list article:hover {
+  transform: translateX(4px);
+}
+
+.status-badge {
+  transition: transform 0.18s ease;
+}
+
+.status-badge:hover {
+  transform: scale(1.06);
+}
+
+.pagination .ghost-button {
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.pagination .ghost-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.modal-backdrop {
+  animation: fadeIn 0.2s ease both;
+}
+
+.confirmation-dialog {
+  animation: fadeSlideUp 0.3s ease both;
+}
+
+.service-catalog-page .section-heading,
+.service-catalog-page .services-hero-heading {
+  animation: fadeSlideUp 0.4s ease both;
+}
+
+.service-catalog-page .services-toolbar {
+  animation: fadeSlideUp 0.4s ease both;
+  animation-delay: 0.06s;
+}
+
+.service-catalog-page .service-card-grid {
+  animation: fadeIn 0.4s ease both;
+  animation-delay: 0.1s;
+}
+
+/* ---- 5. GENERAL UI CONSISTENCY -------------------------------------------
+   Unified spacing hierarchy, consistent card/border treatments
+   -------------------------------------------------------------------------- */
+
+.figma-dashboard .page-content {
+  padding: clamp(22px, 3vw, 40px);
+}
+
+.figma-dashboard .hero-card.dashboard-hero-card {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.figma-dashboard .card {
+  border-radius: 14px;
+}
+
+.figma-dashboard .topbar {
+  border-bottom-width: 1px;
+}
+
+.figma-dashboard .topbar h1 {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.figma-dashboard .section-heading h3 {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.figma-dashboard .empty-state {
+  border-radius: 14px;
+  padding: 48px 24px;
+}
+
+.figma-dashboard .chart-placeholder {
+  border-radius: 12px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.skeleton-pulse {
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
