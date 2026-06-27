@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import StatusBadge from '../components/ui/StatusBadge'
 import { getServiceById } from '../services/services'
+import { getUserRole } from '../utils/auth'
 import { formatCurrency, getCategoryName } from '../utils/csv'
 
 function ServiceDetail() {
+  const isAdmin = getUserRole() === 'admin'
   const { id } = useParams()
   const [service, setService] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -32,7 +34,7 @@ function ServiceDetail() {
     <section className="figma-service-detail">
       <div className="service-detail-actions">
         <Link className="ghost-button home-outline-button" to="/services"><ArrowLeft size={16} />Back to Services</Link>
-        {service && <Link className="ghost-button home-outline-button" to={`/services/${service.id}/edit`}><Edit size={16} />Edit</Link>}
+        {isAdmin && service && <Link className="ghost-button home-outline-button" to={`/services/${service.id}/edit`}><Edit size={16} />Edit</Link>}
       </div>
 
       {loading && <div className="service-grid-loading"><Loader2 size={24} className="spin" /><span>Memuat detail layanan...</span></div>}

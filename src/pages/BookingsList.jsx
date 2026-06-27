@@ -84,7 +84,12 @@ function BookingsList() {
       setMeta(payload.meta)
     } catch (error) {
       setBookings([])
-      setFeedback({ type: 'error', message: error.message || 'Gagal mengambil data booking' })
+      setFeedback({
+        type: 'error',
+        message: !isAdmin && error.status === 403
+          ? 'Booking Anda belum dapat ditampilkan. Izin backend untuk riwayat booking user mungkin perlu disesuaikan.'
+          : error.message || 'Gagal mengambil data booking',
+      })
     } finally {
       setLoading(false)
     }
@@ -116,6 +121,8 @@ function BookingsList() {
   }
 
   const handleStatusChange = async (bookingId, status) => {
+    if (!isAdmin) return
+
     setUpdatingId(bookingId)
     setFeedback({ type: '', message: '' })
 

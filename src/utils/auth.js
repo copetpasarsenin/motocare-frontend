@@ -16,6 +16,14 @@ export function getStoredUser() {
   }
 }
 
+export function getCurrentUser() {
+  return getStoredUser()
+}
+
+export function getUserRole() {
+  return getStoredUser()?.role?.toLowerCase() || ''
+}
+
 export function saveSession(token, user) {
   localStorage.setItem(TOKEN_KEY, token)
   localStorage.setItem(USER_KEY, JSON.stringify(user))

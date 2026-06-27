@@ -12,11 +12,11 @@ import {
   Wrench,
   X,
 } from 'lucide-react'
-import { clearSession, getStoredUser } from '../../utils/auth'
+import { clearSession, getStoredUser, getUserRole } from '../../utils/auth'
 import { getStoredTheme, toggleTheme } from '../../utils/theme'
 
 const navItems = [
-  { to: '/', label: 'Dashboard', icon: Gauge },
+  { to: '/', label: 'Dashboard', icon: Gauge, roles: ['admin'] },
   { to: '/services', label: 'Services', icon: Wrench },
   { to: '/bookings', label: 'Bookings', icon: CalendarDays },
   { to: '/profile', label: 'Profile', icon: UserCircle },
@@ -32,6 +32,9 @@ const pageTitles = {
 }
 
 function Sidebar({ open, onClose, onLogout, user }) {
+  const role = getUserRole()
+  const visibleNavItems = navItems.filter((item) => !item.roles || item.roles.includes(role))
+
   return (
     <aside className={`sidebar ${open ? 'open' : ''}`}>
       <div className="sidebar-brand">
@@ -55,7 +58,7 @@ function Sidebar({ open, onClose, onLogout, user }) {
 
       <nav className="sidebar-nav" aria-label="Main navigation">
         <span className="sidebar-nav-label">Workspace</span>
-        {navItems.map((item) => {
+        {visibleNavItems.map((item) => {
           const Icon = item.icon
           return (
             <NavLink key={item.to} to={item.to} onClick={onClose} end={item.to === '/'}>

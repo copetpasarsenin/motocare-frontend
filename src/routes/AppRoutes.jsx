@@ -22,14 +22,17 @@ function AppRoutes() {
 
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
           <Route path="services" element={<ServicesList />} />
-          <Route path="services/create" element={<ServiceCreate />} />
           <Route path="services/:id" element={<ServiceDetail />} />
-          <Route path="services/:id/edit" element={<ServiceEdit />} />
           <Route path="bookings" element={<BookingsList />} />
           <Route path="bookings/create" element={<BookingCreate />} />
           <Route path="profile" element={<Profile />} />
+
+          <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+            <Route index element={<Dashboard />} />
+            <Route path="services/create" element={<ServiceCreate />} />
+            <Route path="services/:id/edit" element={<ServiceEdit />} />
+          </Route>
         </Route>
       </Route>
 

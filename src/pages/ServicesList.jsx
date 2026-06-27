@@ -20,6 +20,7 @@ import StatusBadge from '../components/ui/StatusBadge'
 import { deleteService, getCategories, getServices } from '../services/services'
 import { buildServicesCsv, downloadCsv, formatCurrency, getCategoryName } from '../utils/csv'
 import { downloadServicesExcel } from '../utils/excel'
+import { getUserRole } from '../utils/auth'
 
 const CSV_FILENAME = 'motocare_services.csv'
 const EXCEL_FILENAME = 'motocare_services.xlsx'
@@ -49,6 +50,7 @@ function SkeletonCard() {
 }
 
 function ServicesList() {
+  const isAdmin = getUserRole() === 'admin'
   const [services, setServices] = useState([])
   const [categories, setCategories] = useState([])
   const [meta, setMeta] = useState({ page: 1, limit: 10, total: 0, total_pages: 0 })
@@ -187,10 +189,12 @@ function ServicesList() {
           <Link className="ghost-button home-outline-button" to="/bookings/create">
             Booking Service
           </Link>
-          <Link className="primary-button" to="/services/create">
-            <PlusCircle size={17} />
-            Add Service
-          </Link>
+          {isAdmin && (
+            <Link className="primary-button" to="/services/create">
+              <PlusCircle size={17} />
+              Add Service
+            </Link>
+          )}
         </div>
       </div>
 
@@ -250,18 +254,20 @@ function ServicesList() {
             </select>
           </label>
         </div>
-        <div className="services-export-panel">
-          <div className="button-row">
-            <button className="ghost-button accent-button" type="button" onClick={handleExportCsv}>
-              <Download size={17} />
-              Export CSV
-            </button>
-            <button className="ghost-button accent-button" type="button" onClick={handleExportExcel}>
-              <FileSpreadsheet size={17} />
-              Export Excel
-            </button>
+        {isAdmin && (
+          <div className="services-export-panel">
+            <div className="button-row">
+              <button className="ghost-button accent-button" type="button" onClick={handleExportCsv}>
+                <Download size={17} />
+                Export CSV
+              </button>
+              <button className="ghost-button accent-button" type="button" onClick={handleExportExcel}>
+                <FileSpreadsheet size={17} />
+                Export Excel
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {feedback.message && <div className={`feedback ${feedback.type}`}>{feedback.message}</div>}
@@ -311,11 +317,15 @@ function ServicesList() {
               <div className="service-card-actions table-actions">
                 <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Lihat Detail</Link>
                 <Link className="action-button book" to={`/bookings/create?service_id=${service.id}`}>Booking</Link>
-                <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
-                <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
-                  <Trash2 size={14} />
-                  {deletingId === service.id ? 'Deleting...' : 'Delete'}
-                </button>
+                {isAdmin && (
+                  <>
+                    <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
+                    <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
+                      <Trash2 size={14} />
+                      {deletingId === service.id ? 'Deleting...' : 'Delete'}
+                    </button>
+                  </>
+                )}
               </div>
             </article>
           ))}
@@ -326,9 +336,9 @@ function ServicesList() {
         <EmptyState
           icon={Wrench}
           title="Layanan kosong"
-          description="Tidak ada layanan sesuai filter saat ini. Reset filter atau tambah layanan baru."
-          actionLabel="Tambah Layanan"
-          actionTo="/services/create"
+          description={isAdmin ? 'Tidak ada layanan sesuai filter saat ini. Reset filter atau tambah layanan baru.' : 'Tidak ada layanan sesuai filter saat ini. Reset filter untuk melihat layanan lain.'}
+          actionLabel={isAdmin ? 'Tambah Layanan' : undefined}
+          actionTo={isAdmin ? '/services/create' : undefined}
         />
       )}
 
@@ -347,7 +357,7 @@ function ServicesList() {
         </button>
       </div>
 
-      {pendingDelete && (
+      {isAdmin && pendingDelete && (
         <div className="modal-backdrop" role="presentation" onClick={(e) => { if (e.target === e.currentTarget && !deletingId) setPendingDelete(null) }}>
           <div className="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-service-title">
             <div className="dialog-icon danger">
