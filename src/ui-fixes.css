@@ -1864,3 +1864,293 @@ html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page input:
   color: #78716c !important;
   opacity: 1 !important;
 }
+
+/* Premium warm automotive light mode: restrained orange, charcoal sidebar, cream shell. */
+html[data-theme='light'],
+html:not([data-theme='dark']) {
+  --bg: #f7f3ed;
+  --surface: #ffffff;
+  --surface-soft: #fff7ed;
+  --surface-raised: #ffffff;
+  --text: #1c1917;
+  --muted: #6b625b;
+  --line: #e7e0d8;
+  --sidebar: #1c1917;
+  --sidebar-soft: #2a201c;
+  --primary: #c2410c;
+  --primary-dark: #9a3412;
+  --primary-soft: #ffedd5;
+  --accent: #f59e0b;
+  --accent-soft: #fff7ed;
+  --shadow-soft: 0 18px 45px rgba(42, 32, 28, 0.08);
+  --shadow-hover: 0 26px 68px rgba(42, 32, 28, 0.14);
+}
+
+html[data-theme='light'] body,
+html:not([data-theme='dark']) body,
+html[data-theme='light'] #root,
+html:not([data-theme='dark']) #root,
+html[data-theme='light'] body .figma-dashboard.dashboard-layout,
+html:not([data-theme='dark']) body .figma-dashboard.dashboard-layout,
+html[data-theme='light'] body .figma-dashboard .content-shell,
+html:not([data-theme='dark']) body .figma-dashboard .content-shell,
+html[data-theme='light'] body .figma-dashboard .page-content {
+  color: #1c1917 !important;
+  background: #f7f3ed !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .page-content,
+html:not([data-theme='dark']) body .figma-dashboard .page-content {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(245, 158, 11, 0.10), transparent 30%),
+    linear-gradient(180deg, #fffaf4 0%, #f7f3ed 280px) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar {
+  color: #fafaf9 !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(234, 88, 12, 0.16), transparent 34%),
+    linear-gradient(180deg, #2a201c 0%, #1c1917 100%) !important;
+  border-right: 1px solid rgba(231, 224, 216, 0.12) !important;
+  box-shadow: 16px 0 42px rgba(28, 25, 23, 0.16) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-brand,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-brand,
+html[data-theme='light'] body .figma-dashboard .sidebar-user,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-user,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer {
+  border-color: rgba(250, 250, 249, 0.12) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-brand strong,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-brand strong,
+html[data-theme='light'] body .figma-dashboard .sidebar-user strong,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-user strong,
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a span,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a span,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer span,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer span {
+  color: #fafaf9 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-brand span,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-brand span,
+html[data-theme='light'] body .figma-dashboard .sidebar-user span,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-user span,
+html[data-theme='light'] body .figma-dashboard .sidebar-nav-label,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav-label {
+  color: #d7d3cf !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-user,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-user,
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer a,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer a,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer button,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer button {
+  border: 1px solid rgba(250, 250, 249, 0.12) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a.active,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a.active,
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a:hover,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a:hover,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer a:hover,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer a:hover,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer button:hover {
+  color: #fafaf9 !important;
+  border-color: rgba(234, 88, 12, 0.56) !important;
+  background: rgba(234, 88, 12, 0.20) !important;
+  box-shadow: inset 4px 0 0 #ea580c, 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar svg,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar svg,
+html[data-theme='light'] body .figma-dashboard .nav-chevron,
+html:not([data-theme='dark']) body .figma-dashboard .nav-chevron {
+  color: #fb923c !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .brand-mark,
+html:not([data-theme='dark']) body .figma-dashboard .brand-mark {
+  color: #fff7ed !important;
+  background: linear-gradient(135deg, #c2410c, #ea580c) !important;
+  box-shadow: 0 14px 34px rgba(194, 65, 12, 0.28) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .topbar,
+html:not([data-theme='dark']) body .figma-dashboard .topbar {
+  color: #1c1917 !important;
+  background: rgba(255, 250, 244, 0.94) !important;
+  border-bottom: 1px solid #e7e0d8 !important;
+  box-shadow: 0 16px 38px rgba(42, 32, 28, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .topbar h1,
+html:not([data-theme='dark']) body .figma-dashboard .topbar h1,
+html[data-theme='light'] body .figma-dashboard .theme-toggle span,
+html:not([data-theme='dark']) body .figma-dashboard .theme-toggle span,
+html[data-theme='light'] body .figma-dashboard .user-chip span,
+html:not([data-theme='dark']) body .figma-dashboard .user-chip span,
+html[data-theme='light'] body .figma-dashboard .topbar .ghost-button,
+html:not([data-theme='dark']) body .figma-dashboard .topbar .ghost-button {
+  color: #1c1917 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .topbar-kicker,
+html:not([data-theme='dark']) body .figma-dashboard .topbar-kicker,
+html[data-theme='light'] body .figma-dashboard .user-chip small,
+html:not([data-theme='dark']) body .figma-dashboard .user-chip small {
+  color: #6b625b !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .theme-toggle,
+html:not([data-theme='dark']) body .figma-dashboard .theme-toggle,
+html[data-theme='light'] body .figma-dashboard .user-chip,
+html:not([data-theme='dark']) body .figma-dashboard .user-chip,
+html[data-theme='light'] body .figma-dashboard .topbar .ghost-button,
+html:not([data-theme='dark']) body .figma-dashboard .topbar .ghost-button {
+  border: 1px solid #e7e0d8 !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(42, 32, 28, 0.06) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .theme-toggle:hover,
+html:not([data-theme='dark']) body .figma-dashboard .theme-toggle:hover,
+html[data-theme='light'] body .figma-dashboard .topbar .ghost-button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .topbar .ghost-button:hover {
+  color: #c2410c !important;
+  border-color: rgba(194, 65, 12, 0.32) !important;
+  background: #fff7ed !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .theme-toggle svg,
+html:not([data-theme='dark']) body .figma-dashboard .theme-toggle svg,
+html[data-theme='light'] body .figma-dashboard .topbar .ghost-button svg,
+html:not([data-theme='dark']) body .figma-dashboard .topbar .ghost-button svg {
+  color: #c2410c !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .card,
+html:not([data-theme='dark']) body .figma-dashboard .card,
+html[data-theme='light'] body .figma-dashboard .hero-card,
+html:not([data-theme='dark']) body .figma-dashboard .hero-card,
+html[data-theme='light'] body .figma-dashboard .booking-panel,
+html:not([data-theme='dark']) body .figma-dashboard .booking-panel,
+html[data-theme='light'] body .figma-dashboard .booking-confirm-panel,
+html:not([data-theme='dark']) body .figma-dashboard .booking-confirm-panel,
+html[data-theme='light'] body .figma-dashboard .booking-info-card,
+html:not([data-theme='dark']) body .figma-dashboard .booking-info-card,
+html[data-theme='light'] body .figma-dashboard .profile-hero,
+html:not([data-theme='dark']) body .figma-dashboard .profile-hero,
+html[data-theme='light'] body .figma-dashboard .profile-section,
+html:not([data-theme='dark']) body .figma-dashboard .profile-section,
+html[data-theme='light'] body .figma-dashboard .service-catalog-card,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-card,
+html[data-theme='light'] body .figma-dashboard .booking-metric-card,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card,
+html[data-theme='light'] body .figma-dashboard .table-summary,
+html:not([data-theme='dark']) body .figma-dashboard .table-summary,
+html[data-theme='light'] body .figma-dashboard .pagination,
+html:not([data-theme='dark']) body .figma-dashboard .pagination,
+html[data-theme='light'] body .figma-dashboard .services-controls,
+html:not([data-theme='dark']) body .figma-dashboard .services-controls,
+html[data-theme='light'] body .figma-dashboard .bookings-controls,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-controls,
+html[data-theme='light'] body .figma-dashboard .services-filter-panel,
+html:not([data-theme='dark']) body .figma-dashboard .services-filter-panel,
+html[data-theme='light'] body .figma-dashboard .services-export-panel,
+html:not([data-theme='dark']) body .figma-dashboard .services-export-panel {
+  color: #1c1917 !important;
+  border-color: #e7e0d8 !important;
+  background: #ffffff !important;
+  box-shadow: 0 18px 45px rgba(42, 32, 28, 0.08) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .services-card,
+html:not([data-theme='dark']) body .figma-dashboard .services-card,
+html[data-theme='light'] body .figma-dashboard .bookings-card,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-card,
+html[data-theme='light'] body .figma-dashboard .booking-create-page,
+html:not([data-theme='dark']) body .figma-dashboard .booking-create-page,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page,
+html[data-theme='light'] body .figma-dashboard .profile-page,
+html:not([data-theme='dark']) body .figma-dashboard .profile-page {
+  background: #f7f3ed !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .section-heading,
+html:not([data-theme='dark']) body .figma-dashboard .section-heading,
+html[data-theme='light'] body .figma-dashboard .services-hero-heading,
+html:not([data-theme='dark']) body .figma-dashboard .services-hero-heading,
+html[data-theme='light'] body .figma-dashboard .profile-page-heading,
+html:not([data-theme='dark']) body .figma-dashboard .profile-page-heading,
+html[data-theme='light'] body .figma-dashboard .bookings-card > .section-heading,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-card > .section-heading {
+  color: #1c1917 !important;
+  border-color: #e7e0d8 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard h1,
+html:not([data-theme='dark']) body .figma-dashboard h1,
+html[data-theme='light'] body .figma-dashboard h2,
+html:not([data-theme='dark']) body .figma-dashboard h2,
+html[data-theme='light'] body .figma-dashboard h3,
+html:not([data-theme='dark']) body .figma-dashboard h3,
+html[data-theme='light'] body .figma-dashboard h4,
+html:not([data-theme='dark']) body .figma-dashboard h4,
+html[data-theme='light'] body .figma-dashboard .data-table td,
+html:not([data-theme='dark']) body .figma-dashboard .data-table td,
+html[data-theme='light'] body .figma-dashboard .data-table td span,
+html:not([data-theme='dark']) body .figma-dashboard .data-table td span,
+html[data-theme='light'] body .figma-dashboard .profile-list dd,
+html:not([data-theme='dark']) body .figma-dashboard .profile-list dd {
+  color: #1c1917 !important;
+  opacity: 1 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard p,
+html:not([data-theme='dark']) body .figma-dashboard p,
+html[data-theme='light'] body .figma-dashboard small,
+html:not([data-theme='dark']) body .figma-dashboard small,
+html[data-theme='light'] body .figma-dashboard .section-heading p,
+html:not([data-theme='dark']) body .figma-dashboard .section-heading p,
+html[data-theme='light'] body .figma-dashboard .data-table th,
+html:not([data-theme='dark']) body .figma-dashboard .data-table th,
+html[data-theme='light'] body .figma-dashboard .profile-list dt,
+html:not([data-theme='dark']) body .figma-dashboard .profile-list dt {
+  color: #6b625b !important;
+  opacity: 1 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .primary-button,
+html:not([data-theme='dark']) body .figma-dashboard .primary-button,
+html[data-theme='light'] body .figma-dashboard .booking-confirm-button,
+html:not([data-theme='dark']) body .figma-dashboard .booking-confirm-button,
+html[data-theme='light'] body .figma-dashboard .service-card-actions .action-button.detail,
+html:not([data-theme='dark']) body .figma-dashboard .service-card-actions .action-button.detail,
+html[data-theme='light'] body .figma-dashboard .service-card-actions .action-button.book,
+html:not([data-theme='dark']) body .figma-dashboard .service-card-actions .action-button.book {
+  color: #fff7ed !important;
+  border-color: #9a3412 !important;
+  background: linear-gradient(135deg, #c2410c, #9a3412) !important;
+  box-shadow: 0 14px 30px rgba(194, 65, 12, 0.22) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .primary-button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .primary-button:hover,
+html[data-theme='light'] body .figma-dashboard .booking-confirm-button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .booking-confirm-button:hover {
+  background: linear-gradient(135deg, #9a3412, #7c2d12) !important;
+}
