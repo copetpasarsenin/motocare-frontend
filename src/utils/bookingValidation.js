@@ -1,7 +1,7 @@
 export function validateBookingForm(values) {
   const errors = {}
 
-  if (!values.service_id) errors.service_id = 'Layanan wajib dipilih'
+  if (!Array.isArray(values.service_ids) || values.service_ids.length === 0) errors.service_ids = 'Minimal satu layanan wajib dipilih'
   if (!values.customer_name.trim()) errors.customer_name = 'Nama customer wajib diisi'
   if (!values.phone.trim()) errors.phone = 'Nomor telepon wajib diisi'
   if (!values.vehicle_name.trim()) errors.vehicle_name = 'Nama kendaraan wajib diisi'
@@ -17,7 +17,7 @@ export function hasBookingValidationErrors(errors) {
 
 export function toBookingPayload(values) {
   return {
-    service_id: Number(values.service_id),
+    service_id: Number(values.service_ids[0]),
     customer_name: values.customer_name.trim(),
     phone: values.phone.trim(),
     vehicle_name: values.vehicle_name.trim(),

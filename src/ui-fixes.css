@@ -219,3 +219,110 @@
     min-width: 0;
   }
 }
+
+/* Booking/profile/service readability fixes for both themes. */
+.booking-info-list {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.booking-time-note,
+.booking-payload-note,
+.booking-edit-grid small {
+  display: block;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.booking-edit-grid,
+.profile-password-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.booking-edit-grid label,
+.profile-password-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.booking-edit-grid .full-span,
+.profile-password-form .feedback,
+.profile-password-form button {
+  grid-column: 1 / -1;
+}
+
+.profile-password-form button {
+  width: fit-content;
+}
+
+.table-actions .action-button.danger,
+.action-button.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 35%, var(--line));
+  background: color-mix(in srgb, var(--danger) 9%, var(--surface));
+}
+
+:root[data-theme='light'] .service-catalog-page .services-filter-panel,
+:root[data-theme='light'] .service-catalog-page .services-export-panel,
+:root[data-theme='light'] .booking-detail-dialog,
+:root[data-theme='light'] .profile-section,
+:root[data-theme='light'] .profile-hero,
+:root:not([data-theme='dark']) .service-catalog-page .services-filter-panel,
+:root:not([data-theme='dark']) .service-catalog-page .services-export-panel,
+:root:not([data-theme='dark']) .booking-detail-dialog,
+:root:not([data-theme='dark']) .profile-section,
+:root:not([data-theme='dark']) .profile-hero {
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+:root[data-theme='light'] .service-catalog-page .search-field,
+:root[data-theme='light'] .service-catalog-page input,
+:root[data-theme='light'] .service-catalog-page select,
+:root:not([data-theme='dark']) .service-catalog-page .search-field,
+:root:not([data-theme='dark']) .service-catalog-page input,
+:root:not([data-theme='dark']) .service-catalog-page select {
+  color: var(--text);
+  border-color: #cbd5e1;
+  background: #fff;
+}
+
+:root[data-theme='light'] .booking-detail-header h3,
+:root[data-theme='light'] .booking-detail-grid dd,
+:root:not([data-theme='dark']) .booking-detail-header h3,
+:root:not([data-theme='dark']) .booking-detail-grid dd {
+  color: var(--text);
+}
+
+:root[data-theme='light'] .booking-detail-grid div,
+:root[data-theme='light'] .booking-detail-status-row,
+:root:not([data-theme='dark']) .booking-detail-grid div,
+:root:not([data-theme='dark']) .booking-detail-status-row {
+  border-color: var(--line);
+  background: var(--surface-soft);
+}
+
+:root[data-theme='dark'] input,
+:root[data-theme='dark'] select,
+:root[data-theme='dark'] textarea,
+:root[data-theme='dark'] .input-shell {
+  color: var(--text);
+  border-color: var(--line);
+  background: #111827;
+}
+
+@media (max-width: 720px) {
+  .booking-edit-grid,
+  .profile-password-form {
+    grid-template-columns: 1fr;
+  }
+}

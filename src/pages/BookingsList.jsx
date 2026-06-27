@@ -18,8 +18,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import EmptyState from '../components/ui/EmptyState'
 import StatusBadge from '../components/ui/StatusBadge'
-import { bookingStatuses, getBookings, updateBookingStatus } from '../services/bookings'
+import { bookingStatuses, getBookings, updateBooking, updateBookingStatus } from '../services/bookings'
 import { getUserRole } from '../utils/auth'
+import { getServices } from '../services/services'
 import { formatCurrency } from '../utils/csv'
 
 const SKELETON_ROWS = 5
@@ -36,8 +37,41 @@ function formatDate(value) {
 
 function formatTime(value) {
   if (!value) return '-'
-
+  const date = new Date(value)
+  if (!Number.isNaN(date.getTime())) {
+    return date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false })
+  }
   return String(value).slice(0, 5)
+}
+
+function toDateInputValue(value) {
+  if (!value) return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return ''
+  return date.toISOString().slice(0, 10)
+}
+
+function toTimeInputValue(value) {
+  if (!value) return '09:00'
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return '09:00'
+  return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false })
+}
+
+function toBookingDateTime(date, time) {
+  return `${date}T${time}:00+07:00`
+}
+function isFinalStatus(status) {
+  return ['completed', 'cancelled', 'rejected'].includes(status)
+}
+
+function canUserEditBooking(booking) {
+  const bookingDate = new Date(booking.booking_date)
+  return !isFinalStatus(booking.status) && !Number.isNaN(bookingDate.getTime()) && bookingDate.getTime() - Date.now() > 60 * 60 * 1000
+}
+
+function canUserCancelBooking(booking) {
+  return !isFinalStatus(booking.status) && ['pending', 'confirmed'].includes(booking.status)
 }
 
 function getServiceName(booking) {
@@ -78,6 +112,9 @@ function BookingsList() {
   const [loading, setLoading] = useState(false)
   const [updatingId, setUpdatingId] = useState(null)
   const [selectedBooking, setSelectedBooking] = useState(null)
+  const [editingBooking, setEditingBooking] = useState(null)
+  const [editValues, setEditValues] = useState({})
+  const [services, setServices] = useState([])
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const totalPages = Math.max(meta.total_pages, 1)
   const visibleStatusCounts = bookings.reduce((counts, booking) => {
@@ -133,6 +170,67 @@ function BookingsList() {
     })
   }
 
+
+  useEffect(() => {
+    if (isAdmin) return
+    getServices({ page: 1, limit: 100, status: 'active', sort_by: 'name', sort_order: 'asc' })
+      .then((payload) => setServices(payload.data))
+      .catch(() => setServices([]))
+  }, [isAdmin])
+
+  const openEditBooking = (booking) => {
+    setEditingBooking(booking)
+    setEditValues({
+      service_id: String(booking.service_id || booking.service?.id || ''),
+      customer_name: booking.customer_name || '',
+      phone: booking.phone || '',
+      vehicle_name: booking.vehicle_name || '',
+      vehicle_plate: booking.vehicle_plate || '',
+      booking_date: toDateInputValue(booking.booking_date),
+      booking_time: toTimeInputValue(booking.booking_date),
+      notes: booking.notes || '',
+    })
+  }
+
+  const handleUserCancel = async (booking) => {
+    if (!canUserCancelBooking(booking)) return
+    setUpdatingId(booking.id)
+    setFeedback({ type: '', message: '' })
+    try {
+      const updatedBooking = await updateBooking(booking.id, { status: 'cancelled' })
+      setBookings((current) => current.map((item) => (item.id === booking.id ? updatedBooking : item)))
+      setFeedback({ type: 'success', message: 'Booking berhasil dibatalkan.' })
+    } catch (error) {
+      setFeedback({ type: 'error', message: error.message || 'Gagal membatalkan booking' })
+    } finally {
+      setUpdatingId(null)
+    }
+  }
+
+  const handleEditSubmit = async (event) => {
+    event.preventDefault()
+    if (!editingBooking) return
+    setUpdatingId(editingBooking.id)
+    setFeedback({ type: '', message: '' })
+    try {
+      const updatedBooking = await updateBooking(editingBooking.id, {
+        service_id: Number(editValues.service_id),
+        customer_name: editValues.customer_name,
+        phone: editValues.phone,
+        vehicle_name: editValues.vehicle_name,
+        vehicle_plate: editValues.vehicle_plate,
+        booking_date: toBookingDateTime(editValues.booking_date, editValues.booking_time),
+        notes: editValues.notes,
+      })
+      setBookings((current) => current.map((item) => (item.id === editingBooking.id ? updatedBooking : item)))
+      setEditingBooking(null)
+      setFeedback({ type: 'success', message: 'Booking berhasil diedit.' })
+    } catch (error) {
+      setFeedback({ type: 'error', message: error.message || 'Gagal mengedit booking' })
+    } finally {
+      setUpdatingId(null)
+    }
+  }
   const handleStatusChange = async (bookingId, status) => {
     if (!isAdmin) return
 
@@ -295,6 +393,12 @@ function BookingsList() {
                       <Eye size={14} />
                       Detail
                     </button>
+                    {!isAdmin && canUserEditBooking(booking) && (
+                      <button className="action-button" type="button" onClick={() => openEditBooking(booking)} disabled={updatingId === booking.id}>Edit</button>
+                    )}
+                    {!isAdmin && canUserCancelBooking(booking) && (
+                      <button className="action-button danger" type="button" onClick={() => handleUserCancel(booking)} disabled={updatingId === booking.id}>Batal</button>
+                    )}
                     {isAdmin && (
                       <div className="booking-status-action">
                         <select
@@ -344,6 +448,28 @@ function BookingsList() {
         </button>
       </div>
 
+
+      {editingBooking && (
+        <div className="modal-backdrop" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) setEditingBooking(null) }}>
+          <form className="booking-detail-dialog booking-edit-dialog" onSubmit={handleEditSubmit} role="dialog" aria-modal="true" aria-labelledby="booking-edit-title">
+            <div className="booking-detail-header">
+              <div><span>Edit Booking</span><h3 id="booking-edit-title">Booking #{editingBooking.id}</h3></div>
+              <button className="icon-button" type="button" onClick={() => setEditingBooking(null)} aria-label="Tutup edit booking"><X size={18} /></button>
+            </div>
+            <div className="booking-edit-grid">
+              <label><span>Layanan</span><select value={editValues.service_id} onChange={(event) => setEditValues((current) => ({ ...current, service_id: event.target.value }))} required>{services.map((service) => <option key={service.id} value={service.id}>{service.name}</option>)}</select></label>
+              <label><span>Tanggal</span><input type="date" value={editValues.booking_date} onChange={(event) => setEditValues((current) => ({ ...current, booking_date: event.target.value }))} required /></label>
+              <label><span>Waktu</span><input type="time" min="09:00" max="17:00" value={editValues.booking_time} onChange={(event) => setEditValues((current) => ({ ...current, booking_time: event.target.value }))} required /><small>Waktu jam kerja kami dimulai dari jam 09.00 sampai jam 17.00.</small></label>
+              <label><span>Nama</span><input value={editValues.customer_name} onChange={(event) => setEditValues((current) => ({ ...current, customer_name: event.target.value }))} required /></label>
+              <label><span>Nomor HP</span><input value={editValues.phone} onChange={(event) => setEditValues((current) => ({ ...current, phone: event.target.value }))} required /></label>
+              <label><span>Kendaraan</span><input value={editValues.vehicle_name} onChange={(event) => setEditValues((current) => ({ ...current, vehicle_name: event.target.value }))} required /></label>
+              <label><span>Nomor Plat</span><input value={editValues.vehicle_plate} onChange={(event) => setEditValues((current) => ({ ...current, vehicle_plate: event.target.value }))} required /></label>
+              <label className="full-span"><span>Catatan</span><textarea rows="3" value={editValues.notes} onChange={(event) => setEditValues((current) => ({ ...current, notes: event.target.value }))} /></label>
+            </div>
+            <button className="primary-button booking-confirm-button" type="submit" disabled={updatingId === editingBooking.id}>Simpan Perubahan</button>
+          </form>
+        </div>
+      )}
       {selectedBooking && (
         <div className="modal-backdrop" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) setSelectedBooking(null) }}>
           <div className="booking-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-detail-title">
@@ -406,3 +532,8 @@ function BookingsList() {
 }
 
 export default BookingsList
+
+
+
+
+

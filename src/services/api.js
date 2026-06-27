@@ -60,3 +60,11 @@ export async function apiClient(path, options = {}) {
 
   return payload
 }
+
+export async function changePassword(data) {
+  const payload = await apiClient('/change-password', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+  return payload?.data
+}

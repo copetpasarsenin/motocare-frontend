@@ -3,16 +3,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { createBooking } from '../services/bookings'
 import { getServices } from '../services/services'
-import { formatCurrency } from '../utils/csv'
 import { getUserRole } from '../utils/auth'
-import {
-  hasBookingValidationErrors,
-  toBookingPayload,
-  validateBookingForm,
-} from '../utils/bookingValidation'
+import { validateBookingForm, hasBookingValidationErrors } from '../utils/bookingValidation'
+import { formatCurrency } from '../utils/csv'
 
 const initialValues = {
-  service_id: '',
+  service_ids: [],
   customer_name: '',
   phone: '',
   vehicle_name: '',
@@ -21,13 +17,12 @@ const initialValues = {
   notes: '',
 }
 
+const timeOptions = ['09:00 WIB', '10:30 WIB', '13:00 WIB', '14:30 WIB', '16:00 WIB']
+
 function FieldError({ message }) {
   if (!message) return null
   return <span className="field-error">{message}</span>
 }
-
-const timeOptions = ['09:00 WIB', '10:30 WIB', '13:00 WIB', '14:30 WIB', '16:00 WIB']
-
 
 function toDateInputValue(date) {
   const year = date.getFullYear()
@@ -51,6 +46,23 @@ function buildDateOptions() {
   })
 }
 
+function toBookingDateTime(date, timeLabel) {
+  const time = timeLabel.replace(' WIB', '')
+  return `${date}T${time}:00+07:00`
+}
+
+function toPayload(values, serviceId, selectedTime) {
+  return {
+    service_id: Number(serviceId),
+    customer_name: values.customer_name.trim(),
+    phone: values.phone.trim(),
+    vehicle_name: values.vehicle_name.trim(),
+    vehicle_plate: values.vehicle_plate.trim().toUpperCase(),
+    booking_date: toBookingDateTime(values.booking_date, selectedTime),
+    notes: values.notes.trim(),
+  }
+}
+
 function BookingCreate() {
   const [values, setValues] = useState(initialValues)
   const [services, setServices] = useState([])
@@ -59,28 +71,35 @@ function BookingCreate() {
   const [loading, setLoading] = useState(false)
   const [selectedTime, setSelectedTime] = useState(timeOptions[1])
   const navigate = useNavigate()
-  const isAdmin = getUserRole() === 'admin'
-
-  useEffect(() => {
-    if (isAdmin) {
-      navigate('/bookings', { replace: true })
-    }
-  }, [isAdmin, navigate])
   const [searchParams] = useSearchParams()
   const preselectedServiceId = searchParams.get('service_id') || ''
+  const isAdmin = getUserRole() === 'admin'
   const dateOptions = useMemo(() => buildDateOptions(), [])
-  const selectedService = useMemo(
-    () => services.find((service) => String(service.id) === String(values.service_id)),
-    [services, values.service_id],
+  const selectedServices = useMemo(
+    () => services.filter((service) => values.service_ids.includes(String(service.id))),
+    [services, values.service_ids],
   )
-  const servicePrice = Number(selectedService?.price || 0)
-  const estimatedTax = Math.round(servicePrice * 0.11)
-  const estimatedTotal = servicePrice + estimatedTax
+  const subtotal = selectedServices.reduce((total, service) => total + Number(service.price || 0), 0)
+  const estimatedTax = Math.round(subtotal * 0.11)
+  const estimatedTotal = subtotal + estimatedTax
+
+  useEffect(() => {
+    if (isAdmin) navigate('/bookings', { replace: true })
+  }, [isAdmin, navigate])
 
   const updateValue = useCallback((key, value) => {
     setValues((current) => ({ ...current, [key]: value }))
     setErrors((current) => ({ ...current, [key]: '' }))
   }, [])
+
+  const toggleService = (serviceId) => {
+    setValues((current) => {
+      const id = String(serviceId)
+      const exists = current.service_ids.includes(id)
+      return { ...current, service_ids: exists ? current.service_ids.filter((item) => item !== id) : [...current.service_ids, id] }
+    })
+    setErrors((current) => ({ ...current, service_ids: '' }))
+  }
 
   useEffect(() => {
     const loadServices = async () => {
@@ -89,13 +108,8 @@ function BookingCreate() {
         const loadedServices = Array.from(new Map(payload.data.map((service) => [String(service.id || service.name).toLowerCase(), service])).values())
         setServices(loadedServices)
 
-        if (preselectedServiceId) {
-          const match = loadedServices.find((service) => String(service.id) === preselectedServiceId)
-          if (match) {
-            setValues((current) => (
-              current.service_id ? current : { ...current, service_id: String(match.id) }
-            ))
-          }
+        if (preselectedServiceId && loadedServices.some((service) => String(service.id) === preselectedServiceId)) {
+          setValues((current) => (current.service_ids.length ? current : { ...current, service_ids: [preselectedServiceId] }))
         }
       } catch (error) {
         setFeedback({ type: 'error', message: error.message || 'Gagal mengambil daftar layanan' })
@@ -104,7 +118,6 @@ function BookingCreate() {
 
     loadServices()
   }, [preselectedServiceId])
-
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -120,8 +133,8 @@ function BookingCreate() {
     setFeedback({ type: '', message: '' })
 
     try {
-      await createBooking(toBookingPayload(values))
-      setFeedback({ type: 'success', message: 'Booking berhasil dibuat.' })
+      await Promise.all(values.service_ids.map((serviceId) => createBooking(toPayload(values, serviceId, selectedTime))))
+      setFeedback({ type: 'success', message: `${values.service_ids.length} booking layanan berhasil dibuat.` })
       setTimeout(() => navigate('/bookings'), 600)
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal membuat booking' })
@@ -136,7 +149,7 @@ function BookingCreate() {
         <div>
           <p className="eyebrow">MotoCare Booking</p>
           <h3>Pilih Layanan</h3>
-          <p>Buat booking servis dengan alur premium, tetap memakai data layanan dan payload backend yang sudah ada.</p>
+          <p>Buat booking servis dengan satu atau beberapa layanan aktif MotoCare.</p>
         </div>
         <Link className="ghost-button home-outline-button" to="/bookings"><ArrowLeft size={16} />Back</Link>
       </div>
@@ -150,29 +163,27 @@ function BookingCreate() {
               <Wrench size={22} />
               <div>
                 <h4>Pilih Layanan</h4>
-                <p>Pilih salah satu layanan aktif dari katalog MotoCare.</p>
+                <p>Pilih satu atau lebih layanan. Layanan yang sama tidak bisa dipilih dua kali.</p>
               </div>
             </div>
 
             <div className="booking-service-options">
-              {services.map((service) => (
-                <button
-                  className={`booking-service-option ${String(values.service_id) === String(service.id) ? 'selected' : ''}`}
-                  key={service.id}
-                  type="button"
-                  onClick={() => updateValue('service_id', String(service.id))}
-                >
-                  <span className="service-icon-box"><Wrench size={19} /></span>
-                  <span>
-                    <strong>{service.name}</strong>
-                    <small>{service.description || 'Layanan MotoCare premium.'}</small>
-                    <em>Est. {formatCurrency(service.price || 0)}</em>
-                  </span>
-                  <i>ID: {service.id}</i>
-                </button>
-              ))}
+              {services.map((service) => {
+                const selected = values.service_ids.includes(String(service.id))
+                return (
+                  <button className={`booking-service-option ${selected ? 'selected' : ''}`} key={service.id} type="button" onClick={() => toggleService(service.id)} aria-pressed={selected}>
+                    <span className="service-icon-box"><Wrench size={19} /></span>
+                    <span>
+                      <strong>{service.name}</strong>
+                      <small>{service.description || 'Layanan MotoCare premium.'}</small>
+                      <em>Est. {formatCurrency(service.price || 0)}</em>
+                    </span>
+                    <i>{selected ? 'Dipilih' : `ID: ${service.id}`}</i>
+                  </button>
+                )
+              })}
             </div>
-            <FieldError message={errors.service_id} />
+            <FieldError message={errors.service_ids} />
           </section>
 
           <section className="booking-panel">
@@ -180,35 +191,16 @@ function BookingCreate() {
               <User size={22} />
               <div>
                 <h4>Data Pelanggan</h4>
-                <p>Informasi ini tetap dikirim dengan payload booking yang sudah ada.</p>
+                <p>Informasi ini akan dipakai untuk setiap layanan yang dipilih.</p>
               </div>
             </div>
 
             <div className="booking-form-grid">
-              <label className="figma-field">
-                <span>Nama Lengkap</span>
-                <input value={values.customer_name} onChange={(event) => updateValue('customer_name', event.target.value)} placeholder="Masukkan nama sesuai STNK" />
-                <FieldError message={errors.customer_name} />
-              </label>
-              <label className="figma-field">
-                <span>Nomor HP</span>
-                <input value={values.phone} onChange={(event) => updateValue('phone', event.target.value)} placeholder="+62 8xx-xxxx-xxxx" />
-                <FieldError message={errors.phone} />
-              </label>
-              <label className="figma-field">
-                <span>Nama Kendaraan</span>
-                <input value={values.vehicle_name} onChange={(event) => updateValue('vehicle_name', event.target.value)} placeholder="Honda Beat" />
-                <FieldError message={errors.vehicle_name} />
-              </label>
-              <label className="figma-field">
-                <span>Nomor Plat</span>
-                <input value={values.vehicle_plate} onChange={(event) => updateValue('vehicle_plate', event.target.value)} placeholder="B 1234 MTC" />
-                <FieldError message={errors.vehicle_plate} />
-              </label>
-              <label className="figma-field full-span">
-                <span>Catatan Layanan Lainnya</span>
-                <textarea rows="4" value={values.notes} onChange={(event) => updateValue('notes', event.target.value)} placeholder="Masukkan layanan lainnya" />
-              </label>
+              <label className="figma-field"><span>Nama Lengkap</span><input value={values.customer_name} onChange={(event) => updateValue('customer_name', event.target.value)} placeholder="Masukkan nama sesuai STNK" /><FieldError message={errors.customer_name} /></label>
+              <label className="figma-field"><span>Nomor HP</span><input value={values.phone} onChange={(event) => updateValue('phone', event.target.value)} placeholder="+62 8xx-xxxx-xxxx" /><FieldError message={errors.phone} /></label>
+              <label className="figma-field"><span>Nama Kendaraan</span><input value={values.vehicle_name} onChange={(event) => updateValue('vehicle_name', event.target.value)} placeholder="Honda Beat" /><FieldError message={errors.vehicle_name} /></label>
+              <label className="figma-field"><span>Nomor Plat</span><input value={values.vehicle_plate} onChange={(event) => updateValue('vehicle_plate', event.target.value)} placeholder="B 1234 MTC" /><FieldError message={errors.vehicle_plate} /></label>
+              <label className="figma-field full-span"><span>Catatan Layanan Lainnya</span><textarea rows="4" value={values.notes} onChange={(event) => updateValue('notes', event.target.value)} placeholder="Masukkan catatan tambahan" /></label>
             </div>
           </section>
 
@@ -216,29 +208,21 @@ function BookingCreate() {
             <Info size={23} />
             <div>
               <h4>Informasi Hari Ini</h4>
-              <p>Jam operasional: <strong>08:00 - 20:00</strong> | <strong>Pilih tanggal dan waktu booking sesuai kebutuhan.</strong></p>
+              <p>Jam operasional: <strong>09:00 - 17:00</strong> | <strong>Pilih tanggal dan waktu booking sesuai kebutuhan.</strong></p>
+              <ul className="booking-info-list">
+                <li>Booking bisa dihapus atau dibatalkan oleh user jika status masih memungkinkan.</li>
+                <li>Booking bisa diedit maksimal 1 jam sebelum jadwal pelayanan.</li>
+              </ul>
             </div>
           </section>
         </div>
 
         <aside className="booking-confirm-panel">
           <h4>Jadwal & Konfirmasi</h4>
-
           <div className="booking-confirm-group">
             <span>Pilih Tanggal</span>
             <div className="booking-date-grid">
-              {dateOptions.map((date) => (
-                <button
-                  className={values.booking_date === date.value ? 'selected' : ''}
-                  key={date.value}
-                  type="button"
-                  onClick={() => updateValue('booking_date', date.value)}
-                >
-                  <small>{date.month}</small>
-                  <strong>{date.day}</strong>
-                  <em>{date.weekday}</em>
-                </button>
-              ))}
+              {dateOptions.map((date) => <button className={values.booking_date === date.value ? 'selected' : ''} key={date.value} type="button" onClick={() => updateValue('booking_date', date.value)}><small>{date.month}</small><strong>{date.day}</strong><em>{date.weekday}</em></button>)}
             </div>
             <input className="booking-date-input" type="date" value={values.booking_date} onChange={(event) => updateValue('booking_date', event.target.value)} />
             <FieldError message={errors.booking_date} />
@@ -247,25 +231,20 @@ function BookingCreate() {
           <div className="booking-confirm-group">
             <span>Pilih Waktu</span>
             <div className="booking-time-grid">
-              {timeOptions.map((time) => (
-                <button className={selectedTime === time ? 'selected' : ''} key={time} type="button" onClick={() => setSelectedTime(time)}>
-                  {time}
-                </button>
-              ))}
+              {timeOptions.map((time) => <button className={selectedTime === time ? 'selected' : ''} key={time} type="button" onClick={() => setSelectedTime(time)}>{time}</button>)}
             </div>
+            <p className="booking-time-note">Waktu jam kerja kami dimulai dari jam 09.00 sampai jam 17.00.</p>
           </div>
 
           <div className="booking-summary">
-            <div><span>{selectedService?.name || 'Pilih layanan'}</span><strong>{formatCurrency(servicePrice)}</strong></div>
+            {selectedServices.length === 0 && <div><span>Pilih layanan</span><strong>{formatCurrency(0)}</strong></div>}
+            {selectedServices.map((service) => <div key={service.id}><span>{service.name}</span><strong>{formatCurrency(service.price || 0)}</strong></div>)}
             <div><span>Pajak & biaya (11%)</span><strong>{formatCurrency(estimatedTax)}</strong></div>
             <div className="total"><span>Total</span><strong>{formatCurrency(estimatedTotal)}</strong></div>
           </div>
 
-          <button className="primary-button booking-confirm-button" type="submit" disabled={loading}>
-            {loading ? 'Menyimpan...' : 'Konfirmasi Pemesanan'}
-            {!loading && <ArrowRight size={18} />}
-          </button>
-          <small className="booking-payload-note">Waktu ditampilkan sebagai preferensi UI; payload backend tetap mengikuti format booking saat ini.</small>
+          <button className="primary-button booking-confirm-button" type="submit" disabled={loading}>{loading ? 'Menyimpan...' : 'Konfirmasi Pemesanan'}{!loading && <ArrowRight size={18} />}</button>
+          <small className="booking-payload-note">Setiap layanan yang dipilih dibuat sebagai booking terpisah agar tetap mengikuti struktur backend saat ini.</small>
         </aside>
       </form>
     </section>

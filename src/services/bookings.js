@@ -30,6 +30,14 @@ export async function createBooking(data) {
   return payload?.data
 }
 
+export async function updateBooking(id, data) {
+  const payload = await apiClient(`/api/bookings/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+  return payload?.data
+}
+
 export async function updateBookingStatus(id, status) {
   const payload = await apiClient(`/api/bookings/${id}`, {
     method: 'PUT',
@@ -37,3 +45,4 @@ export async function updateBookingStatus(id, status) {
   })
   return payload?.data
 }
+
