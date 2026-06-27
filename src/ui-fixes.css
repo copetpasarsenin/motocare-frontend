@@ -2154,3 +2154,214 @@ html[data-theme='light'] body .figma-dashboard .booking-confirm-button:hover,
 html:not([data-theme='dark']) body .figma-dashboard .booking-confirm-button:hover {
   background: linear-gradient(135deg, #9a3412, #7c2d12) !important;
 }
+
+/* Align Booking Management frames with Operations Dashboard frames. */
+:root {
+  --motocare-frame-radius: 16px;
+  --motocare-frame-border-dark: rgba(249, 115, 22, 0.26);
+  --motocare-frame-dark: #111827;
+  --motocare-frame-dark-soft: #0f172a;
+  --motocare-frame-shadow-dark: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --motocare-frame-border-light: #eadfd2;
+  --motocare-frame-light: #fffdf8;
+  --motocare-frame-light-soft: #fff7ed;
+  --motocare-frame-shadow-light: 0 18px 45px rgba(42, 32, 28, 0.08);
+}
+
+.figma-dashboard .booking-management-page {
+  display: grid !important;
+  gap: 20px !important;
+  padding: clamp(22px, 3vw, 34px) !important;
+  border-radius: var(--motocare-frame-radius) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page {
+  border: 1px solid rgba(249, 115, 22, 0.18) !important;
+  background: #050707 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page {
+  border: 1px solid var(--motocare-frame-border-light) !important;
+  background: #f7f3ed !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading.row-heading,
+html[data-theme='dark'] body .figma-dashboard .booking-metric-card,
+html[data-theme='dark'] body .figma-dashboard .bookings-controls,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .table-summary,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .table-scroll,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .pagination {
+  border: 1px solid var(--motocare-frame-border-dark) !important;
+  border-radius: var(--motocare-frame-radius) !important;
+  color: #f8fafc !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.06), transparent 48%),
+    var(--motocare-frame-dark) !important;
+  box-shadow: var(--motocare-frame-shadow-dark) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading.row-heading {
+  min-height: 204px !important;
+  align-items: center !important;
+  padding: clamp(26px, 4vw, 42px) !important;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(249, 115, 22, 0.20), transparent 30%),
+    radial-gradient(circle at 18% 82%, rgba(37, 99, 235, 0.18), transparent 30%),
+    linear-gradient(135deg, #111827 0%, #0f172a 58%, #17110c 100%) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-metrics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-metric-card {
+  min-height: 108px !important;
+  padding: 22px !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-metric-card::before {
+  background: var(--primary) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .bookings-controls {
+  padding: 20px !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table th,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table td,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table tbody tr {
+  color: #f8fafc !important;
+  border-color: rgba(148, 163, 184, 0.22) !important;
+  background: var(--motocare-frame-dark) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table th {
+  color: #cbd5e1 !important;
+  background: var(--motocare-frame-dark-soft) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading.row-heading,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading.row-heading,
+html[data-theme='light'] body .figma-dashboard .booking-metric-card,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card,
+html[data-theme='light'] body .figma-dashboard .bookings-controls,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-controls,
+html[data-theme='light'] body .figma-dashboard .booking-management-page .table-summary,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .table-summary,
+html[data-theme='light'] body .figma-dashboard .booking-management-page .table-scroll,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .table-scroll,
+html[data-theme='light'] body .figma-dashboard .booking-management-page .pagination,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .pagination {
+  border: 1px solid var(--motocare-frame-border-light) !important;
+  border-radius: var(--motocare-frame-radius) !important;
+  color: #1c1917 !important;
+  background: var(--motocare-frame-light) !important;
+  box-shadow: var(--motocare-frame-shadow-light) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading.row-heading,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading.row-heading {
+  min-height: 204px !important;
+  align-items: center !important;
+  padding: clamp(26px, 4vw, 42px) !important;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(245, 158, 11, 0.18), transparent 32%),
+    linear-gradient(135deg, #fffdf8 0%, #fff7ed 58%, #ffedd5 100%) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-metrics-grid,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metrics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-metric-card,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card {
+  min-height: 108px !important;
+  padding: 22px !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-metric-card::before,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card::before {
+  background: var(--primary) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .bookings-controls,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-controls {
+  padding: 20px !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page .data-table,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .data-table,
+html[data-theme='light'] body .figma-dashboard .booking-management-page .data-table th,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .data-table th,
+html[data-theme='light'] body .figma-dashboard .booking-management-page .data-table td,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .data-table td,
+html[data-theme='light'] body .figma-dashboard .booking-management-page .data-table tbody tr,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .data-table tbody tr {
+  color: #1c1917 !important;
+  border-color: #e7e0d8 !important;
+  background: var(--motocare-frame-light) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page .data-table th,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page .data-table th {
+  color: #6b625b !important;
+  background: var(--motocare-frame-light-soft) !important;
+}
+
+.figma-dashboard .booking-management-page > .section-heading.row-heading h3,
+.figma-dashboard .booking-management-page > .section-heading.row-heading p,
+.figma-dashboard .booking-metric-card span,
+.figma-dashboard .booking-metric-card strong,
+.figma-dashboard .bookings-controls .filter-panel-heading,
+.figma-dashboard .bookings-controls .filter-panel-heading span {
+  opacity: 1 !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading.row-heading h3,
+html[data-theme='dark'] body .figma-dashboard .booking-metric-card strong,
+html[data-theme='dark'] body .figma-dashboard .bookings-controls .filter-panel-heading,
+html[data-theme='dark'] body .figma-dashboard .bookings-controls .filter-panel-heading span {
+  color: #f8fafc !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading.row-heading p,
+html[data-theme='dark'] body .figma-dashboard .booking-metric-card span {
+  color: #cbd5e1 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading.row-heading h3,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading.row-heading h3,
+html[data-theme='light'] body .figma-dashboard .booking-metric-card strong,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card strong,
+html[data-theme='light'] body .figma-dashboard .bookings-controls .filter-panel-heading,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-controls .filter-panel-heading,
+html[data-theme='light'] body .figma-dashboard .bookings-controls .filter-panel-heading span,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-controls .filter-panel-heading span {
+  color: #1c1917 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .booking-management-page > .section-heading.row-heading p,
+html:not([data-theme='dark']) body .figma-dashboard .booking-management-page > .section-heading.row-heading p,
+html[data-theme='light'] body .figma-dashboard .booking-metric-card span,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card span {
+  color: #6b625b !important;
+}
+
+@media (max-width: 1024px) {
+  .figma-dashboard .booking-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .figma-dashboard .booking-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
