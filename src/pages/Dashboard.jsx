@@ -117,9 +117,9 @@ function Dashboard() {
           <h2>Operations Dashboard</h2>
           <p>Pantau performa bengkel, katalog servis, booking, dan estimasi revenue dalam satu workspace admin.</p>
           <div className="dashboard-hero-badges" aria-label="Dashboard highlights">
-            <span>Live API Data</span>
-            <span>Booking Overview</span>
-            <span>Garage Analytics</span>
+            <button type="button" onClick={() => document.getElementById('section-stats')?.scrollIntoView({ behavior: 'smooth' })}>Live API Data</button>
+            <button type="button" onClick={() => document.getElementById('section-booking-chart')?.scrollIntoView({ behavior: 'smooth' })}>Booking Overview</button>
+            <button type="button" onClick={() => document.getElementById('section-analytics')?.scrollIntoView({ behavior: 'smooth' })}>Garage Analytics</button>
           </div>
         </div>
         <div className="dashboard-hero-panel" aria-label="Operations snapshot">
@@ -135,7 +135,7 @@ function Dashboard() {
 
       {error && <div className="feedback error span-2">{error}</div>}
 
-      <section className="stats-grid dashboard-stats-grid">
+      <section className="stats-grid dashboard-stats-grid" id="section-stats">
         {summaryCards.map((item) => {
           const Icon = item.icon
           return (
@@ -153,7 +153,7 @@ function Dashboard() {
         })}
       </section>
 
-      <section className="card chart-card dashboard-chart-card">
+      <section className="card chart-card dashboard-chart-card" id="section-booking-chart">
         <div className="section-heading dashboard-chart-heading">
           <div>
             <p className="eyebrow">Booking Status</p>
@@ -201,7 +201,7 @@ function Dashboard() {
         )}
       </section>
 
-      <section className="card chart-card dashboard-chart-card">
+      <section className="card chart-card dashboard-chart-card" id="section-analytics">
         <div className="section-heading dashboard-chart-heading">
           <div>
             <p className="eyebrow">Service Demand</p>
