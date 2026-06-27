@@ -1,0 +1,221 @@
+/* Small UI patches layered after App.css to keep admin booking actions and dark service panels consistent. */
+
+.home-dashboard .dashboard-hero-card::after {
+  display: none;
+}
+
+.service-catalog-page .services-controls {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 250px);
+  align-items: stretch;
+}
+
+.service-catalog-page .services-controls.single-panel {
+  grid-template-columns: 1fr;
+}
+
+.service-catalog-page .services-filter-panel,
+.service-catalog-page .services-export-panel {
+  border-color: rgba(255, 112, 0, 0.24);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 48%),
+    #202323;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.service-catalog-page .services-filter-panel {
+  padding: 18px;
+}
+
+.service-catalog-page .services-toolbar {
+  grid-template-columns: minmax(260px, 1.5fr) repeat(5, minmax(118px, 1fr));
+  gap: 12px;
+}
+
+.service-catalog-page .services-toolbar,
+.service-catalog-page .services-toolbar label,
+.service-catalog-page .services-export-panel {
+  color: #d5b4a8;
+}
+
+.service-catalog-page .services-toolbar,
+.service-catalog-page .services-toolbar.search-field {
+  border: 0;
+  background: transparent;
+}
+
+.service-catalog-page .search-field,
+.service-catalog-page input,
+.service-catalog-page select {
+  border-color: rgba(255, 112, 0, 0.28);
+  color: #f5f7f8;
+  background: #101313;
+}
+
+.service-catalog-page .search-field input {
+  background: transparent;
+}
+
+.service-catalog-page .services-export-panel .button-row {
+  height: 100%;
+  justify-content: center;
+}
+
+.booking-row-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 250px;
+}
+
+.booking-row-actions .action-button.detail {
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.booking-status-action {
+  display: grid;
+  gap: 6px;
+}
+
+.booking-status-action .inline-select {
+  min-width: 150px;
+}
+
+.booking-detail-dialog {
+  width: min(720px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: auto;
+  display: grid;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid rgba(255, 112, 0, 0.28);
+  border-radius: 10px;
+  color: #f5f7f8;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(249, 115, 22, 0.16), transparent 32%),
+    #171a1a;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.38);
+}
+
+.booking-detail-header,
+.booking-detail-status-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.booking-detail-header span {
+  color: #ffb08e;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.booking-detail-header h3 {
+  margin: 6px 0 0;
+  color: #f5f7f8;
+  font-size: clamp(24px, 4vw, 34px);
+}
+
+.booking-detail-header .icon-button {
+  flex: 0 0 auto;
+  border-color: rgba(255, 112, 0, 0.24);
+  color: #f5f7f8;
+  background: #101313;
+}
+
+.booking-detail-status-row {
+  align-items: center;
+  padding: 12px;
+  border: 1px solid rgba(255, 112, 0, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 112, 0, 0.06);
+}
+
+.booking-detail-status-row > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #d5b4a8;
+  font-weight: 900;
+}
+
+.booking-detail-status-row svg {
+  color: #ffb08e;
+}
+
+.booking-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.booking-detail-grid div {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid rgba(255, 112, 0, 0.18);
+  border-radius: 8px;
+  background: rgba(16, 19, 19, 0.84);
+}
+
+.booking-detail-grid dt {
+  color: #d5b4a8;
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.booking-detail-grid dd {
+  margin: 0;
+  color: #f5f7f8;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+:root[data-theme='dark'] .service-catalog-page .services-filter-panel,
+:root[data-theme='dark'] .service-catalog-page .services-export-panel {
+  border-color: rgba(255, 112, 0, 0.24);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 48%),
+    #202323;
+}
+
+:root[data-theme='dark'] .booking-detail-dialog {
+  border-color: rgba(255, 112, 0, 0.28);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(249, 115, 22, 0.16), transparent 32%),
+    #171a1a;
+}
+
+@media (max-width: 1180px) {
+  .service-catalog-page .services-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .service-catalog-page .services-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .service-catalog-page .services-toolbar,
+  .booking-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-row-actions,
+  .booking-detail-header,
+  .booking-detail-status-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .booking-row-actions {
+    min-width: 0;
+  }
+}
