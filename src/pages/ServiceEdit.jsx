@@ -1,7 +1,7 @@
 import { ArrowLeft, Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
-import ServiceForm from '../components/ui/ServiceForm'
+import ServiceForm from '../components/organisms/ServiceForm'
 import { getCategories, getServiceById, updateService } from '../services/services'
 import { hasValidationErrors, toServicePayload, validateServiceForm } from '../utils/serviceValidation'
 
@@ -111,3 +111,4 @@ function ServiceEdit() {
 }
 
 export default ServiceEdit
+

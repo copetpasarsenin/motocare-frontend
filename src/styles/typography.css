@@ -1,0 +1,200 @@
+/* Centralized typography layer for Motocare.
+   Keeps existing visual design while normalizing hierarchy and readability. */
+:root {
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: clamp(1.65rem, 2.4vw, 2.25rem);
+  --text-hero: clamp(2.45rem, 5vw, 4.75rem);
+  --leading-tight: 1.12;
+  --leading-title: 1.2;
+  --leading-body: 1.65;
+  --tracking-label: 0.08em;
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+
+body {
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.topbar h1,
+.section-heading h3,
+.booking-page-heading h3,
+.profile-page-heading h3,
+.service-card-body h4,
+.service-catalog-card h4,
+.profile-hero-info h2,
+.dashboard-hero-copy h2 {
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 850;
+  letter-spacing: -0.035em;
+  line-height: var(--leading-tight);
+  text-transform: none;
+}
+
+.topbar h1,
+.section-heading h3,
+.booking-page-heading h3,
+.profile-page-heading h3 {
+  font-size: var(--text-2xl);
+  font-weight: 850;
+}
+
+.dashboard-hero-copy h2,
+.public-hero-copy h1,
+.services-hero-heading h3 {
+  font-size: var(--text-hero);
+  font-weight: 900;
+  line-height: 0.98;
+}
+
+.booking-panel-heading h4,
+.booking-confirm-panel h4,
+.profile-section-header h3,
+.dashboard-chart-heading h3,
+.service-card-body h4,
+.service-catalog-card h4 {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  line-height: var(--leading-title);
+}
+
+p,
+.section-heading p,
+.booking-page-heading p,
+.booking-panel-heading p,
+.profile-hero-info p,
+.service-card-body p,
+.service-catalog-card p,
+.public-section-heading p {
+  color: var(--muted);
+  font-size: var(--text-base);
+  font-weight: 450;
+  line-height: var(--leading-body);
+  letter-spacing: 0;
+}
+
+.sidebar-nav a,
+.sidebar-footer a,
+.sidebar-footer button,
+.primary-button,
+.ghost-button,
+.action-button,
+.theme-toggle,
+.user-chip,
+.public-service-cta,
+button,
+.table-actions a {
+  font-size: var(--text-sm);
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.primary-button,
+.booking-confirm-button,
+.form-submit {
+  font-weight: 800;
+}
+
+.sidebar-nav-label,
+.eyebrow,
+.admin-page-eyebrow,
+.topbar-kicker,
+.filter-panel-heading,
+.form-alert,
+.feedback,
+.service-code,
+.profile-list dt,
+.booking-detail-grid dt,
+.booking-toolbar label:not(.search-field),
+.services-toolbar label {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.status-badge,
+.profile-role-badge,
+.service-card-meta span,
+.booking-id,
+.hero-panel-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+input,
+select,
+textarea,
+.input-shell input {
+  font-size: var(--text-sm);
+  font-weight: 550;
+  line-height: 1.4;
+}
+
+.field-error,
+.booking-time-note,
+.booking-payload-note,
+.booking-edit-grid small,
+.auth-switch,
+.muted {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.data-table th {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.data-table td,
+.profile-list dd,
+.detail-list dd,
+.booking-cell-main,
+.booking-service-name {
+  font-size: var(--text-sm);
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.service-card-footer strong,
+.booking-summary strong,
+.dashboard-stat-card strong,
+.booking-metric-card strong {
+  font-weight: 850;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --text-2xl: clamp(1.45rem, 7vw, 1.9rem);
+    --text-hero: clamp(2.1rem, 12vw, 3.4rem);
+  }
+}

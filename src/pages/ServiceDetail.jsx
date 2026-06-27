@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Edit, Gauge, Loader2, ShieldCheck, Tag, Wrench } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import StatusBadge from '../components/ui/StatusBadge'
+import StatusBadge from '../components/atoms/StatusBadge'
 import { getServiceById } from '../services/services'
 import { getUserRole } from '../utils/auth'
 import { formatCurrency, getCategoryName } from '../utils/csv'
@@ -119,3 +119,4 @@ function ServiceDetail() {
 }
 
 export default ServiceDetail
+

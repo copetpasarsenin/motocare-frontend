@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router'
-import DashboardLayout from '../components/layout/DashboardLayout'
+import DashboardLayout from '../components/templates/DashboardLayout'
 import BookingCreate from '../pages/BookingCreate'
 import BookingsList from '../pages/BookingsList'
 import Dashboard from '../pages/Dashboard'
@@ -46,6 +46,7 @@ function AppRoutes() {
 }
 
 export default AppRoutes
+
 
 
 

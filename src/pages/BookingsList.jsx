@@ -16,8 +16,8 @@ import {
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
-import EmptyState from '../components/ui/EmptyState'
-import StatusBadge from '../components/ui/StatusBadge'
+import EmptyState from '../components/molecules/EmptyState'
+import StatusBadge from '../components/atoms/StatusBadge'
 import { bookingStatuses, getBookings, updateBooking, updateBookingStatus } from '../services/bookings'
 import { getUserRole } from '../utils/auth'
 import { getServices } from '../services/services'
@@ -532,6 +532,7 @@ function BookingsList() {
 }
 
 export default BookingsList
+
 
 
 

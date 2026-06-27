@@ -15,8 +15,8 @@ import {
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
-import EmptyState from '../components/ui/EmptyState'
-import StatusBadge from '../components/ui/StatusBadge'
+import EmptyState from '../components/molecules/EmptyState'
+import StatusBadge from '../components/atoms/StatusBadge'
 import { deleteService, getCategories, getServices } from '../services/services'
 import { buildServicesCsv, downloadCsv, formatCurrency, getCategoryName } from '../utils/csv'
 import { downloadServicesExcel } from '../utils/excel'
@@ -391,3 +391,4 @@ function ServicesList() {
 }
 
 export default ServicesList
+
