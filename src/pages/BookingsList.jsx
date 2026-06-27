@@ -4,6 +4,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock3,
+  Eye,
   Mail,
   Phone,
   PlusCircle,
@@ -11,6 +12,7 @@ import {
   Search,
   SlidersHorizontal,
   User,
+  X,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
@@ -18,6 +20,7 @@ import EmptyState from '../components/ui/EmptyState'
 import StatusBadge from '../components/ui/StatusBadge'
 import { bookingStatuses, getBookings, updateBookingStatus } from '../services/bookings'
 import { getUserRole } from '../utils/auth'
+import { formatCurrency } from '../utils/csv'
 
 const SKELETON_ROWS = 5
 
@@ -31,8 +34,18 @@ function formatDate(value) {
   }).format(new Date(value))
 }
 
+function formatTime(value) {
+  if (!value) return '-'
+
+  return String(value).slice(0, 5)
+}
+
 function getServiceName(booking) {
   return booking?.service?.name || '-'
+}
+
+function getServiceCategory(booking) {
+  return booking?.service?.category?.name || booking?.service?.category_name || '-'
 }
 
 function getVehicleInfo(booking) {
@@ -51,7 +64,7 @@ function SkeletonRow({ cols }) {
 
 function BookingsList() {
   const isAdmin = getUserRole() === 'admin'
-  const colCount = isAdmin ? 9 : 7
+  const colCount = isAdmin ? 9 : 8
   const [bookings, setBookings] = useState([])
   const [meta, setMeta] = useState({ page: 1, limit: 10, total: 0, total_pages: 0 })
   const [filters, setFilters] = useState({
@@ -64,6 +77,7 @@ function BookingsList() {
   })
   const [loading, setLoading] = useState(false)
   const [updatingId, setUpdatingId] = useState(null)
+  const [selectedBooking, setSelectedBooking] = useState(null)
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const totalPages = Math.max(meta.total_pages, 1)
   const visibleStatusCounts = bookings.reduce((counts, booking) => {
@@ -129,6 +143,7 @@ function BookingsList() {
       const updatedBooking = await updateBookingStatus(bookingId, status)
       setBookings((current) => current.map((booking) => (booking.id === bookingId ? updatedBooking : booking)))
       setFeedback({ type: 'success', message: 'Status booking berhasil diubah.' })
+      setSelectedBooking((current) => (current?.id === updatedBooking.id ? updatedBooking : current))
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal mengubah status booking' })
     } finally {
@@ -144,10 +159,12 @@ function BookingsList() {
           <h3>Bookings</h3>
           <p>{isAdmin ? 'Admin melihat semua booking dan dapat mengubah status.' : 'User melihat booking miliknya sendiri.'}</p>
         </div>
-        <Link className="primary-button" to="/bookings/create">
-          <PlusCircle size={17} />
-          Create Booking
-        </Link>
+        {!isAdmin && (
+          <Link className="primary-button" to="/bookings/create">
+            <PlusCircle size={17} />
+            Create Booking
+          </Link>
+        )}
       </div>
 
       <div className="booking-metrics-grid" aria-label="Booking summary">
@@ -241,7 +258,7 @@ function BookingsList() {
               <th>Service</th>
               <th>Date</th>
               <th>Status</th>
-              {isAdmin && <th>Actions</th>}
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -272,22 +289,30 @@ function BookingsList() {
                   <span className="booking-cell-main"><CalendarDays size={14} />{formatDate(booking.booking_date)}</span>
                 </td>
                 <td data-label="Status"><StatusBadge status={booking.status} /></td>
-                {isAdmin && (
-                  <td data-label="Actions">
-                    <select
-                      className="inline-select"
-                      value={booking.status}
-                      onChange={(event) => handleStatusChange(booking.id, event.target.value)}
-                      disabled={updatingId === booking.id}
-                      aria-label={`Update status booking ${booking.id}`}
-                    >
-                      {bookingStatuses.map((status) => (
-                        <option key={status} value={status}>{status.replaceAll('_', ' ')}</option>
-                      ))}
-                    </select>
-                    {updatingId === booking.id && <span className="status-updating"><Clock3 size={13} />Updating</span>}
-                  </td>
-                )}
+                <td data-label="Actions">
+                  <div className="booking-row-actions table-actions">
+                    <button className="action-button detail" type="button" onClick={() => setSelectedBooking(booking)}>
+                      <Eye size={14} />
+                      Detail
+                    </button>
+                    {isAdmin && (
+                      <div className="booking-status-action">
+                        <select
+                          className="inline-select"
+                          value={booking.status}
+                          onChange={(event) => handleStatusChange(booking.id, event.target.value)}
+                          disabled={updatingId === booking.id}
+                          aria-label={`Update status booking ${booking.id}`}
+                        >
+                          {bookingStatuses.map((status) => (
+                            <option key={status} value={status}>{status.replaceAll('_', ' ')}</option>
+                          ))}
+                        </select>
+                        {updatingId === booking.id && <span className="status-updating"><Clock3 size={13} />Updating</span>}
+                      </div>
+                    )}
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -298,9 +323,9 @@ function BookingsList() {
         <EmptyState
           icon={CalendarDays}
           title="Booking kosong"
-          description="Tidak ada booking sesuai filter saat ini. Reset filter atau buat booking baru."
-          actionLabel="Buat Booking"
-          actionTo="/bookings/create"
+          description="Tidak ada booking sesuai filter saat ini. Reset filter untuk melihat data booking lain."
+          actionLabel={!isAdmin ? 'Buat Booking' : undefined}
+          actionTo={!isAdmin ? '/bookings/create' : undefined}
         />
       )}
 
@@ -318,6 +343,64 @@ function BookingsList() {
           <ChevronRight size={16} />
         </button>
       </div>
+
+      {selectedBooking && (
+        <div className="modal-backdrop" role="presentation" onClick={(event) => { if (event.target === event.currentTarget) setSelectedBooking(null) }}>
+          <div className="booking-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-detail-title">
+            <div className="booking-detail-header">
+              <div>
+                <span>Detail Booking</span>
+                <h3 id="booking-detail-title">Booking #{selectedBooking.id}</h3>
+              </div>
+              <button className="icon-button" type="button" onClick={() => setSelectedBooking(null)} aria-label="Tutup detail booking">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="booking-detail-status-row">
+              <StatusBadge status={selectedBooking.status} />
+              <span><CalendarDays size={15} />{formatDate(selectedBooking.booking_date)} · {formatTime(selectedBooking.booking_time)}</span>
+            </div>
+
+            <dl className="booking-detail-grid">
+              {isAdmin && (
+                <div>
+                  <dt>User</dt>
+                  <dd>{selectedBooking.user?.email || '-'}</dd>
+                </div>
+              )}
+              <div>
+                <dt>Customer</dt>
+                <dd>{selectedBooking.customer_name || '-'}</dd>
+              </div>
+              <div>
+                <dt>Phone</dt>
+                <dd>{selectedBooking.phone || '-'}</dd>
+              </div>
+              <div>
+                <dt>Vehicle</dt>
+                <dd>{getVehicleInfo(selectedBooking)}</dd>
+              </div>
+              <div>
+                <dt>Service</dt>
+                <dd>{getServiceName(selectedBooking)}</dd>
+              </div>
+              <div>
+                <dt>Category</dt>
+                <dd>{getServiceCategory(selectedBooking)}</dd>
+              </div>
+              <div>
+                <dt>Estimasi Harga</dt>
+                <dd>{formatCurrency(selectedBooking.service?.price || selectedBooking.price || selectedBooking.total_price)}</dd>
+              </div>
+              <div>
+                <dt>Catatan</dt>
+                <dd>{selectedBooking.notes || selectedBooking.note || '-'}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
