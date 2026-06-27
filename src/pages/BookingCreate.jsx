@@ -1,9 +1,10 @@
-import { ArrowLeft, ArrowRight, CheckSquare, Info, User, Wrench } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckSquare, Square, Info, User, Wrench } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
 import { createBooking } from '../services/bookings'
 import { getServices } from '../services/services'
 import { formatCurrency } from '../utils/csv'
+import { getUserRole } from '../utils/auth'
 import {
   hasBookingValidationErrors,
   toBookingPayload,
@@ -63,6 +64,13 @@ function BookingCreate() {
   const [selectedTime, setSelectedTime] = useState(timeOptions[1])
   const [selectedAddOns, setSelectedAddOns] = useState([])
   const navigate = useNavigate()
+  const isAdmin = getUserRole() === 'admin'
+
+  useEffect(() => {
+    if (isAdmin) {
+      navigate('/bookings', { replace: true })
+    }
+  }, [isAdmin, navigate])
   const [searchParams] = useSearchParams()
   const preselectedServiceId = searchParams.get('service_id') || ''
   const dateOptions = useMemo(() => buildDateOptions(), [])
@@ -225,7 +233,7 @@ function BookingCreate() {
             <Info size={23} />
             <div>
               <h4>Informasi Hari Ini</h4>
-              <p>Bengkel buka: <strong>08:00 - 20:00</strong> | Kapasitas tersedia: <strong>4 Slot</strong></p>
+              <p>Jam operasional: <strong>08:00 - 20:00</strong> | <strong>Pilih tanggal dan waktu booking sesuai kebutuhan.</strong></p>
             </div>
           </section>
         </div>
@@ -270,7 +278,7 @@ function BookingCreate() {
               {addOns.map((addOn) => (
                 <label key={addOn.id}>
                   <input type="checkbox" checked={selectedAddOns.includes(addOn.id)} onChange={() => toggleAddOn(addOn.id)} />
-                  <CheckSquare size={18} />
+                  {selectedAddOns.includes(addOn.id) ? <CheckSquare size={18} /> : <Square size={18} />}
                   <strong>{addOn.name}</strong>
                   <em>+{formatCurrency(addOn.price)}</em>
                 </label>

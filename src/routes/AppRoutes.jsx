@@ -25,8 +25,11 @@ function AppRoutes() {
           <Route path="services" element={<ServicesList />} />
           <Route path="services/:id" element={<ServiceDetail />} />
           <Route path="bookings" element={<BookingsList />} />
-          <Route path="bookings/create" element={<BookingCreate />} />
           <Route path="profile" element={<Profile />} />
+
+          <Route element={<ProtectedRoute allowedRoles={['user']} redirectTo="/bookings" />}>
+            <Route path="bookings/create" element={<BookingCreate />} />
+          </Route>
 
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route index element={<Dashboard />} />

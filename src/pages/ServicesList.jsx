@@ -337,8 +337,8 @@ function ServicesList() {
           icon={Wrench}
           title="Layanan kosong"
           description={isAdmin ? 'Tidak ada layanan sesuai filter saat ini. Reset filter atau tambah layanan baru.' : 'Tidak ada layanan sesuai filter saat ini. Reset filter untuk melihat layanan lain.'}
-          actionLabel={isAdmin ? 'Tambah Layanan' : undefined}
-          actionTo={isAdmin ? '/services/create' : undefined}
+          actionLabel={isAdmin ? 'Tambah Layanan' : 'Buat Booking'}
+          actionTo={isAdmin ? '/services/create' : '/bookings/create'}
         />
       )}
 
