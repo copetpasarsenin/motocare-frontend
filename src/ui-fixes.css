@@ -889,3 +889,291 @@ textarea:focus,
     transition: none !important;
   }
 }
+
+/* Final sync pass: light/dark shell, sidebar, readable tables, and clean search fields. */
+:root[data-theme='light'] .dashboard-layout,
+:root:not([data-theme='dark']) .dashboard-layout {
+  background: linear-gradient(180deg, #fafaf9 0%, var(--bg) 280px) !important;
+}
+
+:root[data-theme='dark'] .dashboard-layout {
+  background: radial-gradient(circle at top left, rgba(249, 115, 22, 0.08), transparent 32%), var(--bg) !important;
+}
+
+:root[data-theme='light'] .content-shell,
+:root:not([data-theme='dark']) .content-shell {
+  background: var(--bg) !important;
+}
+
+:root[data-theme='dark'] .content-shell {
+  background: var(--bg) !important;
+}
+
+:root[data-theme='light'] .sidebar,
+:root:not([data-theme='dark']) .sidebar {
+  color: var(--text) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%) !important;
+  border-right: 1px solid var(--line) !important;
+  box-shadow: 14px 0 34px rgba(41, 37, 36, 0.06) !important;
+}
+
+:root[data-theme='dark'] .sidebar {
+  color: var(--text) !important;
+  background: linear-gradient(180deg, #1c1917 0%, #0c0a09 100%) !important;
+  border-right: 1px solid var(--line) !important;
+  box-shadow: 14px 0 36px rgba(0, 0, 0, 0.34) !important;
+}
+
+.sidebar-brand,
+.sidebar-user,
+.sidebar-footer {
+  border-color: var(--line) !important;
+}
+
+.sidebar-brand strong,
+.sidebar-user strong,
+.sidebar-nav a span,
+.sidebar-footer a span,
+.sidebar-footer button span {
+  color: var(--text) !important;
+}
+
+.sidebar-brand span,
+.sidebar-user span,
+.sidebar-nav-label {
+  color: var(--muted) !important;
+}
+
+.sidebar-user,
+.sidebar-nav a,
+.sidebar-footer a,
+.sidebar-footer button,
+.user-chip,
+.theme-toggle,
+.topbar .ghost-button {
+  border: 1px solid var(--line) !important;
+  background: var(--surface) !important;
+}
+
+.sidebar-user svg,
+.sidebar-nav a svg,
+.sidebar-footer a svg,
+.sidebar-footer button svg,
+.nav-chevron {
+  color: var(--primary) !important;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active,
+.sidebar-footer a:hover,
+.sidebar-footer a.active,
+.sidebar-footer button:hover,
+.theme-toggle:hover,
+.topbar .ghost-button:hover {
+  color: var(--primary) !important;
+  border-color: color-mix(in srgb, var(--primary) 52%, var(--line)) !important;
+  background: var(--primary-soft) !important;
+}
+
+.sidebar-nav a.active {
+  box-shadow: inset 4px 0 0 var(--primary), 0 12px 28px color-mix(in srgb, var(--primary) 14%, transparent) !important;
+}
+
+:root[data-theme='light'] .topbar,
+:root:not([data-theme='dark']) .topbar {
+  color: var(--text) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: blur(14px);
+}
+
+:root[data-theme='dark'] .topbar {
+  color: var(--text) !important;
+  background: rgba(28, 25, 23, 0.92) !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: blur(14px);
+}
+
+.topbar h1,
+.topbar .user-chip span,
+.theme-toggle span,
+.topbar .ghost-button {
+  color: var(--text) !important;
+}
+
+.topbar .user-chip small {
+  color: var(--muted) !important;
+}
+
+.brand-mark,
+.service-icon-box,
+.profile-avatar {
+  background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+  color: #fff7ed !important;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--primary) 26%, transparent) !important;
+}
+
+.booking-metrics-grid,
+.booking-toolbar,
+.bookings-controls,
+.services-controls,
+.services-filter-panel,
+.services-export-panel {
+  color: var(--text) !important;
+}
+
+.booking-metric-card {
+  color: var(--text) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: var(--auto-radius, 16px) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.booking-metric-card span {
+  color: var(--muted) !important;
+}
+
+.booking-metric-card strong {
+  color: var(--text) !important;
+}
+
+.bookings-controls,
+.services-controls,
+.services-filter-panel {
+  border: 1px solid var(--line) !important;
+  border-radius: var(--auto-radius, 16px) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.filter-panel-heading,
+.filter-panel-heading span {
+  color: var(--text) !important;
+}
+
+.filter-panel-heading svg {
+  color: var(--primary) !important;
+}
+
+.service-catalog-page .services-toolbar,
+.booking-management-page .booking-toolbar {
+  align-items: end !important;
+  color: var(--text) !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.service-catalog-page .services-toolbar label,
+.booking-management-page .booking-toolbar label {
+  color: var(--text) !important;
+  font-weight: 850 !important;
+}
+
+.service-catalog-page .services-toolbar .search-field,
+.booking-management-page .booking-toolbar .search-field {
+  position: relative !important;
+  display: block !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.service-catalog-page .services-toolbar .search-field svg,
+.booking-management-page .booking-toolbar .search-field svg {
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  z-index: 2 !important;
+  color: var(--muted) !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+}
+
+.service-catalog-page .services-toolbar .search-field input,
+.booking-management-page .booking-toolbar .search-field input {
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 11px 14px 11px 44px !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  color: var(--text) !important;
+  background: var(--surface-raised) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #ffffff 32%, transparent) !important;
+}
+
+.service-catalog-page .services-toolbar .search-field:focus-within svg,
+.booking-management-page .booking-toolbar .search-field:focus-within svg {
+  color: var(--primary) !important;
+}
+
+.service-catalog-page .services-toolbar select,
+.booking-management-page .booking-toolbar select {
+  min-height: 48px !important;
+  border-radius: 14px !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+  background: var(--surface-raised) !important;
+}
+
+.table-summary strong,
+.table-summary span,
+.data-table th,
+.data-table td,
+.data-table td span,
+.data-table td strong,
+.booking-cell-main,
+.booking-service-name {
+  color: var(--text) !important;
+  opacity: 1 !important;
+}
+
+.data-table th {
+  color: var(--muted) !important;
+  background: var(--surface-soft) !important;
+}
+
+.data-table tbody tr {
+  background: var(--surface) !important;
+}
+
+.data-table tbody tr:hover {
+  background: color-mix(in srgb, var(--surface) 90%, var(--primary) 10%) !important;
+}
+
+.profile-page,
+.booking-create-page,
+.booking-management-page,
+.service-catalog-page {
+  max-width: none !important;
+}
+
+.profile-page .section-heading,
+.booking-management-page .section-heading,
+.service-catalog-page .section-heading,
+.booking-page-heading {
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+.profile-list dd,
+.profile-mono,
+.booking-detail-grid dd,
+.service-catalog-card strong,
+.service-catalog-card h3,
+.service-catalog-card p,
+.service-card-footer,
+.service-card-footer span {
+  color: var(--text) !important;
+  opacity: 1 !important;
+}
+
+.service-card-footer strong,
+.service-catalog-card .service-card-price,
+.booking-summary strong {
+  color: var(--accent) !important;
+}
