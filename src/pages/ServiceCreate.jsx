@@ -2,7 +2,7 @@ import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import ServiceForm from '../components/organisms/ServiceForm'
-import { createService, getCategories } from '../services/services'
+import { createService, getOrCreateOtherCategory } from '../services/services'
 import { hasValidationErrors, toServicePayload, validateServiceForm } from '../utils/serviceValidation'
 
 const initialValues = {
@@ -25,7 +25,7 @@ function ServiceCreate() {
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        setCategories(await getCategories())
+        setCategories((await getOrCreateOtherCategory()).categories)
       } catch (error) {
         setFeedback({ type: 'error', message: error.message || 'Gagal mengambil kategori' })
       }
@@ -92,4 +92,5 @@ function ServiceCreate() {
 }
 
 export default ServiceCreate
+
 

@@ -41,3 +41,39 @@ export function downloadCsv(filename, csv) {
   link.remove()
   URL.revokeObjectURL(url)
 }
+
+function formatDateTimePart(value, options) {
+  if (!value) return '-'
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return '-'
+  return new Intl.DateTimeFormat('id-ID', options).format(date)
+}
+
+export function getBookingServiceName(booking) {
+  return booking?.service?.name || booking?.service_name || '-'
+}
+
+export function getBookingCustomerName(booking) {
+  return booking?.customer_name || booking?.user?.username || booking?.user?.email || '-'
+}
+
+export function getBookingTotalPrice(booking) {
+  return booking?.total_price || booking?.price || booking?.service?.price || 0
+}
+
+export function buildBookingsCsv(bookings) {
+  const headers = ['ID', 'User/Customer', 'Email', 'Service', 'Tanggal Booking', 'Waktu Booking', 'Status', 'Total Harga', 'Tanggal Dibuat']
+  const rows = bookings.map((booking) => [
+    booking.id,
+    getBookingCustomerName(booking),
+    booking.user?.email || '',
+    getBookingServiceName(booking),
+    formatDateTimePart(booking.booking_date, { day: '2-digit', month: 'long', year: 'numeric' }),
+    formatDateTimePart(booking.booking_date, { hour: '2-digit', minute: '2-digit', hour12: false }),
+    booking.status || '',
+    getBookingTotalPrice(booking),
+    formatDateTimePart(booking.created_at, { day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }),
+  ])
+
+  return [headers, ...rows].map((row) => row.map(escapeCsvCell).join(',')).join('\r\n')
+}

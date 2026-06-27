@@ -52,3 +52,22 @@ export async function getCategories() {
   const payload = await apiClient('/api/categories')
   return Array.isArray(payload?.data) ? payload.data : []
 }
+
+export const OTHER_CATEGORY_NAME = 'Kategori Lainnya'
+
+export async function createCategory(data) {
+  const payload = await apiClient('/api/categories', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+  return payload?.data
+}
+
+export async function getOrCreateOtherCategory() {
+  const categories = await getCategories()
+  const existing = categories.find((category) => category?.name?.trim().toLowerCase() === OTHER_CATEGORY_NAME.toLowerCase())
+  if (existing) return { categories, otherCategory: existing }
+
+  const otherCategory = await createCategory({ name: OTHER_CATEGORY_NAME, description: 'Kategori layanan tambahan MotoCare' })
+  return { categories: [...categories, otherCategory], otherCategory }
+}

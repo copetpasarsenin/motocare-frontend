@@ -5,9 +5,11 @@ import {
   ChevronRight,
   Clock3,
   Eye,
+  FileSpreadsheet,
   Mail,
   Phone,
   PlusCircle,
+  Download,
   RefreshCw,
   Search,
   SlidersHorizontal,
@@ -21,9 +23,12 @@ import StatusBadge from '../components/atoms/StatusBadge'
 import { bookingStatuses, getBookings, updateBooking, updateBookingStatus } from '../services/bookings'
 import { getUserRole } from '../utils/auth'
 import { getServices } from '../services/services'
-import { formatCurrency } from '../utils/csv'
+import { buildBookingsCsv, downloadCsv, formatCurrency } from '../utils/csv'
+import { downloadBookingsExcel } from '../utils/excel'
 
 const SKELETON_ROWS = 5
+const BOOKINGS_CSV_FILENAME = 'motocare-bookings.csv'
+const BOOKINGS_EXCEL_FILENAME = 'motocare-bookings.xlsx'
 
 function formatDate(value) {
   if (!value) return '-'
@@ -231,6 +236,27 @@ function BookingsList() {
       setUpdatingId(null)
     }
   }
+  const handleExportBookingsCsv = () => {
+    if (!isAdmin) return
+    if (bookings.length === 0) {
+      setFeedback({ type: 'error', message: 'Tidak ada data booking untuk diexport.' })
+      return
+    }
+
+    downloadCsv(BOOKINGS_CSV_FILENAME, buildBookingsCsv(bookings))
+    setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_CSV_FILENAME}.` })
+  }
+
+  const handleExportBookingsExcel = () => {
+    if (!isAdmin) return
+    if (bookings.length === 0) {
+      setFeedback({ type: 'error', message: 'Tidak ada data booking untuk diexport.' })
+      return
+    }
+
+    downloadBookingsExcel(BOOKINGS_EXCEL_FILENAME, bookings)
+    setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_EXCEL_FILENAME}.` })
+  }
   const handleStatusChange = async (bookingId, status) => {
     if (!isAdmin) return
 
@@ -262,6 +288,18 @@ function BookingsList() {
             <PlusCircle size={17} />
             Create Booking
           </Link>
+        )}
+        {isAdmin && (
+          <div className="button-row">
+            <button className="ghost-button accent-button" type="button" onClick={handleExportBookingsCsv} disabled={loading}>
+              <Download size={16} />
+              Export CSV
+            </button>
+            <button className="ghost-button accent-button" type="button" onClick={handleExportBookingsExcel} disabled={loading}>
+              <FileSpreadsheet size={16} />
+              Export Excel
+            </button>
+          </div>
         )}
       </div>
 
@@ -354,7 +392,7 @@ function BookingsList() {
               <th>Phone</th>
               <th>Vehicle</th>
               <th>Service</th>
-              <th>Date</th>
+              <th>Jadwal Booking</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -383,8 +421,9 @@ function BookingsList() {
                 <td data-label="Service">
                   <span className="booking-service-name">{getServiceName(booking)}</span>
                 </td>
-                <td data-label="Date">
+                <td data-label="Jadwal Booking">
                   <span className="booking-cell-main"><CalendarDays size={14} />{formatDate(booking.booking_date)}</span>
+                  <span className="booking-cell-sub"><Clock3 size={13} />{formatTime(booking.booking_date)}</span>
                 </td>
                 <td data-label="Status"><StatusBadge status={booking.status} /></td>
                 <td data-label="Actions">
@@ -485,7 +524,7 @@ function BookingsList() {
 
             <div className="booking-detail-status-row">
               <StatusBadge status={selectedBooking.status} />
-              <span><CalendarDays size={15} />{formatDate(selectedBooking.booking_date)} · {formatTime(selectedBooking.booking_time)}</span>
+              <span><CalendarDays size={15} />{formatDate(selectedBooking.booking_date)} · {formatTime(selectedBooking.booking_date)}</span>
             </div>
 
             <dl className="booking-detail-grid">
@@ -508,6 +547,14 @@ function BookingsList() {
                 <dd>{getVehicleInfo(selectedBooking)}</dd>
               </div>
               <div>
+                <dt>Tanggal Booking</dt>
+                <dd>{formatDate(selectedBooking.booking_date)}</dd>
+              </div>
+              <div>
+                <dt>Waktu Booking</dt>
+                <dd>{formatTime(selectedBooking.booking_date)}</dd>
+              </div>
+              <div>
                 <dt>Service</dt>
                 <dd>{getServiceName(selectedBooking)}</dd>
               </div>
@@ -516,7 +563,7 @@ function BookingsList() {
                 <dd>{getServiceCategory(selectedBooking)}</dd>
               </div>
               <div>
-                <dt>Estimasi Harga</dt>
+                <dt>Total Harga</dt>
                 <dd>{formatCurrency(selectedBooking.service?.price || selectedBooking.price || selectedBooking.total_price)}</dd>
               </div>
               <div>
@@ -532,6 +579,8 @@ function BookingsList() {
 }
 
 export default BookingsList
+
+
 
 
 

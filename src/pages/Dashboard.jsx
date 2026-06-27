@@ -239,11 +239,11 @@ function Dashboard() {
         )}
       </section>
 
-      <section className="dashboard-ops-card" aria-label="Bay status">
+      <section className="dashboard-ops-card" aria-label="Booking overview">
         <div className="dashboard-ops-heading">
           <div>
             <p className="eyebrow">Workshop Bays</p>
-            <h3>Bay Status</h3>
+            <h3>Booking Overview</h3>
           </div>
           <span>{loading ? 'Syncing' : 'Live'}</span>
         </div>
@@ -286,3 +286,5 @@ function Dashboard() {
 }
 
 export default Dashboard
+
+
