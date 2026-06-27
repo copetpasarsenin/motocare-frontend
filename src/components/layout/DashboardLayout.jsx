@@ -17,14 +17,14 @@ import { clearSession, getStoredUser, getUserRole } from '../../utils/auth'
 import { getStoredTheme, toggleTheme } from '../../utils/theme'
 
 const navItems = [
-  { to: '/', label: 'Dashboard', icon: Gauge, roles: ['admin'] },
+  { to: '/dashboard', label: 'Dashboard', icon: Gauge, roles: ['admin'] },
   { to: '/services', label: 'Services', icon: Wrench },
   { to: '/bookings', label: 'Bookings', icon: CalendarDays },
   { to: '/profile', label: 'Profile', icon: UserCircle },
 ]
 
 const pageTitles = {
-  '/': 'Dashboard',
+  '/dashboard': 'Dashboard',
   '/services': 'Services List',
   '/services/create': 'Create Service',
   '/bookings': 'Bookings',
@@ -62,7 +62,7 @@ function Sidebar({ open, onClose, onLogout, user }) {
         {visibleNavItems.map((item) => {
           const Icon = item.icon
           return (
-            <NavLink key={item.to} to={item.to} onClick={onClose} end={item.to === '/'}>
+            <NavLink key={item.to} to={item.to} onClick={onClose} end={item.to === '/dashboard'}>
               <Icon size={18} />
               <span>{item.label}</span>
               <ChevronRight className="nav-chevron" size={16} aria-hidden="true" />
@@ -143,3 +143,5 @@ function DashboardLayout() {
 }
 
 export default DashboardLayout
+
+

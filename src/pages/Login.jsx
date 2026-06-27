@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ArrowRight, LockKeyhole, Mail, ShieldCheck } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { apiClient } from '../services/api'
-import { saveSession } from '../utils/auth'
+import { getUserRole, saveSession } from '../utils/auth'
 import { firstValidationError, validateEmail, validatePassword } from '../utils/validation'
 
 function Login() {
@@ -43,8 +43,12 @@ function Login() {
       })
 
       saveSession(response.data.token, response.data.user)
-      setFeedback({ type: 'success', message: 'Login berhasil. Mengalihkan ke dashboard...' })
-      setTimeout(() => navigate(location.state?.from?.pathname || '/', { replace: true }), 350)
+      const role = getUserRole()
+      const fallbackPath = role === 'admin' ? '/dashboard' : '/bookings'
+      const fromPath = location.state?.from?.pathname
+      const targetPath = fromPath && !['/', '/home', '/login', '/register'].includes(fromPath) ? fromPath : fallbackPath
+      setFeedback({ type: 'success', message: 'Login berhasil. Mengalihkan ke halaman akun...' })
+      setTimeout(() => navigate(targetPath, { replace: true }), 350)
     } catch (err) {
       setFeedback({ type: 'error', message: err.message || 'Login gagal' })
     } finally {
@@ -131,3 +135,5 @@ function Login() {
 }
 
 export default Login
+
+

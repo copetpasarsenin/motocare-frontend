@@ -33,7 +33,7 @@ function AppRoutes() {
           </Route>
 
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="services/create" element={<ServiceCreate />} />
             <Route path="services/:id/edit" element={<ServiceEdit />} />
           </Route>
@@ -46,5 +46,6 @@ function AppRoutes() {
 }
 
 export default AppRoutes
+
 
 
