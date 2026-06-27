@@ -1622,3 +1622,245 @@ html[data-theme='dark'] body .figma-dashboard .data-table th {
   color: #a7b0c0 !important;
   opacity: 1 !important;
 }
+
+/* Services List light-mode readability pass: clean cards, softer orange shell. */
+html[data-theme='light'] body .figma-dashboard .sidebar,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar {
+  background: linear-gradient(180deg, #c2410c 0%, #9a3412 100%) !important;
+  box-shadow: 12px 0 30px rgba(154, 52, 18, 0.14) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .topbar,
+html:not([data-theme='dark']) body .figma-dashboard .topbar {
+  background: linear-gradient(90deg, #c2410c 0%, #ea580c 100%) !important;
+  box-shadow: 0 12px 26px rgba(154, 52, 18, 0.13) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-user,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-user,
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer a,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer a,
+html[data-theme='light'] body .figma-dashboard .sidebar-footer button,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-footer button,
+html[data-theme='light'] body .figma-dashboard .theme-toggle,
+html:not([data-theme='dark']) body .figma-dashboard .theme-toggle,
+html[data-theme='light'] body .figma-dashboard .user-chip,
+html:not([data-theme='dark']) body .figma-dashboard .user-chip,
+html[data-theme='light'] body .figma-dashboard .topbar .ghost-button,
+html:not([data-theme='dark']) body .figma-dashboard .topbar .ghost-button {
+  background: rgba(255, 247, 237, 0.12) !important;
+  border-color: rgba(255, 247, 237, 0.32) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a.active,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a.active,
+html[data-theme='light'] body .figma-dashboard .sidebar-nav a:hover,
+html:not([data-theme='dark']) body .figma-dashboard .sidebar-nav a:hover {
+  background: rgba(255, 247, 237, 0.22) !important;
+  box-shadow: inset 4px 0 0 #fbbf24, 0 10px 22px rgba(120, 53, 15, 0.16) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page,
+html[data-theme='light'] body .figma-dashboard .services-card,
+html:not([data-theme='dark']) body .figma-dashboard .services-card {
+  background: #f5f5f4 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-hero-heading,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-hero-heading {
+  color: #1c1917 !important;
+  border: 1px solid #e7e5e4 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%) !important;
+  box-shadow: 0 18px 42px rgba(41, 37, 36, 0.08) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .section-heading h3,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .section-heading h3,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-hero-heading h3,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-hero-heading h3 {
+  color: #1c1917 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .section-heading p,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .section-heading p,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-hero-heading p,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-hero-heading p {
+  color: #57534e !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-controls,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-controls,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-filter-panel,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-filter-panel,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-export-panel,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-export-panel,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .table-summary,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .table-summary,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .pagination,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .pagination {
+  color: #1c1917 !important;
+  border: 1px solid #e7e5e4 !important;
+  background: #ffffff !important;
+  box-shadow: 0 14px 34px rgba(41, 37, 36, 0.07) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .filter-panel-heading,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .filter-panel-heading,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .filter-panel-heading span,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .filter-panel-heading span,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .services-toolbar label,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .services-toolbar label {
+  color: #1c1917 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-grid,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-grid {
+  gap: 22px !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-catalog-card,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-catalog-card {
+  color: #1c1917 !important;
+  border: 1px solid #e7e5e4 !important;
+  border-radius: 18px !important;
+  background: #ffffff !important;
+  box-shadow: 0 14px 34px rgba(41, 37, 36, 0.08) !important;
+  transform: translateY(0) !important;
+  transition: transform 220ms ease-out, box-shadow 220ms ease-out, border-color 220ms ease-out !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-catalog-card:hover,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-catalog-card:hover {
+  border-color: rgba(234, 88, 12, 0.32) !important;
+  box-shadow: 0 22px 54px rgba(41, 37, 36, 0.14) !important;
+  transform: translateY(-4px) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-catalog-card.featured,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-catalog-card.featured {
+  background: linear-gradient(145deg, #ffffff 0%, #fffaf3 100%) !important;
+  border-color: rgba(245, 158, 11, 0.28) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-body h4,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-body h4,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-catalog-card h4,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-catalog-card h4 {
+  color: #1c1917 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-body p,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-body p,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-catalog-card p,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-catalog-card p {
+  color: #57534e !important;
+  opacity: 1 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-code,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-code {
+  color: #78716c !important;
+  background: #f5f5f4 !important;
+  border-color: #e7e5e4 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-meta,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-meta {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-meta span,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-meta span {
+  color: #7c2d12 !important;
+  border: 1px solid rgba(245, 158, 11, 0.34) !important;
+  background: #fffbeb !important;
+  opacity: 1 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-footer,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-footer {
+  color: #1c1917 !important;
+  border-top: 1px solid #e7e5e4 !important;
+  background: transparent !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-footer strong,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-footer strong {
+  color: #c2410c !important;
+  text-shadow: none !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .status-badge.active,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .status-badge.active {
+  color: #166534 !important;
+  border-color: rgba(22, 101, 52, 0.24) !important;
+  background: #dcfce7 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .status-badge.inactive,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .status-badge.inactive {
+  color: #991b1b !important;
+  border-color: rgba(153, 27, 27, 0.22) !important;
+  background: #fee2e2 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-actions .action-button,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-actions .action-button {
+  color: #292524 !important;
+  border-color: #e7e5e4 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-actions .action-button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-actions .action-button:hover {
+  color: #c2410c !important;
+  border-color: rgba(234, 88, 12, 0.34) !important;
+  background: #fff7ed !important;
+  transform: translateY(-2px) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-actions .action-button.detail,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-actions .action-button.detail,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-actions .action-button.book,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-actions .action-button.book {
+  color: #fff7ed !important;
+  border-color: #c2410c !important;
+  background: #ea580c !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-card-actions .action-button.delete,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-card-actions .action-button.delete {
+  color: #b91c1c !important;
+  border-color: rgba(185, 28, 28, 0.22) !important;
+  background: #fff1f2 !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page .service-icon-box,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page .service-icon-box {
+  color: #fff7ed !important;
+  background: linear-gradient(135deg, #ea580c, #f59e0b) !important;
+  border-color: rgba(234, 88, 12, 0.28) !important;
+  box-shadow: 0 12px 24px rgba(234, 88, 12, 0.20) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page input,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page input,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page select,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page select {
+  color: #1c1917 !important;
+  border-color: #e7e5e4 !important;
+  background: #ffffff !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .service-catalog-page input::placeholder,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page input::placeholder {
+  color: #78716c !important;
+  opacity: 1 !important;
+}
