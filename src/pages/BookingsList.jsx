@@ -17,7 +17,7 @@ import { Link } from 'react-router'
 import EmptyState from '../components/ui/EmptyState'
 import StatusBadge from '../components/ui/StatusBadge'
 import { bookingStatuses, getBookings, updateBookingStatus } from '../services/bookings'
-import { getStoredUser } from '../utils/auth'
+import { getUserRole } from '../utils/auth'
 
 const SKELETON_ROWS = 5
 
@@ -50,8 +50,7 @@ function SkeletonRow({ cols }) {
 }
 
 function BookingsList() {
-  const user = getStoredUser()
-  const isAdmin = user?.role === 'admin'
+  const isAdmin = getUserRole() === 'admin'
   const colCount = isAdmin ? 9 : 7
   const [bookings, setBookings] = useState([])
   const [meta, setMeta] = useState({ page: 1, limit: 10, total: 0, total_pages: 0 })
