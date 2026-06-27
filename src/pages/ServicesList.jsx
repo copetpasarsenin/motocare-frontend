@@ -186,9 +186,11 @@ function ServicesList() {
           <p>Pilih layanan bengkel premium dengan teknisi berpengalaman, estimasi durasi jelas, dan harga transparan.</p>
         </div>
         <div className="button-row">
-          <Link className="ghost-button home-outline-button" to="/bookings/create">
-            Booking Service
-          </Link>
+          {!isAdmin && (
+            <Link className="ghost-button home-outline-button" to="/bookings/create">
+              Booking Service
+            </Link>
+          )}
           {isAdmin && (
             <Link className="primary-button" to="/services/create">
               <PlusCircle size={17} />
@@ -198,61 +200,63 @@ function ServicesList() {
         </div>
       </div>
 
-      <div className="services-controls">
-        <div className="filter-panel-heading">
-          <SlidersHorizontal size={18} />
-          <span>Temukan Layanan</span>
-        </div>
-        <div className="toolbar services-toolbar">
-          <label className="search-field">
-            <Search size={18} />
-            <input
-              type="search"
-              value={filters.search}
-              onChange={(event) => updateFilter('search', event.target.value)}
-              placeholder="Cari nama layanan..."
-            />
-          </label>
-          <label>
-            Category
-            <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter category">
-              <option value="">Semua kategori</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>{category.name}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Status
-            <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
-              <option value="">Semua status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </label>
-          <label>
-            Sort by
-            <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Sort field">
-              <option value="name">Nama</option>
-              <option value="price">Price</option>
-              <option value="duration_minutes">Durasi</option>
-            </select>
-          </label>
-          <label>
-            Order
-            <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Sort order">
-              <option value="asc">Naik</option>
-              <option value="desc">Turun</option>
-            </select>
-          </label>
-          <label>
-            Per page
-            <select value={filters.limit} onChange={(event) => updateFilter('limit', Number(event.target.value))} aria-label="Items per page">
-              <option value={5}>5</option>
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-            </select>
-          </label>
+      <div className={`services-controls ${isAdmin ? '' : 'single-panel'}`}>
+        <div className="services-filter-panel">
+          <div className="filter-panel-heading">
+            <SlidersHorizontal size={18} />
+            <span>Temukan Layanan</span>
+          </div>
+          <div className="toolbar services-toolbar">
+            <label className="search-field">
+              <Search size={18} />
+              <input
+                type="search"
+                value={filters.search}
+                onChange={(event) => updateFilter('search', event.target.value)}
+                placeholder="Cari nama layanan..."
+              />
+            </label>
+            <label>
+              Category
+              <select value={filters.category_id} onChange={(event) => updateFilter('category_id', event.target.value)} aria-label="Filter category">
+                <option value="">Semua kategori</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>{category.name}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Status
+              <select value={filters.status} onChange={(event) => updateFilter('status', event.target.value)} aria-label="Filter status">
+                <option value="">Semua status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </label>
+            <label>
+              Sort by
+              <select value={filters.sort_by} onChange={(event) => updateFilter('sort_by', event.target.value)} aria-label="Sort field">
+                <option value="name">Nama</option>
+                <option value="price">Price</option>
+                <option value="duration_minutes">Durasi</option>
+              </select>
+            </label>
+            <label>
+              Order
+              <select value={filters.sort_order} onChange={(event) => updateFilter('sort_order', event.target.value)} aria-label="Sort order">
+                <option value="asc">Naik</option>
+                <option value="desc">Turun</option>
+              </select>
+            </label>
+            <label>
+              Per page
+              <select value={filters.limit} onChange={(event) => updateFilter('limit', Number(event.target.value))} aria-label="Items per page">
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+              </select>
+            </label>
+          </div>
         </div>
         {isAdmin && (
           <div className="services-export-panel">
@@ -316,7 +320,7 @@ function ServicesList() {
               </div>
               <div className="service-card-actions table-actions">
                 <Link className="action-button detail" to={`/services/${service.id}`}><Eye size={14} />Lihat Detail</Link>
-                <Link className="action-button book" to={`/bookings/create?service_id=${service.id}`}>Booking</Link>
+                {!isAdmin && <Link className="action-button book" to={`/bookings/create?service_id=${service.id}`}>Booking</Link>}
                 {isAdmin && (
                   <>
                     <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
