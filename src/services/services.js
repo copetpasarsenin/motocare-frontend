@@ -9,7 +9,7 @@ export function normalizeServiceList(payload) {
   }
 }
 
-export async function getServices(params = {}) {
+export async function getServices(params = {}, options = {}) {
   const query = new URLSearchParams()
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== '') {
@@ -18,7 +18,7 @@ export async function getServices(params = {}) {
   })
 
   const suffix = query.toString() ? `?${query.toString()}` : ''
-  return normalizeServiceList(await apiClient(`/api/services${suffix}`))
+  return normalizeServiceList(await apiClient(`/api/services${suffix}`, options))
 }
 
 export async function getServiceById(id) {

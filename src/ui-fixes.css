@@ -2764,3 +2764,330 @@ html:not([data-theme='dark']) body .public-footer {
   border-top-color: rgba(146, 64, 14, 0.14) !important;
   background: #f7f3ed !important;
 }
+
+/* Final token-based theme alignment for protected MotoCare surfaces. */
+html[data-theme='light'],
+html:not([data-theme='dark']) {
+  --dashboard-panel: var(--surface);
+  --dashboard-panel-strong: var(--surface-soft);
+  --dashboard-panel-raised: var(--surface-raised);
+  --dashboard-border: var(--line);
+  --dashboard-text: var(--text);
+  --dashboard-muted: var(--muted);
+  --dashboard-chart-grid: color-mix(in srgb, var(--muted) 24%, transparent);
+  --dashboard-chart-hover: color-mix(in srgb, var(--primary) 10%, transparent);
+  --dashboard-tooltip-bg: var(--surface-raised);
+}
+
+html[data-theme='dark'] {
+  --dashboard-panel: color-mix(in srgb, var(--surface) 92%, black 8%);
+  --dashboard-panel-strong: var(--surface-soft);
+  --dashboard-panel-raised: color-mix(in srgb, var(--surface-raised) 86%, black 14%);
+  --dashboard-border: color-mix(in srgb, var(--line) 78%, var(--primary) 22%);
+  --dashboard-text: var(--text);
+  --dashboard-muted: var(--muted);
+  --dashboard-chart-grid: color-mix(in srgb, var(--muted) 22%, transparent);
+  --dashboard-chart-hover: color-mix(in srgb, var(--primary) 16%, transparent);
+  --dashboard-tooltip-bg: var(--surface-raised);
+}
+
+.figma-dashboard.dashboard-layout,
+.figma-dashboard .content-shell,
+.figma-dashboard .page-content {
+  color: var(--text) !important;
+  background: var(--bg) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .page-content,
+html:not([data-theme='dark']) body .figma-dashboard .page-content {
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 30%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 72%, var(--bg) 28%) 0%, var(--bg) 280px) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .page-content {
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 32%),
+    var(--bg) !important;
+}
+
+.figma-dashboard .dashboard-grid {
+  color: var(--dashboard-text) !important;
+  background: transparent !important;
+}
+
+.figma-dashboard .dashboard-hero-card,
+.figma-dashboard .dashboard-stat-card,
+.figma-dashboard .dashboard-chart-card,
+.figma-dashboard .dashboard-ops-card,
+.figma-dashboard .dashboard-activity-card,
+.figma-dashboard .dashboard-bay-item,
+.figma-dashboard .dashboard-activity-list article,
+.figma-dashboard .chart-placeholder {
+  color: var(--dashboard-text) !important;
+  border: 1px solid var(--dashboard-border) !important;
+  background: var(--dashboard-panel) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.figma-dashboard .dashboard-hero-card {
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 32%),
+    linear-gradient(135deg, var(--dashboard-panel) 0%, var(--dashboard-panel-strong) 58%, var(--dashboard-panel-raised) 100%) !important;
+}
+
+.figma-dashboard .dashboard-hero-card::before {
+  background:
+    linear-gradient(color-mix(in srgb, var(--muted) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--muted) 8%, transparent) 1px, transparent 1px) !important;
+}
+
+.figma-dashboard .dashboard-hero-panel,
+.figma-dashboard .dashboard-stat-card small,
+.figma-dashboard .dashboard-stat-card span,
+.figma-dashboard .dashboard-hero-badges button,
+.figma-dashboard .dashboard-hero-badges span,
+.figma-dashboard .dashboard-hero-panel small,
+.figma-dashboard .dashboard-ops-heading > span {
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--dashboard-border)) !important;
+  background: color-mix(in srgb, var(--dashboard-panel-strong) 82%, var(--primary) 18%) !important;
+}
+
+.figma-dashboard .dashboard-hero-copy h2,
+.figma-dashboard .dashboard-hero-copy p,
+.figma-dashboard .dashboard-hero-card h2,
+.figma-dashboard .dashboard-chart-heading h3,
+.figma-dashboard .dashboard-ops-heading h3,
+.figma-dashboard .dashboard-stat-card strong,
+.figma-dashboard .dashboard-bay-item strong,
+.figma-dashboard .dashboard-activity-list article strong,
+.figma-dashboard .chart-placeholder {
+  color: var(--dashboard-text) !important;
+}
+
+.figma-dashboard .dashboard-hero-copy p:not(.eyebrow),
+.figma-dashboard .dashboard-chart-heading p,
+.figma-dashboard .dashboard-stat-card span,
+.figma-dashboard .dashboard-stat-card small,
+.figma-dashboard .dashboard-bay-item span,
+.figma-dashboard .dashboard-activity-list article span,
+.figma-dashboard .dashboard-activity-list article em {
+  color: var(--dashboard-muted) !important;
+}
+
+.figma-dashboard .dashboard-hero-card .garage-tag,
+.figma-dashboard .dashboard-hero-card .eyebrow,
+.figma-dashboard .dashboard-hero-panel .hero-panel-label,
+.figma-dashboard .dashboard-hero-panel strong,
+.figma-dashboard .dashboard-ops-heading svg {
+  color: var(--accent) !important;
+}
+
+.figma-dashboard .dashboard-hero-badges button,
+.figma-dashboard .dashboard-hero-badges span,
+.figma-dashboard .dashboard-hero-panel small {
+  color: var(--primary) !important;
+}
+
+.figma-dashboard .dashboard-stat-card .stat-icon.orange,
+.figma-dashboard .stat-icon.orange {
+  color: var(--primary) !important;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--dashboard-border)) !important;
+  background: var(--primary-soft) !important;
+}
+
+.figma-dashboard .dashboard-stat-card .stat-icon.blue,
+.figma-dashboard .stat-icon.blue {
+  color: var(--accent) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--dashboard-border)) !important;
+  background: var(--accent-soft) !important;
+}
+
+.figma-dashboard .dashboard-bay-item em {
+  color: var(--primary) !important;
+  border-color: color-mix(in srgb, var(--primary) 34%, var(--dashboard-border)) !important;
+  background: var(--primary-soft) !important;
+}
+
+.figma-dashboard .recharts-cartesian-axis-tick-value,
+.figma-dashboard .recharts-legend-item-text,
+.figma-dashboard .recharts-label {
+  fill: var(--dashboard-muted) !important;
+  color: var(--dashboard-muted) !important;
+}
+
+.figma-dashboard .recharts-tooltip-wrapper {
+  color: var(--dashboard-text) !important;
+}
+
+.figma-dashboard .service-catalog-page,
+.figma-dashboard .booking-management-page,
+.figma-dashboard .booking-create-page,
+.figma-dashboard .profile-page {
+  color: var(--text) !important;
+  background: var(--bg) !important;
+}
+
+.figma-dashboard .service-catalog-card,
+.figma-dashboard .booking-panel,
+.figma-dashboard .booking-confirm-panel,
+.figma-dashboard .booking-info-card,
+.figma-dashboard .booking-metric-card,
+.figma-dashboard .bookings-controls,
+.figma-dashboard .services-controls,
+.figma-dashboard .services-filter-panel,
+.figma-dashboard .services-export-panel,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section,
+.figma-dashboard .profile-list div,
+.figma-dashboard .table-summary,
+.figma-dashboard .pagination,
+.figma-dashboard .table-scroll,
+.figma-dashboard .data-table,
+.figma-dashboard .data-table tbody tr,
+.figma-dashboard .booking-detail-dialog {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.figma-dashboard .data-table th,
+.figma-dashboard .booking-detail-grid div,
+.figma-dashboard .booking-detail-status-row,
+.figma-dashboard .booking-summary,
+.figma-dashboard .service-card-footer,
+.figma-dashboard .profile-list dt {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+  background: var(--surface-soft) !important;
+}
+
+.figma-dashboard input,
+.figma-dashboard select,
+.figma-dashboard textarea,
+.figma-dashboard .input-shell,
+.figma-dashboard .search-field input,
+.figma-dashboard .inline-select {
+  color: var(--text) !important;
+  border-color: var(--line) !important;
+  background: var(--surface-raised) !important;
+}
+
+.figma-dashboard p,
+.figma-dashboard small,
+.figma-dashboard .data-table th,
+.figma-dashboard .profile-list dt,
+.figma-dashboard .service-catalog-card p,
+.figma-dashboard .booking-page-heading p,
+.figma-dashboard .section-heading p:not(.eyebrow) {
+  color: var(--muted) !important;
+}
+
+.figma-dashboard h1,
+.figma-dashboard h2,
+.figma-dashboard h3,
+.figma-dashboard h4,
+.figma-dashboard .data-table td,
+.figma-dashboard .profile-list dd,
+.figma-dashboard .booking-cell-main,
+.figma-dashboard .booking-service-name {
+  color: var(--text) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .dashboard-hero-card,
+html[data-theme='dark'] body .figma-dashboard .dashboard-stat-card,
+html[data-theme='dark'] body .figma-dashboard .dashboard-chart-card,
+html[data-theme='dark'] body .figma-dashboard .dashboard-ops-card,
+html[data-theme='dark'] body .figma-dashboard .dashboard-activity-card,
+html[data-theme='dark'] body .figma-dashboard .dashboard-bay-item,
+html[data-theme='dark'] body .figma-dashboard .dashboard-activity-list article,
+html[data-theme='dark'] body .figma-dashboard .chart-placeholder {
+  color: var(--text) !important;
+  border-color: var(--dashboard-border) !important;
+  background: var(--dashboard-panel) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .dashboard-hero-card {
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 32%),
+    linear-gradient(135deg, var(--surface) 0%, var(--surface-soft) 58%, var(--bg) 100%) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .dashboard-hero-card,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-hero-card,
+html[data-theme='light'] body .figma-dashboard .dashboard-stat-card,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-stat-card,
+html[data-theme='light'] body .figma-dashboard .dashboard-chart-card,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-chart-card,
+html[data-theme='light'] body .figma-dashboard .dashboard-ops-card,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-ops-card,
+html[data-theme='light'] body .figma-dashboard .dashboard-activity-card,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-activity-card,
+html[data-theme='light'] body .figma-dashboard .dashboard-bay-item,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-bay-item,
+html[data-theme='light'] body .figma-dashboard .dashboard-activity-list article,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-activity-list article,
+html[data-theme='light'] body .figma-dashboard .chart-placeholder,
+html:not([data-theme='dark']) body .figma-dashboard .chart-placeholder {
+  color: var(--text) !important;
+  border-color: var(--dashboard-border) !important;
+  background: var(--dashboard-panel) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+html[data-theme='light'] body .figma-dashboard .dashboard-hero-card,
+html:not([data-theme='dark']) body .figma-dashboard .dashboard-hero-card {
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 32%),
+    linear-gradient(135deg, var(--surface) 0%, var(--surface-soft) 58%, var(--primary-soft) 100%) !important;
+}
+
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .stat-card.dashboard-stat-card,
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .card.chart-card.dashboard-chart-card,
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .dashboard-ops-card,
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .dashboard-activity-card,
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .dashboard-bay-item,
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .dashboard-activity-list article {
+  color: var(--text) !important;
+  border-color: var(--dashboard-border) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--surface-raised) 18%, transparent), transparent 52%),
+    var(--dashboard-panel) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard {
+  --dashboard-panel: color-mix(in srgb, var(--surface) 92%, black 8%);
+  --dashboard-panel-strong: var(--surface-soft);
+  --dashboard-panel-raised: color-mix(in srgb, var(--surface-raised) 86%, black 14%);
+  --dashboard-border: color-mix(in srgb, var(--line) 78%, var(--primary) 22%);
+  --dashboard-text: var(--text);
+  --dashboard-muted: var(--muted);
+  --dashboard-chart-grid: color-mix(in srgb, var(--muted) 22%, transparent);
+  --dashboard-chart-hover: color-mix(in srgb, var(--primary) 16%, transparent);
+  --dashboard-tooltip-bg: var(--surface-raised);
+}
+
+html[data-theme='light'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard,
+html:not([data-theme='dark']) body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard {
+  --dashboard-panel: var(--surface);
+  --dashboard-panel-strong: var(--surface-soft);
+  --dashboard-panel-raised: var(--surface-raised);
+  --dashboard-border: var(--line);
+  --dashboard-text: var(--text);
+  --dashboard-muted: var(--muted);
+  --dashboard-chart-grid: color-mix(in srgb, var(--muted) 24%, transparent);
+  --dashboard-chart-hover: color-mix(in srgb, var(--primary) 10%, transparent);
+  --dashboard-tooltip-bg: var(--surface-raised);
+}
+
+html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-content .dashboard-grid.home-dashboard .hero-card.dashboard-hero-card {
+  color: var(--text) !important;
+  border-color: var(--dashboard-border) !important;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 32%),
+    linear-gradient(135deg, var(--surface) 0%, var(--surface-soft) 58%, var(--bg) 100%) !important;
+  box-shadow: var(--shadow-soft) !important;
+}

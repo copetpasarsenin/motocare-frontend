@@ -31,10 +31,11 @@ function redirectToLoginOnUnauthorized() {
 }
 
 export async function apiClient(path, options = {}) {
+  const { redirectOnUnauthorized = true, ...fetchOptions } = options
   const token = getToken()
-  const headers = new Headers(options.headers || {})
+  const headers = new Headers(fetchOptions.headers || {})
 
-  if (!headers.has('Content-Type') && options.body) {
+  if (!headers.has('Content-Type') && fetchOptions.body) {
     headers.set('Content-Type', 'application/json')
   }
 
@@ -43,14 +44,14 @@ export async function apiClient(path, options = {}) {
   }
 
   const response = await fetch(buildApiUrl(path), {
-    ...options,
+    ...fetchOptions,
     headers,
   })
 
   const contentType = response.headers.get('content-type') || ''
   const payload = contentType.includes('application/json') ? await response.json() : null
 
-  if (response.status === 401) {
+  if (response.status === 401 && redirectOnUnauthorized !== false) {
     redirectToLoginOnUnauthorized()
   }
 

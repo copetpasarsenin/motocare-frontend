@@ -17,11 +17,11 @@ import { getDashboardStats } from '../services/dashboard'
 import { formatCurrency } from '../utils/csv'
 
 const statusColors = {
-  pending: '#f97316',
-  confirmed: '#2563eb',
-  in_progress: '#8b5cf6',
-  completed: '#16a34a',
-  cancelled: '#dc2626',
+  pending: 'var(--warning)',
+  confirmed: 'var(--primary)',
+  in_progress: 'var(--accent)',
+  completed: 'var(--success)',
+  cancelled: 'var(--danger)',
 }
 
 const emptyStats = {
@@ -92,7 +92,7 @@ function Dashboard() {
     background: 'var(--dashboard-tooltip-bg)',
     border: '1px solid var(--dashboard-border)',
     borderRadius: 8,
-    boxShadow: '0 18px 38px rgba(15, 23, 42, 0.16)',
+    boxShadow: 'var(--shadow-soft)',
     color: 'var(--dashboard-text)',
   }
 
@@ -177,7 +177,7 @@ function Dashboard() {
                 labelLine={false}
               >
                 {stats.bookings_by_status.map((entry) => (
-                  <Cell key={entry.status} fill={statusColors[entry.status] || '#64748b'} />
+                  <Cell key={entry.status} fill={statusColors[entry.status] || 'var(--muted)'} />
                 ))}
               </Pie>
               <Tooltip
@@ -192,7 +192,7 @@ function Dashboard() {
               <Legend
                 formatter={(value) => value.replaceAll('_', ' ')}
                 iconType="circle"
-                wrapperStyle={{ paddingTop: 12 }}
+                wrapperStyle={{ paddingTop: 12, color: 'var(--dashboard-muted)' }}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -231,7 +231,7 @@ function Dashboard() {
                 itemStyle={{ color: 'var(--dashboard-text)' }}
                 labelStyle={{ color: 'var(--dashboard-muted)' }}
               />
-              <Bar dataKey="total_bookings" name="Bookings" radius={[6, 6, 0, 0]} fill="#ff7000" barSize={36} />
+              <Bar dataKey="total_bookings" name="Bookings" radius={[6, 6, 0, 0]} fill="var(--primary)" barSize={36} />
             </BarChart>
           </ResponsiveContainer>
         ) : (
@@ -286,5 +286,4 @@ function Dashboard() {
 }
 
 export default Dashboard
-
 

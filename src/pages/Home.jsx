@@ -30,14 +30,17 @@ function Home() {
       try {
         setServicesLoading(true)
         setServicesError('')
-        const result = await getServices({ page: 1, limit: 100, status: 'active' })
+        const result = await getServices(
+          { page: 1, limit: 100, status: 'active' },
+          { redirectOnUnauthorized: false },
+        )
         if (isMounted) {
           setServices(result.data)
         }
       } catch (error) {
         console.error(error)
         if (isMounted) {
-          setServicesError('Gagal memuat layanan. Silakan coba lagi nanti.')
+          setServicesError('Layanan publik belum dapat dimuat. Anda tetap bisa melihat halaman ini dan login untuk booking.')
         }
       } finally {
         if (isMounted) {
