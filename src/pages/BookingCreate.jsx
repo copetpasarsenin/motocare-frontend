@@ -133,9 +133,25 @@ function BookingCreate() {
     setFeedback({ type: '', message: '' })
 
     try {
-      await Promise.all(values.service_ids.map((serviceId) => createBooking(toPayload(values, serviceId, selectedTime))))
-      setFeedback({ type: 'success', message: `${values.service_ids.length} booking layanan berhasil dibuat.` })
-      setTimeout(() => navigate('/bookings'), 600)
+      const results = await Promise.allSettled(
+        values.service_ids.map((serviceId) => createBooking(toPayload(values, serviceId, selectedTime))),
+      )
+      const succeeded = results.filter((result) => result.status === 'fulfilled').length
+      const failed = results.length - succeeded
+
+      if (failed === 0) {
+        setFeedback({ type: 'success', message: `${succeeded} booking layanan berhasil dibuat.` })
+        setTimeout(() => navigate('/bookings'), 600)
+      } else if (succeeded === 0) {
+        const firstError = results.find((result) => result.status === 'rejected')
+        setFeedback({ type: 'error', message: firstError?.reason?.message || 'Gagal membuat semua booking' })
+      } else {
+        setFeedback({
+          type: 'error',
+          message: `${succeeded} booking berhasil dibuat, ${failed} gagal. Booking yang berhasil tersimpan di daftar booking Anda.`,
+        })
+        setTimeout(() => navigate('/bookings'), 2000)
+      }
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal membuat booking' })
     } finally {
