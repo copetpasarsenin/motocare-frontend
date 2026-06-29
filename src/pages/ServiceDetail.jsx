@@ -2,12 +2,13 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Clock, Edit, Gauge, Loader2, Shiel
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import StatusBadge from '../components/atoms/StatusBadge'
-import { getServiceById } from '../services/services'
-import { getUserRole } from '../utils/auth'
+import { getPublicServiceById, getServiceById } from '../services/services'
+import { getUserRole, isAuthenticated } from '../utils/auth'
 import { formatCurrency, getCategoryName } from '../utils/csv'
 
 function ServiceDetail() {
   const isAdmin = getUserRole() === 'admin'
+  const authenticated = isAuthenticated()
   const { id } = useParams()
   const [service, setService] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -19,7 +20,7 @@ function ServiceDetail() {
       setFeedback('')
 
       try {
-        setService(await getServiceById(id))
+        setService(await (authenticated ? getServiceById(id) : getPublicServiceById(id)))
       } catch (error) {
         setFeedback(error.message || 'Gagal mengambil detail layanan')
       } finally {
@@ -28,7 +29,7 @@ function ServiceDetail() {
     }
 
     loadService()
-  }, [id])
+  }, [authenticated, id])
 
   return (
     <section className="figma-service-detail">

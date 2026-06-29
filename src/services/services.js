@@ -41,6 +41,14 @@ export async function getServiceById(id) {
   return payload?.data
 }
 
+export async function getPublicServiceById(id) {
+  const payload = await apiClient(`/api/public/services/${id}`, {
+    includeAuth: false,
+    redirectOnUnauthorized: false,
+  })
+  return payload?.data
+}
+
 export async function createService(data) {
   const payload = await apiClient('/api/services', {
     method: 'POST',

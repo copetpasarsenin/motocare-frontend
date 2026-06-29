@@ -72,3 +72,8 @@ export async function changePassword(data) {
   })
   return payload?.data
 }
+
+export async function getMe() {
+  const payload = await apiClient('/me')
+  return payload?.data?.user
+}

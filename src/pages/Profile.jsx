@@ -1,17 +1,42 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
-import { changePassword, getApiBaseUrl } from '../services/api'
-import { getStoredUser } from '../utils/auth'
+import { changePassword, getApiBaseUrl, getMe } from '../services/api'
+import { getStoredUser, saveUser } from '../utils/auth'
 
 const initialPasswordValues = { current_password: '', new_password: '', confirm_password: '' }
 
 function Profile() {
-  const user = getStoredUser()
+  const [user, setUser] = useState(getStoredUser)
+  const [profileFeedback, setProfileFeedback] = useState({ type: '', message: '' })
   const initials = (user?.username || 'U').slice(0, 2).toUpperCase()
   const roleBadgeClass = user?.role === 'admin' ? 'profile-role-badge admin' : 'profile-role-badge'
   const [passwordValues, setPasswordValues] = useState(initialPasswordValues)
   const [passwordFeedback, setPasswordFeedback] = useState({ type: '', message: '' })
   const [submittingPassword, setSubmittingPassword] = useState(false)
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadProfile() {
+      try {
+        const freshUser = await getMe()
+        if (freshUser && isMounted) {
+          saveUser(freshUser)
+          setUser(freshUser)
+        }
+      } catch (error) {
+        if (isMounted) {
+          setProfileFeedback({ type: 'error', message: error.message || 'Gagal memuat ulang profil.' })
+        }
+      }
+    }
+
+    loadProfile()
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
 
   const updatePasswordValue = (key, value) => {
     setPasswordValues((current) => ({ ...current, [key]: value }))
@@ -47,6 +72,8 @@ function Profile() {
       <div className="section-heading profile-page-heading">
         <div><p className="eyebrow">MotoCare Account</p><h3>Profile</h3><p>View your account details, role, and connection settings.</p></div>
       </div>
+
+      {profileFeedback.message && <div className={`feedback ${profileFeedback.type}`}>{profileFeedback.message}</div>}
 
       <section className="profile-hero">
         <div className="profile-avatar">{initials}</div>
