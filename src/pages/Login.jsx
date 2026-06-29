@@ -6,7 +6,7 @@ import { getUserRole, saveSession } from '../utils/auth'
 import { firstValidationError, validateEmail, validatePassword } from '../utils/validation'
 
 function Login() {
-  const [form, setForm] = useState({ email: 'admin@motocare.test', password: 'password123' })
+  const [form, setForm] = useState({ email: '', password: '' })
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
