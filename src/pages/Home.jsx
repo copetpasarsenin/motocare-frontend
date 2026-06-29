@@ -5,6 +5,8 @@ import { getServices } from '../services/services'
 import { formatCurrency, getCategoryName } from '../utils/csv'
 import { getStoredTheme, toggleTheme } from '../utils/theme'
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 const benefits = [
   'Teknisi berpengalaman untuk motor harian dan premium.',
   'Proses servis rapi dengan catatan pekerjaan yang mudah dipantau.',
@@ -37,8 +39,7 @@ function Home() {
         if (isMounted) {
           setServices(result.data)
         }
-      } catch (error) {
-        console.error(error)
+      } catch {
         if (isMounted) {
           setServicesError('Layanan publik belum dapat dimuat. Anda tetap bisa melihat halaman ini dan login untuk booking.')
         }
@@ -146,7 +147,7 @@ function Home() {
       <footer className="public-footer">
         <div>
           <strong>MotoCare</strong>
-          <span>(c) 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+          <span>(c) {CURRENT_YEAR} MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
         </div>
         <nav aria-label="Legal links">
           <span>Privacy Policy</span>

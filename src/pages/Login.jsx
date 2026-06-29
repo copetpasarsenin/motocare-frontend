@@ -5,6 +5,8 @@ import { apiClient } from '../services/api'
 import { getUserRole, saveSession } from '../utils/auth'
 import { firstValidationError, validateEmail, validatePassword } from '../utils/validation'
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [feedback, setFeedback] = useState({ type: '', message: '' })
@@ -122,7 +124,7 @@ function Login() {
       <footer className="auth-footer">
         <div>
           <strong>MotoCare</strong>
-          <span>(c) 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+          <span>(c) {CURRENT_YEAR} MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
         </div>
         <nav aria-label="Legal links">
           <span>Privacy Policy</span>

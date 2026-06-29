@@ -9,6 +9,8 @@ import {
   validateUsername,
 } from '../utils/validation'
 
+const CURRENT_YEAR = new Date().getFullYear()
+
 function Register() {
   const [form, setForm] = useState({ username: '', email: '', password: '', confirmPassword: '' })
   const [feedback, setFeedback] = useState({ type: '', message: '' })
@@ -143,7 +145,7 @@ function Register() {
       <footer className="auth-footer">
         <div>
           <strong>MotoCare</strong>
-          <span>(c) 2024 MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
+          <span>(c) {CURRENT_YEAR} MOTOCARE PRECISION ENGINEERING. ALL RIGHTS RESERVED.</span>
         </div>
         <nav aria-label="Legal links">
           <span>Privacy Policy</span>

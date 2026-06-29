@@ -2,11 +2,7 @@ import { NavLink } from 'react-router'
 import { ChevronRight, Home, LogOut, UserCircle, X } from 'lucide-react'
 import { getUserRole } from '../../utils/auth'
 
-const navItems = [
-  { to: '/dashboard', label: 'Dashboard', icon: null, roles: ['admin'] },
-]
-
-function Sidebar({ open, onClose, onLogout, user, items }) {
+function Sidebar({ open, onClose, onLogout, user, items = [] }) {
   const role = getUserRole()
   const visibleNavItems = items.filter((item) => !item.roles || item.roles.includes(role))
 
@@ -60,8 +56,7 @@ function Sidebar({ open, onClose, onLogout, user, items }) {
 }
 
 Sidebar.defaultProps = {
-  items: navItems,
+  items: [],
 }
 
 export default Sidebar
-

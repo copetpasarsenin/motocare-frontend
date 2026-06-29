@@ -67,7 +67,7 @@ function toBookingDateTime(date, time) {
   return `${date}T${time}:00+07:00`
 }
 function isFinalStatus(status) {
-  return ['completed', 'cancelled', 'rejected'].includes(status)
+  return ['completed', 'cancelled'].includes(status)
 }
 
 function canUserEditBooking(booking) {

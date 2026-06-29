@@ -18,11 +18,6 @@ function isTokenExpired(token) {
   }
 }
 
-export function isTokenValid() {
-  const token = getToken()
-  return Boolean(token) && !isTokenExpired(token)
-}
-
 export function getStoredUser() {
   const rawUser = localStorage.getItem(USER_KEY)
   if (!rawUser) return null
