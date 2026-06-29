@@ -21,6 +21,20 @@ export async function getServices(params = {}, options = {}) {
   return normalizeServiceList(await apiClient(`/api/services${suffix}`, options))
 }
 
+export async function getPublicServices(params = {}) {
+  const query = new URLSearchParams()
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      query.set(key, value)
+    }
+  })
+
+  const suffix = query.toString() ? `?${query.toString()}` : ''
+  return normalizeServiceList(await apiClient(`/api/public/services${suffix}`, {
+    redirectOnUnauthorized: false,
+  }))
+}
+
 export async function getServiceById(id) {
   const payload = await apiClient(`/api/services/${id}`)
   return payload?.data

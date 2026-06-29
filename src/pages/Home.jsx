@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight, CheckCircle2, Clock3, Moon, Sun, Wrench } from 'lucide-react'
 import { Link } from 'react-router'
-import { getServices } from '../services/services'
+import { getPublicServices } from '../services/services'
 import { formatCurrency, getCategoryName } from '../utils/csv'
 import { getStoredTheme, toggleTheme } from '../utils/theme'
 
@@ -32,16 +32,13 @@ function Home() {
       try {
         setServicesLoading(true)
         setServicesError('')
-        const result = await getServices(
-          { page: 1, limit: 100, status: 'active' },
-          { redirectOnUnauthorized: false },
-        )
+        const result = await getPublicServices({ page: 1, limit: 100 })
         if (isMounted) {
           setServices(result.data)
         }
       } catch {
         if (isMounted) {
-          setServicesError('Layanan publik belum dapat dimuat. Anda tetap bisa melihat halaman ini dan login untuk booking.')
+          setServicesError('Katalog layanan belum dapat dimuat. Anda tetap bisa login untuk booking atau coba lagi nanti.')
         }
       } finally {
         if (isMounted) {
