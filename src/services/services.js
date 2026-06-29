@@ -31,6 +31,7 @@ export async function getPublicServices(params = {}) {
 
   const suffix = query.toString() ? `?${query.toString()}` : ''
   return normalizeServiceList(await apiClient(`/api/public/services${suffix}`, {
+    includeAuth: false,
     redirectOnUnauthorized: false,
   }))
 }

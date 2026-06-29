@@ -31,8 +31,8 @@ function redirectToLoginOnUnauthorized() {
 }
 
 export async function apiClient(path, options = {}) {
-  const { redirectOnUnauthorized = true, ...fetchOptions } = options
-  const token = getToken()
+  const { redirectOnUnauthorized = true, includeAuth = true, ...fetchOptions } = options
+  const token = includeAuth ? getToken() : ''
   const headers = new Headers(fetchOptions.headers || {})
 
   if (!headers.has('Content-Type') && fetchOptions.body) {
@@ -43,7 +43,8 @@ export async function apiClient(path, options = {}) {
     headers.set('Authorization', `Bearer ${token}`)
   }
 
-  const response = await fetch(buildApiUrl(path), {
+  const url = buildApiUrl(path)
+  const response = await fetch(url, {
     ...fetchOptions,
     headers,
   })
@@ -56,7 +57,9 @@ export async function apiClient(path, options = {}) {
   }
 
   if (!response.ok) {
-    throw new ApiError(payload?.message || 'Request gagal', response.status, payload)
+    const error = new ApiError(payload?.message || 'Request gagal', response.status, payload)
+    error.url = url
+    throw error
   }
 
   return payload

@@ -36,7 +36,14 @@ function Home() {
         if (isMounted) {
           setServices(result.data)
         }
-      } catch {
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn('Failed to load public services', {
+            url: error.url,
+            status: error.status,
+            message: error.message,
+          })
+        }
         if (isMounted) {
           setServicesError('Katalog layanan belum dapat dimuat. Anda tetap bisa login untuk booking atau coba lagi nanti.')
         }
