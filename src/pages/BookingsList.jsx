@@ -247,15 +247,19 @@ function BookingsList() {
     setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_CSV_FILENAME}.` })
   }
 
-  const handleExportBookingsExcel = () => {
+  const handleExportBookingsExcel = async () => {
     if (!isAdmin) return
     if (bookings.length === 0) {
       setFeedback({ type: 'error', message: 'Tidak ada data booking untuk diexport.' })
       return
     }
 
-    downloadBookingsExcel(BOOKINGS_EXCEL_FILENAME, bookings)
-    setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_EXCEL_FILENAME}.` })
+    try {
+      await downloadBookingsExcel(BOOKINGS_EXCEL_FILENAME, bookings)
+      setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_EXCEL_FILENAME}.` })
+    } catch (error) {
+      setFeedback({ type: 'error', message: error.message || 'Gagal menyiapkan export Excel' })
+    }
   }
   const handleStatusChange = async (bookingId, status) => {
     if (!isAdmin) return
@@ -579,7 +583,6 @@ function BookingsList() {
 }
 
 export default BookingsList
-
 
 
 

@@ -140,7 +140,7 @@ function ServicesList() {
         return
       }
 
-      downloadServicesExcel(EXCEL_FILENAME, payload.data)
+      await downloadServicesExcel(EXCEL_FILENAME, payload.data)
       setFeedback({ type: 'success', message: `Berhasil export ${payload.data.length} layanan ke ${EXCEL_FILENAME}.` })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal menyiapkan export Excel' })
@@ -391,4 +391,3 @@ function ServicesList() {
 }
 
 export default ServicesList
-

@@ -1,16 +1,63 @@
-# React + Vite
+# MotoCare Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MotoCare Frontend is the React/Vite web app for the MotoCare motorcycle service booking dashboard. It includes the public landing page, authentication screens, service catalog, booking management, profile, and admin dashboard views.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js compatible with the installed Vite toolchain
+- npm
+- A running MotoCare backend API
 
-## React Compiler
+## Environment
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Create a local `.env` file and point the frontend to the backend API:
 
-## Expanding the ESLint configuration
+```bash
+VITE_API_BASE_URL=http://localhost:8080
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+For deployed environments, set `VITE_API_BASE_URL` to the production backend URL.
+
+## Install
+
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+The Vite dev server prints the local URL, usually `http://localhost:5173`.
+
+## Build And Preview
+
+```bash
+npm run build
+npm run preview
+```
+
+Use `preview` to smoke-test the production bundle locally before deployment.
+
+## Quality Checks
+
+```bash
+npm run lint
+npm test
+npm audit --omit=dev
+```
+
+## Roles
+
+The frontend uses the role returned by the backend session data:
+
+- `admin`: dashboard, service create/edit/delete, booking status management, and exports.
+- `user`: service browsing, booking creation, booking history, and profile.
+
+Backend authorization remains the source of truth for protected operations.
+
+## Deployment
+
+This project includes `vercel.json` for SPA routing on Vercel. Configure `VITE_API_BASE_URL` in the Vercel project environment variables, then deploy the production build.

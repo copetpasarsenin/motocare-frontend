@@ -1,5 +1,26 @@
-import * as XLSX from 'xlsx'
 import { getCategoryName } from './csv'
+
+const SERVICES_COLUMNS = [
+  { header: 'ID', key: 'ID', width: 8 },
+  { header: 'Name', key: 'Name', width: 28 },
+  { header: 'Category', key: 'Category', width: 24 },
+  { header: 'Price', key: 'Price', width: 14 },
+  { header: 'Duration', key: 'Duration', width: 12 },
+  { header: 'Status', key: 'Status', width: 14 },
+  { header: 'Description', key: 'Description', width: 48 },
+]
+
+const BOOKINGS_COLUMNS = [
+  { header: 'ID', key: 'ID', width: 8 },
+  { header: 'User/Customer', key: 'User/Customer', width: 28 },
+  { header: 'Email', key: 'Email', width: 28 },
+  { header: 'Service', key: 'Service', width: 28 },
+  { header: 'Tanggal Booking', key: 'Tanggal Booking', width: 22 },
+  { header: 'Waktu Booking', key: 'Waktu Booking', width: 16 },
+  { header: 'Status', key: 'Status', width: 16 },
+  { header: 'Total Harga', key: 'Total Harga', width: 16 },
+  { header: 'Tanggal Dibuat', key: 'Tanggal Dibuat', width: 24 },
+]
 
 export function buildServicesExcelRows(services) {
   return services.map((service) => ({
@@ -13,24 +34,29 @@ export function buildServicesExcelRows(services) {
   }))
 }
 
-export function downloadServicesExcel(filename, services) {
-  const worksheet = XLSX.utils.json_to_sheet(buildServicesExcelRows(services), {
-    header: ['ID', 'Name', 'Category', 'Price', 'Duration', 'Status', 'Description'],
-  })
+async function loadExcelWriter() {
+  const module = await import('write-excel-file/browser')
+  return module.default
+}
 
-  worksheet['!cols'] = [
-    { wch: 8 },
-    { wch: 28 },
-    { wch: 24 },
-    { wch: 14 },
-    { wch: 12 },
-    { wch: 14 },
-    { wch: 48 },
-  ]
+function toExcelColumns(columns) {
+  return columns.map((column) => ({
+    header: { value: column.header, fontWeight: 'bold' },
+    width: column.width,
+    cell: (row) => ({ value: row[column.key] ?? '' }),
+  }))
+}
 
-  const workbook = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Services')
-  XLSX.writeFile(workbook, filename)
+async function downloadWorkbook(filename, sheetName, columns, rows) {
+  const writeExcelFile = await loadExcelWriter()
+  await writeExcelFile(rows, {
+    columns: toExcelColumns(columns),
+    sheet: sheetName,
+  }).toFile(filename)
+}
+
+export async function downloadServicesExcel(filename, services) {
+  await downloadWorkbook(filename, 'Services', SERVICES_COLUMNS, buildServicesExcelRows(services))
 }
 
 function formatBookingDateTime(value, options) {
@@ -54,24 +80,6 @@ export function buildBookingsExcelRows(bookings) {
   }))
 }
 
-export function downloadBookingsExcel(filename, bookings) {
-  const worksheet = XLSX.utils.json_to_sheet(buildBookingsExcelRows(bookings), {
-    header: ['ID', 'User/Customer', 'Email', 'Service', 'Tanggal Booking', 'Waktu Booking', 'Status', 'Total Harga', 'Tanggal Dibuat'],
-  })
-
-  worksheet['!cols'] = [
-    { wch: 8 },
-    { wch: 28 },
-    { wch: 28 },
-    { wch: 28 },
-    { wch: 22 },
-    { wch: 16 },
-    { wch: 16 },
-    { wch: 16 },
-    { wch: 24 },
-  ]
-
-  const workbook = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(workbook, worksheet, 'Bookings')
-  XLSX.writeFile(workbook, filename)
+export async function downloadBookingsExcel(filename, bookings) {
+  await downloadWorkbook(filename, 'Bookings', BOOKINGS_COLUMNS, buildBookingsExcelRows(bookings))
 }
