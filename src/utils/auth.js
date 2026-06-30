@@ -37,6 +37,10 @@ export function getUserRole() {
   return getStoredUser()?.role?.toLowerCase() || ''
 }
 
+export function getAuthenticatedHomePath() {
+  return getUserRole() === 'admin' ? '/dashboard' : '/bookings'
+}
+
 export function saveSession(token, user) {
   localStorage.setItem(TOKEN_KEY, token)
   localStorage.setItem(USER_KEY, JSON.stringify(user))

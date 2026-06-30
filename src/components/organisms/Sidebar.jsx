@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router'
 import { ChevronRight, Home, LogOut, UserCircle, X } from 'lucide-react'
-import { getUserRole } from '../../utils/auth'
+import { getAuthenticatedHomePath, getUserRole } from '../../utils/auth'
 
 function Sidebar({ open, onClose, onLogout, user, items = [] }) {
   const role = getUserRole()
+  const homePath = getAuthenticatedHomePath()
   const visibleNavItems = items.filter((item) => !item.roles || item.roles.includes(role))
 
   return (
@@ -42,7 +43,7 @@ function Sidebar({ open, onClose, onLogout, user, items = [] }) {
       </nav>
 
       <div className="sidebar-footer">
-        <NavLink to="/home" onClick={onClose}>
+        <NavLink to={homePath} onClick={onClose}>
           <Home size={18} />
           <span>Home</span>
         </NavLink>

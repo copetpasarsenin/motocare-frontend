@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight, CheckCircle2, Clock3, Moon, Sun, Wrench } from 'lucide-react'
-import { Link } from 'react-router'
+import { Link, Navigate } from 'react-router'
 import { getPublicServices } from '../services/services'
 import { formatCurrency, getCategoryName } from '../utils/csv'
+import { getAuthenticatedHomePath, isAuthenticated } from '../utils/auth'
 import { getStoredTheme, toggleTheme } from '../utils/theme'
 
 const CURRENT_YEAR = new Date().getFullYear()
@@ -20,6 +21,10 @@ function Home() {
   const [servicesError, setServicesError] = useState('')
 
   const isDark = theme === 'dark'
+
+  if (isAuthenticated()) {
+    return <Navigate to={getAuthenticatedHomePath()} replace />
+  }
 
   function handleToggleTheme() {
     setTheme(toggleTheme(theme))
