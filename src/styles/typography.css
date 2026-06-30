@@ -438,3 +438,117 @@ html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-tab
   color: #c9a48e !important;
   background: linear-gradient(180deg, #1a1c1c, #161818) !important;
 }
+
+/* Light mode cleanup: prevent dark-mode leftovers on admin pages. */
+html:not([data-theme='dark']) body .figma-dashboard,
+html[data-theme='light'] body .figma-dashboard {
+  --bg: #f5f5f4 !important;
+  --surface: #ffffff !important;
+  --surface-soft: #fafaf9 !important;
+  --surface-raised: #ffffff !important;
+  --line: #e7e5e4 !important;
+  --text: #1c1917 !important;
+  --muted: #78716c !important;
+  background: #f5f5f4 !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .content-shell,
+html:not([data-theme='dark']) body .figma-dashboard .page-content,
+html[data-theme='light'] body .figma-dashboard .content-shell,
+html[data-theme='light'] body .figma-dashboard .page-content {
+  background: #f5f5f4 !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .card,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-card,
+html:not([data-theme='dark']) body .figma-dashboard .booking-metric-card,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-controls,
+html:not([data-theme='dark']) body .figma-dashboard .table-summary,
+html:not([data-theme='dark']) body .figma-dashboard .table-scroll,
+html:not([data-theme='dark']) body .figma-dashboard .pagination,
+html:not([data-theme='dark']) body .figma-dashboard .profile-section,
+html:not([data-theme='dark']) body .figma-dashboard .service-catalog-page,
+html:not([data-theme='dark']) body .figma-dashboard .services-filter-panel,
+html:not([data-theme='dark']) body .figma-dashboard .services-export-panel,
+html[data-theme='light'] body .figma-dashboard .card,
+html[data-theme='light'] body .figma-dashboard .bookings-card,
+html[data-theme='light'] body .figma-dashboard .booking-metric-card,
+html[data-theme='light'] body .figma-dashboard .bookings-controls,
+html[data-theme='light'] body .figma-dashboard .table-summary,
+html[data-theme='light'] body .figma-dashboard .table-scroll,
+html[data-theme='light'] body .figma-dashboard .pagination,
+html[data-theme='light'] body .figma-dashboard .profile-section,
+html[data-theme='light'] body .figma-dashboard .service-catalog-page,
+html[data-theme='light'] body .figma-dashboard .services-filter-panel,
+html[data-theme='light'] body .figma-dashboard .services-export-panel {
+  color: #1c1917 !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: #e7e5e4 !important;
+  box-shadow: 0 18px 44px rgba(41, 37, 36, 0.08) !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .hero-card,
+html:not([data-theme='dark']) body .figma-dashboard .section-heading.row-heading,
+html[data-theme='light'] body .figma-dashboard .hero-card,
+html[data-theme='light'] body .figma-dashboard .section-heading.row-heading {
+  color: #1c1917 !important;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(249, 115, 22, 0.18), transparent 34%),
+    linear-gradient(135deg, #fff7ed 0%, #ffffff 54%, #ffedd5 100%) !important;
+  border-color: rgba(249, 115, 22, 0.28) !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard input,
+html:not([data-theme='dark']) body .figma-dashboard select,
+html:not([data-theme='dark']) body .figma-dashboard textarea,
+html:not([data-theme='dark']) body .figma-dashboard .search-field,
+html:not([data-theme='dark']) body .figma-dashboard .input-shell,
+html:not([data-theme='dark']) body .figma-dashboard .inline-select,
+html:not([data-theme='dark']) body .figma-dashboard .data-table,
+html:not([data-theme='dark']) body .figma-dashboard .data-table th,
+html:not([data-theme='dark']) body .figma-dashboard .data-table td,
+html:not([data-theme='dark']) body .figma-dashboard .data-table tbody tr,
+html[data-theme='light'] body .figma-dashboard input,
+html[data-theme='light'] body .figma-dashboard select,
+html[data-theme='light'] body .figma-dashboard textarea,
+html[data-theme='light'] body .figma-dashboard .search-field,
+html[data-theme='light'] body .figma-dashboard .input-shell,
+html[data-theme='light'] body .figma-dashboard .inline-select,
+html[data-theme='light'] body .figma-dashboard .data-table,
+html[data-theme='light'] body .figma-dashboard .data-table th,
+html[data-theme='light'] body .figma-dashboard .data-table td,
+html[data-theme='light'] body .figma-dashboard .data-table tbody tr {
+  color: #1c1917 !important;
+  background: #ffffff !important;
+  background-image: none !important;
+  border-color: #e7e5e4 !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .data-table th,
+html[data-theme='light'] body .figma-dashboard .data-table th {
+  color: #78716c !important;
+  background: #fafaf9 !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .ghost-button,
+html:not([data-theme='dark']) body .figma-dashboard .accent-button,
+html:not([data-theme='dark']) body .figma-dashboard .pagination button,
+html[data-theme='light'] body .figma-dashboard .ghost-button,
+html[data-theme='light'] body .figma-dashboard .accent-button,
+html[data-theme='light'] body .figma-dashboard .pagination button {
+  color: #1c1917 !important;
+  background: #ffffff !important;
+  border-color: #e7e5e4 !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .ghost-button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .accent-button:hover,
+html:not([data-theme='dark']) body .figma-dashboard .pagination button:hover,
+html[data-theme='light'] body .figma-dashboard .ghost-button:hover,
+html[data-theme='light'] body .figma-dashboard .accent-button:hover,
+html[data-theme='light'] body .figma-dashboard .pagination button:hover {
+  color: #c2410c !important;
+  background: #ffedd5 !important;
+  border-color: rgba(249, 115, 22, 0.38) !important;
+}
