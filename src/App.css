@@ -371,9 +371,7 @@ textarea {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 272px 1fr;
-  background:
-    linear-gradient(180deg, rgba(37, 99, 235, 0.04), transparent 260px),
-    var(--bg);
+  background: var(--bg);
 }
 
 .sidebar {
@@ -385,7 +383,7 @@ textarea {
   padding: 20px 18px;
   color: #e5e7eb;
   background:
-    linear-gradient(180deg, rgba(37, 99, 235, 0.2), transparent 220px),
+    linear-gradient(180deg, rgba(249, 115, 22, 0.10), transparent 220px),
     var(--sidebar);
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -406,7 +404,7 @@ textarea {
   border-radius: 8px;
   color: #fff;
   background: linear-gradient(135deg, var(--primary), var(--accent));
-  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.28);
+  box-shadow: 0 12px 26px rgba(249, 115, 22, 0.24);
   font-weight: 900;
 }
 
@@ -1995,8 +1993,8 @@ textarea {
   color: #fff;
   background:
     radial-gradient(circle at 78% 18%, rgba(249, 115, 22, 0.28), transparent 28%),
-    radial-gradient(circle at 18% 82%, rgba(37, 99, 235, 0.22), transparent 30%),
-    linear-gradient(135deg, #111827 0%, #0f172a 58%, #17110c 100%);
+    radial-gradient(circle at 18% 82%, rgba(249, 115, 22, 0.10), transparent 30%),
+    linear-gradient(135deg, #181a1a 0%, #141616 58%, #17110c 100%);
   box-shadow: 0 24px 58px rgba(15, 23, 42, 0.18);
 }
 
@@ -2416,8 +2414,8 @@ textarea {
   border-color: rgba(249, 115, 22, 0.3);
   background:
     radial-gradient(circle at 78% 18%, rgba(249, 115, 22, 0.26), transparent 28%),
-    radial-gradient(circle at 18% 82%, rgba(96, 165, 250, 0.18), transparent 30%),
-    linear-gradient(135deg, #0b1120 0%, #0f172a 56%, #17110c 100%);
+    radial-gradient(circle at 18% 82%, rgba(249, 115, 22, 0.10), transparent 30%),
+    linear-gradient(135deg, #181a1a 0%, #141616 56%, #17110c 100%);
   box-shadow: 0 24px 58px rgba(0, 0, 0, 0.36);
 }
 
@@ -2464,7 +2462,7 @@ textarea {
 :root[data-theme='dark'] .inline-select {
   border-color: var(--line);
   color: var(--text);
-  background: #0f172a;
+  background: #101313;
 }
 
 :root[data-theme='dark'] input:focus,
@@ -2730,7 +2728,7 @@ textarea {
   border-color: rgba(251, 146, 60, 0.28);
   background:
     radial-gradient(circle at 88% 16%, rgba(249, 115, 22, 0.24), transparent 28%),
-    linear-gradient(135deg, #0b1120 0%, #0f172a 62%, #17110c 100%);
+    linear-gradient(135deg, #181a1a 0%, #141616 62%, #17110c 100%);
 }
 
 :root[data-theme='dark'] .service-detail-metrics div {
