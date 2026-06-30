@@ -272,3 +272,39 @@ textarea,
 .figma-dashboard .data-table th {
   background: linear-gradient(180deg, #1a1c1c, #161818) !important;
 }
+
+/* Highest-specificity admin no-navy override. Must beat older theme-specific !important rules. */
+html[data-theme='dark'] body .figma-dashboard .booking-metric-card,
+html[data-theme='dark'] body .figma-dashboard .bookings-controls,
+html[data-theme='dark'] body .figma-dashboard .table-summary,
+html[data-theme='dark'] body .figma-dashboard .table-scroll,
+html[data-theme='dark'] body .figma-dashboard .data-table,
+html[data-theme='dark'] body .figma-dashboard .data-table tbody tr,
+html[data-theme='dark'] body .figma-dashboard .services-filter-panel,
+html[data-theme='dark'] body .figma-dashboard .services-export-panel,
+html[data-theme='dark'] body .figma-dashboard .profile-hero,
+html[data-theme='dark'] body .figma-dashboard .profile-section {
+  background: #181a1a !important;
+  background-image: linear-gradient(180deg, rgba(255, 112, 0, 0.04), transparent 72%) !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard input,
+html[data-theme='dark'] body .figma-dashboard select,
+html[data-theme='dark'] body .figma-dashboard textarea,
+html[data-theme='dark'] body .figma-dashboard .search-field,
+html[data-theme='dark'] body .figma-dashboard .input-shell,
+html[data-theme='dark'] body .figma-dashboard .inline-select,
+html[data-theme='dark'] body .figma-dashboard .pagination-current,
+html[data-theme='dark'] body .figma-dashboard .data-table th,
+html[data-theme='dark'] body .figma-dashboard .data-table td,
+html[data-theme='dark'] body .figma-dashboard .skeleton-line,
+html[data-theme='dark'] body .figma-dashboard .skeleton-block {
+  background: #141616 !important;
+  background-image: none !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .data-table th {
+  background: linear-gradient(180deg, #1a1c1c, #161818) !important;
+}
