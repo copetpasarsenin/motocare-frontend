@@ -25,7 +25,7 @@ import { getUserRole } from '../utils/auth'
 import { getServices } from '../services/services'
 import { buildBookingsCsv, downloadCsv, formatCurrency } from '../utils/csv'
 import { downloadBookingsExcel } from '../utils/excel'
-import { confirmAlert, successAlert } from '../utils/alerts'
+import { confirmAlert, successAlert, toastAlert } from '../utils/alerts'
 
 const SKELETON_ROWS = 5
 const BOOKINGS_CSV_FILENAME = 'motocare-bookings.csv'
@@ -264,7 +264,7 @@ function BookingsList() {
       setUpdatingId(null)
     }
   }
-  const handleExportBookingsCsv = () => {
+  const handleExportBookingsCsv = async () => {
     if (!isAdmin) return
     if (bookings.length === 0) {
       setFeedback({ type: 'error', message: 'Tidak ada data booking untuk diexport.' })
@@ -273,6 +273,7 @@ function BookingsList() {
 
     downloadCsv(BOOKINGS_CSV_FILENAME, buildBookingsCsv(bookings))
     setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_CSV_FILENAME}.` })
+    await toastAlert({ title: 'Export CSV siap', text: `${bookings.length} booking berhasil diexport.` })
   }
 
   const handleExportBookingsExcel = async () => {
@@ -285,6 +286,7 @@ function BookingsList() {
     try {
       await downloadBookingsExcel(BOOKINGS_EXCEL_FILENAME, bookings)
       setFeedback({ type: 'success', message: `Berhasil export ${bookings.length} booking ke ${BOOKINGS_EXCEL_FILENAME}.` })
+      await toastAlert({ title: 'Export Excel siap', text: `${bookings.length} booking berhasil diexport.` })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal menyiapkan export Excel' })
     }

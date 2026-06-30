@@ -853,3 +853,179 @@ html[data-theme='light'] body .figma-dashboard .data-table tbody tr:hover {
     transition-duration: 0.001ms !important;
   }
 }
+
+
+/* Final production polish: focus rings, empty states, and mobile ergonomics. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid rgba(255, 112, 0, 0.72) !important;
+  outline-offset: 3px !important;
+}
+
+button:disabled,
+.primary-button:disabled,
+.ghost-button:disabled,
+.action-button:disabled,
+.danger-button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.68 !important;
+  transform: none !important;
+}
+
+.empty-state,
+.placeholder-box {
+  min-height: 180px !important;
+  padding: clamp(24px, 5vw, 44px) !important;
+  border-style: solid !important;
+  border-color: rgba(255, 112, 0, 0.22) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 112, 0, 0.08), transparent 42%),
+    var(--surface) !important;
+}
+
+.empty-state svg,
+.placeholder-box svg {
+  color: #ff7000 !important;
+}
+
+.empty-state strong,
+.placeholder-box strong {
+  font-size: clamp(18px, 2vw, 22px) !important;
+  letter-spacing: -0.02em;
+}
+
+.empty-state p,
+.placeholder-box p {
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+@media (max-width: 1180px) {
+  .figma-dashboard .page-content {
+    padding: 20px !important;
+  }
+
+  .booking-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .booking-confirm-panel {
+    position: static !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .figma-dashboard.dashboard-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .figma-dashboard .sidebar {
+    position: fixed !important;
+    z-index: 2100 !important;
+    width: min(300px, 86vw) !important;
+    transform: translateX(-100%);
+  }
+
+  .figma-dashboard .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .figma-dashboard .topbar {
+    min-height: 72px !important;
+    padding-inline: 16px !important;
+  }
+
+  .figma-dashboard .topbar h1 {
+    font-size: clamp(24px, 7vw, 34px) !important;
+  }
+
+  .figma-dashboard .page-content {
+    padding: 16px !important;
+  }
+
+  .booking-service-options,
+  .booking-form-grid,
+  .booking-date-grid,
+  .booking-time-grid,
+  .profile-password-form {
+    grid-template-columns: 1fr !important;
+  }
+
+  .booking-service-option {
+    min-height: auto !important;
+    grid-template-columns: 44px 1fr !important;
+    padding: 16px !important;
+  }
+
+  .figma-dashboard .modal-backdrop,
+  .modal-backdrop {
+    padding: 82px 12px 24px !important;
+  }
+
+  .figma-dashboard .booking-detail-dialog,
+  .booking-detail-dialog {
+    width: min(100%, 680px) !important;
+    max-height: calc(100vh - 106px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .public-home-nav,
+  .public-footer,
+  .booking-page-heading,
+  .service-detail-actions,
+  .section-heading.row-heading,
+  .table-summary,
+  .table-summary-actions,
+  .pagination {
+    align-items: stretch !important;
+    flex-direction: column !important;
+  }
+
+  .public-home-nav nav,
+  .button-row,
+  .table-summary-actions,
+  .booking-row-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .primary-button,
+  .ghost-button,
+  .accent-button,
+  .danger-button,
+  .booking-confirm-button,
+  .public-service-cta {
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  .figma-dashboard .bookings-table,
+  .figma-dashboard .data-table {
+    min-width: 760px !important;
+  }
+
+  .figma-dashboard .bookings-table th:last-child,
+  .figma-dashboard .bookings-table td:last-child {
+    min-width: 132px;
+  }
+
+  .booking-detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .booking-service-detail-item {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+
+  .public-service-grid,
+  .service-card-grid,
+  .booking-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

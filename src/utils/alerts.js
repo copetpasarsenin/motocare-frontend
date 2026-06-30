@@ -48,3 +48,17 @@ export async function errorAlert(options) {
     ...options,
   })
 }
+
+export async function toastAlert(options) {
+  const Swal = await getSwal()
+  return Swal.fire({
+    toast: true,
+    position: 'top-end',
+    timer: 1800,
+    timerProgressBar: true,
+    showConfirmButton: false,
+    icon: 'success',
+    ...getAlertTheme(),
+    ...options,
+  })
+}

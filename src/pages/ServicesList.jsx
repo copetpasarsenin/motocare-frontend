@@ -20,7 +20,7 @@ import { deleteService, getCategories, getServices } from '../services/services'
 import { buildServicesCsv, downloadCsv, formatCurrency, getCategoryName } from '../utils/csv'
 import { downloadServicesExcel } from '../utils/excel'
 import { getUserRole } from '../utils/auth'
-import { confirmAlert, successAlert } from '../utils/alerts'
+import { confirmAlert, successAlert, toastAlert } from '../utils/alerts'
 
 const CSV_FILENAME = 'motocare_services.csv'
 const EXCEL_FILENAME = 'motocare_services.xlsx'
@@ -124,6 +124,7 @@ function ServicesList() {
 
       downloadCsv(CSV_FILENAME, buildServicesCsv(payload.data))
       setFeedback({ type: 'success', message: `Berhasil export ${payload.data.length} layanan ke ${CSV_FILENAME}.` })
+      await toastAlert({ title: 'Export CSV siap', text: `${payload.data.length} layanan berhasil diexport.` })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal menyiapkan export CSV' })
     }
@@ -141,6 +142,7 @@ function ServicesList() {
 
       await downloadServicesExcel(EXCEL_FILENAME, payload.data)
       setFeedback({ type: 'success', message: `Berhasil export ${payload.data.length} layanan ke ${EXCEL_FILENAME}.` })
+      await toastAlert({ title: 'Export Excel siap', text: `${payload.data.length} layanan berhasil diexport.` })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal menyiapkan export Excel' })
     }
