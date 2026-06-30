@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, Info, User, Wrench } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router'
-import { createBooking } from '../services/bookings'
+import { createBooking, getReservedBookingSlots } from '../services/bookings'
 import { getServices } from '../services/services'
 import { getUserRole } from '../utils/auth'
 import { validateBookingForm, hasBookingValidationErrors } from '../utils/bookingValidation'
@@ -51,6 +51,10 @@ function toBookingDateTime(date, timeLabel) {
   return `${date}T${time}:00+07:00`
 }
 
+function toTimeValue(timeLabel) {
+  return timeLabel.replace(' WIB', '')
+}
+
 function toPayload(values, serviceId, selectedTime) {
   return {
     service_id: Number(serviceId),
@@ -69,6 +73,8 @@ function BookingCreate() {
   const [errors, setErrors] = useState({})
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const [loading, setLoading] = useState(false)
+  const [slotLoading, setSlotLoading] = useState(false)
+  const [reservedSlots, setReservedSlots] = useState([])
   const [selectedTime, setSelectedTime] = useState(timeOptions[1])
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -82,10 +88,47 @@ function BookingCreate() {
   const subtotal = selectedServices.reduce((total, service) => total + Number(service.price || 0), 0)
   const estimatedTax = Math.round(subtotal * 0.11)
   const estimatedTotal = subtotal + estimatedTax
+  const reservedSlotSet = useMemo(() => new Set(reservedSlots), [reservedSlots])
+  const availableTimes = useMemo(() => timeOptions.filter((time) => !reservedSlotSet.has(toTimeValue(time))), [reservedSlotSet])
+  const selectedTimeReserved = reservedSlotSet.has(toTimeValue(selectedTime))
 
   useEffect(() => {
     if (isAdmin) navigate('/bookings', { replace: true })
   }, [isAdmin, navigate])
+
+  useEffect(() => {
+    if (!values.booking_date) {
+      setReservedSlots([])
+      return
+    }
+
+    let cancelled = false
+    setSlotLoading(true)
+
+    getReservedBookingSlots(values.booking_date)
+      .then((slots) => {
+        if (!cancelled) setReservedSlots(slots)
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          setReservedSlots([])
+          setFeedback({ type: 'error', message: error.message || 'Gagal mengambil slot booking' })
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setSlotLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [values.booking_date])
+
+  useEffect(() => {
+    if (selectedTimeReserved && availableTimes.length > 0) {
+      setSelectedTime(availableTimes[0])
+    }
+  }, [availableTimes, selectedTimeReserved])
 
   const updateValue = useCallback((key, value) => {
     setValues((current) => ({ ...current, [key]: value }))
@@ -126,6 +169,11 @@ function BookingCreate() {
 
     if (hasBookingValidationErrors(validationErrors)) {
       setFeedback({ type: 'error', message: 'Periksa kembali form booking.' })
+      return
+    }
+
+    if (selectedTimeReserved || availableTimes.length === 0) {
+      setFeedback({ type: 'error', message: 'Jam booking yang dipilih sudah terisi. Pilih jam lain.' })
       return
     }
 
@@ -247,9 +295,17 @@ function BookingCreate() {
           <div className="booking-confirm-group">
             <span>Pilih Waktu</span>
             <div className="booking-time-grid">
-              {timeOptions.map((time) => <button className={selectedTime === time ? 'selected' : ''} key={time} type="button" onClick={() => setSelectedTime(time)}>{time}</button>)}
+              {timeOptions.map((time) => {
+                const reserved = reservedSlotSet.has(toTimeValue(time))
+                return (
+                  <button className={`${selectedTime === time ? 'selected' : ''} ${reserved ? 'is-reserved' : ''}`} key={time} type="button" disabled={reserved || slotLoading} onClick={() => setSelectedTime(time)}>
+                    <span>{time}</span>
+                    {reserved && <small>Penuh</small>}
+                  </button>
+                )
+              })}
             </div>
-            <p className="booking-time-note">Waktu jam kerja kami dimulai dari jam 09.00 sampai jam 17.00.</p>
+            <p className="booking-time-note">{slotLoading ? 'Memeriksa slot tersedia...' : 'Waktu jam kerja kami dimulai dari jam 09.00 sampai jam 17.00.'}</p>
           </div>
 
           <div className="booking-summary">
@@ -259,7 +315,7 @@ function BookingCreate() {
             <div className="total"><span>Total</span><strong>{formatCurrency(estimatedTotal)}</strong></div>
           </div>
 
-          <button className="primary-button booking-confirm-button" type="submit" disabled={loading}>{loading ? 'Menyimpan...' : 'Konfirmasi Pemesanan'}{!loading && <ArrowRight size={18} />}</button>
+          <button className="primary-button booking-confirm-button" type="submit" disabled={loading || slotLoading || selectedTimeReserved || availableTimes.length === 0}>{loading ? 'Menyimpan...' : 'Konfirmasi Pemesanan'}{!loading && <ArrowRight size={18} />}</button>
           <small className="booking-payload-note">Setiap layanan yang dipilih dibuat sebagai booking terpisah agar tetap mengikuti struktur backend saat ini.</small>
         </aside>
       </form>

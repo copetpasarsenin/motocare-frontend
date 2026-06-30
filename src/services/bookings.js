@@ -22,6 +22,12 @@ export async function getBookings(params = {}) {
   return normalizeBookingList(await apiClient(`/api/bookings${suffix}`))
 }
 
+export async function getReservedBookingSlots(date) {
+  const query = new URLSearchParams({ date })
+  const payload = await apiClient(`/api/bookings/reserved-slots?${query.toString()}`)
+  return Array.isArray(payload?.data?.reserved_slots) ? payload.data.reserved_slots : []
+}
+
 export async function createBooking(data) {
   const payload = await apiClient('/api/bookings', {
     method: 'POST',
@@ -45,4 +51,3 @@ export async function updateBookingStatus(id, status) {
   })
   return payload?.data
 }
-
