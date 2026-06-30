@@ -708,3 +708,148 @@ html:not([data-theme='dark']) body .public-benefits article.orange p,
 html[data-theme='light'] body .public-benefits article.orange p {
   color: #1c1917 !important;
 }
+
+/* Subtle premium motion polish. Keep the dashboard fast and restrained. */
+:root {
+  --mc-motion-fast: 160ms;
+  --mc-motion-base: 220ms;
+  --mc-motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.primary-button,
+.ghost-button,
+.accent-button,
+.action-button,
+.icon-button,
+.public-service-cta,
+.public-theme-toggle,
+.sidebar-nav a,
+.sidebar-footer a,
+.sidebar-footer button {
+  transition:
+    transform var(--mc-motion-fast) var(--mc-motion-ease),
+    box-shadow var(--mc-motion-fast) var(--mc-motion-ease),
+    border-color var(--mc-motion-fast) var(--mc-motion-ease),
+    background-color var(--mc-motion-fast) var(--mc-motion-ease),
+    color var(--mc-motion-fast) var(--mc-motion-ease) !important;
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.accent-button:hover,
+.action-button:hover,
+.icon-button:hover,
+.public-service-cta:hover,
+.public-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.figma-dashboard .sidebar-nav a:hover,
+.figma-dashboard .sidebar-footer a:hover,
+.figma-dashboard .sidebar-footer button:hover {
+  transform: translateX(3px);
+}
+
+.public-service-card,
+.public-benefits article,
+.figma-dashboard .booking-panel,
+.figma-dashboard .booking-confirm-panel,
+.figma-dashboard .booking-info-card,
+.figma-dashboard .service-catalog-card,
+.figma-dashboard .booking-metric-card,
+.figma-dashboard .dashboard-stat-card,
+.figma-dashboard .profile-section,
+.figma-dashboard .profile-hero {
+  transition:
+    transform var(--mc-motion-base) var(--mc-motion-ease),
+    box-shadow var(--mc-motion-base) var(--mc-motion-ease),
+    border-color var(--mc-motion-base) var(--mc-motion-ease),
+    background-color var(--mc-motion-base) var(--mc-motion-ease) !important;
+}
+
+.public-service-card:hover,
+.public-benefits article:hover,
+.figma-dashboard .booking-panel:hover,
+.figma-dashboard .booking-confirm-panel:hover,
+.figma-dashboard .booking-info-card:hover,
+.figma-dashboard .service-catalog-card:hover,
+.figma-dashboard .booking-metric-card:hover,
+.figma-dashboard .dashboard-stat-card:hover,
+.figma-dashboard .profile-section:hover,
+.figma-dashboard .profile-hero:hover {
+  transform: translateY(-2px);
+}
+
+.figma-dashboard .data-table tbody tr {
+  transition:
+    background-color var(--mc-motion-fast) var(--mc-motion-ease),
+    color var(--mc-motion-fast) var(--mc-motion-ease) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .data-table tbody tr:hover {
+  background: rgba(255, 112, 0, 0.08) !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .data-table tbody tr:hover,
+html[data-theme='light'] body .figma-dashboard .data-table tbody tr:hover {
+  background: #fff7ed !important;
+}
+
+.modal-backdrop {
+  animation: mcBackdropIn 180ms var(--mc-motion-ease) both;
+}
+
+.booking-detail-dialog,
+.booking-edit-dialog,
+.confirmation-dialog {
+  animation: mcDialogIn 200ms var(--mc-motion-ease) both;
+  transform-origin: top center;
+}
+
+.booking-create-page,
+.booking-management-page,
+.service-catalog-page,
+.profile-page,
+.public-hero,
+.public-service-section,
+.public-final-cta {
+  animation: mcFadeUp 220ms var(--mc-motion-ease) both;
+}
+
+@keyframes mcBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mcDialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mcFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
