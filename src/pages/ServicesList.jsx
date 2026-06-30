@@ -26,21 +26,6 @@ const CSV_FILENAME = 'motocare_services.csv'
 const EXCEL_FILENAME = 'motocare_services.xlsx'
 const SKELETON_COUNT = 6
 
-const serviceCopyOverrides = {
-  'Bore Up 70 Spek Sakit hati': {
-    name: 'Bore Up 70 Spek Harian',
-    description: 'Peningkatan performa mesin dengan setelan aman untuk pemakaian harian.',
-  },
-}
-
-function getServiceDisplayCopy(service) {
-  const override = serviceCopyOverrides[service.name]
-  return {
-    name: override?.name || service.name,
-    description: override?.description || service.description || 'Tanpa deskripsi',
-  }
-}
-
 function SkeletonCard() {
   return (
     <article className="service-catalog-card skeleton-card" aria-hidden="true">
@@ -315,17 +300,15 @@ function ServicesList() {
         </div>
       ) : (
         <div className="service-card-grid" aria-label="Service catalog">
-          {services.map((service) => {
-            const serviceCopy = getServiceDisplayCopy(service)
-            return (
-            <article className="service-catalog-card" key={service.id}>
+          {services.map((service, index) => (
+            <article className={`service-catalog-card ${index === 0 ? 'featured' : ''}`} key={service.id}>
               <div className="service-card-topline">
                 <span className="service-icon-box"><Wrench size={22} aria-hidden="true" /></span>
                 <span className="service-code">ID: #{service.id}</span>
               </div>
               <div className="service-card-body">
-                <h4>{serviceCopy.name}</h4>
-                <p>{serviceCopy.description}</p>
+                <h4>{service.name}</h4>
+                <p>{service.description || 'Tanpa deskripsi'}</p>
               </div>
               <div className="service-card-meta">
                 <span>{getCategoryName(service)}</span>
@@ -349,8 +332,7 @@ function ServicesList() {
                 )}
               </div>
             </article>
-            )
-          })}
+          ))}
         </div>
       )}
 

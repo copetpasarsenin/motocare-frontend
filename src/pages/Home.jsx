@@ -14,21 +14,6 @@ const benefits = [
   'Layanan booking digital untuk mengurangi waktu tunggu di bengkel.',
 ]
 
-const serviceCopyOverrides = {
-  'Bore Up 70 Spek Sakit hati': {
-    name: 'Bore Up 70 Spek Harian',
-    description: 'Peningkatan performa mesin dengan setelan aman untuk pemakaian harian.',
-  },
-}
-
-function getPublicServiceCopy(service) {
-  const override = serviceCopyOverrides[service.name]
-  return {
-    name: override?.name || service.name,
-    description: override?.description || service.description || 'Layanan perawatan motor profesional dari teknisi MotoCare.',
-  }
-}
-
 function Home() {
   const [theme, setTheme] = useState(getStoredTheme)
   const [services, setServices] = useState([])
@@ -140,22 +125,19 @@ function Home() {
         )}
         {!servicesLoading && !servicesError && services.length > 0 && (
           <div className="public-service-grid">
-            {services.map((service) => {
-              const serviceCopy = getPublicServiceCopy(service)
-              return (
-                <article className="public-service-card" key={service.id}>
-                  <span className="service-icon-box"><Wrench size={20} /></span>
-                  <div className="public-service-meta">{getCategoryName(service)}</div>
-                  <h3>{serviceCopy.name}</h3>
-                  <p>{serviceCopy.description}</p>
-                  <footer>
-                    <span><Clock3 size={14} />{service.duration_minutes || 0} menit</span>
-                    <strong>{formatCurrency(service.price)}</strong>
-                  </footer>
-                  <Link className="public-service-cta" to="/login">Booking Service</Link>
-                </article>
-              )
-            })}
+            {services.map((service) => (
+              <article className="public-service-card" key={service.id}>
+                <span className="service-icon-box"><Wrench size={20} /></span>
+                <div className="public-service-meta">{getCategoryName(service)}</div>
+                <h3>{service.name}</h3>
+                <p>{service.description || 'Layanan perawatan motor profesional dari teknisi MotoCare.'}</p>
+                <footer>
+                  <span><Clock3 size={14} />{service.duration_minutes || 0} menit</span>
+                  <strong>{formatCurrency(service.price)}</strong>
+                </footer>
+                <Link className="public-service-cta" to="/login">Booking Service</Link>
+              </article>
+            ))}
           </div>
         )}
       </section>

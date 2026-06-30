@@ -19,21 +19,6 @@ const initialValues = {
 
 const timeOptions = ['09:00 WIB', '10:30 WIB', '13:00 WIB', '14:30 WIB', '16:00 WIB']
 
-const serviceCopyOverrides = {
-  'Bore Up 70 Spek Sakit hati': {
-    name: 'Bore Up 70 Spek Harian',
-    description: 'Peningkatan performa mesin dengan setelan aman untuk pemakaian harian.',
-  },
-}
-
-function getServiceDisplayCopy(service) {
-  const override = serviceCopyOverrides[service.name]
-  return {
-    name: override?.name || service.name,
-    description: override?.description || service.description || 'Layanan MotoCare premium.',
-  }
-}
-
 function FieldError({ message }) {
   if (!message) return null
   return <span className="field-error">{message}</span>
@@ -249,13 +234,12 @@ function BookingCreate() {
             <div className="booking-service-options">
               {services.map((service) => {
                 const selected = values.service_ids.includes(String(service.id))
-                const serviceCopy = getServiceDisplayCopy(service)
                 return (
                   <button className={`booking-service-option ${selected ? 'selected' : ''}`} key={service.id} type="button" onClick={() => toggleService(service.id)} aria-pressed={selected}>
                     <span className="service-icon-box"><Wrench size={19} /></span>
                     <span>
-                      <strong>{serviceCopy.name}</strong>
-                      <small>{serviceCopy.description}</small>
+                      <strong>{service.name}</strong>
+                      <small>{service.description || 'Layanan MotoCare premium.'}</small>
                       <em>Est. {formatCurrency(service.price || 0)}</em>
                     </span>
                     <i>{selected ? 'Dipilih' : `ID: ${service.id}`}</i>
