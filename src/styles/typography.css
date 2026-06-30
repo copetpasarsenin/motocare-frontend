@@ -318,6 +318,28 @@ html[data-theme='dark'] body .figma-dashboard .data-table th {
   background: linear-gradient(180deg, #1a1c1c, #161818) !important;
 }
 
+html[data-theme='dark'] body .figma-dashboard .booking-detail-dialog {
+  background:
+    radial-gradient(circle at 90% 0%, rgba(255, 112, 0, 0.16), transparent 32%),
+    #141616 !important;
+  border-color: rgba(255, 112, 0, 0.28) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-detail-status-row,
+html[data-theme='dark'] body .figma-dashboard .booking-detail-grid div {
+  background: #181a1a !important;
+  border-color: rgba(255, 112, 0, 0.16) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-detail-header .icon-button {
+  background: #181a1a !important;
+  border-color: rgba(255, 112, 0, 0.18) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-service-detail-item {
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
 /* Highest-specificity services/profile no-navy override. */
 html[data-theme='dark'] body .figma-dashboard .service-catalog-page,
 html[data-theme='dark'] body .figma-dashboard .service-catalog-page.card,
