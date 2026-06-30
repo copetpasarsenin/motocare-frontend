@@ -112,7 +112,7 @@ function Login() {
 
           <div className="auth-note">
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>Secure access for MotoCare operations teams.</span>
+            <span>Akses aman untuk akun MotoCare Anda.</span>
           </div>
 
           <p className="auth-switch">

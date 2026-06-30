@@ -133,7 +133,7 @@ function Register() {
 
           <div className="auth-note">
             <ShieldCheck size={16} aria-hidden="true" />
-            <span>Account creation keeps the existing MotoCare access flow.</span>
+            <span>Pembuatan akun mengikuti alur akses MotoCare yang aman.</span>
           </div>
 
           <p className="auth-switch">

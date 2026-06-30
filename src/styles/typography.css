@@ -583,3 +583,84 @@ html[data-theme='light'] body .figma-dashboard .pagination button:hover {
   background: #ffedd5 !important;
   border-color: rgba(249, 115, 22, 0.38) !important;
 }
+
+/* Production QA fixes: keep dialogs above the fixed shell and remove clipped/washed-out states. */
+.figma-dashboard .modal-backdrop,
+.modal-backdrop {
+  z-index: 2000 !important;
+  background: rgba(5, 7, 7, 0.68) !important;
+}
+
+.figma-dashboard .booking-detail-dialog {
+  position: relative;
+  z-index: 2001 !important;
+}
+
+.figma-dashboard .table-scroll {
+  max-width: 100%;
+  overflow-x: auto !important;
+  scrollbar-gutter: stable;
+}
+
+.figma-dashboard .bookings-table,
+.figma-dashboard .data-table {
+  min-width: 980px;
+}
+
+.figma-dashboard .empty-state strong {
+  color: var(--text) !important;
+  opacity: 1 !important;
+}
+
+.figma-dashboard .empty-state p,
+.figma-dashboard .empty-state span {
+  color: var(--muted) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-service-detail-item strong,
+html[data-theme='dark'] body .figma-dashboard .booking-detail-grid dd {
+  color: #f8fafc !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .booking-service-detail-item strong,
+html:not([data-theme='dark']) body .figma-dashboard .booking-detail-grid dd,
+html[data-theme='light'] body .figma-dashboard .booking-service-detail-item strong,
+html[data-theme='light'] body .figma-dashboard .booking-detail-grid dd {
+  color: #1c1917 !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .booking-service-detail-item small,
+html[data-theme='light'] body .figma-dashboard .booking-service-detail-item small {
+  color: #6b625b !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .booking-service-detail-item em,
+html[data-theme='light'] body .figma-dashboard .booking-service-detail-item em {
+  color: #c2410c !important;
+}
+
+html:not([data-theme='dark']) body .public-service-card h3,
+html:not([data-theme='dark']) body .public-service-card strong,
+html:not([data-theme='dark']) body .public-footer strong,
+html[data-theme='light'] body .public-service-card h3,
+html[data-theme='light'] body .public-service-card strong,
+html[data-theme='light'] body .public-footer strong {
+  color: #1c1917 !important;
+}
+
+html:not([data-theme='dark']) body .public-service-card p,
+html:not([data-theme='dark']) body .public-service-card footer span,
+html:not([data-theme='dark']) body .public-footer span,
+html:not([data-theme='dark']) body .public-footer nav span,
+html[data-theme='light'] body .public-service-card p,
+html[data-theme='light'] body .public-service-card footer span,
+html[data-theme='light'] body .public-footer span,
+html[data-theme='light'] body .public-footer nav span {
+  color: #4b4039 !important;
+}
+
+html:not([data-theme='dark']) body .public-benefits article.orange p,
+html[data-theme='light'] body .public-benefits article.orange p {
+  color: #1c1917 !important;
+}

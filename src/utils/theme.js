@@ -3,7 +3,7 @@ const DARK_THEME = 'dark'
 const LIGHT_THEME = 'light'
 
 export function getStoredTheme() {
-  return localStorage.getItem(THEME_KEY) || LIGHT_THEME
+  return localStorage.getItem(THEME_KEY) || DARK_THEME
 }
 
 export function applyTheme(theme) {
