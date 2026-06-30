@@ -3162,3 +3162,78 @@ html[data-theme='dark'] body div.dashboard-layout.figma-dashboard main.page-cont
 .figma-dashboard .profile-list dt {
   color: #a89080;
 }
+
+/* Strong admin palette override: match dashboard surfaces across all admin pages. */
+.figma-dashboard .bookings-card,
+.figma-dashboard .service-catalog-page,
+.figma-dashboard .profile-page,
+.figma-dashboard .bookings-card.card,
+.figma-dashboard .service-catalog-page.card {
+  color: #e5e0db !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+  background: #141616 !important;
+}
+
+.figma-dashboard .bookings-card > .section-heading,
+.figma-dashboard .service-catalog-page > .section-heading,
+.figma-dashboard .profile-page > .section-heading,
+.figma-dashboard .hero-card:not(.dashboard-hero-card) {
+  border-color: rgba(255, 112, 0, 0.22) !important;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 0, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 54%, #1a1410 100%) !important;
+}
+
+.figma-dashboard .booking-metric-card,
+.figma-dashboard .bookings-controls,
+.figma-dashboard .booking-toolbar,
+.figma-dashboard .table-summary,
+.figma-dashboard .pagination,
+.figma-dashboard .table-scroll,
+.figma-dashboard .services-filter-panel,
+.figma-dashboard .services-export-panel,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section,
+.figma-dashboard .profile-list div,
+.figma-dashboard .service-grid-loading,
+.figma-dashboard .service-catalog-card,
+.figma-dashboard .loading-state {
+  border-color: rgba(255, 112, 0, 0.14) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 112, 0, 0.04), transparent 72%),
+    #181a1a !important;
+}
+
+.figma-dashboard input,
+.figma-dashboard select,
+.figma-dashboard textarea,
+.figma-dashboard .search-field,
+.figma-dashboard .inline-select,
+.figma-dashboard .pagination-current,
+.figma-dashboard .data-table th,
+.figma-dashboard .data-table td,
+.figma-dashboard .data-table tbody tr,
+.figma-dashboard .skeleton-line,
+.figma-dashboard .skeleton-block {
+  border-color: rgba(255, 112, 0, 0.14) !important;
+  background: #141616 !important;
+}
+
+.figma-dashboard .data-table th {
+  background: linear-gradient(180deg, #1a1c1c, #161818) !important;
+}
+
+.figma-dashboard .section-heading h3,
+.figma-dashboard .profile-section-header h3,
+.figma-dashboard .booking-metric-card strong {
+  color: #f3f0ed !important;
+}
+
+.figma-dashboard .section-heading p,
+.figma-dashboard .table-summary,
+.figma-dashboard .pagination,
+.figma-dashboard .profile-hero-info p,
+.figma-dashboard .profile-list dt,
+.figma-dashboard .booking-metric-card span {
+  color: #a89080 !important;
+}
