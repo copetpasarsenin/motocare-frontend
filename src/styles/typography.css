@@ -392,3 +392,49 @@ html[data-theme='dark'] body .figma-dashboard .services-toolbar .search-field {
 html[data-theme='dark'] body .figma-dashboard .data-table th {
   background: linear-gradient(180deg, #1a1c1c, #161818) !important;
 }
+
+/* Booking page ultimate no-navy override: beats older booking-management-page frame rules. */
+html[data-theme='dark'] body .figma-dashboard .booking-management-page > .section-heading.row-heading {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 0, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 54%, #1a1410 100%) !important;
+  background-image:
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 0, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 54%, #1a1410 100%) !important;
+  border-color: rgba(255, 112, 0, 0.22) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .table-summary,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .table-scroll,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .pagination {
+  background: #181a1a !important;
+  background-image: linear-gradient(180deg, rgba(255, 112, 0, 0.04), transparent 72%) !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table thead,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table tbody,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table tbody tr,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table td {
+  color: #e5e0db !important;
+  background: #181a1a !important;
+  background-image: none !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table thead tr,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table th,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .booking-toolbar input,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .booking-toolbar select,
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .booking-toolbar .search-field {
+  color: #e5e0db !important;
+  background: #141616 !important;
+  background-image: none !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .booking-management-page .data-table th {
+  color: #c9a48e !important;
+  background: linear-gradient(180deg, #1a1c1c, #161818) !important;
+}
