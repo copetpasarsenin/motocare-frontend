@@ -25,6 +25,7 @@ import { getUserRole } from '../utils/auth'
 import { getServices } from '../services/services'
 import { buildBookingsCsv, downloadCsv, formatCurrency } from '../utils/csv'
 import { downloadBookingsExcel } from '../utils/excel'
+import { confirmAlert, successAlert } from '../utils/alerts'
 
 const SKELETON_ROWS = 5
 const BOOKINGS_CSV_FILENAME = 'motocare-bookings.csv'
@@ -217,12 +218,20 @@ function BookingsList() {
 
   const handleUserCancel = async (booking) => {
     if (!canUserCancelBooking(booking)) return
+    const confirmed = await confirmAlert({
+      title: 'Batalkan booking?',
+      text: `Booking #${booking.id} akan dibatalkan.`,
+      confirmButtonText: 'Ya, batalkan',
+    })
+    if (!confirmed) return
+
     setUpdatingId(booking.id)
     setFeedback({ type: '', message: '' })
     try {
       const updatedBooking = await updateBooking(booking.id, { status: 'cancelled' })
       setBookings((current) => current.map((item) => (item.id === booking.id ? updatedBooking : item)))
       setFeedback({ type: 'success', message: 'Booking berhasil dibatalkan.' })
+      await successAlert({ title: 'Booking dibatalkan', text: `Booking #${booking.id} berhasil dibatalkan.` })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal membatalkan booking' })
     } finally {
@@ -248,6 +257,7 @@ function BookingsList() {
       setBookings((current) => current.map((item) => (item.id === editingBooking.id ? updatedBooking : item)))
       setEditingBooking(null)
       setFeedback({ type: 'success', message: 'Booking berhasil diedit.' })
+      await successAlert({ title: 'Booking diperbarui', text: 'Perubahan booking berhasil disimpan.' })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal mengedit booking' })
     } finally {
@@ -282,6 +292,15 @@ function BookingsList() {
   const handleStatusChange = async (bookingId, status) => {
     if (!isAdmin) return
 
+    if (['completed', 'cancelled'].includes(status)) {
+      const confirmed = await confirmAlert({
+        title: 'Ubah ke status final?',
+        text: `Booking #${bookingId} akan diubah menjadi ${status.replaceAll('_', ' ')}.`,
+        confirmButtonText: 'Ya, ubah status',
+      })
+      if (!confirmed) return
+    }
+
     setUpdatingId(bookingId)
     setFeedback({ type: '', message: '' })
 
@@ -290,6 +309,9 @@ function BookingsList() {
       setBookings((current) => current.map((booking) => (booking.id === bookingId ? updatedBooking : booking)))
       setFeedback({ type: 'success', message: 'Status booking berhasil diubah.' })
       setSelectedBooking((current) => (current?.id === updatedBooking.id ? updatedBooking : current))
+      if (['completed', 'cancelled'].includes(status)) {
+        await successAlert({ title: 'Status diperbarui', text: `Booking #${bookingId} menjadi ${status.replaceAll('_', ' ')}.` })
+      }
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal mengubah status booking' })
     } finally {

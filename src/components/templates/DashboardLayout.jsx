@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router'
 import { CalendarDays, Gauge, UserCircle, Wrench } from 'lucide-react'
 import { clearSession, getStoredUser } from '../../utils/auth'
+import { confirmAlert } from '../../utils/alerts'
 import { getStoredTheme, toggleTheme } from '../../utils/theme'
 import DashboardTopbar from '../organisms/DashboardTopbar'
 import Sidebar from '../organisms/Sidebar'
@@ -31,24 +32,13 @@ function DashboardLayout() {
   const isDark = theme === 'dark'
 
   const handleLogout = async () => {
-    const { default: Swal } = await import('sweetalert2')
-
-    const result = await Swal.fire({
+    const confirmed = await confirmAlert({
       title: 'Keluar dari akun?',
       text: 'Sesi login Anda akan diakhiri.',
-      icon: 'warning',
-      showCancelButton: true,
       confirmButtonText: 'Ya, logout',
-      cancelButtonText: 'Batal',
-      confirmButtonColor: '#f97316',
-      cancelButtonColor: '#334155',
-      background: isDark ? '#020617' : '#ffffff',
-      color: isDark ? '#e5e7eb' : '#111827',
-      reverseButtons: true,
-      focusCancel: true,
     })
 
-    if (!result.isConfirmed) return
+    if (!confirmed) return
 
     clearSession()
     navigate('/login', { replace: true })

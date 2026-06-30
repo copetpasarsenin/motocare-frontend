@@ -1,5 +1,4 @@
 import {
-  AlertTriangle,
   ChevronLeft,
   ChevronRight,
   Download,
@@ -21,6 +20,7 @@ import { deleteService, getCategories, getServices } from '../services/services'
 import { buildServicesCsv, downloadCsv, formatCurrency, getCategoryName } from '../utils/csv'
 import { downloadServicesExcel } from '../utils/excel'
 import { getUserRole } from '../utils/auth'
+import { confirmAlert, successAlert } from '../utils/alerts'
 
 const CSV_FILENAME = 'motocare_services.csv'
 const EXCEL_FILENAME = 'motocare_services.xlsx'
@@ -65,7 +65,6 @@ function ServicesList() {
   })
   const [loading, setLoading] = useState(false)
   const [deletingId, setDeletingId] = useState(null)
-  const [pendingDelete, setPendingDelete] = useState(null)
   const [feedback, setFeedback] = useState({ type: '', message: '' })
 
   const exportFilters = useMemo(() => ({ ...filters, page: 1, limit: 100 }), [filters])
@@ -160,6 +159,13 @@ function ServicesList() {
   }
 
   const handleDelete = async (service) => {
+    const confirmed = await confirmAlert({
+      title: 'Hapus layanan?',
+      text: `Layanan "${service.name}" akan dihapus permanen dari katalog.`,
+      confirmButtonText: 'Ya, hapus',
+    })
+    if (!confirmed) return
+
     setDeletingId(service.id)
     setFeedback({ type: '', message: '' })
 
@@ -169,11 +175,11 @@ function ServicesList() {
       setServices(payload.data)
       setMeta(payload.meta)
       setFeedback({ type: 'success', message: `Layanan "${service.name}" berhasil dihapus.` })
+      await successAlert({ title: 'Layanan dihapus', text: `Layanan "${service.name}" berhasil dihapus.` })
     } catch (error) {
       setFeedback({ type: 'error', message: error.message || 'Gagal menghapus layanan' })
     } finally {
       setDeletingId(null)
-      setPendingDelete(null)
     }
   }
 
@@ -324,7 +330,7 @@ function ServicesList() {
                 {isAdmin && (
                   <>
                     <Link className="action-button edit" to={`/services/${service.id}/edit`}><Pencil size={14} />Edit</Link>
-                    <button className="action-button delete" type="button" onClick={() => setPendingDelete(service)} disabled={deletingId === service.id}>
+                    <button className="action-button delete" type="button" onClick={() => handleDelete(service)} disabled={deletingId === service.id}>
                       <Trash2 size={14} />
                       {deletingId === service.id ? 'Deleting...' : 'Delete'}
                     </button>
@@ -361,31 +367,6 @@ function ServicesList() {
         </button>
       </div>
 
-      {isAdmin && pendingDelete && (
-        <div className="modal-backdrop" role="presentation" onClick={(e) => { if (e.target === e.currentTarget && !deletingId) setPendingDelete(null) }}>
-          <div className="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-service-title">
-            <div className="dialog-icon danger">
-              <AlertTriangle size={24} />
-            </div>
-            <div>
-              <h3 id="delete-service-title">Delete Service?</h3>
-              <p>
-                Layanan <strong>{pendingDelete.name}</strong> akan dihapus permanen dari katalog.
-              </p>
-              <p className="dialog-warning">This action cannot be undone.</p>
-            </div>
-            <div className="dialog-actions">
-              <button className="ghost-button" type="button" onClick={() => setPendingDelete(null)} disabled={Boolean(deletingId)}>
-                Cancel
-              </button>
-              <button className="danger-button" type="button" onClick={() => handleDelete(pendingDelete)} disabled={Boolean(deletingId)}>
-                <Trash2 size={16} />
-                {deletingId ? 'Deleting...' : 'Delete Service'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   )
 }

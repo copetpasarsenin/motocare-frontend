@@ -6,6 +6,7 @@ import { getServices } from '../services/services'
 import { getUserRole } from '../utils/auth'
 import { validateBookingForm, hasBookingValidationErrors } from '../utils/bookingValidation'
 import { formatCurrency } from '../utils/csv'
+import { successAlert } from '../utils/alerts'
 
 const initialValues = {
   service_ids: [],
@@ -189,7 +190,8 @@ function BookingCreate() {
 
       if (failed === 0) {
         setFeedback({ type: 'success', message: `${succeeded} booking layanan berhasil dibuat.` })
-        setTimeout(() => navigate('/bookings'), 600)
+        await successAlert({ title: 'Booking berhasil', text: `${succeeded} booking layanan berhasil dibuat.` })
+        navigate('/bookings')
       } else if (succeeded === 0) {
         const firstError = results.find((result) => result.status === 'rejected')
         setFeedback({ type: 'error', message: firstError?.reason?.message || 'Gagal membuat semua booking' })

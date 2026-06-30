@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Globe, KeyRound, Mail, Shield, User, UserCircle } from 'lucide-react'
 import { changePassword, getApiBaseUrl, getMe } from '../services/api'
 import { getStoredUser, saveUser } from '../utils/auth'
+import { errorAlert, successAlert } from '../utils/alerts'
 
 const initialPasswordValues = { current_password: '', new_password: '', confirm_password: '' }
 
@@ -60,8 +61,11 @@ function Profile() {
       await changePassword({ current_password: passwordValues.current_password, new_password: passwordValues.new_password })
       setPasswordValues(initialPasswordValues)
       setPasswordFeedback({ type: 'success', message: 'Password berhasil diubah.' })
+      await successAlert({ title: 'Password berhasil diubah', text: 'Gunakan password baru pada login berikutnya.' })
     } catch (error) {
-      setPasswordFeedback({ type: 'error', message: error.message || 'Gagal mengubah password.' })
+      const message = error.message || 'Gagal mengubah password.'
+      setPasswordFeedback({ type: 'error', message })
+      await errorAlert({ title: 'Gagal mengubah password', text: message })
     } finally {
       setSubmittingPassword(false)
     }
