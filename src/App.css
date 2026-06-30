@@ -11266,3 +11266,74 @@ html body .auth-page.figma-auth-page .auth-stage .auth-hero .auth-hero-lines spa
   box-shadow: 0 0 0 1000px #15110f inset;
   caret-color: #fff7ed;
 }
+
+/* Final dashboard palette harmonization: remove blue/navy surfaces on admin pages. */
+.figma-dashboard .service-catalog-page,
+.figma-dashboard .bookings-card,
+.figma-dashboard .profile-page,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section {
+  color: #e5e0db;
+  border-color: rgba(255, 112, 0, 0.14);
+  background: #141616;
+}
+
+.figma-dashboard .service-catalog-page .section-heading,
+.figma-dashboard .booking-management-page > .section-heading,
+.figma-dashboard .profile-page > .section-heading {
+  border-color: rgba(255, 112, 0, 0.22);
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 0, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 54%, #1a1410 100%);
+}
+
+.figma-dashboard .service-catalog-page .services-filter-panel,
+.figma-dashboard .service-catalog-page .services-export-panel,
+.figma-dashboard .booking-toolbar,
+.figma-dashboard .booking-stat-card,
+.figma-dashboard .bookings-controls,
+.figma-dashboard .table-summary,
+.figma-dashboard .pagination,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section,
+.figma-dashboard .profile-list div {
+  border-color: rgba(255, 112, 0, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 112, 0, 0.04), transparent 72%),
+    #181a1a;
+}
+
+.figma-dashboard .service-catalog-page input,
+.figma-dashboard .service-catalog-page select,
+.figma-dashboard .service-catalog-page .search-field,
+.figma-dashboard .booking-toolbar input,
+.figma-dashboard .booking-toolbar select,
+.figma-dashboard .booking-toolbar .search-field,
+.figma-dashboard .inline-select,
+.figma-dashboard .table-scroll,
+.figma-dashboard .data-table th,
+.figma-dashboard .pagination-current {
+  border-color: rgba(255, 112, 0, 0.14);
+  background: #141616;
+}
+
+.figma-dashboard .data-table th {
+  background: linear-gradient(180deg, #1a1c1c, #161818);
+}
+
+.figma-dashboard .service-catalog-page .section-heading h3,
+.figma-dashboard .booking-management-page .section-heading h3,
+.figma-dashboard .profile-page .section-heading h3,
+.figma-dashboard .profile-section-header h3 {
+  color: #f3f0ed;
+}
+
+.figma-dashboard .service-catalog-page .section-heading p,
+.figma-dashboard .booking-management-page .section-heading p,
+.figma-dashboard .profile-page .section-heading p,
+.figma-dashboard .table-summary,
+.figma-dashboard .pagination,
+.figma-dashboard .profile-hero-info p,
+.figma-dashboard .profile-list dt {
+  color: #a89080;
+}
