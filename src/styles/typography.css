@@ -198,3 +198,77 @@ textarea,
     --text-hero: clamp(2.1rem, 12vw, 3.4rem);
   }
 }
+
+/* No-navy admin theme lock: dashboard palette source of truth. */
+.figma-dashboard {
+  --bg: #0d0f0f !important;
+  --surface: #141616 !important;
+  --surface-soft: #181a1a !important;
+  --surface-raised: #181a1a !important;
+  --dashboard-panel: #141616 !important;
+  --dashboard-panel-strong: #181a1a !important;
+  --dashboard-border: rgba(255, 112, 0, 0.14) !important;
+  --line: rgba(255, 112, 0, 0.14) !important;
+  background: #0d0f0f !important;
+}
+
+.figma-dashboard .content-shell,
+.figma-dashboard .page-content {
+  background: #0d0f0f !important;
+}
+
+.figma-dashboard .hero-card,
+.figma-dashboard .section-heading,
+.figma-dashboard .services-hero-heading,
+.figma-dashboard .profile-page-heading,
+.figma-dashboard .booking-page-heading {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 0, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 54%, #1a1410 100%) !important;
+  border-color: rgba(255, 112, 0, 0.22) !important;
+}
+
+.figma-dashboard .card,
+.figma-dashboard .booking-metric-card,
+.figma-dashboard .dashboard-stat-card,
+.figma-dashboard .dashboard-chart-card,
+.figma-dashboard .service-catalog-card,
+.figma-dashboard .service-grid-loading,
+.figma-dashboard .services-filter-panel,
+.figma-dashboard .services-export-panel,
+.figma-dashboard .bookings-controls,
+.figma-dashboard .booking-toolbar,
+.figma-dashboard .profile-hero,
+.figma-dashboard .profile-section,
+.figma-dashboard .table-summary,
+.figma-dashboard .pagination,
+.figma-dashboard .table-scroll,
+.figma-dashboard .data-table tbody tr,
+.figma-dashboard .loading-state,
+.figma-dashboard .booking-service-option,
+.figma-dashboard .booking-date-grid button,
+.figma-dashboard .booking-time-grid button {
+  background:
+    linear-gradient(180deg, rgba(255, 112, 0, 0.04), transparent 72%),
+    #181a1a !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+.figma-dashboard input,
+.figma-dashboard select,
+.figma-dashboard textarea,
+.figma-dashboard .search-field,
+.figma-dashboard .input-shell,
+.figma-dashboard .inline-select,
+.figma-dashboard .pagination-current,
+.figma-dashboard .data-table th,
+.figma-dashboard .data-table td,
+.figma-dashboard .skeleton-line,
+.figma-dashboard .skeleton-block {
+  background: #141616 !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+.figma-dashboard .data-table th {
+  background: linear-gradient(180deg, #1a1c1c, #161818) !important;
+}
