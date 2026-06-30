@@ -588,23 +588,67 @@ html[data-theme='light'] body .figma-dashboard .pagination button:hover {
 .figma-dashboard .modal-backdrop,
 .modal-backdrop {
   z-index: 2000 !important;
+  place-items: start center !important;
+  overflow-y: auto !important;
+  padding-top: 96px !important;
+  padding-bottom: 32px !important;
   background: rgba(5, 7, 7, 0.68) !important;
 }
 
 .figma-dashboard .booking-detail-dialog {
   position: relative;
   z-index: 2001 !important;
+  max-height: calc(100vh - 128px) !important;
 }
 
 .figma-dashboard .table-scroll {
   max-width: 100%;
-  overflow-x: auto !important;
+  overflow-x: scroll !important;
+  padding-bottom: 10px !important;
   scrollbar-gutter: stable;
+}
+
+.figma-dashboard .table-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.figma-dashboard .table-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 112, 0, 0.08);
+  border-radius: 999px;
+}
+
+.figma-dashboard .table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 112, 0, 0.48);
+  border-radius: 999px;
+}
+
+.figma-dashboard .table-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 112, 0, 0.68);
 }
 
 .figma-dashboard .bookings-table,
 .figma-dashboard .data-table {
   min-width: 980px;
+}
+
+.figma-dashboard .bookings-table th:last-child,
+.figma-dashboard .bookings-table td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  box-shadow: -12px 0 18px rgba(0, 0, 0, 0.18);
+}
+
+html[data-theme='dark'] body .figma-dashboard .bookings-table th:last-child,
+html[data-theme='dark'] body .figma-dashboard .bookings-table td:last-child {
+  background: #181a1a !important;
+}
+
+html:not([data-theme='dark']) body .figma-dashboard .bookings-table th:last-child,
+html:not([data-theme='dark']) body .figma-dashboard .bookings-table td:last-child,
+html[data-theme='light'] body .figma-dashboard .bookings-table th:last-child,
+html[data-theme='light'] body .figma-dashboard .bookings-table td:last-child {
+  background: #ffffff !important;
 }
 
 .figma-dashboard .empty-state strong {
