@@ -308,3 +308,40 @@ html[data-theme='dark'] body .figma-dashboard .skeleton-block {
 html[data-theme='dark'] body .figma-dashboard .data-table th {
   background: linear-gradient(180deg, #1a1c1c, #161818) !important;
 }
+
+/* Highest-specificity services/profile no-navy override. */
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page.card,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page > .section-heading,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .services-hero-heading,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .services-filter-panel,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .services-export-panel,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .service-catalog-card,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .service-grid-loading,
+html[data-theme='dark'] body .figma-dashboard .profile-page,
+html[data-theme='dark'] body .figma-dashboard .profile-page > .section-heading,
+html[data-theme='dark'] body .figma-dashboard .profile-hero,
+html[data-theme='dark'] body .figma-dashboard .profile-section {
+  background: #181a1a !important;
+  background-image: linear-gradient(180deg, rgba(255, 112, 0, 0.04), transparent 72%) !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page > .section-heading,
+html[data-theme='dark'] body .figma-dashboard .profile-page > .section-heading {
+  background:
+    radial-gradient(circle at 88% 18%, rgba(255, 112, 0, 0.22), transparent 32%),
+    linear-gradient(135deg, #1a1c1c 0%, #141616 54%, #1a1410 100%) !important;
+}
+
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page input,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page select,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .search-field,
+html[data-theme='dark'] body .figma-dashboard .service-catalog-page .input-shell,
+html[data-theme='dark'] body .figma-dashboard .profile-page input,
+html[data-theme='dark'] body .figma-dashboard .profile-page select,
+html[data-theme='dark'] body .figma-dashboard .profile-page .profile-list div {
+  background: #141616 !important;
+  background-image: none !important;
+  border-color: rgba(255, 112, 0, 0.14) !important;
+}
