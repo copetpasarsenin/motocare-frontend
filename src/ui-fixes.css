@@ -177,6 +177,48 @@
   overflow-wrap: anywhere;
 }
 
+.booking-services-detail {
+  grid-column: 1 / -1;
+}
+
+.booking-services-detail dd {
+  display: grid;
+  gap: 10px;
+}
+
+.booking-service-detail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 112, 0, 0.14);
+}
+
+.booking-service-detail-item:last-child {
+  border-bottom: 0;
+}
+
+.booking-service-detail-item span {
+  display: grid;
+  gap: 3px;
+}
+
+.booking-service-detail-item strong {
+  color: #f5f7f8;
+}
+
+.booking-service-detail-item small {
+  color: #d5b4a8;
+}
+
+.booking-service-detail-item em {
+  color: #ffb08e;
+  font-style: normal;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
 :root[data-theme='dark'] .service-catalog-page .services-filter-panel,
 :root[data-theme='dark'] .service-catalog-page .services-export-panel {
   border-color: rgba(255, 112, 0, 0.24);

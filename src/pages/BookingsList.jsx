@@ -87,8 +87,23 @@ function getServiceCategory(booking) {
   return booking?.service?.category?.name || booking?.service?.category_name || '-'
 }
 
+function getServicePrice(booking) {
+  return Number(booking?.service?.price || booking?.price || booking?.total_price || 0)
+}
+
 function getVehicleInfo(booking) {
   return `${booking.vehicle_name || '-'} / ${booking.vehicle_plate || '-'}`
+}
+
+function isSameBookingGroup(a, b) {
+  if (!a || !b) return false
+  return String(a.user_id || a.user?.id || '') === String(b.user_id || b.user?.id || '')
+    && (a.customer_name || '') === (b.customer_name || '')
+    && (a.phone || '') === (b.phone || '')
+    && (a.vehicle_name || '') === (b.vehicle_name || '')
+    && (a.vehicle_plate || '') === (b.vehicle_plate || '')
+    && (a.booking_date || '') === (b.booking_date || '')
+    && (a.notes || a.note || '') === (b.notes || b.note || '')
 }
 
 function SkeletonRow({ cols }) {
@@ -122,6 +137,9 @@ function BookingsList() {
   const [services, setServices] = useState([])
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const totalPages = Math.max(meta.total_pages, 1)
+  const selectedBookingGroup = selectedBooking ? bookings.filter((booking) => isSameBookingGroup(selectedBooking, booking)) : []
+  const selectedBookingServices = selectedBookingGroup.length > 0 ? selectedBookingGroup : selectedBooking ? [selectedBooking] : []
+  const selectedBookingTotal = selectedBookingServices.reduce((total, booking) => total + getServicePrice(booking), 0)
   const visibleStatusCounts = bookings.reduce((counts, booking) => {
     counts[booking.status] = (counts[booking.status] || 0) + 1
     return counts
@@ -558,17 +576,27 @@ function BookingsList() {
                 <dt>Waktu Booking</dt>
                 <dd>{formatTime(selectedBooking.booking_date)}</dd>
               </div>
-              <div>
+              <div className="booking-services-detail">
                 <dt>Service</dt>
-                <dd>{getServiceName(selectedBooking)}</dd>
+                <dd>
+                  {selectedBookingServices.map((booking) => (
+                    <span className="booking-service-detail-item" key={booking.id}>
+                      <span>
+                        <strong>{getServiceName(booking)}</strong>
+                        <small>{getServiceCategory(booking)}</small>
+                      </span>
+                      <em>{formatCurrency(getServicePrice(booking))}</em>
+                    </span>
+                  ))}
+                </dd>
               </div>
               <div>
-                <dt>Category</dt>
-                <dd>{getServiceCategory(selectedBooking)}</dd>
+                <dt>Jumlah Layanan</dt>
+                <dd>{selectedBookingServices.length} layanan</dd>
               </div>
               <div>
                 <dt>Total Harga</dt>
-                <dd>{formatCurrency(selectedBooking.service?.price || selectedBooking.price || selectedBooking.total_price)}</dd>
+                <dd>{formatCurrency(selectedBookingTotal)}</dd>
               </div>
               <div>
                 <dt>Catatan</dt>
