@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router'
 import { CalendarDays, Gauge, UserCircle, Wrench } from 'lucide-react'
-import Swal from 'sweetalert2'
 import { clearSession, getStoredUser } from '../../utils/auth'
 import { getStoredTheme, toggleTheme } from '../../utils/theme'
 import DashboardTopbar from '../organisms/DashboardTopbar'
@@ -32,6 +31,8 @@ function DashboardLayout() {
   const isDark = theme === 'dark'
 
   const handleLogout = async () => {
+    const { default: Swal } = await import('sweetalert2')
+
     const result = await Swal.fire({
       title: 'Keluar dari akun?',
       text: 'Sesi login Anda akan diakhiri.',
